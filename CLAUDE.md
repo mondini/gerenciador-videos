@@ -2,7 +2,7 @@
 
 Sistema local para gerenciar a produção de **múltiplos canais do YouTube** no estilo *dark channel* (narração, imagens geradas, sem rosto). Ele organiza ideias, a produção de cada vídeo, os arquivos usados (que ficam no Google Drive) e as métricas de analytics.
 
-> **Status atual: fase de descoberta.** Ainda não existe código. Antes de escrever qualquer coisa, rode `/ideias` e depois `/grill-me` para fechar os requisitos. As decisões vão para `docs/decisoes.md`.
+> **Status atual: implementação da v0.1 (Produção).** A descoberta terminou. Os requisitos fechados estão em `docs/requisitos.md` (escopo, modelo de dados, telas e roadmap) e as decisões com motivos em `docs/decisoes.md`. Leia os dois antes de codar. Qualquer decisão nova vai para `docs/decisoes.md`.
 
 ## Contexto do dono
 
@@ -35,10 +35,11 @@ Ver `docs/visao-inicial.md` para os detalhes. Resumo:
 
 ## Como trabalhar neste repositório
 
-- Faça perguntas antes de assumir requisitos. O usuário pediu explicitamente um processo de entrevista (`/grill-me`).
+- Se algo não estiver em `docs/requisitos.md`, pergunte antes de assumir. Não aumente o escopo além da versão em andamento.
 - Registre cada decisão em `docs/decisoes.md` (data, decisão, motivo, alternativas descartadas).
+- Stack: Hono + Zod, React + Vite, SQLite (`better-sqlite3`) + Drizzle, Vitest, npm, pacote único (`src/server`, `src/web`, `src/shared`). Comandos: `npm run dev`, `npm start`, `npm test`.
 - Prefira soluções simples que rodem localmente com um comando (`npm run dev`). Evite dependências de infraestrutura (Docker, Postgres em servidor) a menos que o usuário peça. SQLite é a escolha padrão a discutir.
-- Nunca mova, renomeie ou apague arquivos no Google Drive sem confirmação explícita.
+- O sistema **só cria** arquivos e pastas no Drive. Nunca move nem apaga; renomear só por botão com confirmação. Testes de Drive usam sempre pasta temporária, nunca o Drive real.
 - Credenciais (OAuth do Google/YouTube) ficam em `.env`/arquivos ignorados pelo git, nunca no código.
 
 ## Comandos disponíveis
