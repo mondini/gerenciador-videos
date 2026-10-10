@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { gunzipSync } from "node:zlib";
 import Database from "better-sqlite3";
 import { resolverDentro } from "./seguranca";
 import {
@@ -115,7 +114,7 @@ describe("status das subpastas", () => {
   });
 });
 
-describe("backup compactado", () => {
+describe("backup do banco", () => {
   function criarBanco(): string {
     const caminho = join(raiz, "gerenciador.db");
     const db = new Database(caminho);
@@ -124,15 +123,13 @@ describe("backup compactado", () => {
     return caminho;
   }
 
-  it("gera .db.gz restaurável, sem sobras temporárias", async () => {
+  it("gera .db restaurável, sem sobras temporárias", async () => {
     const dbPath = criarBanco();
     const destino = join(raiz, "_backup");
     const arquivo = await fazerBackup(dbPath, destino, new Date(2026, 9, 9));
-    expect(arquivo).toBe(join(destino, "gerenciador_2026-10-09.db.gz"));
-    expect(readdirSync(destino)).toEqual(["gerenciador_2026-10-09.db.gz"]);
-    const restaurado = join(raiz, "restaurado.db");
-    writeFileSync(restaurado, gunzipSync(readFileSync(arquivo!)));
-    const db = new Database(restaurado, { readonly: true });
+    expect(arquivo).toBe(join(destino, "gerenciador_2026-10-09.db"));
+    expect(readdirSync(destino)).toEqual(["gerenciador_2026-10-09.db"]);
+    const db = new Database(arquivo!, { readonly: true });
     expect(db.prepare("SELECT x FROM t").get()).toEqual({ x: "olá" });
     db.close();
   });
@@ -145,6 +142,6 @@ describe("backup compactado", () => {
     const repetido = await fazerBackup(dbPath, destino, new Date(2026, 9, 9));
     expect(hoje).not.toBeNull();
     expect(repetido).toBeNull();
-    expect(readdirSync(destino).sort()).toEqual(["gerenciador_2026-10-08.db.gz", "gerenciador_2026-10-09.db.gz"]);
+    expect(readdirSync(destino).sort()).toEqual(["gerenciador_2026-10-08.db", "gerenciador_2026-10-09.db"]);
   });
 });
