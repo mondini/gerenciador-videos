@@ -91,3 +91,50 @@ describe("API", () => {
     expect(r.status).toBe(400);
   });
 });
+
+describe("configurações do canal", () => {
+  const put = (corpo: unknown) => ({ ...json(corpo), method: "PUT" });
+
+  it("edita dados, grade, formatos, séries, temas e checklist", async () => {
+    const { id } = await criarCanalBase();
+    const ed = await app.request(`/api/canais/${id}`, patch({ nicho: "BJJ", tagsPadrao: ["bjj", "jiu-jitsu"], vozPadrao: "Voz X" }));
+    expect(ed.status).toBe(200);
+
+    expect((await app.request(`/api/canais/${id}/grade`, put({ grade: [{ diaSemana: 1, hora: "09:00" }, { diaSemana: 4, hora: "18:30" }] }))).status).toBe(200);
+    expect((await app.request(`/api/canais/${id}/checklist/Roteiro`, put({ textos: ["Só este item"] }))).status).toBe(200);
+
+    const f = (await (await app.request(`/api/canais/${id}/formatos`, json({ nome: "Tutorial" }))).json()) as { id: number };
+    expect((await app.request(`/api/canais/${id}/formatos`, json({ nome: "Tutorial" }))).status).toBe(409);
+    expect((await app.request(`/api/formatos/${f.id}`, patch({ ativo: false }))).status).toBe(200);
+
+    const s = (await (await app.request(`/api/canais/${id}/series`, json({ nome: "Faixas" }))).json()) as { id: number };
+    const t = (await (await app.request(`/api/canais/${id}/temas`, json({ nome: "guarda" }))).json()) as { id: number };
+    expect((await app.request(`/api/canais/${id}/temas`, json({ nome: "guarda" }))).status).toBe(409);
+
+    const cfg = (await (await app.request(`/api/canais/${id}/config`)).json()) as {
+      canal: { nicho: string; tagsPadrao: string[] }; grade: unknown[]; formatos: { nome: string; ativo: boolean }[]; series: unknown[]; temas: unknown[];
+      modelos: { etapa: string; texto: string }[];
+    };
+    expect(cfg.canal.tagsPadrao).toEqual(["bjj", "jiu-jitsu"]);
+    expect(cfg.grade).toHaveLength(2);
+    expect(cfg.formatos.find((x) => x.nome === "Tutorial")?.ativo).toBe(false);
+    expect(cfg.modelos.filter((m) => m.etapa === "Roteiro").map((m) => m.texto)).toEqual(["Só este item"]);
+    expect(cfg.modelos.some((m) => m.etapa === "Pesquisa")).toBe(true);
+
+    expect((await app.request(`/api/series/${s.id}`, { method: "DELETE" })).status).toBe(200);
+    expect((await app.request(`/api/temas/${t.id}`, { method: "DELETE" })).status).toBe(200);
+  });
+
+  it("não apaga série em uso e recusa etapa inválida", async () => {
+    const { id } = await criarCanalBase();
+    const s = (await (await app.request(`/api/canais/${id}/series`, json({ nome: "Faixas" }))).json()) as { id: number };
+    const formatos = (await (await app.request(`/api/canais/${id}/formatos`)).json()) as { id: number }[];
+    const r = await app.request("/api/videos", json({ canalId: id, tituloProvisorio: "Teste", formatoId: formatos[0]!.id }));
+    const { video } = (await r.json()) as { video: { id: number } };
+    await app.request(`/api/videos/${video.id}`, patch({ serieId: s.id }));
+    expect((await app.request(`/api/series/${s.id}`, { method: "DELETE" })).status).toBe(409);
+    expect((await app.request(`/api/canais/${id}/checklist/Nada`, put2({ textos: [] }))).status).toBe(400);
+  });
+});
+
+const put2 = (corpo: unknown) => ({ method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) });

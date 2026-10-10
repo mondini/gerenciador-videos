@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { api, ler } from "./api";
-import { botao, botaoClaro, campo, Modal, Rotulo } from "./ui";
+import { botao, botaoClaro, campo, InfoNotas, Modal, Rotulo } from "./ui";
 
-type Formato = { id: number; nome: string };
+type Formato = { id: number; nome: string; ativo: boolean };
 type Parecidos = { codigo: string; tituloProvisorio: string }[];
 
 const NOTAS = [1, 2, 3, 4, 5];
@@ -52,7 +52,7 @@ export function NovaIdeia({ canalId, onFechar, onCriada, onAviso }: { canalId: n
   );
 
   return (
-    <Modal titulo="Nova ideia" onFechar={onFechar}>
+    <Modal titulo="Nova ideia" onFechar={onFechar} aoLadoDoTitulo={<InfoNotas />}>
       <form onSubmit={enviar} className="space-y-4">
         <Rotulo texto="Título provisório">
           <input className={campo} value={titulo} onChange={(e) => setTitulo(e.target.value)} required autoFocus />
@@ -60,7 +60,7 @@ export function NovaIdeia({ canalId, onFechar, onCriada, onAviso }: { canalId: n
         <Rotulo texto="Formato">
           <select className={campo} value={formatoId} onChange={(e) => setFormatoId(e.target.value ? Number(e.target.value) : "")} required>
             <option value="">Escolha…</option>
-            {formatos.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
+            {formatos.filter((f) => f.ativo).map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
           </select>
         </Rotulo>
         <div className="grid grid-cols-3 gap-3">

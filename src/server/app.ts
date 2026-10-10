@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { ZodError } from "zod";
 import { criarRotas } from "./rotas";
+import { ConflitoError } from "./servicos/configuracao";
 import type { Contexto } from "./servicos/contexto";
 
 export function createApp(ctx: Contexto) {
@@ -12,6 +13,7 @@ export function createApp(ctx: Contexto) {
     if (erro instanceof Error && /fora da raiz|Mais de uma pasta|não existe|não pertence|inválid/.test(erro.message)) {
       return c.json({ erro: erro.message }, 400);
     }
+    if (erro instanceof ConflitoError) return c.json({ erro: erro.message }, 409);
     console.error(erro);
     return c.json({ erro: "Erro interno do servidor" }, 500);
   });

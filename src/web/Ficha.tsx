@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, fmtData, ler, paraInputData } from "./api";
-import { botao, botaoClaro, campo, Modal, Rotulo } from "./ui";
+import { botao, botaoClaro, campo, InfoNotas, Modal, Rotulo } from "./ui";
 
 type Video = {
   id: number; codigo: string; canalId: number; etapa: string; tituloProvisorio: string; tituloFinal: string | null;
-  formatoId: number | null; dataPlanejada: string | null; notaApelo: number | null; notaIlustracao: number | null; notaPesquisa: number | null;
+  formatoId: number | null; serieId: number | null; dataPlanejada: string | null; notaApelo: number | null; notaIlustracao: number | null; notaPesquisa: number | null;
   gancho: string; resumo: string; roteiroAtual: string; pastaRelativa: string | null;
 };
 type Item = { id: number; etapa: string; texto: string; feito: boolean };
@@ -18,13 +18,16 @@ const PALAVRAS_POR_MIN = 150;
 export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId: number; onFechar: () => void; onAlterado: () => void; onAviso: (m: string, erro?: boolean) => void }) {
   const [ficha, setFicha] = useState<Ficha | null>(null);
   const [aba, setAba] = useState<(typeof ABAS)[number]>("Básico");
-  const [formatos, setFormatos] = useState<{ id: number; nome: string }[]>([]);
+  const [formatos, setFormatos] = useState<{ id: number; nome: string; ativo: boolean }[]>([]);
+  const [series, setSeries] = useState<{ id: number; nome: string }[]>([]);
 
   const carregar = useCallback(async () => {
     try {
       const f = await ler<Ficha>(api.api.videos[":id"].$get({ param: { id: String(videoId) } }));
       setFicha(f);
-      setFormatos(await ler(api.api.canais[":id"].formatos.$get({ param: { id: String(f.video.canalId) } })));
+      const cfg = await ler<{ formatos: typeof formatos; series: typeof series }>(api.api.canais[":id"].config.$get({ param: { id: String(f.video.canalId) } }));
+      setFormatos(cfg.formatos);
+      setSeries(cfg.series);
     } catch (e) {
       onAviso((e as Error).message, true);
     }
@@ -35,7 +38,7 @@ export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId
   const v = ficha.video;
 
   return (
-    <Modal titulo={`${v.codigo} · ${v.tituloFinal ?? v.tituloProvisorio}`} onFechar={onFechar} largo>
+    <Modal titulo={`${v.codigo} · ${v.tituloFinal ?? v.tituloProvisorio}`} onFechar={onFechar} largo aoLadoDoTitulo={<InfoNotas />}>
       <div className="mb-4 flex gap-1 border-b border-slate-200">
         {ABAS.map((a) => (
           <button key={a} onClick={() => setAba(a)} className={`-mb-px border-b-2 px-3 py-1.5 text-sm font-medium ${aba === a ? "border-slate-900 text-slate-900" : "border-transparent text-slate-500 hover:text-slate-800"}`}>
@@ -44,17 +47,18 @@ export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId
         ))}
         <span className="ml-auto self-center rounded bg-slate-100 px-2 py-0.5 text-xs">Etapa: {v.etapa}</span>
       </div>
-      {aba === "Básico" && <Basico v={v} formatos={formatos} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} />}
-      {aba === "Roteiro" && <Roteiro v={v} versoes={ficha.versoes} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} />}
-      {aba === "Checklist" && <Checklist itens={ficha.checklist} etapaAtual={v.etapa} onMudou={() => { void carregar(); onAlterado(); }} onAviso={onAviso} />}
-      {aba === "Arquivos" && <ArquivosAba videoId={v.id} etapa={v.etapa} onAviso={onAviso} />}
+      {/* as abas ficam montadas (só escondidas) para não perder o que foi digitado ao trocar de aba */}
+      <div hidden={aba !== "Básico"}><Basico v={v} formatos={formatos} series={series} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
+      <div hidden={aba !== "Roteiro"}><Roteiro v={v} versoes={ficha.versoes} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
+      <div hidden={aba !== "Checklist"}><Checklist itens={ficha.checklist} etapaAtual={v.etapa} onMudou={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
+      <div hidden={aba !== "Arquivos"}><ArquivosAba videoId={v.id} etapa={v.etapa} onAviso={onAviso} /></div>
     </Modal>
   );
 }
 
-function Basico({ v, formatos, onSalvo, onAviso }: { v: Video; formatos: { id: number; nome: string }[]; onSalvo: () => void; onAviso: (m: string, erro?: boolean) => void }) {
+function Basico({ v, formatos, series, onSalvo, onAviso }: { v: Video; formatos: { id: number; nome: string; ativo: boolean }[]; series: { id: number; nome: string }[]; onSalvo: () => void; onAviso: (m: string, erro?: boolean) => void }) {
   const [f, setF] = useState({
-    tituloProvisorio: v.tituloProvisorio, tituloFinal: v.tituloFinal ?? "", formatoId: v.formatoId ?? "",
+    tituloProvisorio: v.tituloProvisorio, tituloFinal: v.tituloFinal ?? "", formatoId: v.formatoId ?? "", serieId: v.serieId ?? "",
     dataPlanejada: paraInputData(v.dataPlanejada), notaApelo: v.notaApelo ?? "", notaIlustracao: v.notaIlustracao ?? "", notaPesquisa: v.notaPesquisa ?? "",
     gancho: v.gancho, resumo: v.resumo,
   });
@@ -65,7 +69,7 @@ function Basico({ v, formatos, onSalvo, onAviso }: { v: Video; formatos: { id: n
       await ler(api.api.videos[":id"].$patch({
         param: { id: String(v.id) },
         json: {
-          tituloProvisorio: f.tituloProvisorio, tituloFinal: f.tituloFinal.trim() || null, formatoId: n(f.formatoId as number | ""),
+          tituloProvisorio: f.tituloProvisorio, tituloFinal: f.tituloFinal.trim() || null, formatoId: n(f.formatoId as number | ""), serieId: n(f.serieId as number | ""),
           dataPlanejada: f.dataPlanejada ? new Date(f.dataPlanejada).toISOString() : null,
           notaApelo: n(f.notaApelo as number | ""), notaIlustracao: n(f.notaIlustracao as number | ""), notaPesquisa: n(f.notaPesquisa as number | ""),
           gancho: f.gancho, resumo: f.resumo,
@@ -94,7 +98,13 @@ function Basico({ v, formatos, onSalvo, onAviso }: { v: Video; formatos: { id: n
       <Rotulo texto="Formato">
         <select className={campo} value={f.formatoId} onChange={(e) => setF({ ...f, formatoId: e.target.value ? Number(e.target.value) : "" })}>
           <option value="">A definir</option>
-          {formatos.map((o) => <option key={o.id} value={o.id}>{o.nome}</option>)}
+          {formatos.filter((o) => o.ativo || o.id === v.formatoId).map((o) => <option key={o.id} value={o.id}>{o.nome}</option>)}
+        </select>
+      </Rotulo>
+      <Rotulo texto="Série">
+        <select className={campo} value={f.serieId} onChange={(e) => setF({ ...f, serieId: e.target.value ? Number(e.target.value) : "" })}>
+          <option value="">Nenhuma</option>
+          {series.map((o) => <option key={o.id} value={o.id}>{o.nome}</option>)}
         </select>
       </Rotulo>
       <Rotulo texto="Data planejada de publicação"><input type="datetime-local" className={campo} value={f.dataPlanejada} onChange={(e) => setF({ ...f, dataPlanejada: e.target.value })} /></Rotulo>

@@ -15,6 +15,11 @@ import { agoraDe, type Contexto } from "./servicos/contexto";
 import { criarVideo, importarIdeias, moverEtapa, novoVideoSchema } from "./servicos/videos";
 import { exportarVersaoRoteiro, acharPastaVideo } from "./drive/estrutura";
 import { relative } from "node:path";
+import {
+  apagarSerie, apagarTema, checklistSchema, criarFormato, criarSerie, criarTema, editarCanalSchema, editarFormato,
+  editarFormatoSchema, editarSerie, editarSerieSchema, etapaSchema, gradeSchema, lerConfiguracao, nomeSchema,
+  serieSchema, substituirChecklist, substituirGrade,
+} from "./servicos/configuracao";
 
 /** Validador de corpo JSON: erros saem sempre no formato { erro } com status 400. */
 const corpo = <T extends ZodType>(schema: T) =>
@@ -62,6 +67,40 @@ export function criarRotas(ctx: Contexto) {
     .get("/api/canais/:id/formatos", (c) =>
       c.json(db.select().from(formato).where(eq(formato.canalId, Number(c.req.param("id")))).orderBy(asc(formato.id)).all()),
     )
+
+    .get("/api/canais/:id/config", (c) => {
+      const cfg = lerConfiguracao(ctx, Number(c.req.param("id")));
+      return cfg ? c.json(cfg) : c.json({ erro: "Canal não encontrado" }, 404);
+    })
+    .patch("/api/canais/:id", corpo(editarCanalSchema), (c) => {
+      const campos = c.req.valid("json");
+      if (Object.keys(campos).length === 0) return c.json({ erro: "Nada para alterar" }, 400);
+      const atualizado = db.update(canal).set(campos).where(eq(canal.id, Number(c.req.param("id")))).returning().get();
+      return atualizado ? c.json(atualizado) : c.json({ erro: "Canal não encontrado" }, 404);
+    })
+    .put("/api/canais/:id/grade", corpo(gradeSchema), (c) => {
+      substituirGrade(ctx, Number(c.req.param("id")), c.req.valid("json").grade);
+      return c.json({ ok: true });
+    })
+    .post("/api/canais/:id/formatos", corpo(nomeSchema), (c) => c.json(criarFormato(ctx, Number(c.req.param("id")), c.req.valid("json").nome), 201))
+    .patch("/api/formatos/:id", corpo(editarFormatoSchema), (c) => {
+      const f = editarFormato(ctx, Number(c.req.param("id")), c.req.valid("json"));
+      return f ? c.json(f) : c.json({ erro: "Formato não encontrado" }, 404);
+    })
+    .post("/api/canais/:id/series", corpo(serieSchema), (c) => c.json(criarSerie(ctx, Number(c.req.param("id")), c.req.valid("json")), 201))
+    .patch("/api/series/:id", corpo(editarSerieSchema), (c) => {
+      const s = editarSerie(ctx, Number(c.req.param("id")), c.req.valid("json"));
+      return s ? c.json(s) : c.json({ erro: "Série não encontrada" }, 404);
+    })
+    .delete("/api/series/:id", (c) => (apagarSerie(ctx, Number(c.req.param("id"))) ? c.json({ ok: true }) : c.json({ erro: "Série não encontrada" }, 404)))
+    .post("/api/canais/:id/temas", corpo(nomeSchema), (c) => c.json(criarTema(ctx, Number(c.req.param("id")), c.req.valid("json").nome), 201))
+    .delete("/api/temas/:id", (c) => (apagarTema(ctx, Number(c.req.param("id"))) ? c.json({ ok: true }) : c.json({ erro: "Tema não encontrado" }, 404)))
+    .put("/api/canais/:id/checklist/:etapa", corpo(checklistSchema), (c) => {
+      const etapa = etapaSchema.safeParse(c.req.param("etapa"));
+      if (!etapa.success) return c.json({ erro: "Etapa inválida" }, 400);
+      substituirChecklist(ctx, Number(c.req.param("id")), etapa.data, c.req.valid("json").textos);
+      return c.json({ ok: true });
+    })
 
     .get("/api/canais/:id/kanban", (c) => {
       const canalId = Number(c.req.param("id"));

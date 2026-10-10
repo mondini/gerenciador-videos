@@ -16,7 +16,7 @@ Documento consolidado ao fim da entrevista (`/grill-me`) de 2026-10-09. A justif
 3. **O sistema só cria arquivos e pastas no Drive.** Nunca move nem apaga. Renomear acontece só por botão, com confirmação explícita. Os arquivos que o próprio sistema exporta (roteiro `.md`, `fontes_tela.txt`) recebem nomes novos por versão em vez de sobrescrever.
 4. As pastas de vídeo são localizadas pelo **prefixo do código** (`BJJ-001_*`), nunca pelo nome completo.
 5. A leitura do Drive é **sob demanda**, sem índice nem watcher. Arquivos só online aparecem com ☁️, e nada de vídeo ou áudio é baixado para gerar prévia.
-6. O banco SQLite fica em `data/` (fora do Drive). Há backup `.db.gz` em `DRIVE_ROOT/_backup/` ao iniciar e a cada 24h, sem exclusão automática.
+6. O banco SQLite fica em `data/` (fora do Drive). Há backup `.db` em `DRIVE_ROOT/_backup/` ao iniciar e a cada 24h, sem exclusão automática.
 7. Segredos (chaves futuras de API, OAuth) ficam só no `.env` ou em arquivos ignorados pelo git.
 8. Os campos de publicação respeitam os limites do YouTube: título ≤ 100 caracteres, descrição ≤ 5.000, tags ≤ 500 no total.
 
@@ -113,7 +113,7 @@ Video N─N Ativo (UsoAtivo)      Video 1─N RegistroAnalytics (máx. 1 por mar
 
 ```
 DRIVE_ROOT/
-├── _backup/                         gerenciador_AAAA-MM-DD.db.gz
+├── _backup/                         gerenciador_AAAA-MM-DD.db
 └── <pasta do canal>/
     ├── 00_IDENTIDADE/
     ├── 01_BIBLIOTECA/

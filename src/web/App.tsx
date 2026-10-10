@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, fmtData, ler } from "./api";
+import { ConfiguracoesCanal } from "./Configuracoes";
 import { CriarCanal } from "./CriarCanal";
 import { FichaVideo } from "./Ficha";
 import { Kanban, type DadosKanban } from "./Kanban";
@@ -13,7 +14,7 @@ export function App() {
   const [canais, setCanais] = useState<Canal[] | null>(null);
   const [canalId, setCanalId] = useState<number | null>(null);
   const [kanban, setKanban] = useState<DadosKanban | null>(null);
-  const [modal, setModal] = useState<"ideia" | "lote" | null>(null);
+  const [modal, setModal] = useState<"ideia" | "lote" | "config" | null>(null);
   const [aberto, setAberto] = useState<number | null>(null);
 
   const carregarCanais = useCallback(async () => {
@@ -55,6 +56,7 @@ export function App() {
         <div className="ml-auto flex items-center gap-3 text-sm text-slate-600">
           {kanban && <span title="Vídeos em Thumbnail ou Agendado">Prontos/agendados: <b>{prontos}</b></span>}
           {kanban?.proximoHorarioLivre && <span>Próximo horário livre: <b>{fmtData(kanban.proximoHorarioLivre)}</b></span>}
+          <button className={botaoClaro} onClick={() => setModal("config")}>Configurações</button>
           <button className={botaoClaro} onClick={() => setModal("lote")}>Colar várias ideias</button>
           <button className={botao} onClick={() => setModal("ideia")}>+ Nova ideia</button>
         </div>
@@ -64,6 +66,7 @@ export function App() {
 
       {modal === "ideia" && canalId != null && <NovaIdeia canalId={canalId} onFechar={() => setModal(null)} onCriada={carregarKanban} onAviso={mostrar} />}
       {modal === "lote" && canalId != null && <ColarIdeias canalId={canalId} onFechar={() => setModal(null)} onCriada={carregarKanban} onAviso={mostrar} />}
+      {modal === "config" && canalId != null && <ConfiguracoesCanal canalId={canalId} onFechar={() => setModal(null)} onAlterado={() => { void carregarCanais(); void carregarKanban(); }} onAviso={mostrar} />}
       {aberto != null && <FichaVideo videoId={aberto} onFechar={() => setAberto(null)} onAlterado={carregarKanban} onAviso={mostrar} />}
       {painel}
     </main>
