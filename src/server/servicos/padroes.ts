@@ -16,5 +16,5 @@ export const CHECKLIST_PADRAO: Partial<Record<Etapa, string[]>> = {
   Imagens: ["Todas as cenas com status ok", "Posições de luta conferidas (anatomia correta)", "Imagens salvas em 03_imagens"],
   Edição: ["Montagem concluída", "Fontes exibidas na tela", "Legenda .srt gerada", "Export salvo em 07_export"],
   Thumbnail: ["2 a 3 variações criadas", "Variante escolhida", "Arquivos salvos em 06_thumbnail"],
-  Agendado: ["Título final definido", "Descrição, tags e capítulos prontos", "Divulgação de conteúdo sintético conferida", "Agendado no YouTube Studio"],
+  Agendado: ["Título final definido", "Descrição, tags e capítulos prontos", "Dossiê de direitos preenchido (contestações, uso de IA, riscos)", "Divulgação de conteúdo sintético conferida", "Agendado no YouTube Studio"],
 };

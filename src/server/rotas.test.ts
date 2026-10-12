@@ -92,6 +92,49 @@ describe("API", () => {
   });
 });
 
+describe("dossiê de direitos", () => {
+  const put = (corpo: unknown) => ({ ...json(corpo), method: "PUT" });
+
+  it("começa vazio, substitui o dossiê inteiro e resume pendências", async () => {
+    const canal = await criarCanalBase();
+    const { video } = (await (await app.request("/api/videos", json({ canalId: canal.id, tituloProvisorio: "x" }))).json()) as { video: { id: number } };
+    const vazio = (await (await app.request(`/api/videos/${video.id}/dossie`)).json()) as { marcacaoSintetico: string; itens: unknown[]; resumo: { marcacaoPendente: boolean } };
+    expect(vazio.itens).toHaveLength(0);
+    expect(vazio.marcacaoSintetico).toBe("nao-avaliado");
+    expect(vazio.resumo.marcacaoPendente).toBe(true);
+
+    const r = await app.request(`/api/videos/${video.id}/dossie`, put({
+      marcacaoSintetico: "obrigatoria",
+      justificativaSintetico: "Voz clonada realista",
+      itens: [
+        { tipo: "direitos", elemento: "Proverbs 16:18 (KJV)", categoria: "citacao-biblica", base: "dominio-publico", contestacao: "Public domain text.", risco: "baixo" },
+        { tipo: "direitos", elemento: "Trilha ambiente", categoria: "musica", base: "licenca", risco: "medio" },
+        { tipo: "ia", elemento: "Narração", categoria: "voz", origem: "ElevenLabs" },
+        { tipo: "monetizacao", elemento: "Conteúdo reaproveitado", mitigacao: "Roteiro autoral", risco: "alto" },
+      ],
+    }));
+    expect(r.status).toBe(200);
+    const d = (await r.json()) as { itens: { elemento: string }[]; resumo: { total: number; piorRisco: string; direitosSemContestacao: number; marcacaoPendente: boolean } };
+    expect(d.itens.map((i) => i.elemento)).toEqual(["Proverbs 16:18 (KJV)", "Trilha ambiente", "Narração", "Conteúdo reaproveitado"]);
+    expect(d.resumo).toEqual({ total: 4, piorRisco: "alto", direitosSemContestacao: 1, marcacaoPendente: false });
+
+    const de_novo = (await (await app.request(`/api/videos/${video.id}/dossie`, put({ marcacaoSintetico: "nao-obrigatoria", itens: [] }))).json()) as { itens: unknown[]; marcacaoSintetico: string };
+    expect(de_novo.itens).toHaveLength(0);
+    expect(de_novo.marcacaoSintetico).toBe("nao-obrigatoria");
+  });
+
+  it("recusa tipo, risco ou base inválidos e vídeo inexistente", async () => {
+    const canal = await criarCanalBase();
+    const { video } = (await (await app.request("/api/videos", json({ canalId: canal.id, tituloProvisorio: "x" }))).json()) as { video: { id: number } };
+    const ruim = (itens: unknown[]) => app.request(`/api/videos/${video.id}/dossie`, put({ marcacaoSintetico: "obrigatoria", itens }));
+    expect((await ruim([{ tipo: "outro", elemento: "x" }])).status).toBe(400);
+    expect((await ruim([{ tipo: "direitos", elemento: "x", risco: "enorme" }])).status).toBe(400);
+    expect((await ruim([{ tipo: "direitos", elemento: "x", base: "pirataria" }])).status).toBe(400);
+    expect((await ruim([{ tipo: "direitos", elemento: "  " }])).status).toBe(400);
+    expect((await app.request("/api/videos/999/dossie", put({ marcacaoSintetico: "obrigatoria", itens: [] }))).status).toBe(404);
+  });
+});
+
 describe("configurações do canal", () => {
   const put = (corpo: unknown) => ({ ...json(corpo), method: "PUT" });
 

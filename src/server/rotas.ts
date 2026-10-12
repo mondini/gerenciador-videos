@@ -12,6 +12,7 @@ import { statusSubpastas } from "./drive/estrutura";
 import { canal, checklistItem, formato, gradePublicacao, versaoRoteiro, video } from "./db/schema";
 import { criarCanal, novoCanalSchema } from "./servicos/canais";
 import { agoraDe, type Contexto } from "./servicos/contexto";
+import { dossieSchema, lerDossie, substituirDossie } from "./servicos/dossie";
 import { criarVideo, importarIdeias, moverEtapa, novoVideoSchema } from "./servicos/videos";
 import { exportarVersaoRoteiro, acharPastaVideo } from "./drive/estrutura";
 import { relative } from "node:path";
@@ -165,6 +166,15 @@ export function criarRotas(ctx: Contexto) {
       if (Object.keys(campos).length === 0) return c.json({ erro: "Nada para alterar" }, 400);
       const atualizado = db.update(video).set(campos).where(eq(video.id, id)).returning().get();
       return atualizado ? c.json(atualizado) : c.json({ erro: "Vídeo não encontrado" }, 404);
+    })
+    .get("/api/videos/:id/dossie", (c) => {
+      const d = lerDossie(ctx, Number(c.req.param("id")));
+      return d ? c.json(d) : c.json({ erro: "Vídeo não encontrado" }, 404);
+    })
+    .put("/api/videos/:id/dossie", corpo(dossieSchema), (c) => {
+      const id = Number(c.req.param("id"));
+      if (!db.select({ id: video.id }).from(video).where(eq(video.id, id)).get()) return c.json({ erro: "Vídeo não encontrado" }, 404);
+      return c.json(substituirDossie(ctx, id, c.req.valid("json")));
     })
     .post("/api/videos/:id/etapa", corpo(z.object({ etapa: z.enum(ETAPAS) })), (c) =>
       c.json(moverEtapa(ctx, Number(c.req.param("id")), c.req.valid("json").etapa)),

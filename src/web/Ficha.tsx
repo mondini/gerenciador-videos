@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, fmtData, ler, paraInputData } from "./api";
+import { DossieAba } from "./Dossie";
 import { botao, botaoClaro, campo, InfoNotas, Modal, Rotulo } from "./ui";
 
 type Video = {
@@ -12,7 +13,7 @@ type Versao = { id: number; numero: number; origem: string; nota: string | null;
 type Ficha = { video: Video; checklist: Item[]; versoes: Versao[] };
 type Arquivos = { pasta: string | null; subpastas: { subpasta: string; arquivos: number; soOnline: number }[] };
 
-const ABAS = ["Básico", "Roteiro", "Checklist", "Arquivos"] as const;
+const ABAS = ["Básico", "Roteiro", "Direitos", "Checklist", "Arquivos"] as const;
 const PALAVRAS_POR_MIN = 150;
 
 export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId: number; onFechar: () => void; onAlterado: () => void; onAviso: (m: string, erro?: boolean) => void }) {
@@ -50,6 +51,7 @@ export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId
       {/* as abas ficam montadas (só escondidas) para não perder o que foi digitado ao trocar de aba */}
       <div hidden={aba !== "Básico"}><Basico v={v} formatos={formatos} series={series} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Roteiro"}><Roteiro v={v} versoes={ficha.versoes} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
+      <div hidden={aba !== "Direitos"}><DossieAba videoId={v.id} onAviso={onAviso} onSalvo={onAlterado} /></div>
       <div hidden={aba !== "Checklist"}><Checklist itens={ficha.checklist} etapaAtual={v.etapa} onMudou={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Arquivos"}><ArquivosAba videoId={v.id} etapa={v.etapa} onAviso={onAviso} /></div>
     </Modal>

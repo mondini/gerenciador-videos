@@ -102,6 +102,11 @@ export const video = sqliteTable(
     capitulos: text("capitulos").notNull().default(""),
     youtubeVideoId: text("youtube_video_id"),
     urlYoutube: text("url_youtube"),
+    /** Marcação "conteúdo alterado ou sintético" do YouTube. */
+    marcacaoSintetico: text("marcacao_sintetico", { enum: ["nao-avaliado", "obrigatoria", "nao-obrigatoria"] })
+      .notNull()
+      .default("nao-avaliado"),
+    justificativaSintetico: text("justificativa_sintetico").notNull().default(""),
     criadoEm: criadoEm(),
   },
   (t) => [uniqueIndex("video_canal_numero").on(t.canalId, t.numero), index("video_etapa").on(t.canalId, t.etapa)],
@@ -211,3 +216,35 @@ export const promptBanco = sqliteTable("prompt_banco", {
   cenaOrigemId: integer("cena_origem_id").references(() => cena.id, { onDelete: "set null" }),
   arquivoExemplo: text("arquivo_exemplo"),
 });
+
+/**
+ * Dossiê de direitos do vídeo, em três tipos:
+ * - `direitos`: elemento de terceiros (música, imagem, citação…) com a defesa pronta contra claim;
+ * - `ia`: o que foi gerado por IA (voz, imagens, roteiro…);
+ * - `monetizacao`: risco de desmonetização, com a mitigação.
+ */
+export const dossieItem = sqliteTable(
+  "dossie_item",
+  {
+    id: id(),
+    videoId: integer("video_id").notNull().references(() => video.id, { onDelete: "cascade" }),
+    tipo: text("tipo", { enum: ["direitos", "ia", "monetizacao"] }).notNull(),
+    ordem: integer("ordem").notNull().default(0),
+    /** direitos/ia: o elemento ou componente; monetizacao: o ponto de risco. */
+    elemento: text("elemento").notNull(),
+    /** direitos: musica, sfx, imagem, citacao-biblica, citacao-estoica, fonte-tipografica, clipe, outro. ia: voz, imagens, roteiro, musica, thumbnail, outro. */
+    categoria: text("categoria").notNull().default(""),
+    /** direitos: origem; ia: ferramenta usada. */
+    origem: text("origem").notNull().default(""),
+    link: text("link").notNull().default(""),
+    /** direitos: dominio-publico, licenca, citacao-uso-transformativo, conteudo-proprio, gerado-por-ia. */
+    base: text("base").notNull().default(""),
+    /** direitos: detalhes da licença/edição/tradução; ia/monetizacao: descrição. */
+    descricao: text("descricao").notNull().default(""),
+    contestacao: text("contestacao").notNull().default(""),
+    provas: text("provas").notNull().default(""),
+    risco: text("risco", { enum: ["baixo", "medio", "alto"] }).notNull().default("baixo"),
+    mitigacao: text("mitigacao").notNull().default(""),
+  },
+  (t) => [index("dossie_video").on(t.videoId, t.tipo)],
+);

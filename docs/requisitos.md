@@ -5,9 +5,10 @@ Documento consolidado ao fim da entrevista (`/grill-me`) de 2026-10-09. A justif
 ## 1. Contexto
 
 - **Usuário único** (o dono), sem login. O sistema roda no Mac em `127.0.0.1:4321`.
-- **Primeiro canal:** curiosidades de artes marciais com foco em BJJ, em pt-BR, prefixo `BJJ`, cerca de 2 vídeos por semana. É um **experimento de 90 dias**, com critérios de corte definidos no início.
-- **Segundo canal:** depois dos 90 dias. O modelo é multi-canal desde já.
-- **Fluxo de trabalho:** produção em lote semanal, com estoque de 4 a 6 vídeos prontos antes da primeira publicação.
+- **Primeiro canal:** estoicismo (foco em Marco Aurélio e nas *Meditações*) com Provérbios bíblicos como ponte. Finanças pessoais entram **de forma bem leve**, só como vínculo para deixar o assunto mais palatável, e não como tema central nem como orientação financeira. Canal *dark*, **100% em inglês** (mercado global), cerca de 2 vídeos por semana, 10 a 15 minutos, com shorts extraídos de cada vídeo. O plano completo está em [`canal-estoicismo/plano-canal-estoicismo.md`](../canal-estoicismo/plano-canal-estoicismo.md). Prefixo sugerido: `STO` (a confirmar). É um **experimento de 90 dias**, com critérios de corte definidos no início. Tudo o que o público vê (roteiro, narração, textos de tela, thumbnails, títulos, descrição, tags, capítulos, comentários fixados) é em inglês. A interface e a documentação do sistema continuam em pt-BR, assim como as notas internas do dono.
+- O canal de artes marciais/BJJ foi a hipótese inicial e foi **substituído** pelo de estoicismo (ver `decisoes.md`). Os exemplos `BJJ-001` deste documento valem como exemplo de formato de código.
+- **Segundo canal:** depois dos 90 dias (ideias já mapeadas: história atmosférica e mistérios do universo). O modelo é multi-canal desde já.
+- **Fluxo de trabalho:** produção em lote, com estoque de vídeos prontos antes da primeira publicação (o plano do canal pede 12). Cada vídeo é produzido numa sessão separada do Claude, que devolve o **pacote de publicação** (ver `docs/pacote-de-publicacao.md`) para ser preenchido na ficha.
 
 ## 2. Regras gerais (não funcionais)
 
@@ -62,6 +63,7 @@ Video 1─N VersaoRoteiro         Video 1─N Cena
 Video 1─N Fonte                 Fonte N─N Cena
 Video 1─N TituloCandidato       Video 1─N VarianteThumbnail
 Video N─N Ativo (UsoAtivo)      Video 1─N RegistroAnalytics (máx. 1 por marco)
+Video 1─N DossieItem (direitos · ia · monetizacao)
 ```
 
 ### Entidades e campos principais
@@ -84,6 +86,13 @@ Video N─N Ativo (UsoAtivo)      Video 1─N RegistroAnalytics (máx. 1 por mar
 - *Conteúdo:* gancho (15s), resumo, roteiroAtual (Markdown)
 - *Produção:* pastaRelativa?, vozUsada (pré-preenchida pelo canal), duracaoFinal?, notasCorte
 - *Publicação:* descricao (pré-preenchida pelo modelo), tags (pré-preenchidas), capitulos, youtubeVideoId?, urlYoutube?
+
+**DossieItem** (dossiê de direitos do vídeo, implementado na v0.1): vídeo, tipo (`direitos` | `ia` | `monetizacao`), ordem, elemento, categoria, origem (ferramenta, quando `ia`), link, base, descricao, contestacao, provas, risco (baixo · médio · alto), mitigacao.
+- `direitos`: um item por elemento de terceiros (música, SFX, imagem de acervo, fonte tipográfica, citação bíblica ou estoica, clipe). `base` = domínio público · licença · citação/uso transformativo · conteúdo próprio · gerado por IA. Guarda o texto de contestação pronto e as provas a anexar.
+- `ia`: um item por componente gerado por IA (voz, imagens, roteiro, música, thumbnail) e a ferramenta.
+- `monetizacao`: um item por ponto de risco (conteúdo reaproveitado ou inautêntico, aviso financeiro quando o vídeo citar dinheiro, tema sensível) com a mitigação.
+- No **Video**: `marcacaoSintetico` (não avaliado · obrigatória · não obrigatória) e `justificativaSintetico`, para a marcação "conteúdo alterado ou sintético" do YouTube. Todo vídeo novo começa como "não avaliado".
+- O dossiê é salvo **inteiro** (substituição) e pode ser importado colando o JSON do pacote de publicação.
 
 **HistoricoEtapa:** vídeo, etapa, entrouEm.
 
@@ -144,6 +153,7 @@ Convenção de arquivos: `BJJ-001_narracao_v2.mp3`, `BJJ-001_thumb_B.png`.
    - *Cenas:* lista ordenável com prompt, ferramenta, arquivos (com miniatura), status, ⭐ e fontes ligadas. Mostra o progresso ("18/30 ok, 4 refazer").
    - *Fontes:* lista com tipo, fato, confiabilidade, texto de tela e cenas ligadas (⚠️ "sem exibição no vídeo" quando não há cena).
    - *Produção:* voz usada, duração final, notas de corte.
+   - *Direitos:* marcação de conteúdo sintético, itens de direitos (com contestação pronta e provas), uso de IA e riscos de monetização, e "Colar JSON" para importar o dossiê gerado pela sessão de produção.
    - *Publicação:* descrição, tags, capítulos, variantes de thumbnail (A/B/C, escolhida, resultado do teste) e links do YouTube.
    - *Arquivos:* listagem por subpasta, com ☁️ para arquivos só online, miniaturas de imagens, "Abrir no Finder" e "Criar pasta" / "Renomear pasta" (com confirmação).
    - *Checklist e histórico:* itens por etapa e linha do tempo das etapas.
@@ -164,7 +174,7 @@ Convenção de arquivos: `BJJ-001_narracao_v2.mp3`, `BJJ-001_thumb_B.png`.
 
 | Versão | Conteúdo | Quando |
 |---|---|---|
-| **v0.1 Produção** | Seções 4, 5 e telas 1–7, backup, validação do `.env`, testes | Antes de começar o estoque |
+| **v0.1 Produção** | Seções 4, 5 e telas 1–7, aba Direitos (dossiê), backup, validação do `.env`, testes | Antes de começar o estoque |
 | **v0.2 Publicação e análise** | Telas 8–14 | Antes do 1º vídeo publicado |
 | v0.3 | API da Anthropic no lugar do "Copiar para o Claude", com as respostas voltando para a ficha | Pós-MVP |
 | v0.4 | **YouTube Fase 2:** OAuth (app publicado em "Produção" para os tokens não expirarem), coleta automática dos marcos | Quando o registro manual pesar |
@@ -176,13 +186,17 @@ Convenção de arquivos: `BJJ-001_narracao_v2.mp3`, `BJJ-001_thumb_B.png`.
 - Criar o canal do YouTube como **Conta de marca** sob `mondini@gmail.com`.
 - Marcar `Meu Drive/Canais YouTube` como **"Disponível off-line"** no Drive for Desktop.
 - Usar só a **Biblioteca de Áudio do YouTube** nos 90 dias.
-- Preferir um **estilo de imagem ilustrado** (posições de BJJ geradas por IA costumam sair erradas, e imagens realistas exigem a divulgação de conteúdo sintético).
+- Preferir um **estilo de imagem ilustrado/minimalista** (linhas e listras sobre fundo escuro, como no plano do canal). Imagens realistas e voz clonada realista exigem a divulgação de conteúdo sintético; confirme caso a caso na aba Direitos.
+- **Citações:** Marco Aurélio e a Bíblia (KJV, WEB, ASV) estão em domínio público, mas as traduções modernas (ex.: Gregory Hays, NIV, ESV) são protegidas. Registre sempre a tradução usada no dossiê.
+- **Finanças pessoais:** como é só um vínculo leve, o canal não dá recomendação financeira. Se um vídeo citar dinheiro, o dossiê registra o risco e a descrição leva o aviso "educational content, not financial advice". Sem tema financeiro, o aviso não é necessário.
 
 ## 9. Pendências que não bloqueiam a implementação
 
 Estes pontos são preenchidos no próprio app, depois que ele existir:
 
-- Nome do canal e nome da pasta do canal no Drive.
+- Nome do canal, prefixo do código (sugestão `STO`) e nome da pasta do canal no Drive.
+- Idioma do canal no cadastro: `en` (o cadastro ainda assume `pt-BR` por padrão; ajustar ao criar o canal).
+- Padrões do canal de estoicismo: formatos, temas, checklists (os padrões do sistema ainda vêm com exemplos de BJJ, como "Posições de luta conferidas") e modelo de descrição.
 - Dias e horário da grade de publicação.
 - Gerador de imagens, ferramenta de voz e editor (CapCut ou DaVinci): ficam como texto livre.
 - Textos finais dos modelos de checklist e do modelo de descrição (o sistema vem com padrões sugeridos).
