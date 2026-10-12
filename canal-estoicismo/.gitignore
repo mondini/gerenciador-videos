@@ -1,0 +1,18 @@
+# mídia pesada fica fora do git
+*.mp3
+*.wav
+*.mp4
+*.mov
+videos/**/audio/
+videos/**/previas/
+videos/**/final/
+# arquivos intermediários gerados pelo pipeline (áudio desacelerado, vídeo sem som, referências)
+videos/**/trabalho/
+# ambiente Python, cache de arte/máscaras e modelos do transcritor
+.venv/
+pipeline/.cache/
+pipeline/.modelos/
+__pycache__/
+.pytest_cache/
+pipeline/in/
+pipeline/stills/

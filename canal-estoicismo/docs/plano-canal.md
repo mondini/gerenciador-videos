@@ -1,0 +1,92 @@
+# Marble & Ash — Plano do Canal
+
+*Old wisdom for quiet hours.* Atualizado em 11/10/2026, ao fim da sessão de criação do canal.
+
+Links (claude.ai):
+- Plano colaborativo (Claude Docs): https://claude.ai/code/artifact/41d9cec2-ff3a-493c-83ac-34526173d40f
+- Design System: https://claude.ai/artifact/YD1Vx9JHfUSKFFVMcdkQqh
+- Canvas de logo, thumbs e banner: https://claude.ai/artifact/4TczXDna7NDn4JW9jyACkp
+
+## Decisões do canal
+
+- **Nome:** Marble & Ash. Mármore = bustos romanos e a pedra onde a sabedoria foi gravada; cinza = *memento mori*; o âmbar = a brasa que ainda brilha.
+- **Formato:** canal dark (sem rosto), narração lenta e introspectiva, vídeos em **teatro de sombras projetadas** (ver `estilo-teatro-de-sombras.md`).
+- **Idioma:** 100% inglês (público: EUA, Reino Unido, Canadá). O criador é fluente, não nativo — revisar sempre se o inglês soa natural.
+- **Uso pretendido:** *slow learning* — ouvir limpando a casa, se exercitando ou tentando dormir.
+- **Tema:** estoicismo com foco em **Marco Aurélio** e as *Meditações*, cruzado de forma sutil com **Provérbios** (sabedorias que se encontram, nunca pregação).
+- **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
+- **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
+- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência planejada: 2 vídeos/semana, 5–6 shorts por vídeo. Meta: 12 vídeos prontos antes de lançar.
+- **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs v4 (voz de senhor ~70 anos, tom de avô; **plano Starter** para versões finais). Sem Canva nem Photoshop.
+- **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
+
+## Identidade visual
+
+- Paleta 60·30·10: carvão `#1A1816`, mármore `#EDE6DA`, âmbar `#E8A33D` (thumbs: âmbar vivo `#FFB547` em 20–30% da imagem).
+- Tipografia: **Cinzel** (títulos, nomes, logo), **Cormorant Garamond** (citações, itálico), **Inter** (créditos e legendas).
+- Logo: A — Horizonte. Banner: B — Centro silencioso.
+- Vídeos: teatro de sombras projetadas (padrão aprovado). Thumbs, logo e banner continuam na arte de linhas **até o criador decidir** se migram para o estilo de sombras.
+- Thumbnails: sempre **3 versões** para o Test & Compare do YouTube — A Palavra (1–2 palavras), B Símbolo (sem texto), C Gancho (até 4 palavras).
+
+## Estrutura padrão de um vídeo (~10 min)
+
+1. **Gancho** (~45 s): fala direto com a dor do ouvinte, sem entregar a resposta.
+2. **Abertura** (2 s): logo Horizonte + "MARBLE & ASH".
+3. **Blocos de conteúdo** (história/contexto, a fonte antiga, a lição aplicada à vida de hoje).
+4. **The Pause** logo após a ideia mais forte.
+5. **Provérbio-ponte**.
+6. **Fechamento** que volta ao gancho, em calma.
+
+## The Pause — o diferencial do canal
+
+Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
+- Deixa falada: *"Let's pause here."*
+- **Precisa funcionar só com áudio:** o narrador guia a respiração em voz alta e **lê a pergunta** (feedback do vídeo 1: a versão muda e longa não funcionava).
+- **Curta:** bem menos que 40 s (a prévia de ~40 s foi considerada longa).
+- Visual: o sol do logo "respirando" (sobe na inspiração, desce na expiração), adaptado ao lençol de sombras; pergunta na tela.
+- Capítulo próprio no YouTube. Vídeo 12 (sono) pode ter uma pausa mais longa encerrando o episódio.
+- Formato de short: *"Take 30 seconds with Marcus Aurelius"*.
+
+## Regras fixas para todos os vídeos
+
+1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
+2. **Crédito na tela, sempre:** toda citação ou informação de fora mostra a fonte no canto inferior esquerdo (Inter, discreto). Ex.: *Marcus Aurelius, Meditations 6.30 · trans. George Long*; *Proverbs 16:18 · World English Bible*.
+3. **Citações:** lidas no inglês antigo da tradução e, logo depois, repetidas em palavras simples ("In other words...", "In simple words...").
+4. **Narração pronta para colar no ElevenLabs:** só o texto falado + audio tags (`[softly]`, `[thoughtful]`, `[warmly]`, `[whispers]`, `[sighs]`) e reticências para pausas. Deixas visuais e créditos ficam fora do bloco de texto. Um arquivo de áudio por bloco.
+5. **Ritmo:** o ElevenLabs não tem controle de velocidade; na montagem as pausas são levemente alongadas (+10% + 0,05 s) e a voz fica no andamento original, para ~150 palavras/min (decisão de 12/10/2026; antes era −8% de andamento, que deixava ~120 palavras/min, lento demais).
+6. **Efeitos de voz:** EM ESPERA — gerar sempre seco.
+7. **Construção do roteiro aos poucos:** um bloco por vez, com perguntas ao criador, nada genérico. O criador aprova cada bloco.
+8. **Pacote de Publicação** ao concluir cada vídeo (`pacote-de-publicacao-regras.md`). Nunca inventar fonte, versículo, link ou licença — perguntar ou marcar "VERIFICAR". Pedir os links do canal na hora.
+
+## Os 12 vídeos
+
+| # | Nome interno | Título de publicação | Tema central | Provérbio-ponte |
+|---|---|---|---|---|
+| 1 | The Man Who Had Everything | The Richest Man in Rome Wrote This to Himself Every Night | Poder e humildade | 30:8-9 e 16:18-19 |
+| 2 | On Anger | How to Stay Calm When Work and Money Push You to the Edge | Ira | 16:32 |
+| 3 | The Last Hour | Memento Mori for Busy Minds: Stop Spending Your Life on Tomorrow | Memento mori | 27:1 |
+| 4 | What You Cannot Control | Stoicism for Financial Stress: Let Go of What You Can't Control | Dicotomia do controle | 19:21 |
+| 5 | The Noise of Others | Stop Living for Their Approval: Stoic Wisdom for Leaders | Opinião alheia | 29:25 |
+| 6 | Holding Your Tongue | The Power of Saying Less: Ancient Proverbs Every Leader Should Hear | Domínio da fala | 17:28 |
+| 7 | The Weight of Envy | Stop Comparing Your Life: Proverbs on Envy and True Wealth | Inveja | 14:30 |
+| 8 | Mornings | How Marcus Aurelius Started His Day: A Stoic Morning for Deep Work | Propósito matinal | 6:9-11 |
+| 9 | The Obstacle | When Everything Fails: The Stoic Art of Rising Again | Dificuldade como caminho | 24:16 |
+| 10 | On Gratitude | The Truest Wealth: What Marcus Aurelius Knew About Enough | Gratidão | 15:16 |
+| 11 | The Company You Keep | You Become Who You Walk With: Ancient Wisdom on Mentors and Friends | Amizade e influência | 13:20 |
+| 12 | Letting Go Before Sleep | Ancient Proverbs Every Leader Should Hear Before Sleep | Reflexão para dormir | 3:24 |
+
+Versículos e citações desta tabela são **pontos de partida**: conferir na WEB/Long antes de usar.
+
+### Fichas iniciais (vídeos 2 e 3)
+
+- **Vídeo 2 — On Anger:** a ira como fraqueza, não força; ângulo "quem te irrita tem poder sobre você"; estrutura: gancho sobre a última vez que perdeu a cabeça → visão estoica da raiva → exercício prático de pausa → Provérbios 16:32 → fechamento. Exemplo prático: reunião tensa, cliente que desrespeita. Palavras-chave: stoicism anger, controlling emotions, marcus aurelius anger, self control, calm mind. Thumbs já esboçadas no canvas (ANGER / linhas que se quebram / "Who angers you owns you").
+- **Vídeo 3 — The Last Hour:** memento mori para viver melhor; ângulo "o friozinho existencial que acorda a gratidão"; gancho sobre o tempo que não volta → memento mori explicado → não é mórbido, é libertador → Provérbios 27:1 → fechamento. Palavras-chave: memento mori, stoicism death, living fully, marcus aurelius time, mortality.
+
+## Fluxo de produção (uma sessão por vídeo)
+
+Ver `fluxo-por-video.md`.
+
+## Status
+
+- Vídeo 1: ver `../videos/video-01/roteiro.md` (blocos 1–5 aprovados; The Pause e bloco 6 pendentes; animação no novo estilo só no bloco 1).
+- Vídeos 2–12: roteiros a fazer.

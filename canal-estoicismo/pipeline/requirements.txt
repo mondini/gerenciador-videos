@@ -1,0 +1,12 @@
+# Pipeline Marble & Ash — instalar num .venv dentro da pasta do canal (ver LEIA-ME.md).
+# Versões fixas: o render aprovado foi conferido pixel a pixel com elas. Outras versões funcionam,
+# mas podem mudar alguns pixels; nesse caso gere a referência de novo antes de mexer no código.
+numpy==2.4.6
+scipy==1.17.1
+pillow==12.3.0
+opencv-python-headless==5.0.0.93
+imageio-ffmpeg==0.6.0          # traz um ffmpeg (com libx264) para dentro do .venv
+
+# opcionais
+faster-whisper==1.2.1          # transcritor: tempos automáticos em `ma tempos` (modelo small.en em pipeline/.modelos)
+pytest==9.1.1                  # testes: python -m pytest pipeline/testes

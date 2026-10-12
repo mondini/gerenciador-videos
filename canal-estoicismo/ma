@@ -1,0 +1,7 @@
+#!/bin/sh
+# Atalho do pipeline de vídeo: ./ma <comando> ...   (ajuda: ./ma -h; detalhes em pipeline/LEIA-ME.md)
+# Usa o Python do .venv desta pasta, se existir; senão, o python3 do sistema.
+DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -x "$DIR/.venv/bin/python" ]; then PY="$DIR/.venv/bin/python"; else PY=python3; fi
+export HF_HOME="${HF_HOME:-$DIR/pipeline/.modelos/hf}" HF_HUB_DISABLE_TELEMETRY=1
+exec "$PY" "$DIR/pipeline/ma.py" "$@"
