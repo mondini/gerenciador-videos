@@ -406,10 +406,11 @@ _RACHA = [(750, BASE - 352), (741, BASE - 322), (757, BASE - 296), (744, BASE - 
           (769, BASE - 148), (756, BASE - 104)]          # termina acima do pano da base
 
 
-def _racha_pts(q):
-    segs = list(zip(_RACHA[:-1], _RACHA[1:]))
+def _parcial(pts, q):
+    """Os primeiros `q` (0..1) do comprimento de uma linha quebrada (rachadura crescendo)."""
+    segs = list(zip(pts[:-1], pts[1:]))
     total = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in segs)
-    resto, out = q * total, [_RACHA[0]]
+    resto, out = q * total, [pts[0]]
     for a, b in segs:
         L = math.hypot(b[0] - a[0], b[1] - a[1])
         if resto >= L:
@@ -419,6 +420,10 @@ def _racha_pts(q):
             out.append((a[0] + (b[0] - a[0]) * resto / L, a[1] + (b[1] - a[1]) * resto / L))
             break
     return out
+
+
+def _racha_pts(q):
+    return _parcial(_RACHA, q)
 
 
 def templo_rachado(q):
@@ -561,8 +566,17 @@ _CABECA = [(-10, 4), (-12, -16), (-22, -30), (-26, -50), (-20, -70), (-4, -82), 
            (27, -32), (32, -27), (26, -24), (24, -16), (16, -6), (8, 0), (10, 6)]
 
 
-def busto(cx, mulher=False, semente=0):
-    """Busto romano sobre um pedestal (herma), de perfil. `mulher` troca barba e cachos por coque e tiara."""
+def _racha_busto(cx):
+    b = BASE
+    return [(cx + 8, b - 372), (cx - 2, b - 342), (cx + 14, b - 312), (cx + 2, b - 284), (cx + 16, b - 254), (cx + 4, b - 218),
+            (cx + 18, b - 186), (cx + 6, b - 160)]                   # da cabeça ao peito, acima da coluna
+
+
+def busto(cx, mulher=False, semente=0, racha=0.0):
+    """Busto romano sobre um pedestal (herma), de perfil. `mulher` troca barba e cachos por coque e tiara.
+
+    `racha` 0..1: uma rachadura vazada desce da cabeça ao peito (ver `busto_brasa` para a gelatina âmbar).
+    """
     rr = np.random.default_rng(semente)
     def desenho(d):
         b = BASE
@@ -597,6 +611,16 @@ def busto(cx, mulher=False, semente=0):
                     ell(d, ox + x * s, oy + y * s, 6 * s, 7 * s)
                     spiral(d, ox + x * s, oy + y * s, 3.6 * s, 1, 1.4, HOLE)
             spiral(d, ox - 6 * s, oy - 46 * s, 5 * s, 1.3, 1.8, HOLE)                                    # orelha
+        if racha > 0:
+            ln(d, _parcial(_racha_busto(cx), racha), 5, HOLE)
+    return full(desenho)
+
+
+def busto_brasa(q, cx=960):
+    """Gelatina âmbar da rachadura do busto (mesmo traço de `busto(..., racha=q)`)."""
+    def desenho(d):
+        if q > 0:
+            ln(d, _parcial(_racha_busto(cx), q), 5, AMBAR)
     return full(desenho)
 
 
@@ -682,4 +706,279 @@ def tesouro(i, cx=960, cy=BASE - 150):
                 y = cy + 20 - k * 12
                 ell(d, cx + (k % 2) * 6, y, 34, 9)
                 stroke(d, [(cx - 26 + (k % 2) * 6, y), (cx + 26 + (k % 2) * 6, y)], 1.6, 1.6, HOLE)
+    return full(desenho)
+
+
+# ---------------- vídeo 1 · bloco 3 (o diário) ----------------
+def risco(q, x0, x1, y):
+    """Traço de tinta que risca uma palavra da esquerda para a direita (q = 0..1 do comprimento)."""
+    def desenho(d):
+        if q > 0:
+            x = x0 + (x1 - x0) * q
+            stroke(d, [(x0, y + 4), ((x0 + x) / 2, y - 2), (x, y - 6)], 7, 5)
+    return full(desenho)
+
+
+def anfiteatro():
+    """O anfiteatro visto de fora: fachada curva com três ordens de arcos vazados e o ático com janelas.
+
+    Os arcos estreitam perto das pontas (a fachada é uma elipse em perspectiva). Nenhuma pessoa: vazio.
+    """
+    def desenho(d):
+        b, R = BASE, 720
+        cotas = (0, 150, 280, 400, 470)                                 # base, ordens 1-3, topo do ático
+        def x_de(t):
+            return 960 + R * math.sin(t)
+        def topo(x):
+            return b - cotas[-1] + 26 * ((x - 960) / R) ** 2               # a borda de cima "dobra" na curva
+        bordas = [(x_de(math.radians(a)), topo(x_de(math.radians(a)))) for a in range(-72, 73, 4)]
+        poly(d, [(x_de(math.radians(-72)), b)] + bordas + [(x_de(math.radians(72)), b)])
+        for k in (1, 2, 3):                                             # cornijas entre as ordens
+            y = b - cotas[k]
+            pts = [(x_de(math.radians(a)), y + 18 * ((x_de(math.radians(a)) - 960) / R) ** 2) for a in range(-70, 71, 5)]
+            ln(d, pts, 3.4, HOLE)
+        for k in (0, 1, 2):                                             # arcos
+            y0, y1 = b - cotas[k] - 14, b - cotas[k + 1] + 16
+            for a in range(-66, 67, 8):
+                t = math.radians(a)
+                x, w = x_de(t), 30 * math.cos(t)
+                curva = 18 * ((x - 960) / R) ** 2
+                r = w
+                poly(d, [(x - w, y0 + curva), (x + w, y0 + curva), (x + w, y1 + r + curva), (x - w, y1 + r + curva)], HOLE)
+                d.pieslice([*P(x - w, y1 + curva), *P(x + w, y1 + 2 * r + curva)], 180, 360, fill=HOLE)
+        y0 = b - cotas[3] - 22                                          # ático: janelinhas alternadas
+        for a in range(-62, 63, 16):
+            t = math.radians(a)
+            x, w = x_de(t), 12 * math.cos(t)
+            curva = 22 * ((x - 960) / R) ** 2
+            poly(d, [(x - w, y0 + curva), (x + w, y0 + curva), (x + w, y0 - 30 + curva), (x - w, y0 - 30 + curva)], HOLE)
+    return full(desenho)
+
+
+def linha_escrita(j, x0=600, x1=1320, y0=250, passo=78):
+    """A mesma linha manuscrita (sempre a mesma: semente fixa), na linha `j` da página.
+
+    Cursiva inclinada: letras com laço (e, l) e com arco (n, m), hastes altas de vez em quando.
+    """
+    rr = np.random.default_rng(77)
+    y = y0 + j * passo
+    def desenho(d):
+        x = x0
+        while x < x1 - 60:
+            pts = []
+            for _ in range(int(rr.integers(2, 7))):                    # letras da palavra
+                tipo, w = int(rr.integers(0, 3)), float(rr.uniform(11, 17))
+                h = float(rr.uniform(26, 36)) if tipo == 2 else float(rr.uniform(11, 16))
+                for k in range(9):
+                    t = k / 8
+                    if tipo == 1:                                       # arco (n, m)
+                        px, py = x + w * t, y - h * math.sin(math.pi * t)
+                    else:                                               # laço (e) ou haste alta (l)
+                        px, py = x + w * t - 0.45 * w * math.sin(2 * math.pi * t), y - h * (0.5 - 0.5 * math.cos(2 * math.pi * t))
+                    pts.append((px + 0.3 * (y - py), py))               # inclinação da escrita
+                x += w
+            ln(d, pts, 3.2)
+            x += float(rr.uniform(18, 28))
+    return full(desenho)
+
+
+# o imperador de toga em tamanho grande, parado (para o manto que tinge): mesmas formas do boneco
+_TOGA = [(0, -188), (20, -184), (34, -150), (38, -100), (36, -40), (48, 30), (62, 110), (70, 160), (40, 172), (0, 168), (-40, 174),
+         (-70, 166), (-60, 100), (-44, 20), (-38, -60), (-40, -130), (-28, -170)]
+_PALLA = [(-26, -176), (-56, -150), (-70, -80), (-78, 0), (-74, 80), (-56, 40), (-44, -40), (-30, -120), (-6, -160)]
+_DOBRAS = [[(30, -176), (6, -120), (-24, -60), (-48, 20), (-60, 120)]] + \
+          [[(10 + k * 9, -60 + k * 6), (16 + k * 10, 40), (24 + k * 10, 140)] for k in range(4)]
+_BRACO = [(-10, -4), (8, -6), (12, 20), (9, 52), (7, 80), (-6, 80), (-10, 50), (-13, 20)]
+_MAO = [(-7, -2), (7, -2), (8, 30), (6, 62), (12, 70), (16, 78), (24, 82), (20, 88), (8, 92), (-2, 90), (-8, 78), (-6, 62), (-8, 30)]
+
+
+def _figura_toga(d, cx, s, cor_manto, cor_resto, cor_furo):
+    oy = BASE - 174 * s
+    def Q(pts, dx=0, dy=0):
+        return [(cx + (x + dx) * s, oy + (y + dy) * s) for x, y in pts]
+    if cor_resto is not None:
+        for x in (-14, 12):                                                         # pés
+            shape(d, Q([(x - 10, 160), (x + 26, 160), (x + 40, 172), (x - 10, 174)]), cor_resto, n=4)
+    shape(d, Q(_TOGA), cor_manto)
+    shape(d, Q(_PALLA), cor_manto)
+    for pts in _DOBRAS:
+        stroke(d, Q(pts), 3.2 * s * 0.8, 0.6 * s, cor_furo)
+    if cor_resto is not None:
+        ox, oy2 = cx + 2 * s, oy - 184 * s                                           # cabeça e coroa de louros
+        shape(d, [(ox + x * s, oy2 + y * s) for x, y in _CABECA], cor_resto, n=12)
+        shape(d, [(ox + 12 * s, oy2 - 58 * s), (ox + 20 * s, oy2 - 61 * s), (ox + 16 * s, oy2 - 55 * s)], cor_furo, n=6)
+        for k in range(9):
+            a = math.radians(200 + k * 17)
+            serrated(d, ox + (-2 + 26 * math.cos(a)) * s, oy2 + (-54 + 28 * math.sin(a)) * s,
+                     math.degrees(a) + 70 * (1 if k < 5 else -1) - 90, 18 * s, 0.32)
+    braco = Q(_BRACO, 10, -162)
+    mao = Q(_MAO, 10, -162 + 78)
+    shape(d, braco, cor_resto if cor_resto is not None else cor_furo)              # braço da frente, solto ao lado
+    shape(d, mao, cor_resto if cor_resto is not None else cor_furo)
+
+
+def figura_toga(cx=960, s=2.0):
+    """O imperador grande, de pé e parado: toga, palla, braço solto e coroa de louros (formas do boneco)."""
+    return full(lambda d: _figura_toga(d, cx, s, INK, INK, HOLE))
+
+
+def toga_tinta(q, cx=960, s=2.0, chao=835):
+    """Gelatina do manto tingido de cima para baixo (q = 0..1 da altura); o braço fica de fora e a tinta
+    para em `chao` (o monte de capim da frente cobre os pés)."""
+    def desenho(d):
+        if q <= 0:
+            return
+        _figura_toga(d, cx, s, (255, 255, 255, 255), None, (0, 0, 0, 0))     # a cor vem da gelatina
+        oy = BASE - 174 * s
+        y = oy - 188 * s + q * 362 * s
+        d.rectangle([*P(0, min(y, chao)), *P(W, H)], fill=(0, 0, 0, 0))
+    return full(desenho)
+
+
+# ---------------- vídeo 1 · bloco 4 (a lição) ----------------
+def _celular_pts(cx, cy, e, inset=0.0):
+    w, h, c = 110 * e - inset, 220 * e - inset, 16 * e                  # cantos chanfrados (pedra cortada)
+    return [(cx - w + c, cy - h), (cx + w - c, cy - h), (cx + w, cy - h + c), (cx + w, cy + h - c), (cx + w - c, cy + h),
+            (cx - w + c, cy + h), (cx - w, cy + h - c), (cx - w, cy - h + c)]
+
+
+def celular(cx=1150, cy=540, e=1.0):
+    """Celular recortado: corpo de cantos chanfrados, tela vazada, alto-falante e câmera."""
+    def desenho(d):
+        poly(d, _celular_pts(cx, cy, e))
+        w, h = 110 * e - 12 * e, 220 * e - 40 * e
+        poly(d, [(cx - w, cy - h), (cx + w, cy - h), (cx + w, cy + h), (cx - w, cy + h)], HOLE)
+        stroke(d, [(cx - 22 * e, cy - 202 * e), (cx + 22 * e, cy - 202 * e)], 4 * e, 4 * e, HOLE)
+        ell(d, cx + 40 * e, cy - 202 * e, 4 * e, 4 * e, HOLE)
+        ell(d, cx, cy + 202 * e, 9 * e, 9 * e, HOLE)
+        ell(d, cx, cy + 202 * e, 5 * e, 5 * e)
+    return full(desenho)
+
+
+def celular_tela(cx=1150, cy=540, e=1.0):
+    """A tela do celular (para a gelatina âmbar: o brilho de coisa nova)."""
+    def desenho(d):
+        w, h = 110 * e - 12 * e, 220 * e - 40 * e
+        poly(d, [(cx - w, cy - h), (cx + w, cy - h), (cx + w, cy + h), (cx - w, cy + h)], (255, 255, 255, 255))
+    return full(desenho)
+
+
+def redemoinho(fase, cx=540, cy=250, r=62):
+    """Redemoinho de pensamentos sobre a cabeça: duas espirais girando (fase 0..1 dá uma volta)."""
+    def desenho(d):
+        for k in (0, 1):
+            a0 = 2 * math.pi * fase + k * math.pi
+            pts = [(cx + r * (0.12 + 0.88 * t) * math.cos(a0 + 3.2 * math.pi * t), cy + 0.55 * r * (0.12 + 0.88 * t) * math.sin(a0 + 3.2 * math.pi * t))
+                   for t in [j / 30 for j in range(31)]]
+            stroke(d, pts, 1.5, 6.5)
+        for k in range(3):
+            a = 2 * math.pi * (fase * 1.5 + k / 3)
+            ell(d, cx + 1.15 * r * math.cos(a), cy + 0.62 * r * math.sin(a), 4, 4)
+    return full(desenho)
+
+
+def conta(q, cx=1280, y0=300, altura=420):
+    """A conta a pagar: papel que desenrola para baixo de um rolinho (q = 0..1), com linhas, total e carimbo."""
+    def desenho(d):
+        w, y1 = 92, y0 + altura * q
+        if q > 0.02:
+            poly(d, [(cx - w, y0), (cx + w, y0), (cx + w, y1 - 8), (cx + w - 10, y1), (cx + w - 22, y1 - 8), (cx + w - 34, y1),
+                     (cx - w + 34, y1), (cx - w + 22, y1 - 8), (cx - w + 10, y1), (cx - w, y1 - 8)])
+            for j in range(12):
+                y = y0 + 40 + j * 28
+                if y > y1 - 30:
+                    break
+                L = 70 if j % 3 else 120
+                stroke(d, [(cx - w + 18, y), (cx - w + 18 + L, y)], 3, 3, HOLE)
+                stroke(d, [(cx + w - 48, y), (cx + w - 18, y)], 3, 3, HOLE)
+            if q > 0.85:                                                    # total e carimbo
+                yt = y0 + altura - 70
+                stroke(d, [(cx - w + 14, yt - 18), (cx + w - 14, yt - 18)], 2, 2, HOLE)
+                ell(d, cx + 30, yt + 18, 30, 30, HOLE)
+                ell(d, cx + 30, yt + 18, 23, 23)
+                stroke(d, [(cx + 12, yt + 4), (cx + 48, yt + 32)], 4, 4, HOLE)
+        shape(d, [(cx - w - 14, y0 - 16), (cx + w + 14, y0 - 16), (cx + w + 14, y0 + 6), (cx - w - 14, y0 + 6)], n=4)   # rolinho
+        for x in (cx - w - 22, cx + w + 22):
+            ell(d, x, y0 - 5, 9, 13)
+    return full(desenho)
+
+
+def banquinho(cx=540, altura=92):
+    """Banquinho de três pés (para o homem sentado na insônia)."""
+    def desenho(d):
+        b, h = BASE, altura
+        shape(d, [(cx - 70, b - h), (cx + 70, b - h), (cx + 64, b - h + 14), (cx - 64, b - h + 14)], n=4)
+        for x0, x1 in ((cx - 54, cx - 70), (cx + 54, cx + 70), (cx, cx + 4)):
+            stroke(d, [(x0, b - h + 12), (x1, b)], 9, 7)
+        stroke(d, [(cx - 62, b - h * 0.4), (cx + 62, b - h * 0.4)], 4, 4)
+    return full(desenho)
+
+
+_FENDA = [(940, 60), (956, 140), (930, 230), (962, 330), (938, 430), (970, 530), (944, 640), (966, 760), (948, BASE)]
+
+
+def fenda(q):
+    """Rachadura que desce pelo lençol e separa a família (q = 0..1 do comprimento)."""
+    def desenho(d):
+        if q > 0:
+            pts = _parcial(_FENDA, q)
+            ln(d, pts, 7)
+            for (x, y), s in zip(pts[1:-1], (1, -1, 1, -1, 1, -1, 1)):         # galhinhos da rachadura
+                ln(d, [(x, y), (x + s * 34, y + 30)], 3)
+    return full(desenho)
+
+
+def vaso(cx=960):
+    """O vaso furado: grande pithos sobre um tripé, faixa de meandro vazada e uma fresta no fundo."""
+    def desenho(d):
+        corpo = [(cx - 64, 330), (cx + 64, 330), (cx + 58, 362), (cx + 150, 410), (cx + 236, 480), (cx + 250, 540), (cx + 226, 620),
+                 (cx + 150, 700), (cx + 90, 738), (cx - 90, 738), (cx - 150, 700), (cx - 226, 620), (cx - 250, 540), (cx - 236, 480),
+                 (cx - 150, 410), (cx - 58, 362)]
+        shape(d, corpo, n=8)
+        ell(d, cx, 330, 80, 14)                                               # boca
+        ell(d, cx, 330, 58, 8, HOLE)
+        stroke(d, [(cx - 200, 462), (cx + 200, 462)], 3, 3, HOLE)
+        stroke(d, [(cx - 236, 532), (cx + 236, 532)], 3, 3, HOLE)
+        for k in range(12):                                                   # meandro (gregas)
+            x = cx - 198 + k * 34
+            poly(d, [(x, 520), (x, 476), (x + 24, 476), (x + 24, 500), (x + 12, 500), (x + 12, 488), (x + 6, 488), (x + 6, 520)], HOLE)
+        holes_row(d, cx - 200, 600, cx + 200, 600, 14, 4)
+        shape(d, [(cx + 22, 712), (cx + 36, 700), (cx + 44, 724), (cx + 38, 738), (cx + 28, 738)], HOLE, n=4)   # a fresta
+        for x0, x1 in ((cx - 70, cx - 120), (cx + 70, cx + 120), (cx - 10, cx - 8)):                         # tripé
+            stroke(d, [(x0, 730), (x1, BASE)], 12, 9)
+        stroke(d, [(cx - 100, 840), (cx + 100, 840)], 5, 5)
+    return full(desenho)
+
+
+def balanca(ang, cx=960, topo=360):
+    """Balança de pratos: coluna, travessão inclinado `ang` graus (positivo = direita desce),
+    moedas no prato da esquerda e um pão no da direita."""
+    def desenho(d):
+        b = BASE
+        shape(d, [(cx - 110, b), (cx + 110, b), (cx + 90, b - 30), (cx - 90, b - 30)], n=4)
+        poly(d, [(cx - 18, b - 30), (cx + 18, b - 30), (cx + 12, topo + 10), (cx - 12, topo + 10)])
+        for k in range(4):
+            stroke(d, [(cx - 6 + k * 4, b - 50), (cx - 4 + k * 4, topo + 40)], 1.6, 1.6, HOLE)
+        ell(d, cx, topo, 16, 16)
+        ell(d, cx, topo, 6, 6, HOLE)
+        shape(d, [(cx - 6, topo - 10), (cx, topo - 60), (cx + 6, topo - 10)], n=4)          # fiel
+        a = math.radians(ang)
+        ca, sa = math.cos(a), math.sin(a)
+        L = 300
+        ln(d, [(cx - L * ca, topo - L * sa), (cx + L * ca, topo + L * sa)], 10)
+        for s in (-1, 1):
+            hx, hy = cx + s * L * ca, topo + s * L * sa
+            ell(d, hx, hy, 9, 9)
+            py = hy + 250
+            for dx in (-80, 0, 80):
+                ln(d, [(hx, hy), (hx + dx, py)], 2.4)
+            shape(d, [(hx - 92, py), (hx + 92, py), (hx + 70, py + 24), (hx, py + 34), (hx - 70, py + 24)], n=6)
+            if s < 0:                                                            # moedas
+                for k in range(5):
+                    ell(d, hx + (k % 2) * 8 - 4, py - 8 - k * 11, 40, 8)
+                    stroke(d, [(hx - 30 + (k % 2) * 8, py - 8 - k * 11), (hx + 22 + (k % 2) * 8, py - 8 - k * 11)], 1.6, 1.6, HOLE)
+            else:                                                                # pão
+                shape(d, [(hx - 66, py - 2), (hx - 58, py - 40), (hx - 20, py - 62), (hx + 20, py - 62), (hx + 58, py - 40), (hx + 66, py - 2)], n=8)
+                for k in range(3):
+                    stroke(d, [(hx - 34 + k * 30, py - 50), (hx - 22 + k * 30, py - 30)], 4, 2, HOLE)
     return full(desenho)

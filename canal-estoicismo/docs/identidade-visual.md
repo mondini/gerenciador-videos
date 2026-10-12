@@ -39,3 +39,8 @@ System mudar, atualizar este arquivo.
 A grade sépia faz o papel da paleta: sombra ≈ `ash-900`, lençol iluminado ≈ `marble-100`, e a única cor
 saturada é o âmbar (chamas, sol do logo, "&"). Textos: nomes em Cinzel, citações em Cormorant Garamond,
 créditos em Inter (`marble-300`) no canto inferior esquerdo, com margem de segurança de 64 px.
+
+## Exceções aprovadas pelo criador
+- **Vídeo 1, bloco 3 (12/10/2026):** o manto imperial tingido usa **púrpura** apagada e translúcida
+  (RGB 0.40 · 0.20 · 0.34), porque o roteiro fala da púrpura dos imperadores. Fora desse caso, a única cor
+  saturada continua sendo o âmbar.

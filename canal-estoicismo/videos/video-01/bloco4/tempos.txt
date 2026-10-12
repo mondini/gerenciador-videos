@@ -1,0 +1,50 @@
+# Tempos do bloco4 · video-01 — deixas da narração.
+# Áudio: audio/video01-bloco4-free.mp3 (97.80 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+now                  0.00  Now...                                                              # início
+think                0.86  think about your own life for a moment.                             # voz
+phone                3.47  Remember the day you held a new phone for the first time.           # pausa
+glass                7.56  The smooth glass.                                                   # pausa
+speed                9.16  The speed.                                                          # voz
+thrill              10.20  The small thrill of something new in your hands.                    # voz
+andthen             13.89  And then...                                                         # pausa
+months               14.72  a few months later...                                               # pausa
+justphone              16.23  it was just a phone.                                                # pausa
+slower              17.95  Slower than the new one.                                            # pausa
+older               19.63  Older than the one you saw in someone else's hand.                  # pausa
+nothing             22.64  Nothing changed in the phone.                                       # pausa
+changed             24.81  Something changed in you.                                           # pausa
+now2                27.33  Now,                                                                # pausa
+honest              27.84  let me be honest with you.                                          # voz
+money               29.55  Money is not the enemy.                                             # pausa
+notenough           31.83  Not having enough is real.                                          # pausa
+awake               34.29  It keeps people awake at night.                                     # pausa
+families            36.30  It breaks families.                                                 # pausa
+choices             37.96  It takes away choices.                                              # pausa
+pretend             39.73  There is no wisdom in pretending otherwise.                         # pausa
+poverty             42.84  But there is another kind of poverty...                             # pausa
+follows             45.73  the one that follows you no matter how much you earn.               # pausa
+feeling             48.89  The feeling that enough...                                          # pausa
+ahead               50.94  is always one step ahead.                                           # pausa
+proverbs              53.41  In the book of Proverbs,                                            # pausa
+prayer              54.92  there is a prayer that asks for something strange:                  # voz
+give                58.27  Give me neither poverty nor riches.                                 # pausa
+feed                61.22  Feed me with the food that is needful for me.                       # pausa
+inother             64.41  In other words...                                                   # pausa
+poor                65.51  not so poor that I am pushed to do wrong.                           # pausa
+rich                68.64  And not so rich...                                                  # pausa
+forget              70.07  that I forget who gave me everything.                               # pausa
+marcus              72.80  Marcus Aurelius left himself a simple exercise for this.            # pausa
+q727                76.77  Think not so much of what thou hast not as of what thou hast.       # pausa
+simple              81.49  In simple words...                                                  # pausa
+stop                82.73  stop counting what is missing.                                      # pausa
+look                85.03  Look at what is already here.                                       # pausa
+further             87.38  And then he goes one step further.                                  # pausa
+choose              89.79  Choose the best of the things you have...                           # pausa
+imagine             92.28  and imagine how much you would long for them,                       # pausa
+gone                94.70  if they were gone.                                                  # voz
+pause               96.60  Let's pause here.                                                   # pausa

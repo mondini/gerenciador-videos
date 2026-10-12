@@ -56,6 +56,7 @@ PERGAMINHO = [Camada(objetos.pergaminho, k / 20, desfoque=1.6, opacidade=0.85, s
               for k in range(21)]
 CRED_HA = Credito('Historia Augusta, Life of Marcus 17')
 BAU = [Camada(objetos.bau, k / 8, desfoque=2.0, opacidade=0.85, semente=31, pivo=(960, BASE), balanco=(2.0, 0.2)) for k in range(9)]
+SOBE_BAU = -100              # o baú pousa sobre o monte de capim da base, em vez de ficar atrás dele
 TESOUROS = [Camada(objetos.tesouro, i, desfoque=1.8, opacidade=0.85, semente=40 + i, pivo=(960, BASE - 150), balanco=(2.5, 0.4))
             for i in range(5)]
 
@@ -148,12 +149,12 @@ def quadro(q, c):
         q.sombra(PERGAMINHO[int(round(20 * q.ss(c.historians + 0.2, 2.2)))], lenda, 1 - 0.35 * duvida)
         q.credito(CRED_HA, q.env(c.historians, 0.8, c.story - 0.5, 1.0))
         tampa = int(round(8 * q.ss(c.sold - 0.4, 0.8)))
-        q.sombra(BAU[tampa], lenda, 1 - 0.35 * duvida, dx=760 * (1 - q.ss(c.whenwars, 1.6)))
+        q.sombra(BAU[tampa], lenda, 1 - 0.35 * duvida, dx=760 * (1 - q.ss(c.whenwars, 1.6)), dy=SOBE_BAU)
         for i, t in enumerate(TESOUROS):
             t0 = c.sold + i * 0.45
             sobe, vai = q.ss(t0, 1.2), q.ss(t0 + 1.4, 2.2)
             lado = -1 if i % 2 else 1
-            q.sombra(t, lenda, min(1, sobe * 2), 1 - vai, dx=(i - 2) * 90 * sobe + lado * (320 + i * 60) * vai, dy=-230 * sobe - 120 * vai)
+            q.sombra(t, lenda, min(1, sobe * 2), 1 - vai, dx=(i - 2) * 90 * sobe + lado * (320 + i * 60) * vai, dy=SOBE_BAU - 120 * sobe - 30 * vai)
         q.boneco(IMPERADOR, 1380, BASE - 172 * 1.3, {'uarmF': 8, 'farmF': -10, 'uarmB': -6, 'farmB': -8, 'head': 4},
                  lenda, q.ss(c.sounds - 0.6, 1.2))
 
@@ -169,4 +170,4 @@ def quadro(q, c):
     elif z_escrita > 0:
         q.camera(1060, 640, 1 + z_escrita)
     elif z_bau > 0:
-        q.camera(960, 720, 1 + z_bau)
+        q.camera(960, 720 + SOBE_BAU, 1 + z_bau)

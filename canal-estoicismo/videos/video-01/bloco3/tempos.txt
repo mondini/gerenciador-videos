@@ -1,0 +1,60 @@
+# Tempos do bloco3 · video-01 — deixas da narração.
+# Áudio: audio/video01-bloco3-free.mp3 (105.40 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+tent                 0.00  What he wrote in that tent was never meant for us.                  # início
+latin                3.54  He did not write it in Latin,                                       # pausa
+the_language         5.28  the language of the empire...                                       # voz
+greek                7.03  but in Greek.                                                       # pausa
+philo                8.34  The language of philosophy.                                         # pausa
+teachers            10.17  The language of his teachers.                                       # pausa
+title               12.49  And the title these pages have carried for centuries is simply this:  # pausa
+himself             16.88  To Himself.                                                         # pausa
+noaudience          18.51  No audience.                                                        # pausa
+noapplause          19.50  No applause.                                                        # voz
+noone               20.60  No one to impress.                                                  # voz
+tired               22.29  Just a tired man...                                                 # pausa
+reminding           23.56  reminding himself,                                                  # voz
+again               24.88  again and again,                                                    # voz
+person              26.63  of the person he wanted to be.                                      # pausa
+honest              28.97  And that is what makes it so honest.                                # pausa
+repeats             31.82  Because he repeats himself.                                         # pausa
+warnings            33.76  He writes the same warnings over and over...                        # pausa
+forget              36.77  the way you only repeat what you keep forgetting.                   # pausa
+perfect             39.56  This was not a perfect man writing down his perfection.             # pausa
+fighting            43.22  This was a man fighting,                                            # pausa
+everyday            44.81  every single day...                                                 # pausa
+ruined              46.46  not to be ruined by what he had.                                    # pausa
+mornings            48.93  Some mornings,                                                      # pausa
+prepared            49.48  he prepared himself for the people he would face:                   # voz
+q21a                52.61  Begin the morning by saying to thyself...                           # pausa
+q21b                55.38  I shall meet with the busy-body,                                    # pausa
+ungrateful          57.34  the ungrateful,                                                     # voz
+arrogant            58.42  arrogant,                                                           # voz
+deceitful           59.18  deceitful,                                                          # voz
+envious             60.12  envious,                                                            # voz
+unsocial            60.90  unsocial.                                                           # voz
+inother             61.98  In other words...                                                   # pausa
+before              63.16  before the day began,                                               # pausa
+cross               64.66  he already knew that difficult people would cross his path.         # voz
+notexpect             68.50  He did not expect a world without them.                             # pausa
+peace               70.78  He only refused to let them steal his peace.                        # pausa
+nights              74.18  And some nights...                                                  # pausa
+wrote               74.86  he wrote a warning that only an emperor could write.                # voz
+warning             78.22  A warning about himself.                                            # pausa
+q630a               80.42  Take care that thou art not made into a Caesar...                   # pausa
+q630b               83.71  that thou art not dyed with this dye.                               # pausa
+q630c               86.53  For such things happen.                                             # pausa
+simple              88.22  In simple words...                                                  # pausa
+careful             89.60  be careful not to become only the title.                            # pausa
+crown               92.45  Only the crown.                                                     # pausa
+noman               93.73  With no man left inside it.                                         # pausa
+dyed                95.84  Dyed...                                                             # pausa
+purple              96.16  like the purple robes of the emperors.                              # voz
+power               98.96  The color of power...                                               # pausa
+soaking            100.16  soaking into a man,                                                 # voz
+slowly             101.70  slowly...                                                           # voz
+nothing            102.80  until there is nothing of him left underneath.                      # pausa
