@@ -1,6 +1,6 @@
 """Pastas e dados de um vídeo e de um bloco; carregamento do script de cena.
 
-Estrutura de um vídeo (videos/video-NN/):
+Estrutura de um vídeo (videos/MA-NNN-slug/, ex.: videos/MA-001-the-man-who-had-everything/):
   roteiro.md               roteiro e status
   audio/                   mp3 do ElevenLabs (fora do git)
   blocoN/cena.py           script de cena do bloco N (elenco + função quadro)
@@ -24,10 +24,20 @@ from . import audio, config, tempos
 
 
 def nome_video(v) -> str:
-    """Aceita '1', '01', 'video-01' -> 'video-01'."""
+    """Nome da pasta do vídeo. Aceita '1', '01', 'video-01', 'MA-001' ou o slug inteiro -> 'MA-001-the-man-who-had-everything'.
+
+    A pasta é achada pelo código (`MA-001`), então o slug pode mudar sem quebrar os comandos.
+    """
     v = str(v)
-    m = re.fullmatch(r'(?:video-?)?(\d+)', v)
-    return f'video-{int(m.group(1)):02d}' if m else v
+    m = re.fullmatch(rf'(?:video-?|{config.PREFIXO}-)?(\d+)', v, re.I)
+    if not m:
+        return v
+    codigo = f'{config.PREFIXO}-{int(m.group(1)):03d}'
+    achadas = sorted(p.name for p in config.VIDEOS.glob(f'{codigo}*')
+                     if p.is_dir() and (p.name == codigo or p.name.startswith(f'{codigo}-')))
+    if len(achadas) > 1:
+        raise SystemExit(f'Mais de uma pasta para {codigo}: {", ".join(achadas)}')
+    return achadas[0] if achadas else codigo
 
 
 class Bloco:
@@ -71,7 +81,7 @@ class Bloco:
         return self.pasta_video / 'roteiro.md'
 
     def procurar_mp3(self):
-        """O mp3 mais recente de videos/video-NN/audio/ com 'blocoN' (ou o nome da peça, ex.: 'pausa') no nome."""
+        """O mp3 mais recente de videos/<vídeo>/audio/ com 'blocoN' (ou o nome da peça, ex.: 'pausa') no nome."""
         padrao = rf'bloco0*{self.numero}(?!\d)' if isinstance(self.numero, int) else rf'\b{self.nome}\b'
         cands = [p for p in (self.pasta_video / 'audio').glob('*.mp3') if re.search(padrao, p.name, re.I)]
         if not cands:
@@ -115,7 +125,7 @@ class Bloco:
     @cached_property
     def cena(self):
         if not self.arquivo_cena.exists():
-            raise SystemExit(f'Falta o script de cena {self.arquivo_cena} (modelo: videos/video-01/bloco1/cena.py)')
+            raise SystemExit(f'Falta o script de cena {self.arquivo_cena} (modelo: videos/MA-001-the-man-who-had-everything/bloco1/cena.py)')
         nome = f'cena_{self.video}_{self.nome}'.replace('-', '_')
         spec = importlib.util.spec_from_file_location(nome, self.arquivo_cena)
         mod = importlib.util.module_from_spec(spec)

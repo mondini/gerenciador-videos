@@ -8,25 +8,20 @@
 - **Provérbios-ponte:** 30:8-9 (bloco 4) e 16:18-19 (bloco 5)
 - **Visão do criador (virada do bloco 4):** dinheiro não é o vilão; não ter dinheiro também faz infeliz; o problema é o "suficiente" que nunca chega. "Não é capitalismo malvado, é a sociedade atual."
 
-## Status dos blocos (12/10/2026)
+## Notas de produção
 
-| Bloco | Conteúdo | Texto | Áudio final (Starter) | Animação no estilo de sombras |
-|---|---|---|---|---|
-| 1 | Gancho | ✅ aprovado | ✅ 37,3 s · tempos refeitos | ✅ (sem mãos; refinos pendentes) — re-render com a voz nova aprovado |
-| — | Abertura (2 s) | — | — | ✅ prévia em sombras (`videos/comum/abertura`), aguardando aprovação |
-| 2 | O homem | ✅ aprovado | ✅ 74,5 s · tempos refeitos | ✅ em sombras (12/10/2026) — re-render com a voz nova aprovado |
-| 3 | O diário | ✅ aprovado | ✅ 108,3 s · tempos refeitos | ✅ em sombras (12/10/2026) — re-render com a voz nova aprovado |
-| 4 | A lição | ✅ aprovado | ✅ 92,0 s · tempos refeitos | ✅ em sombras; escada trocada pelo vaso furado (12/10/2026) — re-render com a voz nova aprovado |
-| — | The Pause | ✅ aprovado (12/10/2026) | ✅ 38,1 s · tempos sugeridos | ✅ sol do logo respirando sobre o mar (12/10/2026), prévia renderizada |
-| 5 | Provérbios 16:18 | ✅ aprovado | ✅ 66,6 s · tempos sugeridos | ✅ rolo hebraico, Salomão, torre, fogueira x baú, linha âmbar, sombra que cresce (12/10/2026), prévia renderizada |
-| 6 | Fechamento | ✅ aprovado (12/10/2026) | ✅ 49,4 s · tempos sugeridos | ✅ casa do gancho, tenda, âmbar na casa, família, só a chama no fim (12/10/2026), prévia renderizada |
+> Status (o que existe e o que falta): `./ma status 1`. Aqui ficam só decisões e notas.
+
+- Abertura: peça comum `videos/comum/abertura` (logo em sombras); a prévia ainda aguardava a aprovação do criador em 12/10/2026.
+- Bloco 1: sem mãos de manipuladores; refinos visuais anotados para depois.
+- Bloco 4: a escada foi trocada pelo vaso furado.
 
 Todos os áudios foram gravados no plano **Starter** em 12/10/2026, com a voz nova *Flint — Deep, Raspy, and Warm*
 (Eleven v4, Stability 50%, Similarity 75%): 6.638 créditos no total. Narração: 7 min 46 s no áudio original,
 8 min 6 s no ritmo do canal (+ abertura e encerramento). Os tempos dos blocos 1–4 foram refeitos com os mesmos
 nomes de deixa; nos blocos 5, 6 e na Pausa, renomear as deixas ao escrever as cenas.
 
-**Vídeo final montado (12/10/2026):** `final/video-01-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 8 min 26 s, −16 LUFS, 1080p
+**Vídeo final montado (12/10/2026):** `final/video-01-1-abertura-2-3-4-pausa-5-6-encerramento.mp4` (nome de antes da pasta MA-001), 8 min 26 s, −16 LUFS, 1080p
 (simulação do YouTube a ~4 Mbps sem faixas nos degradês: não precisa de 4K). Próximo: Pacote de Publicação.
 **Publicação: AGUARDAR** a liberação do criador (12/10/2026). Não publicar nem agendar o vídeo 1 sem pedido.
 

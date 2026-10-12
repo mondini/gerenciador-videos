@@ -2,10 +2,10 @@
 
 Código Python que monta os vídeos no padrão **teatro de sombras projetadas** (ver
 `docs/estilo-teatro-de-sombras.md`). Uma biblioteca (`marbleash/`) com a arte e o compositor, e, para
-cada bloco de cada vídeo, **dados fora do código**: `videos/video-NN/blocoN/` com o script de cena,
+cada bloco de cada vídeo, **dados fora do código**: `videos/MA-NNN-slug/blocoN/` com o script de cena,
 os tempos da narração e a análise do áudio. Uma linha de comando (`ma`) faz cada etapa com um comando.
 
-> O bloco 1 do vídeo 1 é o **exemplo oficial**: `videos/video-01/bloco1/cena.py`. Ele reproduz bit a bit
+> O bloco 1 do vídeo 1 é o **exemplo oficial**: `videos/MA-001-the-man-who-had-everything/bloco1/cena.py`. Ele reproduz bit a bit
 > o render aprovado em 11/10/2026. Copie-o para começar qualquer bloco novo.
 
 ---
@@ -41,7 +41,7 @@ Use o nome do arquivo: `objetos.letreiro('texto', 'Inter-Regular.ttf', tamanho=2
 
 ## 2. Comandos
 
-Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do bloco, ou `pausa` para The Pause (mp3 com `pausa` no nome; texto do `## The Pause` do roteiro).
+Rode na pasta do canal. `VIDEO` = `1`, `MA-001` ou o nome da pasta (`MA-001-the-man-who-had-everything`); a pasta é achada pelo código; `BLOCO` = número do bloco, ou `pausa` para The Pause (mp3 com `pausa` no nome; texto do `## The Pause` do roteiro).
 
 | Etapa | Comando | O que faz | Gera |
 |---|---|---|---|
@@ -51,11 +51,16 @@ Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do 
 | Stills | `./ma stills VIDEO BLOCO 5 12.5 30` | PNGs de conferência nos segundos dados (sem segundos: os `STILLS` da cena) | `previas/stills/blocoN_SSS.SS.png` |
 | Render | `./ma render VIDEO BLOCO` | Vídeo do bloco com voz + ambiente a −16 LUFS | `previas/blocoN.mp4` (+ `trabalho/blocoN-video.mp4` sem som) |
 | Trecho | `./ma render VIDEO BLOCO --de 20 --ate 30` | Só um trecho, para conferir rápido | `previas/blocoN-20a30s.mp4` |
-| Juntar | `./ma juntar VIDEO 1 abertura 2 3` | Junta blocos e peças comuns, na ordem dada, com ambiente contínuo (−16 LUFS); `--4k` também exporta em 4K | `final/video-NN-1-abertura-2-3.mp4` |
+| Juntar | `./ma juntar VIDEO 1 abertura 2 3` | Junta blocos e peças comuns, na ordem dada, com ambiente contínuo (−16 LUFS); `--4k` também exporta em 4K | `final/MA-NNN-slug-1-abertura-2-3.mp4` |
 | Peça comum | `./ma render comum abertura` | Renderiza uma peça sem narração, igual em todos os vídeos (`videos/comum/<nome>/cena.py`, com `DURACAO`) | `videos/comum/previas/abertura.mp4` |
-| YouTube | `./ma youtube videos/video-01/previas/bloco1.mp4` | Recomprime a ~4 Mbps e salva stills lado a lado (inteiros e zoom num degradê) | `...-youtube4mbps.mp4`, `previas/stills/<nome>-youtube/` |
+| YouTube | `./ma youtube videos/MA-001-the-man-who-had-everything/previas/bloco1.mp4` | Recomprime a ~4 Mbps e salva stills lado a lado (inteiros e zoom num degradê) | `...-youtube4mbps.mp4`, `previas/stills/<nome>-youtube/` |
 | Comparar | `./ma comparar A.png B.png` | Diferença de pixels (também aceita duas pastas) | — |
 | Testes | `.venv/bin/python -m pytest pipeline/testes` | Confere tempos, atalhos de desempenho e os stills de referência | — |
+| Status | `./ma status VIDEO` | O que existe e o que falta por peça (texto aprovado, voz, tempos, cena, prévia), final, thumbs, shorts, pacote; etapa do kanban e créditos do ElevenLabs para o que falta | — |
+| Backup | `./ma backup VIDEO` | Copia para `DRIVE_ROOT/MA - Marble & Ash/VIDEOS/<pasta do vídeo>/` (01_roteiro, 02_audio, 04_video, 05_projeto, 06_thumbnail, 07_export). Só copia o que mudou; nunca apaga no Drive; texto alterado guarda a versão anterior em `_versoes/`. Roda sozinho depois de `audio` e `juntar` | — |
+| Sincronizar | `./ma sincronizar VIDEO` | Manda etapa, títulos, roteiro, duração e pendências para o sistema de gestão (`npm run dev` na raiz; canal cadastrado com prefixo `MA`) | — |
+| Fechar | `./ma fechar VIDEO` | `backup` + `sincronizar` (ao fechar um bloco e no fim da sessão) | — |
+| Limpar | `./ma limpar VIDEO --apagar` | Vídeo concluído: refaz o backup e apaga do Mac `trabalho/` (menos `referencia/`), `previas/stills/`, simulações e prévias que já estão no Drive. Sem `--apagar`, só lista | — |
 
 Opções úteis: `render --processos N` (padrão 4), `render --sem-som`, `render --so-som` (refaz só o som, reaproveitando o vídeo sem som já renderizado), `render --ambiente -20` (ganho do
 ambiente em dB), `stills --referencia PASTA` (compara com stills salvos), `tempos --refazer`,
@@ -67,30 +72,30 @@ ambiente em dB), `stills --referencia PASTA` (compara com stills salvos), `tempo
 
 Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos nem a aprovação do frame.
 
-1. **Áudio.** Salve o mp3 do ElevenLabs em `videos/video-01/audio/` com `bloco2` no nome
-   (ex.: `video01-bloco2-starter.mp3`). Se houver mais de um, o comando usa o mais recente; para escolher,
+1. **Áudio.** Salve o mp3 do ElevenLabs em `videos/MA-001-the-man-who-had-everything/audio/` com `bloco2` no nome
+   (ex.: `MA-002-bloco2-starter.mp3`). Se houver mais de um, o comando usa o mais recente; para escolher,
    use `--arquivo`.
-2. **Pausas e ritmo:** `./ma audio video-01 2`. Confira a mensagem: número de pausas e duração antes/depois.
-3. **Tempos:** `./ma tempos video-01 2`. Ele lê o texto do `## Bloco 2` no `roteiro.md` e grava
-   `videos/video-01/bloco2/tempos.txt`, uma linha por frase (ver seção 4). Leia a tabela impressa:
+2. **Pausas e ritmo:** `./ma audio 1 2`. Confira a mensagem: número de pausas e duração antes/depois.
+3. **Tempos:** `./ma tempos 1 2`. Ele lê o texto do `## Bloco 2` no `roteiro.md` e grava
+   `videos/MA-001-the-man-who-had-everything/bloco2/tempos.txt`, uma linha por frase (ver seção 4). Leia a tabela impressa:
    - frases com origem `pausa` estão exatas; `voz` vem do transcritor (±0,1 s); `estimado`, sem
      transcritor, precisa de conferência ouvindo o áudio;
    - **renomeie** as deixas que a cena vai usar para nomes curtos (`name`, `plague`, `danube`...).
      Só letras, números e `_`. As outras podem ficar como estão.
-4. **Script de cena.** Copie `videos/video-01/bloco1/cena.py` para `videos/video-01/bloco2/cena.py` e:
+4. **Script de cena.** Copie `videos/MA-001-the-man-who-had-everything/bloco1/cena.py` para `videos/MA-001-the-man-who-had-everything/bloco2/cena.py` e:
    - troque a docstring (o que acontece em cada cena, seguindo as "Ideias de cena" do roteiro);
    - monte o ELENCO com peças da biblioteca (`cenario.*`, `objetos.*`, `bonecos.*`) — ver seção 5;
    - escreva `quadro(q, c)` usando só deixas de `tempos.txt` (`c.nome`), nunca segundos soltos;
    - ajuste `STILLS` para os momentos-chave do bloco.
    Se faltar uma peça (ex.: máscara da peste, busto), crie a arte nova — ver seção 6.
-5. **Conferência interna.** `./ma stills video-01 2 <segundos>` para conferir as cenas novas (enquadramento,
+5. **Conferência interna.** `./ma stills 1 2 <segundos>` para conferir as cenas novas (enquadramento,
    textos fora das laterais). Não mostrar os stills ao criador para aprovação (decisão de 12/10/2026): ele revisa a prévia renderizada.
-6. **Render:** `./ma render video-01 2` → `videos/video-01/previas/bloco2.mp4`. O comando imprime o tempo
+6. **Render:** `./ma render 1 2` → `videos/MA-001-the-man-who-had-everything/previas/bloco2.mp4`. O comando imprime o tempo
    de render e a loudness final (−16 LUFS).
-7. **Compressão do YouTube:** `./ma youtube videos/video-01/previas/bloco2.mp4` e confira os stills
+7. **Compressão do YouTube:** `./ma youtube videos/MA-001-the-man-who-had-everything/previas/bloco2.mp4` e confira os stills
    `*-degrade-zoom.png`: se aparecerem faixas ou blocos nos degradês, a entrega final vai em 4K
    (`./ma juntar ... --4k`).
-8. **Vídeo final** (todos os blocos prontos): `./ma juntar video-01 1 abertura 2 3 4 pausa 5 6 encerramento` → `videos/video-01/final/`
+8. **Vídeo final** (todos os blocos prontos): `./ma juntar 1 1 abertura 2 3 4 pausa 5 6 encerramento` → `videos/MA-001-the-man-who-had-everything/final/`
    (a abertura padrão entra logo depois do gancho; peças comuns renderizadas uma vez com `./ma render comum <nome>`; uma peça com nome, como `pausa`, é procurada primeiro na pasta do vídeo e depois em `videos/comum/`).
 
 ---
@@ -203,10 +208,10 @@ Regras: tudo em `quadro()` depende só de `q.u` e das deixas (nada de `random` s
   no mesmo Mac). Preparo da arte: ~8 s na primeira vez, ~0,1 s depois.
 - Cache em `pipeline/.cache/` (fora do git). `./ma limpar-cache` apaga; é refeito sob demanda.
 - Pouca memória? `./ma render ... --processos 2`.
-- Referência visual: `videos/video-01/trabalho/referencia/stills/` (fora do git). O teste
+- Referência visual: `videos/MA-001-the-man-who-had-everything/trabalho/referencia/stills/` (fora do git). O teste
   `test_referencia.py` exige igualdade pixel a pixel. Em outro computador (outras versões de bibliotecas),
   gere a referência de novo **antes** de mexer no código:
-  `./ma stills video-01 1 --pasta videos/video-01/trabalho/referencia/stills`.
+  `./ma stills 1 1 --pasta videos/MA-001-the-man-who-had-everything/trabalho/referencia/stills`.
 
 ## 8. Problemas comuns
 

@@ -4,7 +4,7 @@
 
 Traz: math; os catálogos `cenario`, `objetos`, `bonecos`; o elenco (Camada, Boneco, Chama, Credito);
 as curvas (ss, env, lin, lerp, tremor, wob); e as medidas do palco (W, H, FPS, FLOOR, BASE).
-Modelo comentado: videos/video-01/bloco1/cena.py.
+Modelo comentado: videos/MA-001-the-man-who-had-everything/bloco1/cena.py.
 """
 import math
 

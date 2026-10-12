@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Marble & Ash — linha de comando do pipeline de vídeo. Ajuda: python3 pipeline/ma.py -h
 
-Um comando por etapa (VIDEO = video-01 ou 1; BLOCO = número do bloco):
+Um comando por etapa (VIDEO = 1, MA-001 ou a pasta inteira MA-001-slug; BLOCO = número do bloco):
   audio    VIDEO BLOCO            pausas + áudio desacelerado + BLOCO/audio.json
   tempos   VIDEO BLOCO            sugere BLOCO/tempos.txt (transcritor + pausas + roteiro)
   deixas   VIDEO BLOCO            mostra as deixas com o tempo no vídeo
@@ -11,6 +11,13 @@ Um comando por etapa (VIDEO = video-01 ou 1; BLOCO = número do bloco):
   youtube  ARQUIVO.mp4            simula a compressão do YouTube (~4 Mbps) e tira stills
   comparar A B                    diferença de pixels entre duas imagens (ou pastas de PNGs)
   limpar-cache                    apaga o cache de arte (é refeito sozinho)
+
+Produção (status, backup e sistema de gestão):
+  status      VIDEO               o que já existe, o que falta e a etapa do kanban
+  backup      VIDEO               copia para o Google Drive (nunca apaga nada lá)
+  sincronizar VIDEO               manda status, roteiro e pendências para o sistema de gestão
+  fechar      VIDEO               backup + sincronizar (ao fechar um bloco ou uma etapa)
+  limpar      VIDEO [--apagar]    vídeo concluído: tira do Mac o que tem backup ou é refeito
 """
 from __future__ import annotations
 
@@ -52,6 +59,7 @@ def cmd_audio(a):
         'pausas': [list(x) for x in p]})
     print(f'{len(p)} pausas; {dur:.2f} s -> {lenta:.2f} s com o ritmo do canal ({b.audio_lento.relative_to(config.CANAL)})')
     print(f'gravado: {b.arquivo_audio_json.relative_to(config.CANAL)}')
+    _backup_automatico(b.pasta_video)
 
 
 def cmd_tempos(a):
@@ -187,6 +195,7 @@ def cmd_juntar(a):
         s4 = pasta / f'{nome}-4k.mp4'
         entrega.exportar_4k(saida, s4)
         print(f'4K: {s4.relative_to(config.CANAL)}')
+    _backup_automatico(base.pasta_video)
 
 
 def cmd_youtube(a):
@@ -231,10 +240,98 @@ def cmd_comparar(a):
         print(entrega.comparar_imagens(A, B, a.saida))
 
 
-def cmd_limpar(a):
+def cmd_limpar_cache(a):
     from marbleash import cache
     cache.limpar()
     print(f'cache apagado: {config.CACHE}')
+
+
+def _pasta_video(v) -> Path:
+    from marbleash.projeto import nome_video
+    pasta = config.VIDEOS / nome_video(v)
+    if not pasta.is_dir():
+        raise SystemExit(f'Pasta do vídeo não encontrada: {pasta}')
+    return pasta
+
+
+def _status(pasta):
+    from marbleash import entrega, producao
+    st = producao.ler_status(pasta)
+    if st.final:
+        st.duracao_final = entrega.duracao_video(st.final)
+    return st
+
+
+def _backup_automatico(pasta):
+    """Áudio pago e vídeo final vão para o Drive na hora; se o Drive não estiver disponível, só avisa."""
+    from marbleash import producao
+    try:
+        r = producao.backup(pasta, avisar=lambda *_: None)
+        print(f'backup no Drive: {r["novos"]} novo(s), {r["atualizados"]} atualizado(s)')
+    except SystemExit as e:
+        print(f'AVISO: backup não feito ({e}). Rode depois: ma backup {pasta.name}')
+
+
+def cmd_status(a):
+    st = _status(_pasta_video(a.video))
+    print(f'{st.codigo} · {st.nome_interno}' + (f'  ("{st.titulo}")' if st.titulo else ''))
+    print(f'etapa no kanban: {st.etapa}')
+    print(f'  {"peça":<8} {"texto":^6} {"voz":^5} {"tempos":^7} {"cena":^5} {"prévia":^7}')
+    ok = lambda x: '✅' if x else '·'
+    for p in st.pecas:
+        print(f'  {p.nome:<8} {ok(p.texto_aprovado):^6} {ok(p.mp3):^5} {ok(p.tempos):^7} {ok(p.cena):^5} {ok(p.previa):^7}')
+    if st.final:
+        print(f'final: {st.final.name}' + (f' ({st.duracao_final // 60:.0f} min {st.duracao_final % 60:.0f} s)' if st.duracao_final else ''))
+    print(f'thumbnails {st.thumbnails}/3 · shorts {st.shorts}/{5} · pacote {"✅" if st.pacote else "·"}')
+    if st.creditos_pendentes:
+        print(f'ElevenLabs: ~{st.creditos_pendentes:,} créditos para narrar o que falta'.replace(',', '.'))
+    falta = st.pendencias()
+    print('\nFALTA:' if falta else '\nCONCLUÍDO: tudo pronto para publicar.')
+    for f in falta:
+        print(f'  - {f}')
+
+
+def cmd_backup(a):
+    from marbleash import producao
+    pasta = _pasta_video(a.video)
+    r = producao.backup(pasta)
+    print(f'{r["novos"]} novo(s), {r["atualizados"]} atualizado(s) ({r["versoes"]} versão(ões) anterior(es) em _versoes/), '
+          f'{r["iguais"]} já iguais; {r["bytes"] / 1e6:.1f} MB copiados\n-> {r["destino"]}')
+
+
+def cmd_sincronizar(a):
+    from marbleash import producao
+    st = _status(_pasta_video(a.video))
+    r = producao.sincronizar(st)
+    v = r['video']
+    print(f'sistema: {v["codigo"]} na etapa {v["etapa"]}; {len(v["pendencias"])} pendência(s)')
+    for aviso in r['avisos']:
+        print(f'  {aviso}')
+
+
+def cmd_fechar(a):
+    cmd_backup(a)
+    cmd_sincronizar(a)
+
+
+def cmd_limpar(a):
+    from marbleash import producao
+    pasta = _pasta_video(a.video)
+    st = _status(pasta)
+    if not st.concluido and not a.forcar:
+        raise SystemExit('O vídeo ainda não está concluído (ver: ma status). Use --forcar para limpar mesmo assim.')
+    producao.backup(pasta, avisar=lambda *_: None)          # garante o backup antes de apagar qualquer coisa
+    itens = producao.plano_limpeza(pasta)
+    if not itens:
+        print('nada para limpar')
+        return
+    tam = sum(producao._tamanho(p) for p in itens)
+    for p in itens:
+        print(f'  {p.relative_to(pasta)}')
+    if not a.apagar:
+        print(f'{len(itens)} item(ns), {tam / 1e6:.0f} MB. Nada foi apagado: rode de novo com --apagar.')
+        return
+    print(f'liberados {producao.limpar(itens) / 1e6:.0f} MB (o Drive não foi tocado)')
 
 
 def main(argv=None):
@@ -242,7 +339,7 @@ def main(argv=None):
     sub = p.add_subparsers(dest='cmd', required=True)
 
     def vb(sp):
-        sp.add_argument('video', help='ex.: video-01 ou 1')
+        sp.add_argument('video', help='ex.: 1, MA-001 ou MA-001-slug')
         sp.add_argument('bloco', help='número do bloco (ou nome de uma peça de videos/comum, ex.: abertura)')
 
     sp = sub.add_parser('audio', help='pausas + áudio desacelerado + audio.json')
@@ -301,6 +398,20 @@ def main(argv=None):
     sp.set_defaults(f=cmd_comparar)
 
     sp = sub.add_parser('limpar-cache', help='apaga o cache de arte e máscaras')
+    sp.set_defaults(f=cmd_limpar_cache)
+
+    for nome, f, ajuda in (('status', cmd_status, 'o que já existe e o que falta'),
+                           ('backup', cmd_backup, 'copia o vídeo para o Google Drive'),
+                           ('sincronizar', cmd_sincronizar, 'manda status e roteiro para o sistema de gestão'),
+                           ('fechar', cmd_fechar, 'backup + sincronizar')):
+        sp = sub.add_parser(nome, help=ajuda)
+        sp.add_argument('video', help='ex.: 1, MA-001 ou MA-001-slug')
+        sp.set_defaults(f=f)
+
+    sp = sub.add_parser('limpar', help='vídeo concluído: tira do Mac o que tem backup ou é refeito')
+    sp.add_argument('video')
+    sp.add_argument('--apagar', action='store_true', help='apaga de fato (sem isto, só lista)')
+    sp.add_argument('--forcar', action='store_true', help='limpa mesmo sem o vídeo estar concluído')
     sp.set_defaults(f=cmd_limpar)
 
     a = p.parse_args(argv)

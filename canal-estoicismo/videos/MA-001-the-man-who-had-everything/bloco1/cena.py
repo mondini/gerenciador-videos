@@ -1,6 +1,6 @@
 """Vídeo 1 · Bloco 1 — Gancho. Script de cena (padrão Teatro de Sombras Projetadas).
 
-MODELO OFICIAL para os próximos blocos: copie este arquivo para videos/video-NN/blocoN/cena.py e
+MODELO OFICIAL para os próximos blocos: copie este arquivo para videos/MA-NNN-slug/blocoN/cena.py e
 troque o elenco e a função quadro(). Os tempos vêm de tempos.txt (c.roof, c.light...), sempre em
 segundos desde o início da narração, já no ritmo desacelerado.
 

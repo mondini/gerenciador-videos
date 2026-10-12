@@ -1,6 +1,7 @@
 """Caminhos, constantes do vídeo e ferramentas externas (ffmpeg, fontes)."""
 from __future__ import annotations
 
+import json
 import os
 import shutil
 from functools import lru_cache
@@ -15,6 +16,25 @@ FONTES = CANAL / 'fontes-tipograficas'
 VIDEOS = CANAL / 'videos'
 CACHE = Path(os.environ.get('MA_CACHE', PIPELINE / '.cache'))
 MODELOS = Path(os.environ.get('MA_MODELOS', PIPELINE / '.modelos'))
+REPO = CANAL.parent                                                   # repositório (o .env do sistema fica aqui)
+
+# Dados do canal (nome, prefixo do código dos vídeos, pasta no Drive): canal.json.
+_CANAL_JSON = CANAL / 'canal.json'
+CANAL_INFO = json.loads(_CANAL_JSON.read_text(encoding='utf-8')) if _CANAL_JSON.exists() else {}
+PREFIXO = CANAL_INFO.get('prefixo', 'MA')
+
+
+def env_repo(chave: str, padrao: str | None = None) -> str | None:
+    """Valor do ambiente ou, se faltar, do .env do repositório (o mesmo que o sistema usa: DRIVE_ROOT, PORT)."""
+    if os.environ.get(chave):
+        return os.environ[chave]
+    arq = REPO / '.env'
+    if arq.exists():
+        for linha in arq.read_text(encoding='utf-8').splitlines():
+            k, sep, v = linha.strip().partition('=')
+            if sep and k.strip() == chave and not k.startswith('#'):
+                return v.strip().strip('"').strip("'")
+    return padrao
 
 # Onde mais procurar fontes que não estão em fontes-tipograficas/ (ex.: Inter no ambiente do Claude.ai).
 _PASTAS_FONTES_SISTEMA = [

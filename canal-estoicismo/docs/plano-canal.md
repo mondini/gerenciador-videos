@@ -110,5 +110,7 @@ Ver `fluxo-por-video.md`.
 
 ## Status
 
-- Vídeo 1: ver `../videos/video-01/roteiro.md` (blocos 1–5 aprovados; The Pause e bloco 6 pendentes; animação no novo estilo só no bloco 1).
-- Vídeos 2–12: roteiros a fazer.
+Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe e o que falta em cada vídeo, e `./ma sincronizar N` leva isso ao kanban do sistema de gestão.
+
+- MA-001 *The Man Who Had Everything*: produção concluída; faltam thumbnails, shorts e Pacote de Publicação. **Publicação: aguardar a liberação do criador.**
+- Vídeos 2–12: roteiros a fazer. Pasta de cada um: `videos/MA-NNN-slug/` (slug do nome interno da tabela acima).
