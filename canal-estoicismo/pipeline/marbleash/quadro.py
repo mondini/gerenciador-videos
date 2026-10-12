@@ -30,10 +30,12 @@ import math
 import cv2
 import numpy as np
 
-from . import lencol
+from PIL import ImageFont
+
+from . import config, lencol
 from .anim import env, lin, ss, wob
-from .config import H, W
-from .traco import borrar, mascara_camada, raio_borrao
+from .config import H, S, W
+from .traco import Static, borrar, canvas, comp, down, mascara_camada, raio_borrao
 
 
 class Camada:
@@ -84,6 +86,30 @@ class Chama:
         self.dados()
 
 
+class Credito:
+    """Crédito de fonte na tela (regra fixa do canal): Inter, `marble-300`, canto inferior esquerdo, margem de 64 px.
+
+    Não é sombra: é texto sobreposto à imagem final (o pano escuro da base engoliria uma sombra) e
+    não acompanha a câmera. Uso: `CRED = Credito('Marcus Aurelius, Meditations 6.30 · trans. George Long')`
+    no elenco e `q.credito(CRED, q.env(c.a, 0.8, c.b, 0.8))` na linha do tempo.
+    """
+
+    def __init__(self, texto, fonte='Inter-Regular.ttf', tamanho=24, cor=(184, 175, 162), margem=64):
+        self.texto, self.fonte, self.tamanho, self.cor, self.margem = texto, fonte, tamanho, cor, margem
+        self._sp = None
+
+    def sprite(self):
+        if self._sp is None:
+            f = ImageFont.truetype(config.fonte(self.fonte), int(self.tamanho * S))
+            im, d = canvas(W, H)
+            d.text((self.margem * S, (H - self.margem) * S), self.texto, font=f, fill=self.cor + (255,), anchor='ld')
+            self._sp = Static(down(im))
+        return self._sp
+
+    def preparar(self):
+        self.sprite()
+
+
 # ---------------- operações em região (resultado idêntico ao quadro inteiro, mais rápido) ----------------
 def _cortar(r):
     x0, y0, x1, y1 = r
@@ -130,6 +156,7 @@ class Quadro:
         self._foco = None
         self._chamas = []
         self._camera = None
+        self._creditos = []
 
     # ---- tempo (no relógio da narração, q.u) ----
     def ss(self, t0, d):
@@ -272,6 +299,11 @@ class Quadro:
             mov = (dx, dy, 0.0, (960, 1080))
         self._chamas.append((chama, fatores, cintila, mov))
 
+    def credito(self, credito, alpha=1.0):
+        """Mostra o crédito de fonte (ver `Credito`) com a opacidade dada."""
+        if alpha > 0.003:
+            self._creditos.append((credito.sprite(), alpha))
+
     def camera(self, cx, cy, zoom):
         """Aproxima a câmera `zoom` vezes em torno de (cx, cy)."""
         self._camera = (cx, cy, zoom)
@@ -325,13 +357,15 @@ class Quadro:
         lut, lutf = lencol.grade()
         idx = (L * (lencol.LUTN - 1) / 1.3).astype(np.int32)
         fade = 1 - ss(self.t, self.fim - self._fade[0], self._fade[1]) if self.fim is not None else 1.0
-        if not self._chamas and self._camera is None and fade == 1.0:
+        if not self._chamas and self._camera is None and not self._creditos and fade == 1.0:
             return lut[idx]                     # idêntico ao caminho em ponto flutuante (ver testes)
         img = lutf[idx]
         for ch in self._chamas:
             img = self._aplicar_chama(img, *ch)
         if self._camera is not None:
             img = lencol.camera(img, *self._camera)
+        for sp, al in self._creditos:                # depois da câmera: o crédito não aproxima junto
+            comp(img, sp, al)
         if fade != 1.0:
             img *= fade
         return (np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8)

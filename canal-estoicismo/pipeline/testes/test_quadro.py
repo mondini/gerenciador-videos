@@ -46,3 +46,18 @@ def test_mascara_do_boneco_igual_ao_quadro_inteiro():
     recorte = np.zeros((H, W), np.float32)
     recorte[y0:y0 + m.shape[0], x0:x0 + m.shape[1]] = m
     assert np.array_equal(cheia, recorte)
+
+
+def test_credito_fica_no_canto_inferior_esquerdo_com_margem():
+    sp = quadro.Credito('Marcus Aurelius, Meditations 6.30 · trans. George Long').sprite()
+    assert sp.x0 >= 64 - 2 and sp.y0 + sp.h <= H - 64 + 12      # margem de 64 px (descendentes incluídos)
+    assert sp.x0 + sp.w < W / 2 and sp.y0 > H * 0.85
+
+
+def test_credito_nao_muda_o_resto_do_quadro():
+    q1, q2 = quadro.Quadro(1.0, 1.0), quadro.Quadro(1.0, 1.0)
+    q2.credito(quadro.Credito('Proverbs 30:8 · World English Bible'))
+    a, b = q1.finalizar().astype(int), q2.finalizar().astype(int)
+    dif = np.abs(a - b).max(-1)
+    ys, xs = np.nonzero(dif)
+    assert len(ys) and xs.max() < W / 2 and ys.min() > H * 0.85

@@ -41,7 +41,7 @@ Não mostramos os bonecos: mostramos **as sombras deles projetadas num lençol i
 - Som ambiente gerado por código (sem amostras de terceiros), bem baixo sob a voz; normalização a −16 LUFS.
 
 ## Textos na tela
-- Citações em Cormorant itálico; nomes em Cinzel; créditos de fonte em Inter no canto inferior esquerdo (regra fixa do canal).
+- Citações em Cormorant itálico; nomes em Cinzel; créditos de fonte em Inter (24 px, `marble-300`) no canto inferior esquerdo, margem de 64 px (regra fixa do canal), sobrepostos à imagem — não são sombra; no pipeline: `Credito` e `q.credito()`.
 
 ## Qualidade e entrega
 - 1920×1080, 30 fps. Antes de entregar, simular a compressão do YouTube (~4 Mbps) e conferir se aparecem faixas/blocos nos degradês. Se aparecerem, exportar em 4K.

@@ -152,6 +152,7 @@ def quadro(q, c):
 |---|---|
 | `Camada(arte, *args, ...)` | `desfoque` = distância do lençol em px (personagem ~1; objetos 1,5–3; laterais 4,5; fundo 6–9) · `opacidade` (0,3 no fundo; 0,8–0,86 em objetos) · `semente` liga o balanço na vareta (use números diferentes por peça) · `pivo` = onde a mão segura · `balanco=(px, graus)` · `dobra=False` não entorta nas dobras · `posicao` = onde desenhar uma figura pequena (soldado, moeda) |
 | `Boneco(fabrica, escala, desfoque, opacidade)` | `bonecos.homem`, `bonecos.imperador`. Pose: `{'torso', 'head', 'uarmF', 'farmF', 'uarmB', 'farmB', 'legF', 'legB': graus}` (F = frente, B = trás; ângulos somam ao da peça-mãe) |
+| `Credito(texto)` | texto do crédito; opções `fonte`, `tamanho`, `cor`, `margem` (padrões do Design System) |
 | `Chama(arte, *args, brilho, cor, forca)` | `objetos.chama`, `objetos.chama_noite`: a única cor saturada, com brilho âmbar em volta |
 
 **Quadro** (`q`), chamado a cada quadro com as deixas (`c`):
@@ -167,6 +168,7 @@ def quadro(q, c):
 | `q.foco(forca, cx, cy, raio)` | círculo de luz; o resto cai na penumbra |
 | `q.chama(chama, *fatores, cintila=(base, amp, freq), camada=, dy=)` | chama colorida; com `camada`, balança junto |
 | `q.camera(cx, cy, zoom)` | aproximação (ex.: `1 + 0.38 * env(...)`) |
+| `q.credito(CRED, alpha)` | crédito de fonte na tela (regra fixa do canal): Inter 24 px, `marble-300`, canto inferior esquerdo, margem de 64 px. Não é sombra nem acompanha a câmera. Declare `CRED = Credito('Marcus Aurelius, Meditations 6.30 · trans. George Long')` no elenco e chame `q.credito(CRED, q.env(c.inicio, 0.8, c.fim_da_citacao, 0.8))` (aparece e some suavemente) |
 
 Receitas do padrão aprovado (todas no bloco 1):
 - **sobe do chão**: `p = q.ss(c.x, 1.6)` → `dy=420 * (1 - p)`; **desce do teto**: `dy=-460 * (1 - p)`;
