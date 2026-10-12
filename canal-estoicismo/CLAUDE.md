@@ -22,7 +22,7 @@ Esta pasta guarda tudo o que é preciso para produzir os vídeos do canal **Marb
 - `videos/video-NN/` — `roteiro.md`, `audio/`, `blocoN/` (script de cena `cena.py`, deixas `tempos.txt`, análise `audio.json`), `trabalho/` (intermediários), `previas/`, `final/`, `pacote-de-publicacao.md`.
 
 ## Regras rápidas
-- **Design System sempre:** toda peça visual (vídeo, thumbs, textos na tela, shorts) segue o Design System do canal feito no Claude Design (https://claude.ai/artifact/YD1Vx9JHfUSKFFVMcdkQqh): paleta, tipografia e logo. Na dúvida, consultar antes de criar. Todo o trabalho fica centralizado nesta pasta.
+- **Design System sempre:** toda peça visual (vídeo, thumbs, textos na tela, shorts) segue o Design System do canal feito no Claude Design (https://claude.ai/artifact/YD1Vx9JHfUSKFFVMcdkQqh): paleta, tipografia e logo. Resumo em `docs/identidade-visual.md`; na dúvida, consultar o original antes de criar. Todo o trabalho fica centralizado nesta pasta.
 - Só material de domínio público (Meditações: George Long; Provérbios: World English Bible). Crédito na tela, sempre.
 - Nunca inventar fonte, versículo, link ou licença.
 - Áudios e vídeos são arquivos grandes: ficam fora do git (ver `.gitignore` desta pasta).

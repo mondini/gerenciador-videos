@@ -155,8 +155,10 @@ def mixar(vozes, duracao, saida, ganho_ambiente_db=-20.0, lufs=-16.0):
     entradas += ['-i', str(amb)]
     na = len(vozes)
     filtros.append(f'[{na}:a]volume={ganho_ambiente_db}dB[amb]')
-    mistura = ''.join(rotulos) + '[amb]'
-    filtros.append(f'{mistura}amix=inputs={na + 1}:duration=longest:normalize=0,atrim=0:{duracao:.3f}[mix]')
+    if na:
+        filtros.append(''.join(rotulos) + f'[amb]amix=inputs={na + 1}:duration=longest:normalize=0,atrim=0:{duracao:.3f}[mix]')
+    else:
+        filtros.append(f'[amb]atrim=0:{duracao:.3f}[mix]')
     grafo = ';'.join(filtros)
     # 1º passo: medir a loudness da mistura
     medida = subprocess.run([ffmpeg(), '-hide_banner', '-nostats', *entradas, '-filter_complex',

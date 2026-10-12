@@ -118,7 +118,7 @@ def cmd_stills(a):
 def cmd_render(a):
     from marbleash import audio, render
     b = _bloco(a)
-    if not b.audio_lento.exists():
+    if not b.sem_narracao and not b.audio_lento.exists():
         raise SystemExit(f'Falta o áudio desacelerado. Rode antes: ma audio {b.video} {b.numero}')
     trecho = a.de is not None or a.ate is not None
     sufixo = f'-{a.de or 0:g}a{a.ate if a.ate is not None else b.fim:.4g}s' if trecho else ''
@@ -130,7 +130,10 @@ def cmd_render(a):
         mudo.replace(saida)
     else:
         mix = b.trabalho / f'{b.nome}-mix.m4a'
-        audio.mixar([(b.audio_lento, b.entrada)], b.fim, mix, ganho_ambiente_db=a.ambiente)
+        if b.sem_narracao:     # só ambiente, no nível em que ele fica sob a voz
+            audio.mixar([], b.fim, mix, ganho_ambiente_db=0.0, lufs=-31.0)
+        else:
+            audio.mixar([(b.audio_lento, b.entrada)], b.fim, mix, ganho_ambiente_db=a.ambiente)
         if trecho:
             corte = b.trabalho / f'{b.nome}-mix{sufixo}.m4a'
             ini = a.de or 0
@@ -147,21 +150,23 @@ def cmd_render(a):
 def cmd_juntar(a):
     from marbleash import audio, entrega
     from marbleash.projeto import Bloco
-    blocos = [Bloco(a.video, n) for n in a.blocos]
+    blocos = [Bloco(a.video, n) if str(n).isdigit() else Bloco('comum', n) for n in a.blocos]
     videos, vozes, t = [], [], 0.0
     for b in blocos:
         v = b.trabalho / f'{b.nome}-video.mp4'
         if not v.exists():
             raise SystemExit(f'Falta {v.relative_to(config.CANAL)}. Rode antes: ma render {b.video} {b.numero}')
         videos.append(v)
-        vozes.append((b.audio_lento, t + b.entrada))
+        if not b.sem_narracao:
+            vozes.append((b.audio_lento, t + b.entrada))
         t += entrega.duracao_video(v)
-    pasta = blocos[0].final
+    base = Bloco(a.video, next(n for n in a.blocos if str(n).isdigit()))
+    pasta = base.final
     pasta.mkdir(parents=True, exist_ok=True)
-    nome = a.saida or f'{blocos[0].video}-blocos-{"-".join(str(b.numero) for b in blocos)}'
-    mudo = blocos[0].trabalho / f'{nome}-video.mp4'
+    nome = a.saida or f'{base.video}-{"-".join(str(b.numero) for b in blocos)}'
+    mudo = base.trabalho / f'{nome}-video.mp4'
     entrega.concatenar(videos, mudo)
-    mix = blocos[0].trabalho / f'{nome}-mix.m4a'
+    mix = base.trabalho / f'{nome}-mix.m4a'
     audio.mixar(vozes, t, mix, ganho_ambiente_db=a.ambiente)
     from marbleash import render
     saida = pasta / f'{nome}.mp4'
@@ -227,7 +232,7 @@ def main(argv=None):
 
     def vb(sp):
         sp.add_argument('video', help='ex.: video-01 ou 1')
-        sp.add_argument('bloco', type=int, help='número do bloco')
+        sp.add_argument('bloco', help='número do bloco (ou nome de uma peça de videos/comum, ex.: abertura)')
 
     sp = sub.add_parser('audio', help='pausas + áudio desacelerado + audio.json')
     vb(sp)
@@ -265,7 +270,7 @@ def main(argv=None):
 
     sp = sub.add_parser('juntar', help='junta blocos renderizados com áudio contínuo')
     sp.add_argument('video')
-    sp.add_argument('blocos', type=int, nargs='+')
+    sp.add_argument('blocos', nargs='+', help='números dos blocos e peças comuns na ordem, ex.: 1 abertura 2 3')
     sp.add_argument('--4k', dest='k4', action='store_true', help='também exporta ampliado para 4K')
     sp.add_argument('--ambiente', type=float, default=GANHO_AMBIENTE_DB)
     sp.add_argument('--saida', help='nome do arquivo (sem extensão)')

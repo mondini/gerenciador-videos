@@ -6,6 +6,8 @@ Estrutura de um vídeo (videos/video-NN/):
   blocoN/cena.py           script de cena do bloco N (elenco + função quadro)
   blocoN/tempos.txt        deixas: nome, segundo no áudio original, frase
   blocoN/audio.json        qual mp3 foi usado, pausas detectadas e parâmetros de ritmo (gerado)
+Peças sem narração, iguais em todos os vídeos, ficam em videos/comum/<nome>/cena.py (ex.: abertura),
+com DURACAO no script de cena.
   trabalho/                intermediários: áudio desacelerado, vídeo sem som (fora do git)
   previas/                 prévias e stills de conferência (fora do git)
   final/                   vídeo final (fora do git)
@@ -33,8 +35,9 @@ class Bloco:
 
     def __init__(self, video, numero):
         self.video = nome_video(video)
-        self.numero = int(numero)
-        self.nome = f'bloco{self.numero}'
+        n = str(numero)
+        self.numero = int(n) if n.isdigit() else n          # número do bloco ou nome de uma peça ('abertura')
+        self.nome = f'bloco{self.numero}' if n.isdigit() else n
         self.pasta_video = config.VIDEOS / self.video
         self.pasta = self.pasta_video / self.nome
         self.trabalho = self.pasta_video / 'trabalho'
@@ -76,6 +79,11 @@ class Bloco:
         return max(cands, key=lambda p: p.stat().st_mtime)
 
     # ---- dados ----
+    @property
+    def sem_narracao(self) -> bool:
+        """Peça sem narração (abertura, vinheta): a duração vem de DURACAO no script de cena."""
+        return hasattr(self.cena, 'DURACAO')
+
     @cached_property
     def audio_info(self) -> dict:
         if not self.arquivo_audio_json.exists():
@@ -84,17 +92,21 @@ class Bloco:
 
     @cached_property
     def mapa(self) -> tempos.MapaRitmo:
+        if self.sem_narracao:
+            return tempos.MapaRitmo([], 1.0)
         a = self.audio_info
         r = a['ritmo']
         return tempos.MapaRitmo(audio.inseridos(a['pausas'], r['alonga'], r['acrescimo']), r['tempo'])
 
     @property
     def duracao(self) -> float:
-        """Duração da narração desacelerada (s)."""
-        return self.audio_info['duracao_lenta']
+        """Duração da narração já no ritmo do canal (s); numa peça sem narração, DURACAO."""
+        return self.cena.DURACAO if self.sem_narracao else self.audio_info['duracao_lenta']
 
     @cached_property
     def deixas(self) -> tempos.Deixas:
+        if self.sem_narracao and not self.arquivo_tempos.exists():
+            return tempos.Deixas([], self.mapa, self.duracao)
         if not self.arquivo_tempos.exists():
             raise SystemExit(f'Falta {self.arquivo_tempos}. Rode antes: ma tempos {self.video} {self.numero}')
         return tempos.Deixas(tempos.ler(self.arquivo_tempos), self.mapa, self.duracao)
@@ -117,12 +129,17 @@ class Bloco:
     @property
     def entrada(self) -> float:
         """Segundos de vídeo antes da narração começar."""
-        return getattr(self.cena, 'ENTRADA', 0.4)
+        return getattr(self.cena, 'ENTRADA', 0.0 if self.sem_narracao else 0.4)
 
     @property
     def saida(self) -> float:
         """Segundos de vídeo depois do fim da narração (o último segundo escurece)."""
-        return getattr(self.cena, 'SAIDA', 1.0)
+        return getattr(self.cena, 'SAIDA', 0.0 if self.sem_narracao else 1.0)
+
+    @property
+    def fade(self):
+        """(segundos antes do fim em que o escurecimento final começa, duração do escurecimento)."""
+        return getattr(self.cena, 'FADE', (1.0, 0.9))
 
     @property
     def fim(self) -> float:

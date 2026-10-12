@@ -51,7 +51,8 @@ Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do 
 | Stills | `./ma stills VIDEO BLOCO 5 12.5 30` | PNGs de conferência nos segundos dados (sem segundos: os `STILLS` da cena) | `previas/stills/blocoN_SSS.SS.png` |
 | Render | `./ma render VIDEO BLOCO` | Vídeo do bloco com voz + ambiente a −16 LUFS | `previas/blocoN.mp4` (+ `trabalho/blocoN-video.mp4` sem som) |
 | Trecho | `./ma render VIDEO BLOCO --de 20 --ate 30` | Só um trecho, para conferir rápido | `previas/blocoN-20a30s.mp4` |
-| Juntar | `./ma juntar VIDEO 1 2 3` | Junta os blocos renderizados com ambiente contínuo (−16 LUFS); `--4k` também exporta em 4K | `final/video-NN-blocos-1-2-3.mp4` |
+| Juntar | `./ma juntar VIDEO 1 abertura 2 3` | Junta blocos e peças comuns, na ordem dada, com ambiente contínuo (−16 LUFS); `--4k` também exporta em 4K | `final/video-NN-1-abertura-2-3.mp4` |
+| Peça comum | `./ma render comum abertura` | Renderiza uma peça sem narração, igual em todos os vídeos (`videos/comum/<nome>/cena.py`, com `DURACAO`) | `videos/comum/previas/abertura.mp4` |
 | YouTube | `./ma youtube videos/video-01/previas/bloco1.mp4` | Recomprime a ~4 Mbps e salva stills lado a lado (inteiros e zoom num degradê) | `...-youtube4mbps.mp4`, `previas/stills/<nome>-youtube/` |
 | Comparar | `./ma comparar A.png B.png` | Diferença de pixels (também aceita duas pastas) | — |
 | Testes | `.venv/bin/python -m pytest pipeline/testes` | Confere tempos, atalhos de desempenho e os stills de referência | — |
@@ -89,7 +90,8 @@ Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos
 7. **Compressão do YouTube:** `./ma youtube videos/video-01/previas/bloco2.mp4` e confira os stills
    `*-degrade-zoom.png`: se aparecerem faixas ou blocos nos degradês, a entrega final vai em 4K
    (`./ma juntar ... --4k`).
-8. **Vídeo final** (todos os blocos prontos): `./ma juntar video-01 1 2 3 4 5 6` → `videos/video-01/final/`.
+8. **Vídeo final** (todos os blocos prontos): `./ma juntar video-01 1 abertura 2 3 4 pausa 5 6` → `videos/video-01/final/`
+   (a abertura padrão entra logo depois do gancho; peças comuns renderizadas uma vez com `./ma render comum <nome>`).
 
 ---
 

@@ -303,3 +303,62 @@ def letreiro(texto, fonte='CormorantGaramond-MediumItalic.ttf', tamanho=52, cx=9
         wdt = f.getlength(texto)
         d.text((cx * S - wdt / 2, y * S), texto, font=f, fill=cor)
     return full(desenho)
+
+
+# ---------------- logo A — Horizonte (abertura de todos os vídeos) ----------------
+# Geometria do Design System (caixa 200 x 200, ver docs/identidade-visual.md): meio-sol de centro (100, 110)
+# e raio 56, dois cortes em y 80 e 94, cinco linhas de horizonte em degraus; nome em Cinzel 600, tracking
+# 0.06em, com o "&" em âmbar. No lençol, o logo é RECORTADO num painel de papel: a luz passa pelos vazados.
+_HZ_LINHAS = ((24, 176, 110), (44, 156, 124), (60, 140, 138), (76, 124, 152), (90, 110, 166))
+AMBAR = (232, 163, 61, 255)                    # amber-500
+
+
+def _hz(x, y, cx, cy, s):
+    return cx + (x - 100) * s, cy + (y - 110) * s
+
+
+def _nome_layout(texto, fonte, tamanho, cx, tracking):
+    """Posição x (em 2x) de cada letra do nome, centrado em cx, com o espaçamento do Design System."""
+    f = ImageFont.truetype(config.fonte(fonte), int(tamanho * S))
+    gap = tracking * tamanho * S
+    larg = [f.getlength(ch) for ch in texto]
+    x = cx * S - (sum(larg) + gap * (len(texto) - 1)) / 2
+    pos = []
+    for w in larg:
+        pos.append(x)
+        x += w + gap
+    return f, pos
+
+
+def horizonte_painel(cx=960, cy=455, escala=1.6, nome_y=625, tamanho=64, texto='MARBLE & ASH',
+                     fonte='Cinzel-SemiBold.ttf', tracking=0.06):
+    """Painel de papel preto do tamanho da tela com o logo Horizonte e o nome vazados."""
+    im, d = canvas(W, H)
+    d.rectangle([0, 0, W * S, H * S], fill=INK)
+    d.pieslice([*P(*_hz(44, 54, cx, cy, escala)), *P(*_hz(156, 166, cx, cy, escala))], 180, 360, fill=HOLE)
+    for y in (80, 94):                                      # os dois cortes atravessam o sol (papel que fica)
+        d.line([P(*_hz(40, y, cx, cy, escala)), P(*_hz(160, y, cx, cy, escala))], fill=INK, width=int(4 * escala * S))
+    for a, b, y in _HZ_LINHAS:
+        d.line([P(*_hz(a, y, cx, cy, escala)), P(*_hz(b, y, cx, cy, escala))], fill=HOLE, width=int(3 * escala * S))
+    f, pos = _nome_layout(texto, fonte, tamanho, cx, tracking)
+    for ch, x in zip(texto, pos):
+        if ch != ' ':
+            d.text((x, nome_y * S), ch, font=f, fill=HOLE)
+    return Static(down(im))
+
+
+def horizonte_sol(cx=960, cy=455, escala=1.6):
+    """Gelatina âmbar no recorte do sol (mesma geometria do painel)."""
+    im, d = canvas(W, H)
+    d.pieslice([*P(*_hz(44, 54, cx, cy, escala)), *P(*_hz(156, 166, cx, cy, escala))], 180, 360, fill=AMBAR)
+    for y in (80, 94):
+        d.line([P(*_hz(40, y, cx, cy, escala)), P(*_hz(160, y, cx, cy, escala))], fill=HOLE, width=int(4 * escala * S))
+    return Static(down(im))
+
+
+def horizonte_e(cx=960, nome_y=625, tamanho=64, texto='MARBLE & ASH', fonte='Cinzel-SemiBold.ttf', tracking=0.06):
+    """Gelatina âmbar no "&" do nome (mesmo layout do painel)."""
+    im, d = canvas(W, H)
+    f, pos = _nome_layout(texto, fonte, tamanho, cx, tracking)
+    d.text((pos[texto.index('&')], nome_y * S), '&', font=f, fill=AMBAR)
+    return Static(down(im))

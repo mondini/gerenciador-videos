@@ -70,9 +70,12 @@ class Boneco:
 class Chama:
     """Chama colorida (a única cor saturada do padrão), com brilho em volta de raio `brilho`."""
 
-    def __init__(self, arte, *args, brilho=22, cor=(0.6, 0.38, 0.12), forca=1.3):
+    def __init__(self, arte, *args, brilho=22, cor=(0.6, 0.38, 0.12), forca=1.3, gelatina=None, desfoque=0.0):
+        """`gelatina` = cor sólida RGB 0..1: a peça vira um filtro colorido num recorte de uma camada
+        (ex.: o sol do logo), com o mesmo `desfoque` da camada e entortado pelas mesmas dobras."""
         self.arte, self.args = arte, args
         self.brilho, self.cor, self.forca = brilho, cor, forca
+        self.gelatina, self.desfoque = gelatina, desfoque
 
     def dados(self):
         return lencol.chama_rgba(self.arte, *self.args)
@@ -285,6 +288,15 @@ class Quadro:
                 frgb = np.stack([cv2.warpAffine(frgb[..., k], M, (W, H), flags=cv2.INTER_LINEAR, borderValue=0) for k in range(3)], -1)
         if r is None:
             return img
+        if chama.gelatina is not None:              # filtro: mesmo desfoque e mesmas dobras do recorte
+            r = _ampliar(r, raio_borrao(chama.desfoque) + 2)
+            cheio = np.zeros((H, W), np.float32)
+            sl0 = _cortar(r)
+            cheio[sl0] = borrar(np.ascontiguousarray(fa[sl0]), chama.desfoque)
+            m, r = self._dobrar(cheio, r)
+            fa = np.zeros((H, W), np.float32)
+            fa[_cortar(r)] = m
+            frgb = np.broadcast_to(np.array(chama.gelatina, np.float32), (H, W, 3))
         g = _ampliar(r, raio_borrao(chama.brilho) + 2)
         sl = _cortar(g)
         a = fa[sl]

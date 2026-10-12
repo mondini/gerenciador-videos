@@ -13,7 +13,7 @@
 | Bloco | Conteúdo | Texto | Áudio de prévia (Free) | Animação no estilo de sombras |
 |---|---|---|---|---|
 | 1 | Gancho | ✅ aprovado | ✅ | ✅ (sem mãos; refinos pendentes) |
-| — | Abertura (2 s) | — | — | logo Horizonte + nome |
+| — | Abertura (2 s) | — | — | ✅ prévia em sombras (`videos/comum/abertura`), aguardando aprovação |
 | 2 | O homem | ✅ aprovado | ✅ | ⏳ refazer (prévia antiga em traço) |
 | 3 | O diário | ✅ aprovado | ✅ | ⏳ refazer (prévia antiga em traço) |
 | 4 | A lição | ✅ aprovado | ✅ | ⏳ refazer + trocar a cena da escada |

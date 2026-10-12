@@ -27,7 +27,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - Prévias e stills ficam em `videos/video-NN/previas/`.
 
 ## 5. Montagem final
-- `./ma juntar video-NN 1 2 3 ...` — concatena os blocos, mixa voz + som ambiente contínuo (−16 LUFS) e grava em `videos/video-NN/final/`. Com `--4k`, também exporta ampliado para 4K.
+- `./ma juntar video-NN 1 abertura 2 3 ...` — concatena o gancho, a abertura padrão (`videos/comum/abertura`) e os blocos, mixa voz + som ambiente contínuo (−16 LUFS) e grava em `videos/video-NN/final/`. Com `--4k`, também exporta ampliado para 4K.
 
 ## 6. Entregáveis de publicação
 - 3 thumbnails (A Palavra, B Símbolo, C Gancho) no canvas de design.
