@@ -26,3 +26,8 @@ Esta pasta guarda tudo o que é preciso para produzir os vídeos do canal **Marb
 - Só material de domínio público (Meditações: George Long; Provérbios: World English Bible). Crédito na tela, sempre.
 - Nunca inventar fonte, versículo, link ou licença.
 - Áudios e vídeos são arquivos grandes: ficam fora do git (ver `.gitignore` desta pasta).
+
+## Modelo por etapa (economia de tokens)
+Ao propor a próxima etapa, diga sempre qual modelo usar (o criador troca com `/model`):
+- **Sonnet** — etapas mecânicas: ler os docs no início, `./ma audio`/`tempos`/`render`/`youtube`/`juntar`, nomear deixas, script de cena com peças prontas, elementos simples já definidos pelo Design System (ex.: créditos na tela), stills para aprovação, shorts, documentação, commit.
+- **Opus** — julgamento: roteiro e tom em inglês, conferência de citações e fontes, roteiro visual de cenas novas, arte nova (recortes, bonecos, cenários), correção do visual, thumbnails, Pacote de Publicação, depuração do pipeline.
