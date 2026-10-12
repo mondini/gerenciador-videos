@@ -7,11 +7,13 @@ from __future__ import annotations
 
 import math
 
+import numpy as np
+
 from PIL import ImageFont
 
 from . import config
 from .config import H, S, W
-from .traco import (BASE, FLOOR, HOLE, INK, ROD, P, Static, canvas, cr, down, ell, full, holes_row, layer, leaf, ln,
+from .traco import (BASE, FLOOR, HOLE, INK, ROD, P, Static, canvas, cr, down, ell, full, holes_row, layer, leaf, ln, serrated,
                     poly, shape, spiral, stroke, toward)
 
 
@@ -292,7 +294,7 @@ def fumaca(i, q):
 
 
 # ---------------- letreiro: texto projetado como sombra ----------------
-def letreiro(texto, fonte='CormorantGaramond-MediumItalic.ttf', tamanho=52, cx=960, y=150, cor=(60, 34, 16, 255)):
+def letreiro(texto, fonte='CormorantGaramond-MediumItalic.ttf', tamanho=52, cx=960, y=150, cor=(60, 34, 16, 255), tracking=0.0):
     """Texto centrado em cx, com o topo em y (ex.: o sussurro "not yet... not enough.").
 
     Padrão do canal: Cormorant Garamond itálico (citações), Cinzel (nomes), Inter (créditos).
@@ -300,8 +302,13 @@ def letreiro(texto, fonte='CormorantGaramond-MediumItalic.ttf', tamanho=52, cx=9
     f = ImageFont.truetype(config.fonte(fonte), int(tamanho * S))
 
     def desenho(d):
-        wdt = f.getlength(texto)
-        d.text((cx * S - wdt / 2, y * S), texto, font=f, fill=cor)
+        if tracking:                                    # espaçamento entre letras (ex.: Cinzel do Design System)
+            _, pos = _nome_layout(texto, fonte, tamanho, cx, tracking)
+            for ch, x in zip(texto, pos):
+                d.text((x, y * S), ch, font=f, fill=cor)
+        else:
+            wdt = f.getlength(texto)
+            d.text((cx * S - wdt / 2, y * S), texto, font=f, fill=cor)
     return full(desenho)
 
 
@@ -362,3 +369,317 @@ def horizonte_e(cx=960, nome_y=625, tamanho=64, texto='MARBLE & ASH', fonte='Cin
     f, pos = _nome_layout(texto, fonte, tamanho, cx, tracking)
     d.text((pos[texto.index('&')], nome_y * S), '&', font=f, fill=AMBAR)
     return Static(down(im))
+
+
+# =====================================================================================================
+# Vídeo 1 · bloco 2 (O homem) — peças reaproveitáveis
+# =====================================================================================================
+def coroa_louros(cx=960, cy=250, r=110):
+    """Coroa de louros: dois ramos de folhas serrilhadas em arco, com bagas e fita na base."""
+    def desenho(d):
+        for side in (-1, 1):
+            pts = [(cx + r * math.cos(math.radians(90 + side * (22 + 148 * k / 14))),
+                    cy + r * math.sin(math.radians(90 + side * (22 + 148 * k / 14)))) for k in range(15)]
+            stroke(d, pts, 7, 2)
+            for k in range(1, 14):
+                x, y = pts[k]
+                tx, ty = pts[k + 1][0] - pts[k - 1][0], pts[k + 1][1] - pts[k - 1][1]
+                ang = math.degrees(math.atan2(ty, tx))
+                L = 40 - 1.6 * k
+                fora = math.degrees(math.atan2(y - cy, x - cx))
+                for desvio in (-38, 38):
+                    a_ = ang + desvio
+                    if math.cos(math.radians(a_ - fora)) < -0.2:     # folha de dentro: menor
+                        serrated(d, x, y, a_, L * 0.75, 0.3)
+                    else:
+                        serrated(d, x, y, a_, L, 0.32)
+                if k % 3 == 1:
+                    ell(d, x + 10 * math.cos(math.radians(fora)), y + 10 * math.sin(math.radians(fora)), 4, 4)
+                    ell(d, x + 10 * math.cos(math.radians(fora)), y + 10 * math.sin(math.radians(fora)), 1.4, 1.4, HOLE)
+        for side in (-1, 1):                                          # fita
+            stroke(d, [(cx, cy + r + 2), (cx + side * 24, cy + r + 26), (cx + side * 30, cy + r + 58)], 9, 4)
+        ell(d, cx, cy + r + 2, 9, 7)
+    return full(desenho)
+
+
+_RACHA = [(750, BASE - 352), (741, BASE - 322), (757, BASE - 296), (744, BASE - 266), (763, BASE - 240), (747, BASE - 196),
+          (769, BASE - 148), (756, BASE - 104)]          # termina acima do pano da base
+
+
+def _racha_pts(q):
+    segs = list(zip(_RACHA[:-1], _RACHA[1:]))
+    total = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in segs)
+    resto, out = q * total, [_RACHA[0]]
+    for a, b in segs:
+        L = math.hypot(b[0] - a[0], b[1] - a[1])
+        if resto >= L:
+            out.append(b)
+            resto -= L
+        else:
+            out.append((a[0] + (b[0] - a[0]) * resto / L, a[1] + (b[1] - a[1]) * resto / L))
+            break
+    return out
+
+
+def templo_rachado(q):
+    """O templo de três quartos com uma rachadura vazada que desce do frontão (q = 0..1 do comprimento)."""
+    def desenho(d):
+        _templo(d)
+        if q > 0:
+            ln(d, _racha_pts(q), 5, HOLE)
+    return layer(desenho)
+
+
+def racha_brasa(q):
+    """Gelatina âmbar da rachadura (mesmo traço de `templo_rachado`)."""
+    def desenho(d):
+        if q > 0:
+            ln(d, _racha_pts(q), 5, AMBAR)
+    return full(desenho)
+
+
+def cidades(apagadas=0, n=6):
+    """Fileira de cidades romanas ao longe (casas, cúpulas, torres) com janelas acesas (vazadas).
+
+    As `apagadas` primeiras cidades (da esquerda) ficam com as janelas fechadas: a peste passando.
+    """
+    rr = np.random.default_rng(7)
+    def desenho(d):
+        base = 770
+        poly(d, [(220, base + 6)] + [(x, base - 6 * math.sin(x / 70)) for x in range(220, 1720, 20)] + [(1720, base + 6), (1720, base + 40), (220, base + 40)])
+        for i in range(n):
+            x = 260 + i * 240
+            for k in range(4):
+                w, h = float(rr.uniform(34, 62)), float(rr.uniform(60, 150))
+                tipo = int(rr.integers(0, 3))
+                poly(d, [(x, base), (x, base - h), (x + w, base - h), (x + w, base)])
+                if tipo == 0:
+                    poly(d, [(x - 4, base - h), (x + w / 2, base - h - 22), (x + w + 4, base - h)])
+                elif tipo == 1:
+                    d.pieslice([*P(x + 2, base - h - w / 2 + 2), *P(x + w - 2, base - h + w / 2 - 2)], 180, 360, fill=INK)
+                else:
+                    poly(d, [(x + w * 0.3, base - h), (x + w * 0.3, base - h - 26), (x + w * 0.7, base - h - 26), (x + w * 0.7, base - h)])
+                if i >= apagadas:
+                    for j in range(int(h // 28)):
+                        for c in range(max(1, int(w // 22))):
+                            if rr.uniform() < 0.7:
+                                wx, wy = x + 8 + c * 20, base - 20 - j * 26
+                                d.rounded_rectangle([*P(wx, wy - 12), *P(wx + 8, wy)], radius=4 * S, fill=HOLE)
+                else:
+                    for j in range(int(h // 28)):
+                        for c in range(max(1, int(w // 22))):
+                            rr.uniform()
+                x += w + float(rr.uniform(4, 14))
+    return full(desenho)
+
+
+def rio(fase):
+    """O Danúbio: três faixas de onda recortadas correndo (fase 0..1 dá um ciclo)."""
+    def desenho(d):
+        for j, (y0, amp, esp, per) in enumerate(((772, 5, 9, 70), (800, 7, 12, 95), (832, 9, 16, 120))):
+            ph = fase * 2 * math.pi + j * 1.7
+            topo = [(x, y0 + amp * math.sin(x / per + ph)) for x in range(-20, W + 21, 10)]
+            fundo = [(x, y + esp * (0.7 + 0.3 * math.sin(x / 37 + ph * 2))) for x, y in topo]
+            poly(d, topo + fundo[::-1])
+            for k in range(16):
+                x = (k * 127 + fase * 380 * (j + 1)) % (W + 80) - 40
+                y = y0 + amp * math.sin(x / per + ph) + esp * 0.35
+                stroke(d, [(x, y), (x + 22, y - 1), (x + 40, y)], 2.4, 0.6, HOLE, n=4)
+    return full(desenho)
+
+
+def escudo_lancas(cx=960, cy=560):
+    """Escudo de legionário (scutum) com umbo, raios e rebites vazados, e duas lanças cruzadas atrás."""
+    def desenho(d):
+        for side in (-1, 1):
+            a0, a1 = (cx - side * 230, cy + 260), (cx + side * 230, cy - 300)
+            stroke(d, [a0, ((a0[0] + a1[0]) / 2, (a0[1] + a1[1]) / 2), a1], 7, 6)
+            ux, uy = (a1[0] - a0[0]) / 600, (a1[1] - a0[1]) / 600
+            ponta = (a1[0] + ux * 70, a1[1] + uy * 70)
+            shape(d, [a1, (a1[0] + ux * 30 - uy * 16, a1[1] + uy * 30 + ux * 16), ponta, (a1[0] + ux * 30 + uy * 16, a1[1] + uy * 30 - ux * 16)], n=5)
+        w, h = 130, 190
+        shape(d, [(cx - w, cy - h + 30), (cx - w + 18, cy - h), (cx + w - 18, cy - h), (cx + w, cy - h + 30),
+                  (cx + w + 8, cy), (cx + w, cy + h - 30), (cx + w - 18, cy + h), (cx - w + 18, cy + h), (cx - w, cy + h - 30), (cx - w - 8, cy)], n=6)
+        ell(d, cx, cy, 34, 34, HOLE)
+        ell(d, cx, cy, 24, 24)
+        spiral(d, cx, cy, 14, 1.4, 2.4, HOLE)
+        for k in range(8):
+            a = k * math.pi / 4
+            stroke(d, [(cx + 44 * math.cos(a), cy + 44 * math.sin(a)), (cx + 110 * math.cos(a) * 0.9, cy + 170 * math.sin(a) * 0.9)], 3.2, 0.8, HOLE)
+        holes_row(d, cx - w + 16, cy - h + 16, cx + w - 16, cy - h + 16, 11, 3)
+        holes_row(d, cx - w + 16, cy + h - 16, cx + w - 16, cy + h - 16, 11, 3)
+    return full(desenho)
+
+
+def acampamento():
+    """Acampamento militar à noite: tendas com abas e cordas, estacas, estandarte, toras e um tronco-banco."""
+    def desenho(d):
+        for x, w, h in ((300, 300, 230), (1340, 340, 250), (1660, 220, 160)):
+            poly(d, [(x - w / 2, BASE), (x, BASE - h), (x + w / 2, BASE)])
+            shape(d, [(x - 6, BASE - h + 30), (x + 16, BASE - 60), (x + 44, BASE), (x + 4, BASE)], HOLE, n=5)
+            for side in (-1, 1):
+                stroke(d, [(x + side * w * 0.25, BASE - h * 0.5), (x + side * (w * 0.5 + 40), BASE - 4)], 1.8, 1.2)
+                poly(d, [(x + side * (w * 0.5 + 40) - 3, BASE - 6), (x + side * (w * 0.5 + 40) + 3, BASE - 6), (x + side * (w * 0.5 + 40), BASE + 6)])
+            ln(d, [(x, BASE - h), (x + 4, BASE - h - 30)], 4)
+            holes_row(d, x - w * 0.38, BASE - 20, x + w * 0.38, BASE - 20, 9, 2.2)
+        ln(d, [(560, BASE), (562, BASE - 330)], 5)                    # estandarte
+        shape(d, [(540, BASE - 330), (586, BASE - 330), (590, BASE - 270), (563, BASE - 252), (536, BASE - 270)], n=4)
+        holes_row(d, 546, BASE - 300, 580, BASE - 300, 4, 3, shape='diamond')
+        shape(d, [(548, BASE - 342), (563, BASE - 372), (578, BASE - 342)], n=4)
+        for a, b in (((900, BASE - 6), (1020, BASE - 24)), ((900, BASE - 24), (1020, BASE - 6))):   # toras da fogueira
+            stroke(d, [a, b], 14, 12)
+        shape(d, [(690, BASE), (700, BASE - 34), (820, BASE - 38), (830, BASE)], n=6)               # tronco-banco
+        spiral(d, 700, BASE - 18, 9, 1.2, 1.6, HOLE)
+    return full(desenho)
+
+
+def fogueira(k=0):
+    """Chamas da fogueira do acampamento (4 formas para alternar): línguas assimétricas de pontas curvas."""
+    im, d = canvas(W, H)
+    r = np.random.default_rng(40 + k)
+    for dx, h, w in ((0, 118, 24), (-30, 70, 17), (27, 86, 18), (-12, 50, 12), (14, 40, 10)):
+        h *= float(r.uniform(0.8, 1.15))
+        sw = float(r.uniform(-14, 14))
+        cx, cy = 960 + dx, BASE - 22
+        shape(d, [(cx - w, cy), (cx - w * 1.1, cy - h * 0.3), (cx - w * 0.4 + sw * 0.3, cy - h * 0.62), (cx + sw * 0.8 - 4, cy - h * 0.86),
+                  (cx + sw, cy - h), (cx + sw * 0.5 + 6, cy - h * 0.72), (cx + w * 0.7, cy - h * 0.42), (cx + w, cy - h * 0.12), (cx + w * 0.8, cy)],
+              (255, 226, 160, 255), n=10)
+    return Static(down(im))
+
+
+def floco():
+    """Floco de neve: pontinho de papel recortado (desenhado em (100, 100))."""
+    def desenho(d):
+        ell(d, 100, 100, 3.6, 3.6)
+        for k in range(6):
+            a = k * math.pi / 3
+            ln(d, [(100, 100), (100 + 6 * math.cos(a), 100 + 6 * math.sin(a))], 1.2)
+    return full(desenho)
+
+
+_CABECA = [(-10, 4), (-12, -16), (-22, -30), (-26, -50), (-20, -70), (-4, -82), (14, -80), (24, -68), (26, -56), (36, -44), (28, -40),
+           (27, -32), (32, -27), (26, -24), (24, -16), (16, -6), (8, 0), (10, 6)]
+
+
+def busto(cx, mulher=False, semente=0):
+    """Busto romano sobre um pedestal (herma), de perfil. `mulher` troca barba e cachos por coque e tiara."""
+    rr = np.random.default_rng(semente)
+    def desenho(d):
+        b = BASE
+        shape(d, [(cx - 66, b), (cx + 66, b), (cx + 60, b - 22), (cx - 60, b - 22)], n=4)              # base com moldura
+        stroke(d, [(cx - 58, b - 12), (cx + 58, b - 12)], 2.4, 2.4, HOLE)
+        poly(d, [(cx - 40, b - 22), (cx + 40, b - 22), (cx + 34, b - 150), (cx - 34, b - 150)])        # coluna da herma
+        for k in range(3):
+            stroke(d, [(cx - 18 + k * 18, b - 34), (cx - 16 + k * 18, b - 140)], 2.2, 2.2, HOLE)
+        shape(d, [(cx - 54, b - 150), (cx + 54, b - 150), (cx + 48, b - 162), (cx - 48, b - 162)], n=4)
+        shape(d, [(cx - 70, b - 166), (cx - 62, b - 214), (cx - 26, b - 236), (cx + 30, b - 236), (cx + 64, b - 212), (cx + 72, b - 166)], n=8)  # ombros
+        for k in range(4):
+            stroke(d, [(cx - 40 + k * 22, b - 226), (cx - 30 + k * 22, b - 196), (cx - 36 + k * 24, b - 170)], 2.6, 0.6, HOLE)
+        s, ox, oy = 1.7, cx + 2, b - 236
+        poly(d, cr([(ox + x * s, oy + y * s) for x, y in _CABECA], True, 12))
+        shape(d, [(ox + 12 * s, oy - 58 * s), (ox + 20 * s, oy - 61 * s), (ox + 16 * s, oy - 55 * s)], HOLE, n=6)        # olho
+        stroke(d, [(ox + 6 * s, oy - 66 * s), (ox + 14 * s, oy - 68 * s), (ox + 22 * s, oy - 65 * s)], 2.4, 0.6, HOLE)
+        if mulher:
+            ell(d, ox - 30 * s, oy - 56 * s, 13 * s, 12 * s)                                              # coque
+            spiral(d, ox - 30 * s, oy - 56 * s, 9 * s, 1.6, 2.2, HOLE)
+            for k in range(5):                                                                           # ondas do cabelo
+                stroke(d, [(ox + (14 - k * 7) * s, oy - 78 * s), (ox + (6 - k * 7) * s, oy - 66 * s), (ox + (10 - k * 7) * s, oy - 54 * s)], 2.6, 0.8, HOLE)
+            stroke(d, [(ox - 18 * s, oy - 80 * s), (ox + 4 * s, oy - 88 * s), (ox + 22 * s, oy - 80 * s)], 5, 3)    # tiara
+            holes_row(d, ox - 12 * s, oy - 84 * s, ox + 16 * s, oy - 83 * s, 5, 1.6)
+            ell(d, ox - 4 * s, oy - 38 * s, 2.6, 2.6, HOLE)                                              # brinco
+        else:
+            for k in range(7):                                                                           # cachos
+                x, y = (-22 + k * 7 + float(rr.uniform(-2, 2))) * s, (-74 - 6 * math.sin(k / 2) + float(rr.uniform(-2, 2))) * s
+                ell(d, ox + x, oy + y, 8 * s, 8 * s)
+                spiral(d, ox + x, oy + y, 5 * s, 1.2, 1.6, HOLE, sign=1 if k % 2 else -1)
+            if rr.uniform() < 0.75:                                                                      # barba
+                for x, y in ((14, -10), (6, -6), (20, -16), (-2, -10)):
+                    ell(d, ox + x * s, oy + y * s, 6 * s, 7 * s)
+                    spiral(d, ox + x * s, oy + y * s, 3.6 * s, 1, 1.4, HOLE)
+            spiral(d, ox - 6 * s, oy - 46 * s, 5 * s, 1.3, 1.8, HOLE)                                    # orelha
+    return full(desenho)
+
+
+def pergaminho(q, cx=960, y0=200, y1=440):
+    """Rolo de pergaminho se abrindo entre dois cilindros (q = 0 fechado .. 1 aberto), com escrita vazada."""
+    def desenho(d):
+        w = 26 + 400 * q
+        if q > 0.02:
+            topo = [(x, y0 + 3 * math.sin(x / 40)) for x in range(int(cx - w), int(cx + w) + 1, 12)]
+            fundo = [(x, y1 + 3 * math.sin(x / 40 + 1)) for x, _ in topo]
+            poly(d, topo + fundo[::-1])
+            rr = np.random.default_rng(3)
+            for j in range(7):
+                y = y0 + 34 + j * 30
+                x = cx - 390
+                while x < cx + 370:
+                    L = float(rr.uniform(26, 70))
+                    if cx - w + 18 < x and x + L < cx + w - 18:
+                        stroke(d, [(x, y), (x + L * 0.5, y - 2), (x + L, y)], 3.2, 2.2, HOLE, n=4)
+                    x += L + float(rr.uniform(10, 18))
+        for x in (cx - w, cx + w):                                       # os dois cilindros
+            shape(d, [(x - 13, y0 - 14), (x + 13, y0 - 14), (x + 15, y1 + 14), (x - 15, y1 + 14)], n=4)
+            for y in (y0 - 26, y1 + 26):
+                ell(d, x, y, 9, 13)
+                ell(d, x, y, 3.5, 5, HOLE)
+            stroke(d, [(x, y0 + 4), (x, y1 - 4)], 2, 2, HOLE)
+    return full(desenho)
+
+
+def bau(aberto=0.0, cx=960):
+    """Baú de tesouro com reforços e fechadura vazada; `aberto` 0..1 gira a tampa para trás."""
+    def desenho(d):
+        b, w, h = BASE, 110, 120
+        poly(d, [(cx - w, b - 6), (cx + w, b - 6), (cx + w, b - h), (cx - w, b - h)])
+        for x in (cx - w + 8, cx + w - 22):
+            poly(d, [(x, b), (x + 14, b), (x + 14, b - 8), (x, b - 8)])
+        for x in (cx - 60, cx + 60):
+            stroke(d, [(x, b - h + 4), (x, b - 10)], 4, 4, HOLE)
+        holes_row(d, cx - w + 12, b - h + 14, cx + w - 12, b - h + 14, 12, 2.4)
+        ell(d, cx, b - h + 46, 14, 16, HOLE)
+        ell(d, cx, b - h + 46, 8, 10)
+        poly(d, [(cx - 3, b - h + 50), (cx + 3, b - h + 50), (cx + 2, b - h + 60), (cx - 2, b - h + 60)], HOLE)
+        a = math.radians(32 * aberto)                                   # a tampa sobe presa na dobradiça de trás (direita)
+        hx, hy = cx + w + 6, b - h
+        def T(x, y):
+            return (hx + (x - hx) * math.cos(a) - (y - hy) * math.sin(a), hy + (x - hx) * math.sin(a) + (y - hy) * math.cos(a) - 10 * aberto)
+        tampa = [T(cx - w - 6, b - h)] + [T(cx + w * math.cos(math.radians(t)), b - h - 46 * math.sin(math.radians(t))) for t in range(180, -1, -10)] + [T(cx + w + 6, b - h)]
+        poly(d, tampa)
+        for x in (cx - 60, cx + 60):
+            ln(d, [T(x, b - h - 2), T(x, b - h - 40)], 4, HOLE)
+        holes_row(d, *T(cx - w + 14, b - h - 8), *T(cx + w - 14, b - h - 8), 10, 2.2)
+    return full(desenho)
+
+
+def tesouro(i, cx=960, cy=BASE - 150):
+    """Um dos tesouros do palácio, desenhado sobre a boca do baú: 0 cálice, 1 colar, 2 anel, 3 jarra, 4 moedas."""
+    def desenho(d):
+        if i == 0:
+            shape(d, [(cx - 34, cy - 70), (cx + 34, cy - 70), (cx + 26, cy - 30), (cx + 6, cy - 14), (cx + 6, cy + 16), (cx + 26, cy + 26),
+                      (cx - 26, cy + 26), (cx - 6, cy + 16), (cx - 6, cy - 14), (cx - 26, cy - 30)], n=4)
+            holes_row(d, cx - 24, cy - 52, cx + 24, cy - 52, 6, 3, shape='diamond')
+        elif i == 1:
+            pts = [(cx + 60 * math.cos(math.radians(a)), cy - 40 + 52 * math.sin(math.radians(a))) for a in range(10, 171, 16)]
+            stroke(d, pts, 3, 3)
+            for x, y in pts:
+                ell(d, x, y, 7, 7)
+                ell(d, x, y, 2.4, 2.4, HOLE)
+            shape(d, [(cx - 12, cy + 12), (cx, cy - 4), (cx + 12, cy + 12), (cx, cy + 34)], n=4)
+            ell(d, cx, cy + 14, 4, 6, HOLE)
+        elif i == 2:
+            ell(d, cx, cy, 30, 30)
+            ell(d, cx, cy, 20, 20, HOLE)
+            shape(d, [(cx - 16, cy - 26), (cx, cy - 52), (cx + 16, cy - 26), (cx, cy - 18)], n=4)
+            ell(d, cx, cy - 32, 5, 7, HOLE)
+        elif i == 3:
+            shape(d, [(cx - 10, cy - 70), (cx + 10, cy - 70), (cx + 8, cy - 54), (cx + 30, cy - 20), (cx + 26, cy + 20), (cx + 10, cy + 30),
+                      (cx - 10, cy + 30), (cx - 26, cy + 20), (cx - 30, cy - 20), (cx - 8, cy - 54)], n=6)
+            stroke(d, [(cx + 10, cy - 60), (cx + 40, cy - 52), (cx + 30, cy - 18)], 4, 3)
+            holes_row(d, cx - 22, cy - 6, cx + 22, cy - 6, 6, 2.4)
+            stroke(d, [(cx - 24, cy + 6), (cx + 24, cy + 6)], 2, 2, HOLE)
+        else:
+            for k in range(5):
+                y = cy + 20 - k * 12
+                ell(d, cx + (k % 2) * 6, y, 34, 9)
+                stroke(d, [(cx - 26 + (k % 2) * 6, y), (cx + 26 + (k % 2) * 6, y)], 1.6, 1.6, HOLE)
+    return full(desenho)

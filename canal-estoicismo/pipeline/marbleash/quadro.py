@@ -310,6 +310,8 @@ class Quadro:
 
     def _aplicar_chama(self, img, chama, fatores, cintila, mov):
         frgb, fa, r = chama.dados()
+        if r is None:
+            return img
         if mov is not None:
             dx, dy, rot, piv = mov
             if not (abs(dx) < 0.05 and abs(dy) < 0.05 and abs(rot) < 0.01):

@@ -1,0 +1,41 @@
+# Tempos do bloco2 · video-01 — deixas da narração.
+# Áudio: audio/video01-bloco2-free.mp3 (76.36 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+name             0.00  His name was Marcus Aurelius.                                       # início
+nearly           3.12  For nearly twenty years,                                            # pausa
+ruled            4.72  he ruled Rome...                                                    # voz
+atime             6.40  at a time when Rome was,                                            # pausa
+formany          7.74  for many,                                                           # voz
+world            8.65  the whole known world.                                              # pausa
+years           10.77  But his years on the throne were not years of comfort.              # pausa
+plague          14.25  A plague swept across the empire...                                 # pausa
+city            16.76  city after city.                                                    # voz
+northern          18.60  And on the northern frontier,                                       # pausa
+danube          20.14  along the river Danube,                                             # voz
+warsend         21.77  the wars would not end.                                             # pausa
+somost          24.02  So the most powerful man alive spent his nights not in a palace...  # pausa
+camp            28.39  but in a soldier's camp.                                            # pausa
+cold            30.23  Cold.                                                               # pausa
+farhome         31.10  Far from home.                                                      # voz
+sat             33.20  And when he sat down to write...                                    # pausa
+victories          35.05  he did not write about his victories.                               # pausa
+people          37.28  He wrote about the people who had shaped him.                       # pausa
+mother          40.31  And of his mother,                                                  # pausa
+remembered      41.52  he remembered this:                                                 # pausa
+simplicity      43.04  simplicity in my way of living...                                   # pausa
+farremoved      45.65  far removed from the habits of the rich.                            # pausa
+think           48.53  Think about that.                                                   # pausa
+richest         49.77  The richest man in the world...                                     # pausa
+grateful        51.97  grateful that someone taught him not to live like a rich man.       # pausa
+historians         56.28  The old historians even tell a story.                               # pausa
+whenwars        58.70  When the wars emptied the treasury,                                 # pausa
+notaxes         60.92  he did not raise taxes on his people.                               # voz
+sold            63.37  He sold the treasures of his own palace instead.                    # pausa
+whether         67.08  Whether every detail is true...                                     # pausa
+cannotknow       68.98  we cannot know.                                                     # voz
+story           70.31  But the story survived for a reason.                                # pausa
+sounds          72.98  It sounds exactly like the man who wrote those pages.               # pausa

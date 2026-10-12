@@ -82,7 +82,7 @@ class Bloco:
     @property
     def sem_narracao(self) -> bool:
         """Peça sem narração (abertura, vinheta): a duração vem de DURACAO no script de cena."""
-        return hasattr(self.cena, 'DURACAO')
+        return self.arquivo_cena.exists() and hasattr(self.cena, 'DURACAO')
 
     @cached_property
     def audio_info(self) -> dict:
@@ -127,19 +127,24 @@ class Bloco:
         return mod
 
     @property
+    def cena_ou_nada(self):
+        """O script de cena, ou um objeto vazio se ele ainda não existe (valem os padrões)."""
+        return self.cena if self.arquivo_cena.exists() else object()
+
+    @property
     def entrada(self) -> float:
         """Segundos de vídeo antes da narração começar."""
-        return getattr(self.cena, 'ENTRADA', 0.0 if self.sem_narracao else 0.4)
+        return getattr(self.cena_ou_nada, 'ENTRADA', 0.0 if self.sem_narracao else 0.4)
 
     @property
     def saida(self) -> float:
         """Segundos de vídeo depois do fim da narração (o último segundo escurece)."""
-        return getattr(self.cena, 'SAIDA', 0.0 if self.sem_narracao else 1.0)
+        return getattr(self.cena_ou_nada, 'SAIDA', 0.0 if self.sem_narracao else 1.0)
 
     @property
     def fade(self):
         """(segundos antes do fim em que o escurecimento final começa, duração do escurecimento)."""
-        return getattr(self.cena, 'FADE', (1.0, 0.9))
+        return getattr(self.cena_ou_nada, 'FADE', (1.0, 0.9))
 
     @property
     def fim(self) -> float:

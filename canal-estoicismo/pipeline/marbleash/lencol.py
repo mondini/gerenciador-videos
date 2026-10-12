@@ -158,6 +158,8 @@ def chama_rgba(arte, *args):
     comp(fr, sp)
     a = (fr.mean(-1) > 0.02).astype(np.float32)
     ys, xs = np.nonzero(a)
+    if len(ys) == 0:                     # chama vazia (ex.: rachadura ainda sem traço)
+        return fr, a, None
     return fr, a, (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)
 
 
