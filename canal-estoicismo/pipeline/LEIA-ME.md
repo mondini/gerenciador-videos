@@ -51,8 +51,8 @@ Rode na pasta do canal. `VIDEO` = `1`, `MA-001` ou o nome da pasta (`MA-001-the-
 | Stills | `./ma stills VIDEO BLOCO 5 12.5 30` | PNGs de conferência nos segundos dados (sem segundos: os `STILLS` da cena) | `previas/stills/blocoN_SSS.SS.png` |
 | Render | `./ma render VIDEO BLOCO` | Vídeo do bloco com voz + ambiente a −16 LUFS | `previas/blocoN.mp4` (+ `trabalho/blocoN-video.mp4` sem som) |
 | Trecho | `./ma render VIDEO BLOCO --de 20 --ate 30` | Só um trecho, para conferir rápido | `previas/blocoN-20a30s.mp4` |
-| Juntar | `./ma juntar VIDEO 1 abertura 2 3` | Junta blocos e peças comuns, na ordem dada, com ambiente contínuo (−16 LUFS); `--4k` também exporta em 4K | `final/MA-NNN-slug-1-abertura-2-3.mp4` |
-| Peça comum | `./ma render comum abertura` | Renderiza uma peça sem narração, igual em todos os vídeos (`videos/comum/<nome>/cena.py`, com `DURACAO`) | `videos/comum/previas/abertura.mp4` |
+| Juntar | `./ma juntar VIDEO 1 abertura 2 3` | Junta blocos e peças comuns, na ordem dada, com as transições do canal (dissolve de 1,5 s entre blocos; bloco nasce do escuro depois de peça comum; escurece e corta antes de peça comum), ambiente contínuo e som de transição das peças comuns (−16 LUFS); `--4k` também exporta em 4K; `--som NOME` troca o som de transição para comparar | `final/MA-NNN-slug-1-abertura-2-3.mp4` |
+| Peça comum | `./ma render comum abertura` | Renderiza uma peça sem narração, igual em todos os vídeos (`videos/comum/<nome>/cena.py`, com `DURACAO`; `SOM` e `SOM_GOLPE` dão o som de transição de `marbleash/sons.py`, que entra no `juntar`) | `videos/comum/previas/abertura.mp4` |
 | YouTube | `./ma youtube videos/MA-001-the-man-who-had-everything/previas/bloco1.mp4` | Recomprime a ~4 Mbps e salva stills lado a lado (inteiros e zoom num degradê) | `...-youtube4mbps.mp4`, `previas/stills/<nome>-youtube/` |
 | Comparar | `./ma comparar A.png B.png` | Diferença de pixels (também aceita duas pastas) | — |
 | Testes | `.venv/bin/python -m pytest pipeline/testes` | Confere tempos, atalhos de desempenho e os stills de referência | — |
@@ -67,6 +67,17 @@ ambiente em dB), `stills --referencia PASTA` (compara com stills salvos), `tempo
 `tempos --sem-transcritor`, `youtube --mbps 4`.
 
 ---
+
+### Começo e fim de cada peça (padrões em `marbleash/projeto.py`)
+| | `ENTRADA` (s antes da voz) | `SAIDA` (s depois da voz) | `FADE` (escurece no fim) |
+|---|---|---|---|
+| Bloco 1 (gancho) | 0,4 | 1,0 | sim (antes da abertura) |
+| Blocos do meio | 1,9 (cobre o dissolve) | 1,0 | não (dissolve no `juntar`) |
+| Pausa | 1,9 | 4,5 (o bloco seguinte aparece 3 s depois da última frase) | longo, 2,4 s |
+| Último bloco | 1,9 | o da cena | **declarar `FADE` na cena** (antes do encerramento; o `juntar` avisa se faltar) |
+
+`ACENDE = (escuro, subida, 'suave' | 'lanterna')` faz a peça nascer do escuro (não usado no padrão atual).
+Pausa antes do slogan: `audio.PAUSA_ANTES_SLOGAN` (2 s), aplicada sozinha pelos tempos.
 
 ## 3. Como criar um bloco novo (passo a passo)
 

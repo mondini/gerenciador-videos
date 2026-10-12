@@ -30,10 +30,10 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - Prévias e stills ficam em `videos/MA-NNN-slug/previas/`.
 
 ## 5. Montagem final
-- `./ma juntar N 1 abertura 2 3 ...` — concatena o gancho, a abertura padrão (`videos/comum/abertura`) e os blocos, mixa voz + som ambiente contínuo (−16 LUFS) e grava em `videos/MA-NNN-slug/final/`. Com `--4k`, também exporta ampliado para 4K.
+- `./ma juntar N 1 abertura 2 3 ...` — junta o gancho, a abertura padrão (`videos/comum/abertura`, com o som de transição) e os blocos com as transições do canal (dissolve entre blocos), mixa voz + som ambiente contínuo (−16 LUFS) e grava em `videos/MA-NNN-slug/final/`. Com `--4k`, também exporta ampliado para 4K.
 
 ## 6. Entregáveis de publicação
-- 3 thumbnails (A Palavra, B Símbolo, C Gancho) no canvas de design; os arquivos finais vão para `thumbnails/` (`MA-NNN_thumb_A.png`…).
+- 2 thumbnails (A Palavra, C Gancho) para o teste A/B do YouTube, em teatro de sombras com quadros reais do vídeo (ver `docs/plano-canal.md`); os arquivos finais (1280×720 PNG, < 2 MB) vão para `thumbnails/` (`MA-NNN_thumb_A.png`, `MA-NNN_thumb_C.png`). Conferir em 320×180.
 - Shorts verticais 1080×1920 (5–6 por vídeo, incluindo um de The Pause) em `shorts/`.
 - **Pacote de Publicação** (15 seções) em `videos/MA-NNN-slug/pacote-de-publicacao.md` — pedir os links do canal ao criador.
 

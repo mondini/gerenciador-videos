@@ -21,7 +21,7 @@ from .quadro import Quadro
 
 def quadro(bloco: Bloco, t: float) -> np.ndarray:
     """O quadro do instante t (segundos no vídeo do bloco), RGB uint8 (H x W x 3)."""
-    q = Quadro(t, t - bloco.entrada, fim=bloco.fim, fade=bloco.fade)
+    q = Quadro(t, t - bloco.entrada, fim=bloco.fim, fade=bloco.fade, acende=bloco.acende)
     bloco.cena.quadro(q, bloco.deixas)
     return q.finalizar()
 

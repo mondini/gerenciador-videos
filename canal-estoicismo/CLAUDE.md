@@ -23,7 +23,7 @@ Esta pasta guarda tudo o que é preciso para produzir os vídeos do canal **Marb
 - `pipeline/` — código Python que gera os vídeos (teatro de sombras projetadas): biblioteca `marbleash/` e a linha de comando (`./ma` na pasta do canal).
 - `fontes-tipograficas/` — Cinzel, Cormorant Garamond (e Cormorant, usada no bloco 1 aprovado), Inter (créditos) e GFS Baskerville (grego); todas com licença OFL (arquivos OFL-*.txt).
 - `canal.json` — nome, prefixo do código (`MA`) e pasta do canal no Drive (`MA - Marble & Ash`).
-- `videos/MA-NNN-slug/` — uma pasta por vídeo, com código + slug do nome interno (ex.: `MA-001-the-man-who-had-everything`), o mesmo nome no Drive e no sistema. Dentro: `roteiro.md`, `audio/`, `blocoN/` e `pausa/` (script de cena `cena.py`, deixas `tempos.txt`, análise `audio.json`), `trabalho/` (intermediários), `previas/`, `final/`, `thumbnails/` (A, B, C), `shorts/`, `pacote-de-publicacao.md`. Nos comandos, o vídeo pode ser `1`, `MA-001` ou a pasta inteira.
+- `videos/MA-NNN-slug/` — uma pasta por vídeo, com código + slug do nome interno (ex.: `MA-001-the-man-who-had-everything`), o mesmo nome no Drive e no sistema. Dentro: `roteiro.md`, `audio/`, `blocoN/` e `pausa/` (script de cena `cena.py`, deixas `tempos.txt`, análise `audio.json`), `trabalho/` (intermediários), `previas/`, `final/`, `thumbnails/` (A e C), `shorts/`, `pacote-de-publicacao.md`. Nos comandos, o vídeo pode ser `1`, `MA-001` ou a pasta inteira.
 - `videos/comum/` — peças sem narração iguais em todos os vídeos (abertura, encerramento).
 
 ## Regras rápidas

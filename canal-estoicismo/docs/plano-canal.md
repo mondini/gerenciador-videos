@@ -25,17 +25,26 @@ Links (claude.ai):
 - Paleta 60·30·10: carvão `#1A1816`, mármore `#EDE6DA`, âmbar `#E8A33D` (thumbs: âmbar vivo `#FFB547` em 20–30% da imagem).
 - Tipografia: **Cinzel** (títulos, nomes, logo), **Cormorant Garamond** (citações, itálico), **Inter** (créditos e legendas).
 - Logo: A — Horizonte. Banner: B — Centro silencioso.
-- Vídeos: teatro de sombras projetadas (padrão aprovado). Thumbs, logo e banner continuam na arte de linhas **até o criador decidir** se migram para o estilo de sombras.
-- Thumbnails: sempre **3 versões** para o Test & Compare do YouTube — A Palavra (1–2 palavras), B Símbolo (sem texto), C Gancho (até 3 palavras; guia de embalagem, decisão de 12/10/2026). O texto da thumb nunca repete o título.
+- Vídeos: teatro de sombras projetadas (padrão aprovado). Logo e banner continuam na arte de linhas.
+- **Thumbnails em sombras (decisão de 12/10/2026):** feitas com quadros reais do vídeo, gradação puxada para o âmbar vivo e texto em Cinzel Black (mármore, destaque em âmbar), sempre à esquerda e longe do canto inferior direito (selo de duração). Assim a capa promete o que o vídeo mostra.
+- Thumbnails: **2 versões** para o teste A/B do YouTube (decisão de 12/10/2026; antes eram 3) — A Palavra (1–2 palavras) e C Gancho (até 3 palavras; guia de embalagem). A variante B (Símbolo, sem texto) saiu. O texto da thumb nunca repete o título.
 
 ## Estrutura padrão de um vídeo (~10 min)
 
 1. **Gancho** (~45 s): fala direto com a dor do ouvinte, sem entregar a resposta.
-2. **Abertura** (2 s): logo Horizonte + "MARBLE & ASH".
+2. **Abertura** (3 s; 2 s até 12/10/2026): logo Horizonte + "MARBLE & ASH", com o som de transição **Brasa** (sintetizado por código em `pipeline/marbleash/sons.py`): um sopro sobe no escurecimento do gancho e um golpe grave e macio cai quando o sol acende, com faíscas na cauda.
 3. **Blocos de conteúdo** (história/contexto, a fonte antiga, a lição aplicada à vida de hoje).
 4. **The Pause** logo após a ideia mais forte.
 5. **Provérbio-ponte**.
 6. **Fechamento** que volta ao gancho, em calma.
+
+## Transições entre peças (decisão de 12/10/2026)
+
+Aplicadas pelo `./ma juntar`, iguais em todos os vídeos:
+- **Bloco → bloco** (e entrada/saída da Pausa): **dissolve de 1,5 s**, sem escuro. Os blocos do meio terminam acesos e a voz do bloco seguinte entra 1,9 s depois do início dele (o intervalo entre as falas continua ~1,4 s).
+- **Abertura → bloco 2:** o bloco nasce do escuro em 1,5 s.
+- **Gancho → abertura** e **último bloco → encerramento:** o bloco escurece e corta (o último bloco declara `FADE` na cena).
+- **Saída da Pausa:** escurece devagar (2,4 s) e o bloco seguinte só começa a aparecer **3 s depois da última frase**.
 
 ## The Pause — o diferencial do canal
 
@@ -50,6 +59,7 @@ Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
 ## Encerramento padrão (decisão de 12/10/2026)
 
 - Última linha falada de todo vídeo, igual sempre: *"[softly] Old wisdom... for quiet hours."* (só o slogan, sem o nome do canal).
+- O slogan começa **2 s depois da última frase do roteiro** (12/10/2026). Automático: `./ma tempos` (ou `./ma audio`, se os tempos já existem) acha a frase "Old wisdom" e alonga a pausa antes dela no áudio desacelerado; nada a regravar no ElevenLabs.
 - **Nenhuma chamada falada** para inscrição ou comentário (o público ouve para dormir); o pedido fica só na descrição e na tela final do YouTube.
 - Visual: o logo Horizonte + slogan em Cormorant Garamond itálico (`marble-300`), peça comum em `videos/comum/` (a criar).
 

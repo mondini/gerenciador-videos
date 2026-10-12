@@ -1,7 +1,7 @@
 {
  "fonte": "audio/video01-bloco6-starter.mp3",
  "duracao_original": 49.397551020408166,
- "duracao_lenta": 51.996893,
+ "duracao_lenta": 53.364535,
  "ritmo": {
   "tempo": 1.0,
   "alonga": 0.1,
@@ -744,6 +744,12 @@
    "hours.",
    48.56,
    48.98
+  ]
+ ],
+ "minimos": [
+  [
+   46.7927,
+   2.0
   ]
  ]
 }

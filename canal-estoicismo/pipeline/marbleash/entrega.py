@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from . import audio, config
-from .config import ffmpeg
+from .config import FPS, ffmpeg
 
 
 def duracao_video(arq) -> float:
@@ -25,6 +25,34 @@ def concatenar(videos, saida):
     subprocess.run([ffmpeg(), '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', str(lista), '-c', 'copy', str(saida)], check=True)
     lista.unlink()
     return Path(saida)
+
+
+def montar(videos, juncoes, saida, dissolve, crf=14, preset='veryfast'):
+    """Junta os vídeos com uma transição em cada junção (len(juncoes) == len(videos) - 1):
+    'dissolve' (sobrepõe `dissolve` s), 'acende' (o seguinte nasce do escuro em `dissolve` s) ou 'corte'.
+    Devolve o início de cada vídeo na montagem (s)."""
+    durs = [duracao_video(v) for v in videos]
+    entradas, filtros, inicios = [], [], [0.0]
+    for i, v in enumerate(videos):
+        entradas += ['-i', str(v)]
+        f = f'[{i}:v]setpts=PTS-STARTPTS,fps={FPS},settb=AVTB'
+        if i and juncoes[i - 1] == 'acende':
+            f += f',fade=t=in:st=0:d={dissolve}'
+        filtros.append(f + f'[p{i}]')
+    atual, fim = '[p0]', durs[0]
+    for i in range(1, len(videos)):
+        saida_i = f'[m{i}]'
+        if juncoes[i - 1] == 'dissolve':
+            ini = fim - dissolve
+            filtros.append(f'{atual}[p{i}]xfade=transition=fade:duration={dissolve}:offset={ini:.4f}{saida_i}')
+        else:
+            ini = fim
+            filtros.append(f'{atual}[p{i}]concat=n=2:v=1{saida_i}')
+        inicios.append(ini)
+        atual, fim = saida_i, ini + durs[i]
+    subprocess.run([ffmpeg(), '-y', '-v', 'error', *entradas, '-filter_complex', ';'.join(filtros), '-map', atual,
+                    '-c:v', 'libx264', '-preset', preset, '-crf', str(crf), '-pix_fmt', 'yuv420p', str(saida)], check=True)
+    return inicios, fim
 
 
 def exportar_4k(entrada, saida, crf=16):

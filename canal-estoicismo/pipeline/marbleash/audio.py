@@ -52,11 +52,37 @@ def pausas(caminho, ruido_db=RITMO['ruido_db'], pausa_min=RITMO['pausa_min'], du
     return [(s, e) for s, e in zip(st, en) if s > 0.05 and e < duracao - 0.05]
 
 
-def inseridos(pausas_, alonga=RITMO['alonga'], acrescimo=RITMO['acrescimo']):
+# Assinatura falada do fim de todo vídeo: começa PAUSA_ANTES_SLOGAN s depois da última frase do roteiro
+# (decisão de 12/10/2026). A pausa antes dela é achada pelos tempos (ver minimos_do_slogan).
+SLOGAN = 'old wisdom'
+PAUSA_ANTES_SLOGAN = 2.0
+
+
+def _extra(s, e, alonga, acrescimo, minimos):
+    """Silêncio acrescentado numa pausa: o do ritmo do canal, ou o que falta para chegar ao mínimo da pausa."""
+    extra = alonga * (e - s) + acrescimo
+    for fim, minimo in (minimos or []):
+        if abs(fim - e) < 0.02:
+            extra = max(extra, minimo - (e - s))
+    return extra
+
+
+def minimos_do_slogan(pausas_, linhas):
+    """[(fim da pausa, segundos)] para a pausa que antecede o slogan. linhas: [(nome, segundo, frase, ...)] dos tempos."""
+    for _, seg, frase, *_ in linhas:
+        if frase.lower().startswith(SLOGAN):
+            for s, e in pausas_:
+                if abs(e - seg) < 0.02:
+                    return [(e, PAUSA_ANTES_SLOGAN)]
+            raise SystemExit(f'O slogan começa em {seg:.2f} s, mas nenhuma pausa termina ali: confira tempos.txt.')
+    return []
+
+
+def inseridos(pausas_, alonga=RITMO['alonga'], acrescimo=RITMO['acrescimo'], minimos=None):
     """Silêncio acrescentado em cada pausa: [(meio da pausa, total acrescentado até ali)]."""
     acc, out = 0.0, []
     for s, e in pausas_:
-        extra = alonga * (e - s) + acrescimo
+        extra = _extra(s, e, alonga, acrescimo, minimos)
         acc += extra
         out.append(((s + e) / 2, acc))
     return out
@@ -84,13 +110,15 @@ def duracao_wav(caminho) -> float:
         return w.getnframes() / w.getframerate()
 
 
-def desacelerar(origem, pausas_, saida, tempo=RITMO['tempo'], alonga=RITMO['alonga'], acrescimo=RITMO['acrescimo']) -> float:
-    """Grava `saida` (wav) com as pausas alongadas e o andamento ajustado (tempo < 1 desacelera). Devolve a duração em segundos."""
+def desacelerar(origem, pausas_, saida, tempo=RITMO['tempo'], alonga=RITMO['alonga'], acrescimo=RITMO['acrescimo'],
+                minimos=None) -> float:
+    """Grava `saida` (wav) com as pausas alongadas e o andamento ajustado (tempo < 1 desacelera). Devolve a duração em segundos.
+    minimos: [(fim da pausa, segundos)] para pausas que precisam de um silêncio mínimo (ex.: antes do slogan)."""
     x = decodificar(origem)
     pieces, cur = [], 0
     for s, e in pausas_:
         mid = int((s + e) / 2 * SR)
-        extra = alonga * (e - s) + acrescimo
+        extra = _extra(s, e, alonga, acrescimo, minimos)
         pieces.append(x[cur:mid])
         pieces.append(np.zeros(int(extra * SR), np.float32))
         cur = mid
@@ -150,16 +178,18 @@ def ambiente(duracao, saida, semente=0):
 def mixar(vozes, duracao, saida, ganho_ambiente_db=-20.0, lufs=-16.0):
     """Mixa narração + ambiente e normaliza para `lufs` (EBU R128, dois passos).
 
-    vozes: [(wav, atraso em s)]; duracao: total em s; saida: .wav ou .m4a/.aac.
+    vozes: [(wav, atraso em s)] ou [(wav, atraso, ganho em dB)] (sons de transição); duracao: total em s;
+    saida: .wav ou .m4a/.aac.
     """
     saida = Path(saida)
     amb = saida.with_name(saida.stem + '-ambiente.wav')
     ambiente(duracao, amb)
     entradas, filtros, rotulos = [], [], []
-    for i, (wav, atraso) in enumerate(vozes):
+    for i, (wav, atraso, *ganho) in enumerate(vozes):
         entradas += ['-i', str(wav)]
         ms = int(round(atraso * 1000))
-        filtros.append(f'[{i}:a]aresample={SR},aformat=channel_layouts=stereo,adelay={ms}|{ms}[v{i}]')
+        vol = f',volume={ganho[0]}dB' if ganho else ''
+        filtros.append(f'[{i}:a]aresample={SR},aformat=channel_layouts=stereo,adelay={ms}|{ms}{vol}[v{i}]')
         rotulos.append(f'[v{i}]')
     entradas += ['-i', str(amb)]
     na = len(vozes)

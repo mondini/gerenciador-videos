@@ -148,8 +148,8 @@ def mover(m, ret, dx=0.0, dy=0.0, rot=0.0, piv=(960, 1080)):
 class Quadro:
     """Um quadro em construção (ver docstring do módulo)."""
 
-    def __init__(self, t, u, fim=None, fade=(1.0, 0.9)):
-        self.t, self.u, self.fim, self._fade = t, u, fim, fade
+    def __init__(self, t, u, fim=None, fade=(1.0, 0.9), acende=(0.0, 0.0, 'suave')):
+        self.t, self.u, self.fim, self._fade, self._acende = t, u, fim, fade, acende
         self.D = lencol.dados()
         self.nivel = 1.0
         self.L = None
@@ -159,6 +159,18 @@ class Quadro:
         self._creditos = []
 
     # ---- tempo (no relógio da narração, q.u) ----
+    def _entrada_luz(self):
+        """Começo da peça: escuro por `atraso` s, depois a luz sobe em `duracao` s ('suave' ou 'lanterna', que
+        tremula enquanto acende)."""
+        atraso, duracao, estilo = self._acende
+        if duracao <= 0 or self.t >= atraso + duracao:
+            return 1.0
+        f = ss(self.t, atraso, duracao)
+        if estilo == 'lanterna' and 0 < f < 1:
+            t = self.t - atraso
+            f *= 1 - 0.35 * (1 - f) * (0.5 + 0.5 * math.sin(t * 23.0) * math.sin(t * 9.7 + 1.3))
+        return f
+
     def ss(self, t0, d):
         return ss(self.u, t0, d)
 
@@ -376,7 +388,8 @@ class Quadro:
         L = np.clip(L + D['OVER'] * self.nivel + D['GRAIN'], 0, 1.299)
         lut, lutf = lencol.grade()
         idx = (L * (lencol.LUTN - 1) / 1.3).astype(np.int32)
-        fade = 1 - ss(self.t, self.fim - self._fade[0], self._fade[1]) if self.fim is not None else 1.0
+        fade = 1 - ss(self.t, self.fim - self._fade[0], self._fade[1]) if self.fim is not None and self._fade else 1.0
+        fade *= self._entrada_luz()
         if not self._chamas and self._camera is None and not self._creditos and fade == 1.0:
             return lut[idx]                     # idêntico ao caminho em ponto flutuante (ver testes)
         img = lutf[idx]

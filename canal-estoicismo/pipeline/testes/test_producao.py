@@ -75,7 +75,7 @@ def test_etapa_avanca_com_os_arquivos(tmp_path):
     _arq(pasta / 'final' / 'MA-001.mp4')
     st = producao.ler_status(pasta)
     assert st.etapa == 'Thumbnail' and not st.concluido
-    assert st.pendencias() == ['thumbnails: 0/3 em thumbnails/', 'shorts: 0/5 em shorts/', 'pacote-de-publicacao.md']
+    assert st.pendencias() == ['thumbnails: 0/2 em thumbnails/', 'shorts: 0/5 em shorts/', 'pacote-de-publicacao.md']
     for letra in 'ABC':
         _arq(pasta / 'thumbnails' / f'MA-001_thumb_{letra}.png')
     for i in range(5):

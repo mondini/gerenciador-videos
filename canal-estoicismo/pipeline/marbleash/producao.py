@@ -4,7 +4,7 @@ O status é lido dos arquivos da pasta do vídeo e dos títulos do roteiro.md; n
   - Texto aprovado: o título da seção no roteiro.md tem "aprovado" (ex.: "## Bloco 2 — O homem (aprovado)").
   - Narração: um mp3 em audio/ com o nome da peça (bloco2, pausa).
   - Animação: blocoN/tempos.txt, blocoN/cena.py e a prévia previas/blocoN.mp4.
-  - Entrega: final/*.mp4, thumbnails/ (3 imagens: A, B, C), shorts/ (5+ mp4) e pacote-de-publicacao.md.
+  - Entrega: final/*.mp4, thumbnails/ (2 imagens: A e C), shorts/ (5+ mp4) e pacote-de-publicacao.md.
 
 Backup: copia para DRIVE_ROOT/<pasta do canal>/VIDEOS/<pasta do vídeo>/, nas subpastas do sistema de gestão.
 Nunca apaga nada no Drive. Texto e projeto (roteiro, cena.py, tempos) que mudaram guardam a versão anterior
@@ -23,6 +23,7 @@ from . import config, tempos
 ETAPAS = ['Roteiro', 'Narração', 'Imagens', 'Edição', 'Thumbnail']   # as do sistema de gestão que o pipeline sabe medir
 CREDITOS_POR_CARACTERE = 1                                            # ElevenLabs: ~1 crédito por caractere
 SHORTS_MIN = 5
+THUMBS_MIN = 2           # A (Palavra) e C (Gancho), para o teste A/B do YouTube (decisão de 12/10/2026)
 _IMAGEM = {'.png', '.jpg', '.jpeg', '.webp'}
 _SIMULACAO = ('-youtube4mbps', '-4k')                                 # arquivos de conferência, não de entrega
 
@@ -99,8 +100,8 @@ class Status:
                 out.append(f'{p.nome}: falta {", ".join(p.faltas())}')
         if not self.final:
             out.append('vídeo final (ma juntar)')
-        if self.thumbnails < 3:
-            out.append(f'thumbnails: {self.thumbnails}/3 em thumbnails/')
+        if self.thumbnails < THUMBS_MIN:
+            out.append(f'thumbnails: {self.thumbnails}/{THUMBS_MIN} em thumbnails/')
         if self.shorts < SHORTS_MIN:
             out.append(f'shorts: {self.shorts}/{SHORTS_MIN} em shorts/')
         if not self.pacote:

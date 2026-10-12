@@ -21,8 +21,7 @@ Todos os áudios foram gravados no plano **Starter** em 12/10/2026, com a voz no
 8 min 6 s no ritmo do canal (+ abertura e encerramento). Os tempos dos blocos 1–4 foram refeitos com os mesmos
 nomes de deixa; nos blocos 5, 6 e na Pausa, renomear as deixas ao escrever as cenas.
 
-**Vídeo final montado (12/10/2026):** `final/video-01-1-abertura-2-3-4-pausa-5-6-encerramento.mp4` (nome de antes da pasta MA-001), 8 min 26 s, −16 LUFS, 1080p
-(simulação do YouTube a ~4 Mbps sem faixas nos degradês: não precisa de 4K). Próximo: Pacote de Publicação.
+**Vídeo final remontado (12/10/2026):** `final/MA-001-the-man-who-had-everything-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 8 min 33 s, −16 LUFS, 1080p, com os padrões novos do canal: abertura de 3 s com o som Brasa, dissolve de 1,5 s entre blocos, saída da Pausa de 3 s e 2 s antes do slogan. Início das peças: abertura 0:40, bloco 2 0:43, bloco 3 2:02, bloco 4 3:55, The Pause 5:32, bloco 5 6:18, bloco 6 7:28, encerramento 8:25 (base dos capítulos do pacote). Thumbnails: A (ENOUGH?) e C (HE HAD EVERYTHING., recomendada) em `thumbnails/`.
 **Publicação: AGUARDAR** a liberação do criador (12/10/2026). Não publicar nem agendar o vídeo 1 sem pedido.
 
 ---

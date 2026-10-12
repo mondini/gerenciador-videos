@@ -51,12 +51,15 @@ def cmd_audio(a):
     print(f'áudio: {mp3.relative_to(b.pasta_video) if mp3.is_relative_to(b.pasta_video) else mp3}')
     dur = len(audio.decodificar(mp3)) / audio.SR
     p = audio.pausas(mp3, duracao=dur)
-    lenta = audio.desacelerar(mp3, p, b.audio_lento, audio.RITMO['tempo'], audio.RITMO['alonga'], audio.RITMO['acrescimo'])
+    minimos = audio.minimos_do_slogan(p, tempos.ler(b.arquivo_tempos)) if b.arquivo_tempos.exists() else []
+    lenta = audio.desacelerar(mp3, p, b.audio_lento, audio.RITMO['tempo'], audio.RITMO['alonga'], audio.RITMO['acrescimo'], minimos)
     fonte = os.path.relpath(mp3, b.pasta_video)
     b.pasta.mkdir(parents=True, exist_ok=True)
     tempos.gravar_audio_json(b.arquivo_audio_json, {
         'fonte': fonte, 'duracao_original': dur, 'duracao_lenta': lenta, 'ritmo': audio.RITMO,
-        'pausas': [list(x) for x in p]})
+        'pausas': [list(x) for x in p], **({'minimos': [list(m) for m in minimos]} if minimos else {})})
+    if minimos:
+        print(f'slogan: a pausa antes dele foi alongada para {audio.PAUSA_ANTES_SLOGAN:g} s')
     print(f'{len(p)} pausas; {dur:.2f} s -> {lenta:.2f} s com o ritmo do canal ({b.audio_lento.relative_to(config.CANAL)})')
     print(f'gravado: {b.arquivo_audio_json.relative_to(config.CANAL)}')
     _backup_automatico(b.pasta_video)
@@ -93,10 +96,25 @@ def cmd_tempos(a):
            '']
     tempos.escrever(destino, linhas, cab)
     print(f'gravado: {destino.relative_to(config.CANAL)}')
+    _aplicar_slogan(b, info)
     if destino != b.arquivo_tempos:
         print('(tempos.txt já existe e não foi sobrescrito; compare com o sugerido ou use --refazer)')
     for nome, seg, frase, origem in linhas:
         print(f'  {nome:<22} {seg:6.2f} s  -> {b.mapa(seg):6.2f} s no vídeo  [{origem:8}] {frase}')
+
+
+def _aplicar_slogan(b, info):
+    """Se o bloco termina no slogan, alonga a pausa antes dele (audio.PAUSA_ANTES_SLOGAN) e refaz o áudio desacelerado."""
+    from marbleash import audio, tempos
+    minimos = audio.minimos_do_slogan(info['pausas'], tempos.ler(b.arquivo_tempos))
+    if not minimos or info.get('minimos') == [list(m) for m in minimos]:
+        return
+    r = info['ritmo']
+    info['duracao_lenta'] = audio.desacelerar(b.pasta_video / info['fonte'], info['pausas'], b.audio_lento,
+                                              r['tempo'], r['alonga'], r['acrescimo'], minimos)
+    info['minimos'] = [list(m) for m in minimos]
+    tempos.gravar_audio_json(b.arquivo_audio_json, info)
+    print(f'slogan: a pausa antes dele foi alongada para {audio.PAUSA_ANTES_SLOGAN:g} s ({b.audio_lento.name} refeito)')
 
 
 def cmd_deixas(a):
@@ -162,6 +180,20 @@ def cmd_render(a):
     return est
 
 
+def _som_da_peca(b, outro=None):
+    """Som de transição de uma peça sem narração (SOM e SOM_GOLPE no script de cena; `outro` troca o som).
+    Devolve uma função: início da peça na montagem -> (wav, atraso), com o golpe no SOM_GOLPE da peça."""
+    from marbleash import sons
+    nome = outro or getattr(b.cena, 'SOM', None)
+    if not nome:
+        return None
+    wav = b.trabalho / f'som-{nome}.wav'
+    wav.parent.mkdir(parents=True, exist_ok=True)
+    sons.gerar(nome, wav)
+    golpe = getattr(b.cena, 'SOM_GOLPE', 0.0)
+    return lambda t: (wav, max(0.0, t + golpe - sons.GOLPE), sons.GANHO_DB)
+
+
 def cmd_juntar(a):
     from marbleash import audio, entrega
     from marbleash.projeto import Bloco
@@ -170,21 +202,36 @@ def cmd_juntar(a):
         b = Bloco(a.video, n)
         return b if str(n).isdigit() or b.pasta.is_dir() else Bloco('comum', n)
     blocos = [peca(n) for n in a.blocos]
-    videos, vozes, t = [], [], 0.0
-    for b in blocos:
+    from marbleash.projeto import DISSOLVE
+    videos, juncoes = [], []
+    for i, b in enumerate(blocos):
         v = b.trabalho / f'{b.nome}-video.mp4'
         if not v.exists():
             raise SystemExit(f'Falta {v.relative_to(config.CANAL)}. Rode antes: ma render {b.video} {b.numero}')
         videos.append(v)
-        if not b.sem_narracao:
-            vozes.append((b.audio_lento, t + b.entrada))
-        t += entrega.duracao_video(v)
+        if i:
+            ant = blocos[i - 1]
+            if not ant.sem_narracao and not b.sem_narracao:
+                juncoes.append('dissolve')
+            elif ant.sem_narracao and not b.sem_narracao:
+                juncoes.append('acende')
+            else:
+                if not ant.sem_narracao and ant.fade is None:
+                    raise SystemExit(f'{ant.nome} vem antes de {b.nome} (peça comum) e não escurece: declare FADE no script de cena.')
+                juncoes.append('corte')
     base = Bloco(a.video, next(n for n in a.blocos if str(n).isdigit()))
     pasta = base.final
     pasta.mkdir(parents=True, exist_ok=True)
     nome = a.saida or f'{base.video}-{"-".join(str(b.numero) for b in blocos)}'
     mudo = base.trabalho / f'{nome}-video.mp4'
-    entrega.concatenar(videos, mudo)
+    print(f'montando {len(videos)} peças (transições: {", ".join(juncoes)})...')
+    inicios, t = entrega.montar(videos, juncoes, mudo, DISSOLVE)
+    vozes = []
+    for b, ini in zip(blocos, inicios):
+        if not b.sem_narracao:
+            vozes.append((b.audio_lento, ini + b.entrada))
+        elif som := _som_da_peca(b, a.som):
+            vozes.append(som(ini))
     mix = base.trabalho / f'{nome}-mix.m4a'
     audio.mixar(vozes, t, mix, ganho_ambiente_db=a.ambiente)
     from marbleash import render
@@ -282,7 +329,8 @@ def cmd_status(a):
         print(f'  {p.nome:<8} {ok(p.texto_aprovado):^6} {ok(p.mp3):^5} {ok(p.tempos):^7} {ok(p.cena):^5} {ok(p.previa):^7}')
     if st.final:
         print(f'final: {st.final.name}' + (f' ({st.duracao_final // 60:.0f} min {st.duracao_final % 60:.0f} s)' if st.duracao_final else ''))
-    print(f'thumbnails {st.thumbnails}/3 · shorts {st.shorts}/{5} · pacote {"✅" if st.pacote else "·"}')
+    from marbleash.producao import SHORTS_MIN, THUMBS_MIN
+    print(f'thumbnails {st.thumbnails}/{THUMBS_MIN} · shorts {st.shorts}/{SHORTS_MIN} · pacote {"✅" if st.pacote else "·"}')
     if st.creditos_pendentes:
         print(f'ElevenLabs: ~{st.creditos_pendentes:,} créditos para narrar o que falta'.replace(',', '.'))
     falta = st.pendencias()
@@ -383,6 +431,7 @@ def main(argv=None):
     sp.add_argument('--4k', dest='k4', action='store_true', help='também exporta ampliado para 4K')
     sp.add_argument('--ambiente', type=float, default=GANHO_AMBIENTE_DB)
     sp.add_argument('--saida', help='nome do arquivo (sem extensão)')
+    sp.add_argument('--som', help='troca o som de transição das peças sem narração (brasa, pedra, tambor, vento-sino, aurora)')
     sp.set_defaults(f=cmd_juntar)
 
     sp = sub.add_parser('youtube', help='simula a compressão do YouTube e tira stills lado a lado')

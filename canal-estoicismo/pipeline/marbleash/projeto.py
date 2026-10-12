@@ -22,6 +22,15 @@ from pathlib import Path
 
 from . import audio, config, tempos
 
+# Transições na montagem (decisão de 12/10/2026; ver `ma juntar`):
+#   bloco -> bloco (e a Pausa): dissolve de DISSOLVE s, sem escuro; os blocos do meio não escurecem no fim;
+#   peça comum -> bloco: o bloco nasce do escuro em DISSOLVE s; bloco -> peça comum: o bloco escurece e corta.
+DISSOLVE = 1.5
+ENTRADA_BLOCO = 0.4 + DISSOLVE      # a voz entra depois do dissolve (o intervalo entre as falas fica ~1,4 s)
+# The Pause: escurece devagar e o próximo bloco só começa a aparecer 3 s depois da última frase.
+SAIDA_PAUSA = 3.0 + DISSOLVE
+FADE_PAUSA = (SAIDA_PAUSA - 0.4, 2.4)
+
 
 def nome_video(v) -> str:
     """Nome da pasta do vídeo. Aceita '1', '01', 'video-01', 'MA-001' ou o slug inteiro -> 'MA-001-the-man-who-had-everything'.
@@ -106,7 +115,7 @@ class Bloco:
             return tempos.MapaRitmo([], 1.0)
         a = self.audio_info
         r = a['ritmo']
-        return tempos.MapaRitmo(audio.inseridos(a['pausas'], r['alonga'], r['acrescimo']), r['tempo'])
+        return tempos.MapaRitmo(audio.inseridos(a['pausas'], r['alonga'], r['acrescimo'], a.get('minimos')), r['tempo'])
 
     @property
     def duracao(self) -> float:
@@ -144,17 +153,33 @@ class Bloco:
     @property
     def entrada(self) -> float:
         """Segundos de vídeo antes da narração começar."""
-        return getattr(self.cena_ou_nada, 'ENTRADA', 0.0 if self.sem_narracao else 0.4)
+        padrao = 0.0 if self.sem_narracao else 0.4 if self.numero == 1 else ENTRADA_BLOCO
+        return getattr(self.cena_ou_nada, 'ENTRADA', padrao)
 
     @property
     def saida(self) -> float:
         """Segundos de vídeo depois do fim da narração (o último segundo escurece)."""
-        return getattr(self.cena_ou_nada, 'SAIDA', 0.0 if self.sem_narracao else 1.0)
+        padrao = 0.0 if self.sem_narracao else SAIDA_PAUSA if self.nome == 'pausa' else 1.0
+        return getattr(self.cena_ou_nada, 'SAIDA', padrao)
 
     @property
     def fade(self):
-        """(segundos antes do fim em que o escurecimento final começa, duração do escurecimento)."""
-        return getattr(self.cena_ou_nada, 'FADE', (1.0, 0.9))
+        """(segundos antes do fim em que o escurecimento final começa, duração do escurecimento), ou None.
+
+        Escurecem: o gancho (bloco 1, antes da abertura), a Pausa e as peças sem narração. Os outros blocos
+        terminam acesos (dissolve na montagem); o último bloco, antes do encerramento, declara FADE na cena."""
+        if self.nome == 'pausa':
+            padrao = FADE_PAUSA
+        elif self.sem_narracao or self.numero == 1:
+            padrao = (1.0, 0.9)
+        else:
+            padrao = None
+        return getattr(self.cena_ou_nada, 'FADE', padrao)
+
+    @property
+    def acende(self):
+        """(segundos no escuro, segundos para a luz subir, 'suave' | 'lanterna') no começo da peça."""
+        return getattr(self.cena_ou_nada, 'ACENDE', (0.0, 0.0, 'suave'))
 
     @property
     def fim(self) -> float:
