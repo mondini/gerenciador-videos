@@ -99,6 +99,18 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 
 Versículos e citações desta tabela são **pontos de partida**: conferir na WEB/Long antes de usar.
 
+### Formatos (decisão de 12/10/2026)
+
+O formato é a **promessa do título** e serve para comparar o desempenho no experimento de 90 dias (campo Formato do sistema de gestão).
+
+| Formato | O que promete | Vídeos |
+|---|---|---|
+| História de Marco Aurélio | um momento da vida dele vira a lição | 1 |
+| Problema do dia a dia | dor concreta de trabalho ou dinheiro → resposta estoica | 2, 4, 9 |
+| Sabedoria para líderes | conselho antigo aplicado a quem lidera | 5, 6 |
+| Conceito estoico | uma ideia explicada para a vida de hoje | 3, 7, 10, 11 |
+| Ritual guiado | prática para fazer junto (manhã, antes de dormir) | 8, 12 |
+
 ### Fichas iniciais (vídeos 2 e 3)
 
 - **Vídeo 2 — On Anger:** a ira como fraqueza, não força; ângulo "quem te irrita tem poder sobre você"; estrutura: gancho sobre a última vez que perdeu a cabeça → visão estoica da raiva → exercício prático de pausa → Provérbios 16:32 → fechamento. Exemplo prático: reunião tensa, cliente que desrespeita. Palavras-chave: stoicism anger, controlling emotions, marcus aurelius anger, self control, calm mind. Thumbs já esboçadas no canvas (ANGER / linhas que se quebram / "Who angers you owns you").
