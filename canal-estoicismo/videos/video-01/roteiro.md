@@ -8,20 +8,27 @@
 - **Provérbios-ponte:** 30:8-9 (bloco 4) e 16:18-19 (bloco 5)
 - **Visão do criador (virada do bloco 4):** dinheiro não é o vilão; não ter dinheiro também faz infeliz; o problema é o "suficiente" que nunca chega. "Não é capitalismo malvado, é a sociedade atual."
 
-## Status dos blocos (11/10/2026)
+## Status dos blocos (12/10/2026)
 
-| Bloco | Conteúdo | Texto | Áudio de prévia (Free) | Animação no estilo de sombras |
+| Bloco | Conteúdo | Texto | Áudio final (Starter) | Animação no estilo de sombras |
 |---|---|---|---|---|
-| 1 | Gancho | ✅ aprovado | ✅ | ✅ (sem mãos; refinos pendentes) |
+| 1 | Gancho | ✅ aprovado | ✅ 37,3 s · tempos refeitos | ✅ (sem mãos; refinos pendentes) — re-render com a voz nova aprovado |
 | — | Abertura (2 s) | — | — | ✅ prévia em sombras (`videos/comum/abertura`), aguardando aprovação |
-| 2 | O homem | ✅ aprovado | ✅ | ⏳ refazer (prévia antiga em traço) |
-| 3 | O diário | ✅ aprovado | ✅ | ⏳ refazer (prévia antiga em traço) |
-| 4 | A lição | ✅ aprovado | ✅ | ⏳ refazer + trocar a cena da escada |
-| — | The Pause | ⏳ reescrever curta e falada | ⏳ | ⏳ |
-| 5 | Provérbios 16:18 | ✅ aprovado | ⏳ gerar | ⏳ |
-| 6 | Fechamento | ⏳ escrever | ⏳ | ⏳ |
+| 2 | O homem | ✅ aprovado | ✅ 74,5 s · tempos refeitos | ✅ em sombras (12/10/2026) — re-render com a voz nova aprovado |
+| 3 | O diário | ✅ aprovado | ✅ 108,3 s · tempos refeitos | ✅ em sombras (12/10/2026) — re-render com a voz nova aprovado |
+| 4 | A lição | ✅ aprovado | ✅ 92,0 s · tempos refeitos | ✅ em sombras; escada trocada pelo vaso furado (12/10/2026) — re-render com a voz nova aprovado |
+| — | The Pause | ✅ aprovado (12/10/2026) | ✅ 38,1 s · tempos sugeridos | ✅ sol do logo respirando sobre o mar (12/10/2026), prévia renderizada |
+| 5 | Provérbios 16:18 | ✅ aprovado | ✅ 66,6 s · tempos sugeridos | ✅ rolo hebraico, Salomão, torre, fogueira x baú, linha âmbar, sombra que cresce (12/10/2026), prévia renderizada |
+| 6 | Fechamento | ✅ aprovado (12/10/2026) | ✅ 49,4 s · tempos sugeridos | ✅ casa do gancho, tenda, âmbar na casa, família, só a chama no fim (12/10/2026), prévia renderizada |
 
-Os áudios de prévia foram gerados no plano **Free** do ElevenLabs. Para a versão final, regravar TODOS os blocos no plano **Starter**, com a mesma voz e o texto abaixo.
+Todos os áudios foram gravados no plano **Starter** em 12/10/2026, com a voz nova *Flint — Deep, Raspy, and Warm*
+(Eleven v4, Stability 50%, Similarity 75%): 6.638 créditos no total. Narração: 7 min 46 s no áudio original,
+8 min 6 s no ritmo do canal (+ abertura e encerramento). Os tempos dos blocos 1–4 foram refeitos com os mesmos
+nomes de deixa; nos blocos 5, 6 e na Pausa, renomear as deixas ao escrever as cenas.
+
+**Vídeo final montado (12/10/2026):** `final/video-01-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 8 min 26 s, −16 LUFS, 1080p
+(simulação do YouTube a ~4 Mbps sem faixas nos degradês: não precisa de 4K). Próximo: Pacote de Publicação.
+**Publicação: AGUARDAR** a liberação do criador (12/10/2026). Não publicar nem agendar o vídeo 1 sem pedido.
 
 ---
 
@@ -140,10 +147,28 @@ Choose the best of the things you have... and imagine how much you would long fo
 **Ideias de cena:** celular que "envelhece" e é empurrado por um novo maior; figura com redemoinho sobre a cabeça; moedas, boleto, lua da insônia, família com rachadura, portas fechando. **A escada (figura subindo com a bandeira "enough") foi REPROVADA — criar outra metáfora para "another kind of poverty... enough is always one step ahead".** Balança que se equilibra no provérbio; na 7.27, a casa, a lâmpada e a tigela do gancho voltam em âmbar, somem no "if they were gone" e reaparecem.
 **Créditos:** *Proverbs 30:8 · World English Bible* · *Marcus Aurelius, Meditations 7.27 · trans. George Long*
 
-## The Pause (a reescrever)
+## The Pause (aprovado)
 
-Feedback do criador: estava **longa demais** e **não funcionava para quem só ouve** (sem instrução nem pergunta faladas).
-Diretriz para a nova versão: o narrador diz "Let's pause here", dá uma instrução curta de respiração em voz alta (ex.: inspirar 4 s, expirar 6 s, um a dois ciclos guiados) e **lê a pergunta**: *What do you have today... that you once prayed for?* Duração total bem menor que os ~40 s da prévia. Visual: o sol do logo respirando (sobe na inspiração, desce na expiração), adaptado ao lençol de sombras; capítulo próprio "The Pause".
+Reescrita em 12/10/2026 a partir do feedback do criador (a prévia era longa e não funcionava para quem só ouve).
+Dois ciclos de respiração (inspirar 4, expirar 6) com a contagem **falada**, porque o ElevenLabs não grava
+silêncios longos; depois a pergunta lida em voz alta. Duração estimada: ~30 s.
+
+```
+[softly] Wherever you are... let your shoulders drop.
+Breathe in... slowly... two... three... four.
+And let it go... two... three... four... five... six.
+One more time.
+Breathe in... two... three... four.
+And out... two... three... four... five... six.
+[warmly] Now... one question. Just for you.
+What do you have today... that you once prayed for?
+[softly] Stay with that... for a moment.
+```
+
+**Ideias de cena:** o sol do logo (Horizonte) "respirando" no lençol de sombras: sobe na inspiração, desce na
+expiração, guiado pelas deixas da contagem; a pergunta aparece na tela (Cormorant Garamond) quando é lida e
+fica durante "Stay with that". Sem pedir para fechar os olhos (a pergunta está na tela). Capítulo próprio "The Pause".
+**Créditos:** nenhum (texto do canal).
 
 ## Bloco 5 — Provérbios 16:18 (aprovado)
 
@@ -169,9 +194,34 @@ It whispers to him, slowly... that he is more than he is.
 **Ideias de cena:** rolo hebraico do lado oposto ao pergaminho romano; figura que sobe uma torre e despenca no "fall"; duas silhuetas (louros × coroa real) nos extremos, cada uma com uma linha âmbar que se encontra no centro em "the same quiet truth".
 **Créditos:** *Proverbs 16:18 · World English Bible* · *Proverbs 16:19 · World English Bible*
 
-## Bloco 6 — Fechamento (a escrever)
+## Bloco 6 — Fechamento (aprovado em 12/10/2026)
 
 Diretriz: voltar à pessoa do gancho ("not yet, not enough"), fechar o círculo com o imperador escrevendo à noite, sem moralismo; terminar em calma (público ouve para dormir). Encerramento padrão do canal. Manter o vídeo em ~10 min no total.
+
+```
+[softly] So... let's go back to that voice.
+The one that whispers at night... not yet. Not enough.
+
+Maybe it will never go completely quiet.
+It didn't for Marcus either.
+He had the whole empire... and still, night after night, he had to remind himself of what was already in his hands.
+
+[warmly] So tonight... you don't have to defeat that voice.
+You only have to answer it.
+Look around you... slowly.
+A roof. A little light. Something to eat. A few people who know your name.
+[softly] Once... you would have called this enough.
+Maybe... it still is.
+
+[thoughtful] Far away, in a tent at the edge of the world, an old emperor sets down his pen.
+And the lamp... is still burning.
+
+[softly] Old wisdom... for quiet hours.
+```
+
+**Ideias de cena:** o homem do gancho volta à casa à noite; o "not yet... not enough" reaparece e se desfaz; a casa, a lamparina e a mesa (roof, light, something to eat) e duas silhuetas chegando (people who know your name); corte para a tenda à beira do mundo: o imperador pousa a pena, a lamparina segue acesa (última brasa âmbar); escurece; encerramento padrão (logo + slogan).
+**Créditos:** nenhum (texto do canal).
+**Encerramento padrão:** a última linha ("Old wisdom... for quiet hours.") é a assinatura fixa do canal, sem chamada para inscrição (ver `docs/plano-canal.md`).
 
 ---
 
@@ -188,6 +238,6 @@ Diretriz: voltar à pessoa do gancho ("not yet, not enough"), fechar o círculo 
 | Leilão dos tesouros do palácio | *Historia Augusta*, Vida de Marco 17 | edição/tradução: **VERIFICAR** | — | narrado como relato antigo, sem citação literal |
 | Fatos gerais (reinado 161–180, peste, guerras no Danúbio, Meditações em grego, título "Ta eis heauton") | conhecimento histórico geral | fonte de referência para a descrição: **VERIFICAR** | — | — |
 
-**Ativos:** fontes Cinzel e Cormorant (Google Fonts, SIL OFL — arquivos OFL.txt na pasta de fontes); Inter (OFL); GFS Baskerville (grego). Som ambiente gerado por código (sem amostras de terceiros). Animações desenhadas por código (sem acervo nem gerador de imagens). Narração: ElevenLabs v4, voz de senhor ~70 anos — **anotar no pacote o nome da voz e o plano usado (Starter)**.
+**Ativos:** fontes Cinzel e Cormorant (Google Fonts, SIL OFL — arquivos OFL.txt na pasta de fontes); Inter (OFL); GFS Baskerville (grego). Som ambiente gerado por código (sem amostras de terceiros). Animações desenhadas por código (sem acervo nem gerador de imagens). Narração: ElevenLabs, plano Starter, voz *Flint — Deep, Raspy, and Warm*, modelo Eleven v4 (Stability 50%, Similarity 75%); gravada em 12/10/2026, 6.638 créditos.
 
 **Para o Pacote de Publicação:** pedir ao criador os links do canal e redes.

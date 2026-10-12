@@ -338,8 +338,12 @@ def _nome_layout(texto, fonte, tamanho, cx, tracking):
 
 
 def horizonte_painel(cx=960, cy=455, escala=1.6, nome_y=625, tamanho=64, texto='MARBLE & ASH',
-                     fonte='Cinzel-SemiBold.ttf', tracking=0.06):
-    """Painel de papel preto do tamanho da tela com o logo Horizonte e o nome vazados."""
+                     fonte='Cinzel-SemiBold.ttf', tracking=0.06, assinatura=None, assinatura_y=725):
+    """Painel de papel preto do tamanho da tela com o logo Horizonte e o nome vazados.
+
+    `assinatura` (ex.: o slogan, no encerramento): recortada em Cormorant Garamond itálico, num papel
+    translúcido que deixa passar menos luz (o tom mais apagado do `marble-300`).
+    """
     im, d = canvas(W, H)
     d.rectangle([0, 0, W * S, H * S], fill=INK)
     d.pieslice([*P(*_hz(44, 54, cx, cy, escala)), *P(*_hz(156, 166, cx, cy, escala))], 180, 360, fill=HOLE)
@@ -351,6 +355,9 @@ def horizonte_painel(cx=960, cy=455, escala=1.6, nome_y=625, tamanho=64, texto='
     for ch, x in zip(texto, pos):
         if ch != ' ':
             d.text((x, nome_y * S), ch, font=f, fill=HOLE)
+    if assinatura:
+        fa = ImageFont.truetype(config.fonte('CormorantGaramond-MediumItalic.ttf'), int(34 * S))
+        d.text((cx * S - fa.getlength(assinatura) / 2, assinatura_y * S), assinatura, font=fa, fill=(14, 10, 7, 60))
     return Static(down(im))
 
 
@@ -982,3 +989,224 @@ def balanca(ang, cx=960, topo=360):
                 for k in range(3):
                     stroke(d, [(hx - 34 + k * 30, py - 50), (hx - 22 + k * 30, py - 30)], 4, 2, HOLE)
     return full(desenho)
+
+
+# =====================================================================================================
+# The Pause — o sol do logo Horizonte "respirando" sobre o mar (igual em todos os vídeos)
+# =====================================================================================================
+PAUSA_HZ = 640          # linha do horizonte (topo do mar)
+PAUSA_R = 130           # raio do sol; o logo tem raio 56, então escala ~2,3
+
+
+def pausa_sol(cx=960, cy=PAUSA_HZ, r=PAUSA_R):
+    """Gelatina âmbar do sol: disco inteiro (o mar esconde a metade de baixo, como no logo)."""
+    im, d = canvas(W, H)
+    ell(d, cx, cy, r, r, AMBAR)
+    return Static(down(im))
+
+
+def pausa_faixas(cx=960, cy=PAUSA_HZ, r=PAUSA_R):
+    """As duas tiras de papel que atravessam o sol no logo (sobem e descem com ele)."""
+    k = r / 56
+
+    def desenho(d):
+        for y in (80, 94):
+            stroke(d, [(cx - 62 * k, cy + (y - 110) * k), (cx + 62 * k, cy + (y - 110) * k)], 4 * k, 4 * k)
+    return full(desenho)
+
+
+def _pausa_reflexos(d, col, cx, hz, k):
+    for a, b, y in _HZ_LINHAS[1:]:                          # as linhas do logo, mais curtas para baixo
+        stroke(d, [(cx + (a - 100) * k, hz + (y - 110) * k), (cx + (b - 100) * k, hz + (y - 110) * k)], 3 * k, 3 * k, col)
+
+
+def pausa_mar(cx=960, hz=PAUSA_HZ, r=PAUSA_R):
+    """O mar: papel do horizonte até o chão, com o reflexo do sol vazado (as linhas do logo) e marolas finas
+    que crescem para a frente (perspectiva)."""
+    k = r / 56
+
+    def desenho(d):
+        poly(d, [(-20, hz), (W + 20, hz), (W + 20, H + 20), (-20, H + 20)])
+        _pausa_reflexos(d, HOLE, cx, hz, k)
+        rng = np.random.default_rng(31)
+        for fila in range(9):
+            p = fila / 8
+            y = hz + 22 + 300 * p ** 1.4
+            comp_ = 30 + 90 * p
+            for _ in range(5 + fila):
+                x = rng.uniform(-40, W + 40)
+                if abs(x - cx) < 70 * k * (1 - 0.5 * p):           # não corta o reflexo
+                    continue
+                yy = y + rng.uniform(-5, 5)
+                stroke(d, [(x - comp_ / 2, yy + 1), (x, yy - 1.5), (x + comp_ / 2, yy + 1)], 0.6, 2.2 + 2.4 * p, HOLE)
+    return full(desenho)
+
+
+def pausa_reflexo(cx=960, hz=PAUSA_HZ, r=PAUSA_R):
+    """Gelatina âmbar nos cortes do reflexo (acende quando o sol sobe)."""
+    im, d = canvas(W, H)
+    _pausa_reflexos(d, AMBAR, cx, hz, r / 56)
+    return Static(down(im))
+
+
+# =====================================================================================================
+# Vídeo 1 · bloco 5 (Provérbios 16:18) — peças reaproveitáveis
+# =====================================================================================================
+def _palmeira(d, x, h, curva):
+    """Tamareira: tronco curvo com anéis vazados e folhas longas que caem em arco."""
+    topo = (x + curva, 790 - h)
+    stroke(d, [(x, 792), (x + curva * 0.3, 790 - h * 0.5), topo], 16, 8, n=12)
+    for k in range(8):
+        f = 0.1 + k * 0.1
+        cx, cy = x + curva * f * f, 790 - h * f
+        stroke(d, [(cx - 6, cy), (cx + 6, cy - 3)], 1.6, 1.6, HOLE)
+    for a, L in ((-175, 130), (-150, 150), (-120, 120), (-90, 80), (-60, 120), (-30, 150), (-5, 130), (-200, 90), (20, 90)):
+        r = math.radians(a)
+        pts = [(topo[0] + L * t * math.cos(r), topo[1] + L * t * math.sin(r) + 110 * t * t) for t in np.linspace(0, 1, 7)]
+        stroke(d, pts, 30, 4, n=8)                          # folha larga: no fundo borrado ainda lê como palmeira
+        for j in range(1, 6):                               # folíolos caindo
+            (x0, y0), (x1, y1) = pts[j], pts[j + 1]
+            ang = math.degrees(math.atan2(y1 - y0, x1 - x0))
+            for lado in (-1, 1):
+                serrated(d, x0, y0, ang + lado * 50 + 30, 44 - 5 * j, 0.3)
+    ell(d, topo[0], topo[1] + 8, 12, 10)                    # tâmaras
+
+
+def _oriente(d):
+    chao = [(x, 790 - 16 * math.sin(x / 260 + 1) - 10 * math.sin(x / 90)) for x in range(-20, W + 21, 12)]
+    poly(d, chao + [(W + 20, H), (-20, H)])
+    morro = [(x, 700 - 60 * math.exp(-((x - 1380) / 300) ** 2)) for x in range(900, 1880, 12)]
+    poly(d, morro + [(1880, 800), (900, 800)])
+    # a cidade murada no morro: muralha com ameias e torres, casas de teto plano, o palácio no alto
+    poly(d, [(1060, 700), (1700, 700), (1700, 650), (1060, 650)])
+    for x in range(1060, 1700, 22):
+        poly(d, [(x, 650), (x + 12, 650), (x + 12, 638), (x, 638)])
+    for x in (1080, 1300, 1500, 1680):
+        poly(d, [(x - 22, 700), (x + 22, 700), (x + 22, 600), (x - 22, 600)])
+        for k in range(3):
+            poly(d, [(x - 22 + k * 17, 600), (x - 12 + k * 17, 600), (x - 12 + k * 17, 588), (x - 22 + k * 17, 588)])
+        ell(d, x, 630, 5, 9, HOLE)
+    rr = np.random.default_rng(12)
+    for k in range(14):
+        x = 1100 + k * 42 + rr.uniform(-8, 8)
+        h = rr.uniform(26, 60) + 40 * math.exp(-((x - 1380) / 160) ** 2)
+        poly(d, [(x - 20, 652), (x + 20, 652), (x + 20, 652 - h), (x - 20, 652 - h)])
+        poly(d, [(x - 24, 652 - h), (x + 24, 652 - h), (x + 24, 646 - h), (x - 24, 646 - h)])
+        if k % 2 == 0:
+            ell(d, x - 6, 652 - h * 0.5, 3.5, 5, HOLE)
+    poly(d, [(1310, 560), (1450, 560), (1450, 470), (1310, 470)])          # o palácio
+    poly(d, [(1296, 470), (1464, 470), (1464, 458), (1296, 458)])
+    for k in range(6):
+        stroke(d, [(1324 + k * 24, 556), (1324 + k * 24, 478)], 4, 4, HOLE)
+    for x, h, c in ((300, 330, 40), (420, 260, -30), (560, 300, 20), (1820, 310, -40)):
+        _palmeira(d, x, h, c)
+
+
+def oriente():
+    """Fundo distante de outra terra (Israel antigo): colinas secas, cidade murada com casas de teto plano e
+    o palácio no alto, tamareiras. Mesmo papel do `cenario.longe`, já levemente desfocado em 2x."""
+    return layer(_oriente, blur=1.3)
+
+
+def _rolo_glifo(d, x, y, tipo, col, e=0.6):
+    """Um sinal da escrita quadrada, pequeno (escala `e`): só a impressão de letras hebraicas, sem formar palavras."""
+    def tr(pts, w0, w1):
+        stroke(d, [(x + px * e, y + py * e) for px, py in pts], w0 * (0.5 + e / 2), w1 * (0.5 + e / 2), col, n=3)
+    if tipo == 0:                                             # barra em cima + haste à direita
+        tr([(-9, -7), (3, -7)], 3.6, 3.0)
+        tr([(2, -7), (2, 7)], 2.4, 2.0)
+    elif tipo == 1:                                           # com barra embaixo
+        tr([(-9, -7), (2, -7)], 3.6, 3.0)
+        tr([(2, -7), (2, 6)], 2.4, 2.0)
+        tr([(-10, 7), (4, 7)], 2.6, 2.6)
+    elif tipo == 2:                                           # haste curta
+        tr([(-2, -8), (0, 2)], 3.2, 1.6)
+    else:                                                     # barra em cima + duas hastes
+        tr([(-9, -7), (4, -7)], 3.6, 3.0)
+        tr([(3, -7), (3, 7)], 2.4, 2.0)
+        tr([(-8, -2), (-8, 7)], 2.0, 2.0)
+
+
+def _rolo_linhas(d, cx, y0, w, col, so=None):
+    """Três colunas de escrita, da direita para a esquerda; `so` = (coluna, linha) desenha só essa linha."""
+    rr = np.random.default_rng(5)
+    for coluna in range(3):
+        xd = cx + w - 34 - coluna * (2 * w - 40) / 3                   # borda direita da coluna
+        xe = xd - (2 * w - 40) / 3 + 26
+        for j in range(12):
+            y = y0 + 34 + j * 20
+            x = xd
+            while x > xe:
+                passo = float(rr.uniform(9, 12))
+                tipo = int(rr.integers(0, 4))
+                if so is None or so == (coluna, j):
+                    _rolo_glifo(d, x, y, tipo, col)
+                x -= passo + (float(rr.uniform(8, 12)) if rr.uniform() < 0.18 else 0)
+
+
+def rolo(q, cx=1340, y0=220, y1=520):
+    """Rolo hebraico (q = 0 fechado .. 1 aberto): dois cilindros de madeira com punhos e discos, colunas de
+    escrita quadrada vazadas. Fica do lado oposto ao pergaminho romano."""
+    def desenho(d):
+        w = 30 + 270 * q
+        if q > 0.02:
+            topo = [(x, y0 + 3 * math.sin(x / 50)) for x in range(int(cx - w), int(cx + w) + 1, 12)]
+            fundo = [(x, y1 + 3 * math.sin(x / 50 + 2)) for x, _ in topo]
+            poly(d, topo + fundo[::-1])
+            if q > 0.98:
+                _rolo_linhas(d, cx, y0, w, HOLE)
+            for s in (-1, 1):                                          # margens das colunas
+                stroke(d, [(cx + s * (w - 40) / 3, y0 + 20), (cx + s * (w - 40) / 3, y1 - 20)], 1.2, 1.2, HOLE)
+        for x in (cx - w, cx + w):                                     # os cilindros (etz chaim)
+            shape(d, [(x - 12, y0 - 10), (x + 12, y0 - 10), (x + 14, y1 + 10), (x - 14, y1 + 10)], n=4)
+            for y, s in ((y0 - 14, -1), (y1 + 14, 1)):
+                ell(d, x, y, 26, 8)                                    # disco
+                holes_row(d, x - 18, y, x + 18, y, 5, 2)
+                stroke(d, [(x, y), (x, y + s * 46)], 9, 7)             # punho
+                ell(d, x, y + s * 52, 8, 10)
+                ell(d, x, y + s * 52, 3, 4, HOLE)
+    return full(desenho)
+
+
+def rolo_linha(cx=1340, y0=220, coluna=1, linha=6, q=1.0):
+    """Gelatina âmbar numa só linha do rolo aberto ("in one single line")."""
+    im, d = canvas(W, H)
+    _rolo_linhas(d, cx, y0, 30 + 270 * q, AMBAR, so=(coluna, linha))
+    return Static(down(im))
+
+
+TORRE = [(380 - 52 * i, BASE - 104 * i) for i in range(7)]     # (largura, y da base) de cada andar; topo em BASE - 624
+
+
+def torre(cx=1150):
+    """Torre alta de andares que afinam (o orgulho): janelas em arco, cornijas vazadas, escada por fora,
+    ameias no topo."""
+    def desenho(d):
+        for i, (w, yb) in enumerate(TORRE[:-1]):
+            yt = yb - 104
+            poly(d, [(cx - w / 2, yb), (cx + w / 2, yb), (cx + w / 2 - 6, yt), (cx - w / 2 + 6, yt)])
+            stroke(d, [(cx - w / 2 + 8, yt + 10), (cx + w / 2 - 8, yt + 10)], 2.4, 2.4, HOLE)
+            n = max(1, int(w // 70))
+            for k in range(n):
+                x = cx - w / 2 + (k + 0.5) * w / n
+                shape(d, [(x - 9, yb - 20), (x - 9, yt + 44), (x, yt + 32), (x + 9, yt + 44), (x + 9, yb - 20)], HOLE, n=4)
+            lado = -1 if i % 2 == 0 else 1                           # degraus por fora, alternando os lados
+            for k in range(6):
+                x = cx + lado * (w / 2 - 14 - k * 10)
+                stroke(d, [(x - 5, yb - 12 - k * 16), (x + 5, yb - 12 - k * 16)], 2, 2, HOLE)
+        w, yt = TORRE[-1][0] + 40, TORRE[-1][1]
+        for k in range(5):                                           # ameias do topo
+            x = cx - w / 2 + k * w / 4.4
+            poly(d, [(x, yt), (x + 18, yt), (x + 18, yt - 18), (x, yt - 18)])
+    return full(desenho)
+
+
+def fio(x0=330, x1=1590, y=300, curva=50):
+    """Linha âmbar que liga as duas figuras dos extremos ("the same quiet truth"); arco suave, mais fina nas pontas.
+    Use com `q.chama(..., recorte=...)` para fazê-la crescer de cada lado até o centro."""
+    im, d = canvas(W, H)
+    pts = [(x0 + (x1 - x0) * t, y - curva * math.sin(math.pi * t)) for t in np.linspace(0, 1, 13)]
+    stroke(d, pts[:7], 2.0, 5.0, AMBAR, n=8)
+    stroke(d, pts[6:], 5.0, 2.0, AMBAR, n=8)
+    ell(d, (x0 + x1) / 2, y - curva, 8, 8, AMBAR)
+    return Static(down(im))

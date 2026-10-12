@@ -37,8 +37,8 @@ Não mostramos os bonecos: mostramos **as sombras deles projetadas num lençol i
 - Narração dita o tempo: cada deixa visual é sincronizada com a frase correspondente.
 
 ## Áudio e ritmo
-- Narração ElevenLabs (voz de senhor ~70 anos). Na montagem: pausas levemente alongadas (+10% + 0,05 s), voz no andamento original (~150 palavras/min).
-- Som ambiente gerado por código (sem amostras de terceiros), bem baixo sob a voz; normalização a −16 LUFS.
+- Narração ElevenLabs (voz *Flint — Deep, Raspy, and Warm*, Eleven v4; ver `plano-canal.md`). Na montagem: pausas levemente alongadas (+10% + 0,05 s), voz no andamento original (~150 palavras/min).
+- Som ambiente gerado por código (sem amostras de terceiros): **vento suave**, ruído em faixa média sem tons (escolha do criador em 12/10/2026; o acorde grave anterior soava como motor zumbindo), bem baixo sob a voz (−46,4 dB na mistura: leve, mal se nota); normalização a −16 LUFS.
 
 ## Textos na tela
 - Citações em Cormorant itálico; nomes em Cinzel; créditos de fonte em Inter (24 px, `marble-300`) no canto inferior esquerdo, margem de 64 px (regra fixa do canal), sobrepostos à imagem — não são sombra; no pipeline: `Credito` e `q.credito()`.

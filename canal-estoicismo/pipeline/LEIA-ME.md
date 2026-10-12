@@ -41,7 +41,7 @@ Use o nome do arquivo: `objetos.letreiro('texto', 'Inter-Regular.ttf', tamanho=2
 
 ## 2. Comandos
 
-Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do bloco.
+Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do bloco, ou `pausa` para The Pause (mp3 com `pausa` no nome; texto do `## The Pause` do roteiro).
 
 | Etapa | Comando | O que faz | Gera |
 |---|---|---|---|
@@ -57,7 +57,7 @@ Rode na pasta do canal. `VIDEO` = `video-01` (ou só `1`); `BLOCO` = número do 
 | Comparar | `./ma comparar A.png B.png` | Diferença de pixels (também aceita duas pastas) | — |
 | Testes | `.venv/bin/python -m pytest pipeline/testes` | Confere tempos, atalhos de desempenho e os stills de referência | — |
 
-Opções úteis: `render --processos N` (padrão 4), `render --sem-som`, `render --ambiente -20` (ganho do
+Opções úteis: `render --processos N` (padrão 4), `render --sem-som`, `render --so-som` (refaz só o som, reaproveitando o vídeo sem som já renderizado), `render --ambiente -20` (ganho do
 ambiente em dB), `stills --referencia PASTA` (compara com stills salvos), `tempos --refazer`,
 `tempos --sem-transcritor`, `youtube --mbps 4`.
 
@@ -83,15 +83,15 @@ Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos
    - escreva `quadro(q, c)` usando só deixas de `tempos.txt` (`c.nome`), nunca segundos soltos;
    - ajuste `STILLS` para os momentos-chave do bloco.
    Se faltar uma peça (ex.: máscara da peste, busto), crie a arte nova — ver seção 6.
-5. **Frame para aprovação.** `./ma stills video-01 2 <segundos>` e mostre ao criador o frame da cena nova
-   mais importante **antes** de renderizar o bloco (regra do canal).
+5. **Conferência interna.** `./ma stills video-01 2 <segundos>` para conferir as cenas novas (enquadramento,
+   textos fora das laterais). Não mostrar os stills ao criador para aprovação (decisão de 12/10/2026): ele revisa a prévia renderizada.
 6. **Render:** `./ma render video-01 2` → `videos/video-01/previas/bloco2.mp4`. O comando imprime o tempo
    de render e a loudness final (−16 LUFS).
 7. **Compressão do YouTube:** `./ma youtube videos/video-01/previas/bloco2.mp4` e confira os stills
    `*-degrade-zoom.png`: se aparecerem faixas ou blocos nos degradês, a entrega final vai em 4K
    (`./ma juntar ... --4k`).
-8. **Vídeo final** (todos os blocos prontos): `./ma juntar video-01 1 abertura 2 3 4 pausa 5 6` → `videos/video-01/final/`
-   (a abertura padrão entra logo depois do gancho; peças comuns renderizadas uma vez com `./ma render comum <nome>`).
+8. **Vídeo final** (todos os blocos prontos): `./ma juntar video-01 1 abertura 2 3 4 pausa 5 6 encerramento` → `videos/video-01/final/`
+   (a abertura padrão entra logo depois do gancho; peças comuns renderizadas uma vez com `./ma render comum <nome>`; uma peça com nome, como `pausa`, é procurada primeiro na pasta do vídeo e depois em `videos/comum/`).
 
 ---
 

@@ -104,38 +104,47 @@ def desacelerar(origem, pausas_, saida, tempo=RITMO['tempo'], alonga=RITMO['alon
     return round(duracao_wav(saida), 6)        # 6 casas, como o ffprobe media na versão aprovada
 
 
-def ambiente(duracao, saida, semente=7):
-    """Som ambiente original (sem amostras de terceiros): acorde grave em ré, respirando, e vento suave."""
-    t = np.arange(int(SR * duracao)) / SR
-    rng = np.random.default_rng(semente)
+# O vento sai do gerador a ~-15,7 LUFS; o ganho em dB da mistura (GANHO_AMBIENTE_DB em ma.py) foi pensado para o
+# ambiente antigo, a -12,3 LUFS. Esta diferença (medida em 40, 80 e 110 s) é somada na mistura, sem estourar o wav.
+AJUSTE_AMBIENTE_DB = 3.4
 
-    def tone(f, amp, lfo_rate, phase):
-        lfo = 0.6 + 0.4 * np.sin(2 * np.pi * lfo_rate * t + phase)
-        return amp * lfo * (np.sin(2 * np.pi * f * t) + 0.25 * np.sin(2 * np.pi * 2 * f * t + 0.3))
 
-    sig = (tone(73.42, 0.30, 0.031, 0.0) + tone(110.0, 0.22, 0.023, 1.3) +
-           tone(146.83, 0.14, 0.037, 2.1) + tone(220.0, 0.06, 0.019, 0.7))
-    n = rng.standard_normal(len(t))
-    k = np.exp(-np.arange(400) / 80.0)
-    k /= k.sum()
-    wind = np.convolve(n, k, mode='same')
-    wind *= 0.5 + 0.5 * np.sin(2 * np.pi * 0.05 * t + 0.4) ** 2
-    sig += 0.9 * wind
-    # Camadas audíveis em alto-falantes pequenos (notebook, celular), que não tocam abaixo de ~150 Hz:
-    # harmônicos do acorde (ré e lá mais agudos) e um "ar" de vento suave na faixa média (250–2500 Hz).
-    sig += tone(293.66, 0.10, 0.027, 0.9) + tone(440.0, 0.06, 0.021, 2.4) + tone(587.33, 0.03, 0.033, 1.7)
-    ar = np.fft.rfft(np.random.default_rng(semente + 1).standard_normal(len(t)))
-    f = np.fft.rfftfreq(len(t), 1 / SR)
-    ar *= np.clip((f - 150) / 200, 0, 1) * np.clip((4000 - f) / 2500, 0, 1)
-    ar = np.fft.irfft(ar, len(t))
-    ar *= (0.55 + 0.45 * np.sin(2 * np.pi * 0.043 * t + 1.1) ** 2) / (np.std(ar) + 1e-9)
-    sig += 0.05 * ar
+def _suave(x, seg):
+    """Média móvel de `seg` segundos (suaviza as rajadas)."""
+    from scipy.signal import fftconvolve
+    n = int(SR * seg)
+    return fftconvolve(x, np.ones(n) / n, mode='same')
+
+
+def _ruido_filtrado(semente, n, forma):
+    """Ruído branco com o espectro moldado por `forma(f)` (amplitude), normalizado."""
+    f = np.fft.rfftfreq(n, 1 / SR)
+    x = np.fft.irfft(np.fft.rfft(np.random.default_rng(semente).standard_normal(n)) * forma(f), n)
+    return x / (np.std(x) + 1e-12)
+
+
+def _vento(n, semente):
+    """Vento suave: ruído em faixa média cujo timbre vai e volta devagar, com rajadas leves. Sem tons."""
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(70 + semente)
+    sobe = lambda f: 1 / np.sqrt(1 + (60 / np.maximum(f, 1)) ** 4)                      # corta o grave (sem zumbido)
+    a = _ruido_filtrado(4 + semente, n, lambda f: sobe(f) / np.sqrt(1 + ((f - 350) / 220) ** 2))
+    b = _ruido_filtrado(5 + semente, n, lambda f: sobe(f) / np.sqrt(1 + ((f - 800) / 380) ** 2))
+    centro = 450 + 250 * np.sin(2 * np.pi * 0.021 * t + semente) + 120 * np.sin(2 * np.pi * 0.057 * t + 2 * semente)
+    mix = np.clip((centro - 300) / 500, 0, 1)
+    rajada = _suave(0.6 + 0.4 * np.clip(np.sin(2 * np.pi * 0.07 * t + rng.uniform(0, 6)) + 0.3 * np.sin(2 * np.pi * 0.19 * t), -1, 1), 0.8)
+    return (a * (1 - mix) + b * mix) * rajada
+
+
+def ambiente(duracao, saida, semente=0):
+    """Som ambiente original (sem amostras de terceiros): vento suave, estéreo, sem tons (escolha do criador
+    em 12/10/2026; o acorde grave anterior soava como um motor zumbindo)."""
+    n = int(SR * duracao)
+    t = np.arange(n) / SR
+    sig = np.stack([_vento(n, semente), _vento(n, semente + 100)], 1)
     sig /= np.max(np.abs(sig))
-    fade = np.minimum(1, np.minimum(t / 3.0, (duracao - t) / 3.0))
-    sig *= fade * 0.9
-    L = sig
-    R = np.roll(sig, int(0.013 * SR))
-    gravar_wav(saida, np.stack([L, R], 1) * 32767)
+    sig *= (np.minimum(1, np.minimum(t / 3.0, (duracao - t) / 3.0)) * 0.9)[:, None]
+    gravar_wav(saida, np.clip(sig, -1, 1) * 32767)
 
 
 def mixar(vozes, duracao, saida, ganho_ambiente_db=-20.0, lufs=-16.0):
@@ -154,7 +163,7 @@ def mixar(vozes, duracao, saida, ganho_ambiente_db=-20.0, lufs=-16.0):
         rotulos.append(f'[v{i}]')
     entradas += ['-i', str(amb)]
     na = len(vozes)
-    filtros.append(f'[{na}:a]volume={ganho_ambiente_db}dB[amb]')
+    filtros.append(f'[{na}:a]volume={ganho_ambiente_db + AJUSTE_AMBIENTE_DB}dB[amb]')
     if na:
         filtros.append(''.join(rotulos) + f'[amb]amix=inputs={na + 1}:duration=longest:normalize=0,atrim=0:{duracao:.3f}[mix]')
     else:

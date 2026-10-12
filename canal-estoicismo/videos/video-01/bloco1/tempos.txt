@@ -1,28 +1,28 @@
 # Tempos do bloco1 · video-01 — deixas da narração.
-# Áudio: audio/video01-bloco1-free.mp3 (38.61 s). Gerado por `ma tempos`; revise à mão.
+# Áudio: audio/video01-bloco1-starter.mp3 (37.25 s). Gerado por `ma tempos`; revise à mão.
 # Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
 #   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
 #   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
 #   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
 #
 maybe_you             0.00  Maybe you already have more than you once dreamed of.               # início
-roof                  3.88  A roof over your head.                                              # pausa
-light                 5.73  Light at the touch of a finger.                                     # pausa
-food                  8.14  Food you never had to hunt.                                         # pausa
-still                10.46  And still...                                                        # pausa
-at_night             11.57  at night,                                                           # pausa
-something_whispers   12.52  something whispers...                                               # pausa
-notyet               14.03  not yet.                                                            # pausa
-notenough            15.32  Not enough.                                                         # pausa
-imagine              16.70  Now imagine a man who truly had everything.                         # pausa
-coin                 20.10  Every coin in the empire.                                           # pausa
-army                 22.21  Every army.                                                         # pausa
-door                 23.44  Every door...                                                       # pausa
-open                 24.67  open.                                                               # pausa
-andyet               25.66  And yet,                                                            # pausa
-night                26.46  night after night,                                                  # pausa
-alone_in             27.92  alone in a tent at the edge of the world...                         # voz
-wrote                30.74  he wrote to himself.                                                # pausa
-notabout             32.40  Not about how to get more.                                          # pausa
-abouthow             34.47  About how not to lose himself...                                    # pausa
-inwhat               36.92  in what he already had.                                             # pausa
+roof                  3.94  A roof over your head.                                              # pausa
+light                 5.77  Light at the touch of a finger.                                     # pausa
+food                  7.88  Food you never had to hunt.                                         # pausa
+still                10.22  And still...                                                        # pausa
+at_night             11.37  at night,                                                           # pausa
+something_whispers   12.32  something whispers...                                               # pausa
+notyet               13.88  not yet.                                                            # pausa
+notenough            15.09  Not enough.                                                         # pausa
+imagine              16.48  Now imagine a man who truly had everything.                         # pausa
+coin                 19.88  Every coin in the empire.                                           # pausa
+army                 21.83  Every army.                                                         # pausa
+door                 22.93  Every door...                                                       # pausa
+open                 24.12  open.                                                               # pausa
+andyet               25.08  And yet,                                                            # pausa
+night                25.91  night after night,                                                  # pausa
+alone_in             27.14  alone in a tent at the edge of the world...                         # voz
+wrote                29.84  he wrote to himself.                                                # pausa
+notabout             31.54  Not about how to get more.                                          # pausa
+abouthow             33.33  About how not to lose himself...                                    # pausa
+inwhat               35.12  in what he already had.                                             # voz

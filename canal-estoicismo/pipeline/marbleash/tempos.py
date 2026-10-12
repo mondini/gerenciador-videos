@@ -103,12 +103,18 @@ class Deixas:
 
 
 # ---------------- texto do roteiro ----------------
+# Peças narradas que não são "Bloco N": nome usado no comando -> título da seção no roteiro.md.
+TITULOS = {'pausa': 'The Pause'}
+
+
 def texto_do_bloco(roteiro_md, numero):
-    """O texto pronto para o ElevenLabs do "## Bloco N" do roteiro.md (bloco de código)."""
+    """O texto pronto para o ElevenLabs do "## Bloco N" do roteiro.md (bloco de código).
+    `numero` também pode ser o nome de uma peça narrada de TITULOS (ex.: 'pausa' -> "## The Pause")."""
     txt = Path(roteiro_md).read_text(encoding='utf-8')
-    m = re.search(rf'^## Bloco {numero}\b.*?\n```[^\n]*\n(.*?)```', txt, re.S | re.M)
+    titulo = TITULOS.get(str(numero), f'Bloco {numero}')
+    m = re.search(rf'^## {re.escape(titulo)}\b.*?\n```[^\n]*\n(.*?)```', txt, re.S | re.M)
     if not m:
-        raise ValueError(f'não achei "## Bloco {numero}" seguido de um bloco ``` em {roteiro_md}')
+        raise ValueError(f'não achei "## {titulo}" seguido de um bloco ``` em {roteiro_md}')
     return m.group(1)
 
 

@@ -258,3 +258,49 @@ def imperador() -> Puppet:
     Hd = Part('head', 100, head, 'torso', (2, -184))
     newp = [T, Hd, base['uarmB'], base['farmB'], base['uarmF'], base['farmF'], base['legB'], base['legF']]
     return Puppet(newp, ['uarmB', 'farmB', 'legB', 'legF', 'torso', 'head', 'uarmF', 'farmF'], rods=[('farmF', (8, 86)), ('torso', (0, 0))])
+
+
+@lru_cache(maxsize=None)
+def rei() -> Puppet:
+    """Um rei de Israel (Salomão, vídeo 1 · bloco 5): manto longo com faixas e franja na barra, barba longa e
+    coroa de pontas; braços e pernas do homem. Diferente do imperador: coroa de ouro em vez de louros."""
+    def torso(d, ox, oy):
+        shape(d, [(0, -188), (22, -184), (36, -150), (40, -100), (38, -40), (50, 30), (64, 110), (72, 162), (40, 172), (0, 168), (-40, 174), (-72, 168),
+                  (-62, 100), (-46, 20), (-40, -60), (-42, -130), (-30, -170)], ox=ox, oy=oy)
+        shape(d, [(-28, -178), (-60, -150), (-76, -70), (-84, 20), (-80, 110), (-60, 60), (-48, -40), (-34, -120), (-8, -162)], ox=ox, oy=oy)   # manto
+        for k in range(3):                                  # faixas do manto, de cima a baixo
+            y = 96 + k * 18
+            stroke(d, [(-62 + k * 2, y), (-10, y + 2), (40 + k * 6, y - 2)], 3.4 - 0.6 * k, 3.0 - 0.6 * k, HOLE, ox, oy)
+        for k in range(13):                                 # franja da barra
+            x = -66 + k * 10
+            stroke(d, [(x, 160), (x + 1, 176)], 2.0, 0.6, HOLE, ox, oy)
+        stroke(d, [(28, -176), (14, -120), (6, -40), (4, 40)], 3.0, 0.8, HOLE, ox, oy)   # borda da túnica
+        for k in range(6):                                  # cinto bordado
+            ell(d, -30 + k * 12, -40 + k * 0.6, 3.2, 2.4, HOLE, ox, oy)
+        stroke(d, [(-56, -140), (-66, -60), (-70, 20)], 2.4, 0.6, HOLE, ox, oy)
+        rivet(d, 0, 0, ox, oy)
+
+    def head(d, ox, oy):
+        shape(d, [(-10, 4), (-12, -16), (-22, -30), (-26, -50), (-20, -70), (-4, -80), (14, -78), (24, -68), (26, -56), (34, -44), (27, -40),
+                  (27, -32), (31, -27), (25, -24), (22, -14), (14, -6), (8, 0), (10, 6)], ox=ox, oy=oy, n=12)
+        shape(d, [(-8, -24), (-4, 4), (6, 26), (16, 30), (24, 14), (30, -8), (31, -24), (24, -22), (18, -12), (6, -16)], ox=ox, oy=oy, n=10)   # barba
+        for k in range(4):
+            stroke(d, [(2 + k * 6, -8), (6 + k * 5, 8), (10 + k * 3, 22)], 1.8, 0.4, HOLE, ox, oy)
+        for k in range(3):                                  # cabelo longo atrás
+            stroke(d, [(-14 - k * 4, -60), (-24 - k * 3, -34), (-20 - k * 4, -6)], 2.0, 0.5, HOLE, ox, oy)
+        # coroa: faixa com pedras vazadas e cinco pontas com bolinhas
+        shape(d, [(-24, -66), (24, -70), (24, -82), (-24, -78)], ox=ox, oy=oy, n=4)
+        for k in range(5):
+            x = -20 + k * 10
+            shape(d, [(x - 5, -78 - 0.2 * k), (x, -100 - 0.2 * k), (x + 5, -79 - 0.2 * k)], ox=ox, oy=oy, n=4)
+            ell(d, x, -103 - 0.2 * k, 3, 3, INK, ox, oy)
+            ell(d, x - 0.5, -73 - 0.2 * k, 2.2, 2.6, HOLE, ox, oy)
+        shape(d, [(12, -56), (20, -59), (16, -53)], HOLE, ox, oy, n=6)                 # olho
+        stroke(d, [(6, -64), (14, -66), (22, -63)], 2.2, 0.6, HOLE, ox, oy)
+        rivet(d, 0, 0, ox, oy)
+
+    base = homem().parts
+    T = Part('torso', 220, torso)
+    Hd = Part('head', 110, head, 'torso', (2, -184))
+    newp = [T, Hd, base['uarmB'], base['farmB'], base['uarmF'], base['farmF'], base['legB'], base['legF']]
+    return Puppet(newp, ['uarmB', 'farmB', 'legB', 'legF', 'torso', 'head', 'uarmF', 'farmF'], rods=[('farmF', (8, 86)), ('torso', (0, 0))])

@@ -17,7 +17,7 @@ Links (claude.ai):
 - **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
 - **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
 - **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência planejada: 2 vídeos/semana, 5–6 shorts por vídeo. Meta: 12 vídeos prontos antes de lançar.
-- **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs v4 (voz de senhor ~70 anos, tom de avô; **plano Starter** para versões finais). Sem Canva nem Photoshop.
+- **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs (**plano Starter**; voz e custo em "Voz e créditos do ElevenLabs"). Sem Canva nem Photoshop.
 - **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
 
 ## Identidade visual
@@ -26,7 +26,7 @@ Links (claude.ai):
 - Tipografia: **Cinzel** (títulos, nomes, logo), **Cormorant Garamond** (citações, itálico), **Inter** (créditos e legendas).
 - Logo: A — Horizonte. Banner: B — Centro silencioso.
 - Vídeos: teatro de sombras projetadas (padrão aprovado). Thumbs, logo e banner continuam na arte de linhas **até o criador decidir** se migram para o estilo de sombras.
-- Thumbnails: sempre **3 versões** para o Test & Compare do YouTube — A Palavra (1–2 palavras), B Símbolo (sem texto), C Gancho (até 4 palavras).
+- Thumbnails: sempre **3 versões** para o Test & Compare do YouTube — A Palavra (1–2 palavras), B Símbolo (sem texto), C Gancho (até 3 palavras; guia de embalagem, decisão de 12/10/2026). O texto da thumb nunca repete o título.
 
 ## Estrutura padrão de um vídeo (~10 min)
 
@@ -46,6 +46,28 @@ Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
 - Visual: o sol do logo "respirando" (sobe na inspiração, desce na expiração), adaptado ao lençol de sombras; pergunta na tela.
 - Capítulo próprio no YouTube. Vídeo 12 (sono) pode ter uma pausa mais longa encerrando o episódio.
 - Formato de short: *"Take 30 seconds with Marcus Aurelius"*.
+
+## Encerramento padrão (decisão de 12/10/2026)
+
+- Última linha falada de todo vídeo, igual sempre: *"[softly] Old wisdom... for quiet hours."* (só o slogan, sem o nome do canal).
+- **Nenhuma chamada falada** para inscrição ou comentário (o público ouve para dormir); o pedido fica só na descrição e na tela final do YouTube.
+- Visual: o logo Horizonte + slogan em Cormorant Garamond itálico (`marble-300`), peça comum em `videos/comum/` (a criar).
+
+## Voz e créditos do ElevenLabs (desde o vídeo 1, 12/10/2026)
+
+- **Voz:** *Flint — Deep, Raspy, and Warm* (substituiu a voz de senhor ~70 anos usada nas prévias Free).
+- **Modelo:** Eleven v4 · **Stability 50%** · **Similarity 75%** · plano **Starter**. Usar sempre a mesma configuração para a voz não mudar entre blocos e vídeos.
+- **Custo medido no vídeo 1:** 7 áudios (6 blocos + The Pause), uma gravação de cada, **6.638 créditos** (saldo 35.500 → 28.862). O texto colado tinha ~6.600–6.700 caracteres (com as audio tags) e ~1.180 palavras, para ~8 min de narração (8 min 6 s já no ritmo do canal).
+- **Regra para estimar:** **~1 crédito por caractere** do texto colado no ElevenLabs, contando as audio tags e a pontuação. Equivalências aproximadas: ~5,6 créditos por palavra; ~820 créditos por minuto de narração; um vídeo de ~10 min ≈ 6.500–8.000 créditos. Regravações cobram de novo: somar o texto de cada bloco regravado.
+- Ao fechar o roteiro de um vídeo, o Claude informa a estimativa de créditos (total e por bloco) antes da gravação.
+
+## Guia de embalagem — decisões do criador (12/10/2026)
+
+Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
+- **Texto da thumbnail:** passa a ser no máximo **3 palavras** (antes, 4 na variante C).
+- **Cores das thumbnails:** **mantém** a paleta do canal (carvão, mármore, âmbar), apesar de o guia desaconselhar tons marrons/neutros. Conferir a legibilidade em tamanho de celular (320×180).
+- **Rostos:** canal dark; as silhuetas fazem o papel do "fator humano".
+- **Vídeo 1:** mantém o título de 57 caracteres e o gancho como está (sem regravar para falar a palavra-chave nos primeiros 30 s). Do vídeo 2 em diante, o roteiro segue a seção 5 do guia.
 
 ## Regras fixas para todos os vídeos
 

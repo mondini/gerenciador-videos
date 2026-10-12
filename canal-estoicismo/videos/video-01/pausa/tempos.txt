@@ -1,0 +1,38 @@
+# Tempos do pausa · video-01 — deixas da narração.
+# Áudio: audio/video01-pausa-starter.mp3 (38.11 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+wherever_you    0.00  Wherever you are...                                                 # início
+let_your        2.05  let your shoulders drop.                                            # pausa
+breathe_in      4.45  Breathe in...                                                       # pausa
+slowly          5.68  slowly...                                                           # pausa
+two             6.90  two...                                                              # pausa
+three           7.89  three...                                                            # pausa
+four            8.91  four.                                                               # pausa
+and_let         9.77  And let it go...                                                    # pausa
+two2           11.75  two...                                                              # pausa
+three2         12.77  three...                                                            # pausa
+four2          13.82  four...                                                             # pausa
+five           14.87  five...                                                             # pausa
+six            15.76  six.                                                                # pausa
+one_more       16.81  One more time.                                                      # pausa
+breathe_in2    18.46  Breathe in...                                                       # pausa
+two3           19.67  two...                                                              # pausa
+three3         20.66  three...                                                            # pausa
+four3          21.66  four.                                                               # pausa
+and_out        22.53  And out...                                                          # pausa
+two4           24.07  two...                                                              # pausa
+three4         25.08  three...                                                            # pausa
+four4          26.13  four...                                                             # pausa
+five2          27.18  five...                                                             # pausa
+six2           28.08  six.                                                                # pausa
+now            29.27  Now...                                                              # pausa
+one_question   30.04  one question.                                                       # pausa
+just_for       31.24  Just for you.                                                       # pausa
+what_do        32.56  What do you have today...                                           # pausa
+that_you       33.68  that you once prayed for?                                           # voz
+stay_with      36.09  Stay with that...                                                   # pausa
+for_a          37.23  for a moment.                                                       # pausa

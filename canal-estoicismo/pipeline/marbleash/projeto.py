@@ -71,9 +71,9 @@ class Bloco:
         return self.pasta_video / 'roteiro.md'
 
     def procurar_mp3(self):
-        """O mp3 mais recente de videos/video-NN/audio/ com 'blocoN' no nome."""
-        cands = [p for p in (self.pasta_video / 'audio').glob('*.mp3')
-                 if re.search(rf'bloco0*{self.numero}(?!\d)', p.name, re.I)]
+        """O mp3 mais recente de videos/video-NN/audio/ com 'blocoN' (ou o nome da peça, ex.: 'pausa') no nome."""
+        padrao = rf'bloco0*{self.numero}(?!\d)' if isinstance(self.numero, int) else rf'\b{self.nome}\b'
+        cands = [p for p in (self.pasta_video / 'audio').glob('*.mp3') if re.search(padrao, p.name, re.I)]
         if not cands:
             raise SystemExit(f'Nenhum mp3 com "{self.nome}" no nome em {self.pasta_video / "audio"}')
         return max(cands, key=lambda p: p.stat().st_mtime)

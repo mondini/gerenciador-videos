@@ -256,8 +256,10 @@ class Quadro:
         if r is not None:
             self._escurecer(mm, r, op)
 
-    def boneco(self, boneco, x, y, pose, *fatores, desfoque=None):
-        """Boneco articulado com o pivô do torso em (x, y) e a pose {peça: graus}."""
+    def boneco(self, boneco, x, y, pose, *fatores, desfoque=None, espelho=False):
+        """Boneco articulado com o pivô do torso em (x, y) e a pose {peça: graus}.
+
+        espelho=True: o boneco olha para a esquerda (a máscara vira em torno do pivô do torso)."""
         op = boneco.opacidade
         for f in fatores:
             op = op * f
@@ -267,6 +269,14 @@ class Quadro:
         if res is None:
             return
         m, rx0, ry0 = res
+        if espelho:
+            m = np.ascontiguousarray(m[:, ::-1])
+            rx0 = int(round(2 * x)) - rx0 - m.shape[1]
+            if rx0 < 0 or rx0 + m.shape[1] > W:              # corta o que sair da tela
+                a, b = max(0, -rx0), min(m.shape[1], W - rx0)
+                if b <= a:
+                    return
+                m, rx0 = np.ascontiguousarray(m[:, a:b]), rx0 + a
         s = boneco.desfoque if desfoque is None else desfoque
         r = _ampliar((rx0, ry0, rx0 + m.shape[1], ry0 + m.shape[0]), raio_borrao(s) + 2)
         cheio = np.zeros((H, W), np.float32)
@@ -286,10 +296,13 @@ class Quadro:
         if forca > 0:
             self._foco = (forca, cx, cy, raio)
 
-    def chama(self, chama, *fatores, cintila=(1.0, 0.0, 0.0), camada=None, dx=0, dy=0):
+    def chama(self, chama, *fatores, cintila=(1.0, 0.0, 0.0), camada=None, dx=0, dy=0, recorte=None):
         """Chama colorida. Se `camada` for dada, a chama balança junto com ela (mesmo dx, dy).
 
         cintila = (base, amplitude, frequência): fator base + amplitude * sin(u * frequência).
+        recorte = (x0, y0, x1, y1) da tela: a chama só aparece dentro desse retângulo, com borda suave de 3 px
+        (ex.: o sol que se põe atrás do horizonte, um fio que cresce; as chamas são pintadas depois das sombras,
+        então nenhuma peça de papel as esconderia).
         """
         mov = None
         if camada is not None:
@@ -297,7 +310,7 @@ class Quadro:
             mov = (dx + wx, dy + wy, wr, camada.pivo)
         elif dx or dy:
             mov = (dx, dy, 0.0, (960, 1080))
-        self._chamas.append((chama, fatores, cintila, mov))
+        self._chamas.append((chama, fatores, cintila, mov, recorte))
 
     def credito(self, credito, alpha=1.0):
         """Mostra o crédito de fonte (ver `Credito`) com a opacidade dada."""
@@ -308,7 +321,7 @@ class Quadro:
         """Aproxima a câmera `zoom` vezes em torno de (cx, cy)."""
         self._camera = (cx, cy, zoom)
 
-    def _aplicar_chama(self, img, chama, fatores, cintila, mov):
+    def _aplicar_chama(self, img, chama, fatores, cintila, mov, recorte=None):
         frgb, fa, r = chama.dados()
         if r is None:
             return img
@@ -338,6 +351,11 @@ class Quadro:
             a = a * f
         base, amp, freq = cintila
         a = a * (base + amp * math.sin(self.u * freq))
+        if recorte is not None:                     # só dentro do retângulo, com borda suave de 3 px
+            x0, y0, x1, y1 = recorte
+            ys = np.arange(sl[0].start, sl[0].stop, dtype=np.float32)
+            xs = np.arange(sl[1].start, sl[1].stop, dtype=np.float32)
+            a = a * np.clip(np.minimum(ys - y0, y1 - ys) / 3 + 0.5, 0, 1)[:, None] * np.clip(np.minimum(xs - x0, x1 - xs) / 3 + 0.5, 0, 1)[None, :]
         brilho = borrar(np.ascontiguousarray(a), chama.brilho)[..., None]
         if img.dtype != np.float64:
             img = img.astype(np.float64)

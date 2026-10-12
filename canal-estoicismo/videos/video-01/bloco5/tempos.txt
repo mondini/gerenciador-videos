@@ -1,0 +1,49 @@
+# Tempos do bloco5 · video-01 — deixas da narração.
+# Áudio: audio/video01-bloco5-starter.mp3 (66.59 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+far_from               0.00  Far from Rome...                                                    # início
+in_another             1.75  in another land,                                                    # pausa
+and_another            2.72  and another time...                                                 # voz
+a_much                 4.63  a much older book had already written down the same warning.        # pausa
+tradition_says         8.49  Tradition says these words came from a king of Israel.              # pausa
+solomon               11.85  Solomon.                                                            # pausa
+and_in                12.95  And in one single line...                                           # pausa
+line                  14.08  (palavra) line                                                      # voz
+he_holds              14.52  he holds what Marcus spent years trying to remember:                # voz
+pride_goes            18.71  Pride goes before destruction,                                      # pausa
+and_an                20.95  and an arrogant spirit before a fall.                               # pausa
+fall                  22.90  (palavra) fall                                                      # voz
+in_other              23.89  In other words...                                                   # pausa
+the_higher            25.01  the higher you climb inside your own head,                          # pausa
+climb                 25.68  (palavra) climb                                                     # voz
+the_harder            27.71  the harder the ground waits for you.                                # pausa
+ground                28.40  (palavra) ground                                                    # voz
+and_the               30.20  And the verse that follows goes even further:                       # pausa
+it_is                 32.91  It is better to be of a lowly spirit with the poor,                 # pausa
+than_to               36.01  than to divide the plunder with the proud.                          # pausa
+plunder               36.84  (palavra) plunder                                                   # voz
+in_simple             38.76  In simple words...                                                  # pausa
+better_to             40.18  better to have less and keep your soul...                           # pausa
+less                  40.80  (palavra) less                                                      # voz
+than_to2              42.78  than to have more and lose it.                                      # pausa
+more_lose             43.18  (palavra) more                                                      # voz
+two_men               45.09  Two men who never met.                                              # pausa
+one                   47.09  One,                                                                # pausa
+a_king                47.34  a king of Israel.                                                   # voz
+the_other             48.99  The other,                                                          # pausa
+an_emperor            49.36  an emperor of Rome.                                                 # voz
+different_faiths      51.47  Different faiths.                                                   # pausa
+different_languages   52.58  Different languages.                                                # voz
+centuries_apart       53.94  Centuries apart.                                                    # voz
+and_yet               55.42  And yet...                                                          # pausa
+both_of               56.27  both of them arrived at the same quiet truth.                       # pausa
+truth                 58.36  (palavra) truth                                                     # voz
+power_does            59.52  Power does not ruin a man all at once.                              # pausa
+it_whispers           62.45  It whispers to him,                                                 # pausa
+slowly                63.64  slowly...                                                           # voz
+that_he               64.68  that he is more than he is.                                         # pausa
+more                  65.08  (palavra) more                                                      # voz

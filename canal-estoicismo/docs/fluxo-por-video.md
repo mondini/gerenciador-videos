@@ -1,6 +1,6 @@
 # Fluxo de uma sessão por vídeo
 
-Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê, nesta ordem: `CLAUDE.md` (pasta do canal) → `docs/plano-canal.md` → `docs/estilo-teatro-de-sombras.md` → `docs/pacote-de-publicacao-regras.md` → `videos/video-NN/roteiro.md` (se existir) → `pipeline/LEIA-ME.md`.
+Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê, nesta ordem: `CLAUDE.md` (pasta do canal) → `docs/plano-canal.md` → `docs/estilo-teatro-de-sombras.md` → `docs/pacote-de-publicacao-regras.md` → `docs/guia-embalagem-youtube.md` → `videos/video-NN/roteiro.md` (se existir) → `pipeline/LEIA-ME.md`.
 
 ## 1. Preparar o ambiente (começo de toda sessão)
 - O ambiente já fica em `.venv/` dentro da pasta. Conferir com `./ma -h`. Se faltar, instalar como em `pipeline/LEIA-ME.md` (seção 1).
@@ -12,6 +12,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - Conferir cada citação na fonte de domínio público antes de propor; registrar no "Registro de fontes" do roteiro.
 - Entregar cada bloco no formato pronto para colar no ElevenLabs.
 - Salvar cada bloco aprovado em `videos/video-NN/roteiro.md`.
+- Gancho e retenção seguem `docs/guia-embalagem-youtube.md` (seção 5): confirmar a promessa do título/thumbnail nos primeiros 15 s, falar a palavra-chave principal nos primeiros 30 s, abrir um *loop* para o meio ou o fim.
 
 ## 3. Áudio e tempos
 - O criador gera cada bloco no ElevenLabs (plano Starter, mesma voz) e envia o mp3.
@@ -22,7 +23,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 ## 4. Animação (padrão Teatro de Sombras Projetadas)
 - Para cada bloco, escrever o roteiro visual (cenas, entradas, foco de luz, zoom) a partir das ideias de cena do roteiro.
 - Criar o script de cena `videos/video-NN/blocoN/cena.py` copiando o modelo oficial `videos/video-01/bloco1/cena.py` (passo a passo em `pipeline/LEIA-ME.md`, seção 3). Reaproveitar as peças da biblioteca (`pipeline/marbleash/`); arte nova vai em `objetos.py`, `cenario.py` ou `bonecos.py`.
-- Mostrar primeiro **um frame** para aprovação quando houver cena nova importante (`./ma stills video-NN N <segundos>`); depois renderizar o bloco com `./ma render video-NN N` (prévia com voz e ambiente em `videos/video-NN/previas/blocoN.mp4`).
+- Conferir as cenas novas em stills internamente (`./ma stills video-NN N <segundos>`), sem pedir aprovação de frames ao criador (decisão de 12/10/2026); depois renderizar o bloco com `./ma render video-NN N` (prévia com voz e ambiente em `videos/video-NN/previas/blocoN.mp4`).
 - Simular a compressão do YouTube (~4 Mbps) e conferir degradês: `./ma youtube videos/video-NN/previas/blocoN.mp4`; se aparecerem faixas, exportar em 4K (passo 5).
 - Prévias e stills ficam em `videos/video-NN/previas/`.
 

@@ -7,13 +7,14 @@ Esta pasta guarda tudo o que é preciso para produzir os vídeos do canal **Marb
 2. `docs/estilo-teatro-de-sombras.md` — padrão visual aprovado dos vídeos.
 3. `docs/fluxo-por-video.md` — passo a passo de cada sessão.
 4. `docs/pacote-de-publicacao-regras.md` — o pacote obrigatório ao concluir cada vídeo.
+   - `docs/guia-embalagem-youtube.md` — **manual de referência** para títulos, thumbnails, descrição, metadados e retenção. Use sempre que for criar ou revisar qualquer um desses itens (roteiro, gancho, Pacote de Publicação, shorts). Quando o guia conflitar com uma decisão já registrada do canal, aponte o conflito ao criador em vez de decidir sozinho.
 5. `videos/video-NN/roteiro.md` — roteiro e status do vídeo da sessão.
 6. `pipeline/LEIA-ME.md` — como usar o código de montagem.
 
 ## Sobre o criador
 - Brasileiro; toda conversa e documentação em **pt-BR**. Tudo o que é público no canal sai em **inglês natural**.
-- Gosta de construir o roteiro aos poucos, com perguntas, e de aprovar um frame antes de renderizar cenas novas.
-- Gera a narração no ElevenLabs v4 (plano Starter), voz de senhor ~70 anos.
+- Gosta de construir o roteiro aos poucos, com perguntas. **Não** quer aprovar stills cena por cena (12/10/2026): conferir os stills internamente, renderizar e entregar o vídeo para revisão.
+- Gera a narração no ElevenLabs (plano Starter), voz *Flint — Deep, Raspy, and Warm*, Eleven v4 (detalhes e custo em créditos em `docs/plano-canal.md`).
 
 ## Estrutura da pasta
 - `docs/` — plano, estilo, fluxo e regras do pacote.

@@ -1,0 +1,45 @@
+# Tempos do bloco6 · video-01 — deixas da narração.
+# Áudio: audio/video01-bloco6-starter.mp3 (49.40 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+so              0.00  So...                                                               # início
+lets_go         1.15  let's go back to that voice.                                        # pausa
+the_one         3.23  The one that whispers at night...                                   # pausa
+not_yet         5.49  not yet.                                                            # pausa
+not_enough      6.69  Not enough.                                                         # pausa
+maybe_it        8.03  Maybe it will never go completely quiet.                            # pausa
+quiet           9.64  (palavra) quiet                                                     # voz
+it_didnt       10.73  It didn't for Marcus either.                                        # pausa
+he_had         12.48  He had the whole empire...                                          # pausa
+empire         13.38  (palavra) empire                                                    # voz
+and_still      14.55  and still,                                                          # pausa
+night_after    15.40  night after night,                                                  # voz
+he_had2        16.62  he had to remind himself of what was already in his hands.          # voz
+hands          19.42  (palavra) hands                                                     # voz
+so_tonight     20.51  So tonight...                                                       # pausa
+you_dont       21.68  you don't have to defeat that voice.                                # pausa
+you_only       24.02  You only have to answer it.                                         # pausa
+answer         24.98  (palavra) answer                                                    # voz
+look_around    26.07  Look around you...                                                  # pausa
+slowly         27.24  slowly.                                                             # pausa
+a_roof         28.29  A roof.                                                             # pausa
+a_little       29.25  A little light.                                                     # pausa
+something_to   30.33  Something to eat.                                                   # pausa
+a_few          31.51  A few people who know your name.                                    # pausa
+name           32.68  (palavra) name                                                      # voz
+once           33.65  Once...                                                             # pausa
+you_would      34.54  you would have called this enough.                                  # pausa
+maybe          36.39  Maybe...                                                            # pausa
+it_still       37.15  it still is.                                                        # pausa
+far_away       38.51  Far away,                                                           # pausa
+in_a           39.44  in a tent at the edge of the world,                                 # voz
+an_old         41.59  an old emperor sets down his pen.                                   # pausa
+pen            43.42  (palavra) pen                                                       # voz
+and_the        44.31  And the lamp...                                                     # pausa
+is_still       45.32  is still burning.                                                   # pausa
+burning        45.78  (palavra) burning                                                   # voz
+old_wisdom     46.79  Old wisdom...                                                       # pausa
+for_quiet      48.03  for quiet hours.                                                    # pausa

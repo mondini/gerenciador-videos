@@ -25,9 +25,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from marbleash import config  # noqa: E402  (leve: só caminhos)
 
-# Ganho do som ambiente na mistura, antes de normalizar tudo a -16 LUFS. Com -26 dB o ambiente fica ~15 dB
-# abaixo da voz na faixa audível (200 Hz–4 kHz), audível também em notebook e celular.
-GANHO_AMBIENTE_DB = -26.0
+# Ganho do som ambiente na mistura, antes de normalizar tudo a -16 LUFS. O vento suave (escolha do criador em
+# 12/10/2026) ficou 50% mais baixo (-6 dB) que o exemplo aprovado, que já era 40% mais baixo que o ambiente
+# anterior (-26 dB): -26 - 4,4 - 6 = -36,4 dB. Ainda incomodava: mais -10 dB (metade do volume percebido), para
+# ficar só como uma sensação leve, que mal se nota (pedido do criador, 12/10/2026): -46,4 dB.
+GANHO_AMBIENTE_DB = -46.4
 
 
 def _bloco(a):
@@ -123,7 +125,12 @@ def cmd_render(a):
     trecho = a.de is not None or a.ate is not None
     sufixo = f'-{a.de or 0:g}a{a.ate if a.ate is not None else b.fim:.4g}s' if trecho else ''
     mudo = b.trabalho / f'{b.nome}-video{sufixo}.mp4'
-    est = render.renderizar(b, mudo, a.de, a.ate, a.processos)
+    if a.so_som:
+        if trecho or not mudo.exists():
+            raise SystemExit('--so-som precisa do vídeo sem som do bloco inteiro já renderizado (rode o render completo antes).')
+        est = None
+    else:
+        est = render.renderizar(b, mudo, a.de, a.ate, a.processos)
     saida = Path(a.saida) if a.saida else b.previas / f'{b.nome}{sufixo}.mp4'
     saida.parent.mkdir(parents=True, exist_ok=True)
     if a.sem_som:
@@ -150,7 +157,11 @@ def cmd_render(a):
 def cmd_juntar(a):
     from marbleash import audio, entrega
     from marbleash.projeto import Bloco
-    blocos = [Bloco(a.video, n) if str(n).isdigit() else Bloco('comum', n) for n in a.blocos]
+    def peca(n):
+        """Bloco numerado ou peça com nome: a do próprio vídeo (ex.: pausa) ou a comum (abertura, encerramento)."""
+        b = Bloco(a.video, n)
+        return b if str(n).isdigit() or b.pasta.is_dir() else Bloco('comum', n)
+    blocos = [peca(n) for n in a.blocos]
     videos, vozes, t = [], [], 0.0
     for b in blocos:
         v = b.trabalho / f'{b.nome}-video.mp4'
@@ -264,6 +275,7 @@ def main(argv=None):
     sp.add_argument('--ate', type=float, help='fim do trecho (s)')
     sp.add_argument('--processos', type=int, help='processos em paralelo (padrão: até 4)')
     sp.add_argument('--sem-som', action='store_true')
+    sp.add_argument('--so-som', action='store_true', help='refaz só o som, reaproveitando o vídeo sem som já renderizado')
     sp.add_argument('--ambiente', type=float, default=GANHO_AMBIENTE_DB, help='ganho do ambiente em dB (padrão %(default)s)')
     sp.add_argument('--saida', help='arquivo de saída (padrão: previas/blocoN.mp4)')
     sp.set_defaults(f=cmd_render)

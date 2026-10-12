@@ -2,6 +2,8 @@
 
 Gerar este pacote SEMPRE que um vídeo for concluído, para preencher o gerenciador de canais.
 
+> Referência obrigatória para títulos (seção 1), descrição (3), capítulos (4), tags (5) e thumbnails (11): `docs/guia-embalagem-youtube.md`, incluindo o checklist pré-publicação no fim do guia.
+
 Leve essa lista abaixo em consideração, pois sempre que umm video for concluido, você deverá gerar o PACOTE DE PUBLICAÇÃO dele, para eu preencher o meu gerenciador de canais. Siga estas regras:
 
 REGRAS GERAIS
@@ -96,7 +98,7 @@ Ao final, liste em 3 a 5 linhas os elementos de maior risco e o que fazer
 ANTES de publicar para reduzi-lo (trocar a faixa, trocar a tradução etc.).
 
 ## 11. THUMBNAILS
-3 variantes (A, B, C): texto da arte em inglês (≤ 4 palavras), conceito visual, prompt de
+3 variantes (A, B, C): texto da arte em inglês (≤ 3 palavras, sem repetir o título), conceito visual, prompt de
 geração e a variante recomendada. Siga a identidade visual do canal.
 
 ## 12. PROMPTS DE CENA

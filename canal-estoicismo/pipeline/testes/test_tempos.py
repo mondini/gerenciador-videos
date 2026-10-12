@@ -68,6 +68,12 @@ def test_texto_do_bloco(tmp_path):
     assert tempos.texto_do_bloco(md, 2) == 'Other.\n'
 
 
+def test_texto_da_pausa(tmp_path):
+    md = tmp_path / 'roteiro.md'
+    md.write_text('## The Pause (aprovado)\n\n```\nBreathe in...\n```\n')
+    assert tempos.texto_do_bloco(md, 'pausa') == 'Breathe in...\n'
+
+
 def test_palavras_e_forca_da_pontuacao():
     ws = tempos.palavras_do_texto('[softly] Every door... open.\nAnd yet, night')
     assert [w['palavra'] for w in ws] == ['Every', 'door', 'open', 'And', 'yet', 'night']
