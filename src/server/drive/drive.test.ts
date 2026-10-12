@@ -37,7 +37,7 @@ describe("estrutura de pastas", () => {
     criarEstruturaCanal(raiz, "BJJ - Canal");
     const { caminho, criada } = criarPastaVideo(raiz, "BJJ - Canal", "BJJ-001", "Mito ou verdade?");
     expect(criada).toBe(true);
-    expect(caminho).toBe(join(raiz, "BJJ - Canal", "VIDEOS", "BJJ-001_mito-ou-verdade"));
+    expect(caminho).toBe(join(raiz, "BJJ - Canal", "VIDEOS", "BJJ-001-mito-ou-verdade"));
     expect(readdirSync(caminho).sort()).toEqual([...SUBPASTAS_VIDEO]);
     expect(existsSync(join(raiz, "BJJ - Canal", "00_IDENTIDADE"))).toBe(true);
   });

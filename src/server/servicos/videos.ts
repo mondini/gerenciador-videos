@@ -20,7 +20,8 @@ export const novoVideoSchema = z.object({
 });
 export type NovoVideo = z.input<typeof novoVideoSchema>;
 
-export function criarVideo(ctx: Contexto, entrada: NovoVideo) {
+/** `numero` fixo só para vídeos que já nasceram com código fora do sistema (ver sincronizar.ts). */
+export function criarVideo(ctx: Contexto, entrada: NovoVideo, numeroFixo?: number) {
   const dados = novoVideoSchema.parse(entrada);
   const agora = agoraDe(ctx);
   return ctx.db.transaction((tx) => {
@@ -35,7 +36,7 @@ export function criarVideo(ctx: Contexto, entrada: NovoVideo) {
       .from(video)
       .where(eq(video.canalId, c.id))
       .get();
-    const numero = (ultimo?.n ?? 0) + 1;
+    const numero = numeroFixo ?? (ultimo?.n ?? 0) + 1;
     const parecidos = acharParecidos(
       dados.tituloProvisorio,
       tx.select().from(video).where(eq(video.canalId, c.id)).all(),

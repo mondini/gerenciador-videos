@@ -10,6 +10,8 @@ export type Card = {
   dataPlanejada: string | null;
   pontuacao: number | null;
   pendentesChecklist: number;
+  /** O que falta segundo o pipeline do canal (`./ma sincronizar`). */
+  pendencias: string[];
   emRisco: boolean;
   arquivos: { subpasta: string; arquivos: number; soOnline: number }[] | null;
 };
@@ -37,6 +39,7 @@ function CardVideo({ card, onAbrir }: { card: Card; onAbrir: (id: number) => voi
       <div className="mt-1.5 flex flex-wrap gap-1 text-xs">
         <span className="rounded bg-slate-100 px-1.5 py-0.5">{card.formato ?? "formato a definir"}</span>
         {card.pendentesChecklist > 0 && <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-800" title="Itens pendentes no checklist desta etapa">⚠️ {card.pendentesChecklist}</span>}
+        {card.pendencias.length > 0 && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-sky-800" title={`Falta (pipeline do canal):\n${card.pendencias.join("\n")}`}>🎬 falta {card.pendencias.length}</span>}
         {card.emRisco && <span className="rounded bg-red-100 px-1.5 py-0.5 text-red-800" title="Faltam menos de 7 dias e ainda não chegou em Edição">⏰ risco</span>}
         {card.arquivos && (
           <span className="rounded bg-slate-100 px-1.5 py-0.5" title={card.arquivos.map((a) => `${a.subpasta}: ${a.arquivos}${a.soOnline ? ` (${a.soOnline} ☁️)` : ""}`).join("\n")}>

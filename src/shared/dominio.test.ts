@@ -31,7 +31,7 @@ describe("slug e nome da pasta", () => {
     expect(slugify("  !!! ")).toBe("sem-titulo");
   });
   it("monta o nome da pasta", () => {
-    expect(nomePastaVideo("BJJ-001", "Mito ou verdade?")).toBe("BJJ-001_mito-ou-verdade");
+    expect(nomePastaVideo("BJJ-001", "Mito ou verdade?")).toBe("BJJ-001-mito-ou-verdade");
   });
 });
 

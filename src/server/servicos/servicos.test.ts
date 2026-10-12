@@ -64,7 +64,7 @@ describe("moverEtapa", () => {
   it("Ideia → Pesquisa cria a pasta no Drive uma única vez", () => {
     const v = criarVideo(ctx, { canalId, tituloProvisorio: "Mito ou verdade?", formatoId }).video;
     const r = moverEtapa(ctx, v.id, "Pesquisa");
-    expect(r.video.pastaRelativa).toBe(join("BJJ - Canal", "VIDEOS", "BJJ-001_mito-ou-verdade"));
+    expect(r.video.pastaRelativa).toBe(join("BJJ - Canal", "VIDEOS", "BJJ-001-mito-ou-verdade"));
     expect(r.avisos.some((a) => a.startsWith("Pasta criada"))).toBe(true);
     const volta = moverEtapa(ctx, v.id, "Ideia");
     const de_novo = moverEtapa(ctx, v.id, "Pesquisa");

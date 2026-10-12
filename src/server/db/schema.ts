@@ -107,6 +107,9 @@ export const video = sqliteTable(
       .notNull()
       .default("nao-avaliado"),
     justificativaSintetico: text("justificativa_sintetico").notNull().default(""),
+    /** O que falta, segundo a última sincronização do pipeline do canal (`./ma sincronizar`). */
+    pendencias: text("pendencias", { mode: "json" }).$type<string[]>().notNull().default(sql`'[]'`),
+    sincronizadoEm: integer("sincronizado_em", { mode: "timestamp_ms" }),
     criadoEm: criadoEm(),
   },
   (t) => [uniqueIndex("video_canal_numero").on(t.canalId, t.numero), index("video_etapa").on(t.canalId, t.etapa)],

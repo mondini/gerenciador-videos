@@ -181,3 +181,55 @@ describe("configurações do canal", () => {
 });
 
 const put2 = (corpo: unknown) => ({ method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) });
+
+describe("sincronização com o pipeline do canal", () => {
+  const dados = (extra: Record<string, unknown> = {}) => ({
+    prefixo: "BJJ",
+    codigo: "BJJ-003",
+    pasta: "BJJ-003-the-man-who-had-everything",
+    nomeInterno: "The Man Who Had Everything",
+    tituloFinal: "The Richest Man in Rome",
+    etapa: "Edição",
+    roteiro: "# Roteiro\n\ntexto",
+    duracaoFinalSeg: 506,
+    pendencias: ["thumbnails: 0/3 em thumbnails/"],
+    ...extra,
+  });
+  type Resp = { video: { id: number; codigo: string; numero: number; etapa: string; roteiroAtual: string; pastaRelativa: string; pendencias: string[]; tituloFinal: string }; avisos: string[] };
+
+  it("recusa canal que não está cadastrado", async () => {
+    const r = await app.request("/api/sincronizar", json(dados()));
+    expect(r.status).toBe(400);
+    expect(((await r.json()) as { erro: string }).erro).toMatch(/cadastre o canal/);
+  });
+
+  it("cria o vídeo com o código do canal, avança a etapa e guarda roteiro e pendências", async () => {
+    await criarCanalBase();
+    const r = await app.request("/api/sincronizar", json(dados()));
+    expect(r.status).toBe(200);
+    const { video: v, avisos } = (await r.json()) as Resp;
+    expect([v.codigo, v.numero, v.etapa, v.tituloFinal]).toEqual(["BJJ-003", 3, "Edição", "The Richest Man in Rome"]);
+    expect(v.roteiroAtual).toBe("# Roteiro\n\ntexto");
+    expect(v.pastaRelativa).toBe(join("BJJ - Canal", "VIDEOS", "BJJ-003-the-man-who-had-everything"));
+    expect(v.pendencias).toEqual(["thumbnails: 0/3 em thumbnails/"]);
+    expect(avisos).toContain("Vídeo BJJ-003 criado no sistema");
+    const ficha = (await (await app.request(`/api/videos/${v.id}`)).json()) as { versoes: unknown[] };
+    expect(ficha.versoes).toHaveLength(0); // o histórico do roteiro.md fica no git e em _versoes/ do backup
+  });
+
+  it("nunca volta etapa nem mexe em Agendado/Publicado", async () => {
+    await criarCanalBase();
+    const { video: v } = (await (await app.request("/api/sincronizar", json(dados()))).json()) as Resp;
+    const voltou = (await (await app.request("/api/sincronizar", json(dados({ etapa: "Roteiro", pendencias: [] })))).json()) as Resp;
+    expect(voltou.video.etapa).toBe("Edição");
+    expect(voltou.video.pendencias).toEqual([]);
+    await app.request(`/api/videos/${v.id}/etapa`, json({ etapa: "Agendado" }));
+    const agendado = (await (await app.request("/api/sincronizar", json(dados({ etapa: "Thumbnail" })))).json()) as Resp;
+    expect(agendado.video.etapa).toBe("Agendado");
+  });
+
+  it("recusa código que não combina com o prefixo ou a pasta", async () => {
+    await criarCanalBase();
+    expect((await app.request("/api/sincronizar", json(dados({ codigo: "BJJ-004" })))).status).toBe(400);
+  });
+});

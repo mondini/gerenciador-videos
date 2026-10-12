@@ -14,6 +14,7 @@ import { criarCanal, novoCanalSchema } from "./servicos/canais";
 import { agoraDe, type Contexto } from "./servicos/contexto";
 import { dossieSchema, lerDossie, substituirDossie } from "./servicos/dossie";
 import { criarVideo, importarIdeias, moverEtapa, novoVideoSchema } from "./servicos/videos";
+import { sincronizarSchema, sincronizarVideo } from "./servicos/sincronizar";
 import { exportarVersaoRoteiro, acharPastaVideo } from "./drive/estrutura";
 import { relative } from "node:path";
 import {
@@ -128,6 +129,7 @@ export function criarRotas(ctx: Contexto) {
           dataPlanejada: v.dataPlanejada,
           pontuacao,
           pendentesChecklist: pendentes,
+          pendencias: v.pendencias,
           emRisco: emRisco(v.etapa, v.dataPlanejada, agora),
           arquivos,
         };
@@ -144,6 +146,7 @@ export function criarRotas(ctx: Contexto) {
     })
 
     .post("/api/videos", corpo(novoVideoSchema), (c) => c.json(criarVideo(ctx, c.req.valid("json")), 201))
+    .post("/api/sincronizar", corpo(sincronizarSchema), (c) => c.json(sincronizarVideo(ctx, c.req.valid("json"))))
     .post(
       "/api/canais/:id/ideias",
       corpo(z.object({ texto: z.string() })),

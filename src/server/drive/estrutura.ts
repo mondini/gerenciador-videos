@@ -24,12 +24,12 @@ export function criarEstruturaCanal(driveRoot: string, pastaCanal: string): stri
   return base;
 }
 
-/** Acha a pasta do vídeo pelo prefixo do código (`BJJ-001_*`), tolerando renomeações manuais. */
+/** Acha a pasta do vídeo pelo prefixo do código (`BJJ-001-*`, ou `BJJ-001_*` do formato antigo), tolerando renomeações manuais. */
 export function acharPastaVideo(driveRoot: string, pastaCanal: string, codigo: string): string | null {
   const videos = resolverDentro(driveRoot, pastaCanal, "VIDEOS");
   if (!existsSync(videos)) return null;
   const achadas = readdirSync(videos, { withFileTypes: true })
-    .filter((e) => e.isDirectory() && (e.name === codigo || e.name.startsWith(`${codigo}_`)))
+    .filter((e) => e.isDirectory() && (e.name === codigo || e.name.startsWith(`${codigo}-`) || e.name.startsWith(`${codigo}_`)))
     .map((e) => e.name);
   if (achadas.length > 1) {
     throw new Error(`Mais de uma pasta para ${codigo}: ${achadas.join(", ")}. Resolva manualmente no Finder.`);

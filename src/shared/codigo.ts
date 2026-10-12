@@ -22,5 +22,5 @@ export function slugify(texto: string): string {
 }
 
 export function nomePastaVideo(codigo: string, titulo: string): string {
-  return `${codigo}_${slugify(titulo)}`;
+  return `${codigo}-${slugify(titulo)}`;
 }

@@ -5,7 +5,7 @@ Documento consolidado ao fim da entrevista (`/grill-me`) de 2026-10-09. A justif
 ## 1. Contexto
 
 - **Usuário único** (o dono), sem login. O sistema roda no Mac em `127.0.0.1:4321`.
-- **Primeiro canal:** estoicismo (foco em Marco Aurélio e nas *Meditações*) com Provérbios bíblicos como ponte. Finanças pessoais entram **de forma bem leve**, só como vínculo para deixar o assunto mais palatável, e não como tema central nem como orientação financeira. Canal *dark*, **100% em inglês** (mercado global), cerca de 2 vídeos por semana, 10 a 15 minutos, com shorts extraídos de cada vídeo. O plano completo está em [`canal-estoicismo/plano-canal-estoicismo.md`](../canal-estoicismo/plano-canal-estoicismo.md). Prefixo sugerido: `STO` (a confirmar). É um **experimento de 90 dias**, com critérios de corte definidos no início. Tudo o que o público vê (roteiro, narração, textos de tela, thumbnails, títulos, descrição, tags, capítulos, comentários fixados) é em inglês. A interface e a documentação do sistema continuam em pt-BR, assim como as notas internas do dono.
+- **Primeiro canal:** estoicismo (foco em Marco Aurélio e nas *Meditações*) com Provérbios bíblicos como ponte. Finanças pessoais entram **de forma bem leve**, só como vínculo para deixar o assunto mais palatável, e não como tema central nem como orientação financeira. Canal *dark*, **100% em inglês** (mercado global), cerca de 2 vídeos por semana, 10 a 15 minutos, com shorts extraídos de cada vídeo. O plano completo está em [`canal-estoicismo/plano-canal-estoicismo.md`](../canal-estoicismo/plano-canal-estoicismo.md). Nome: **Marble & Ash**, prefixo `MA`, pasta no Drive `MA - Marble & Ash`. É um **experimento de 90 dias**, com critérios de corte definidos no início. Tudo o que o público vê (roteiro, narração, textos de tela, thumbnails, títulos, descrição, tags, capítulos, comentários fixados) é em inglês. A interface e a documentação do sistema continuam em pt-BR, assim como as notas internas do dono.
 - O canal de artes marciais/BJJ foi a hipótese inicial e foi **substituído** pelo de estoicismo (ver `decisoes.md`). Os exemplos `BJJ-001` deste documento valem como exemplo de formato de código.
 - **Segundo canal:** depois dos 90 dias (ideias já mapeadas: história atmosférica e mistérios do universo). O modelo é multi-canal desde já.
 - **Fluxo de trabalho:** produção em lote, com estoque de vídeos prontos antes da primeira publicação (o plano do canal pede 12). Cada vídeo é produzido numa sessão separada do Claude, que devolve o **pacote de publicação** (ver `docs/pacote-de-publicacao.md`) para ser preenchido na ficha.
@@ -15,7 +15,7 @@ Documento consolidado ao fim da entrevista (`/grill-me`) de 2026-10-09. A justif
 1. Toda a interface e a documentação ficam em pt-BR. O código pode ficar em inglês.
 2. **Drive:** a raiz vem do `DRIVE_ROOT` no `.env` (padrão: `…/GoogleDrive-mondini@gmail.com/Meu Drive/Canais YouTube`). O servidor **não sobe** se a raiz não existir.
 3. **O sistema só cria arquivos e pastas no Drive.** Nunca move nem apaga. Renomear acontece só por botão, com confirmação explícita. Os arquivos que o próprio sistema exporta (roteiro `.md`, `fontes_tela.txt`) recebem nomes novos por versão em vez de sobrescrever.
-4. As pastas de vídeo são localizadas pelo **prefixo do código** (`BJJ-001_*`), nunca pelo nome completo.
+4. As pastas de vídeo são localizadas pelo **prefixo do código** (`BJJ-001-*`; o formato antigo `BJJ-001_*` também é aceito), nunca pelo nome completo.
 5. A leitura do Drive é **sob demanda**, sem índice nem watcher. Arquivos só online aparecem com ☁️, e nada de vídeo ou áudio é baixado para gerar prévia.
 6. O banco SQLite fica em `data/` (fora do Drive). Há backup `.db` em `DRIVE_ROOT/_backup/` ao iniciar e a cada 24h, sem exclusão automática.
 7. Segredos (chaves futuras de API, OAuth) ficam só no `.env` ou em arquivos ignorados pelo git.
@@ -127,7 +127,7 @@ DRIVE_ROOT/
     ├── 00_IDENTIDADE/
     ├── 01_BIBLIOTECA/
     └── VIDEOS/
-        └── BJJ-001_slug-do-titulo/
+        └── BJJ-001-slug-do-titulo/
             ├── 01_roteiro/      BJJ-001_roteiro_v1.md …
             ├── 02_audio/
             ├── 03_imagens/
@@ -200,3 +200,13 @@ Estes pontos são preenchidos no próprio app, depois que ele existir:
 - Dias e horário da grade de publicação.
 - Gerador de imagens, ferramenta de voz e editor (CapCut ou DaVinci): ficam como texto livre.
 - Textos finais dos modelos de checklist e do modelo de descrição (o sistema vem com padrões sugeridos).
+
+## Integração com o pipeline de um canal (2026-10-12)
+
+O sistema e o pipeline de produção de um canal (ex.: `canal-estoicismo/`) são projetos separados que dividem o repositório. A única ligação é a API:
+
+- `POST /api/sincronizar` com `{ prefixo, codigo, pasta, nomeInterno, tituloFinal?, etapa, roteiro, duracaoFinalSeg?, pendencias[] }`.
+- O canal precisa estar cadastrado (prefixo igual). O vídeo é criado se faltar, com o número do código.
+- A etapa só avança (nunca volta) e nunca entra em nem sai de Agendado/Publicado.
+- O roteiro vira `roteiroAtual` (somente leitura na ficha). As pendências aparecem no card (🎬 falta N) e no topo da ficha.
+- A mídia vai para o Drive pelo backup do próprio pipeline, na mesma estrutura de pastas da seção 5.

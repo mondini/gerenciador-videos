@@ -7,6 +7,7 @@ type Video = {
   id: number; codigo: string; canalId: number; etapa: string; tituloProvisorio: string; tituloFinal: string | null;
   formatoId: number | null; serieId: number | null; dataPlanejada: string | null; notaApelo: number | null; notaIlustracao: number | null; notaPesquisa: number | null;
   gancho: string; resumo: string; roteiroAtual: string; pastaRelativa: string | null;
+  pendencias: string[]; sincronizadoEm: string | null;
 };
 type Item = { id: number; etapa: string; texto: string; feito: boolean };
 type Versao = { id: number; numero: number; origem: string; nota: string | null; criadoEm: string; arquivoExportado: string | null };
@@ -48,6 +49,7 @@ export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId
         ))}
         <span className="ml-auto self-center rounded bg-slate-100 px-2 py-0.5 text-xs">Etapa: {v.etapa}</span>
       </div>
+      {v.sincronizadoEm && <Pendencias v={v} />}
       {/* as abas ficam montadas (só escondidas) para não perder o que foi digitado ao trocar de aba */}
       <div hidden={aba !== "Básico"}><Basico v={v} formatos={formatos} series={series} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Roteiro"}><Roteiro v={v} versoes={ficha.versoes} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
@@ -118,11 +120,27 @@ function Basico({ v, formatos, series, onSalvo, onAviso }: { v: Video; formatos:
   );
 }
 
+/** Resumo do que falta, vindo do pipeline do canal. */
+function Pendencias({ v }: { v: Video }) {
+  return (
+    <div className={`mb-4 rounded border px-3 py-2 text-sm ${v.pendencias.length ? "border-sky-200 bg-sky-50" : "border-emerald-200 bg-emerald-50"}`}>
+      <div className="font-medium">
+        {v.pendencias.length ? `🎬 Falta (${v.pendencias.length})` : "✅ Produção concluída no pipeline do canal"}
+        <span className="ml-2 font-normal text-slate-500">sincronizado em {fmtData(v.sincronizadoEm!)}</span>
+      </div>
+      {v.pendencias.length > 0 && <ul className="mt-1 list-disc pl-5">{v.pendencias.map((p) => <li key={p}>{p}</li>)}</ul>}
+    </div>
+  );
+}
+
 function Roteiro({ v, versoes, onSalvo, onAviso }: { v: Video; versoes: Versao[]; onSalvo: () => void; onAviso: (m: string, erro?: boolean) => void }) {
   const [texto, setTexto] = useState(v.roteiroAtual);
   const palavras = texto.trim() ? texto.trim().split(/\s+/).length : 0;
   const minutos = palavras / PALAVRAS_POR_MIN;
   const sujo = texto !== v.roteiroAtual;
+  // vídeo sincronizado: o roteiro.md do canal é a fonte da verdade; editar aqui seria sobrescrito
+  const doCanal = v.sincronizadoEm != null;
+  useEffect(() => setTexto(v.roteiroAtual), [v.roteiroAtual]);
 
   async function salvarTexto() {
     try {
@@ -143,9 +161,10 @@ function Roteiro({ v, versoes, onSalvo, onAviso }: { v: Video; versoes: Versao[]
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_16rem]">
       <div>
-        <textarea className={`${campo} h-96 font-mono leading-relaxed`} value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Escreva o roteiro em Markdown…" />
+        {doCanal && <p className="mb-2 text-sm text-slate-600">Somente leitura: este roteiro vem do <code>roteiro.md</code> do canal. Edite lá e rode <code>./ma sincronizar</code>.</p>}
+        <textarea className={`${campo} h-96 font-mono leading-relaxed`} value={texto} onChange={(e) => setTexto(e.target.value)} readOnly={doCanal} placeholder="Escreva o roteiro em Markdown…" />
         <div className="mt-2 flex flex-wrap items-center gap-2">
-          <button className={botao} onClick={salvarTexto} disabled={!sujo}>Salvar roteiro</button>
+          {!doCanal && <button className={botao} onClick={salvarTexto} disabled={!sujo}>Salvar roteiro</button>}
           <button className={botaoClaro} onClick={salvarVersao}>Salvar versão</button>
           <span className="ml-auto text-sm text-slate-500">{palavras} palavras · ~{minutos.toFixed(1)} min {minutos > 0 && (minutos < 8 || minutos > 10) ? "(meta: 8–10 min)" : ""}</span>
         </div>

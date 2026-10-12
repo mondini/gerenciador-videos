@@ -15,6 +15,13 @@
       "when": 1791747723602,
       "tag": "0001_brown_serpent_society",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791843787043,
+      "tag": "0002_goofy_radioactive_man",
+      "breakpoints": true
     }
   ]
 }
