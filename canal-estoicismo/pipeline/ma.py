@@ -197,28 +197,15 @@ def _som_da_peca(b, outro=None):
 def cmd_juntar(a):
     from marbleash import audio, entrega
     from marbleash.projeto import Bloco
-    def peca(n):
-        """Bloco numerado ou peça com nome: a do próprio vídeo (ex.: pausa) ou a comum (abertura, encerramento)."""
-        b = Bloco(a.video, n)
-        return b if str(n).isdigit() or b.pasta.is_dir() else Bloco('comum', n)
-    blocos = [peca(n) for n in a.blocos]
+    blocos = [Bloco.peca(a.video, n) for n in a.blocos]
     from marbleash.projeto import DISSOLVE
-    videos, juncoes = [], []
-    for i, b in enumerate(blocos):
+    videos = []
+    for b in blocos:
         v = b.trabalho / f'{b.nome}-video.mp4'
         if not v.exists():
             raise SystemExit(f'Falta {v.relative_to(config.CANAL)}. Rode antes: ma render {b.video} {b.numero}')
         videos.append(v)
-        if i:
-            ant = blocos[i - 1]
-            if not ant.sem_narracao and not b.sem_narracao:
-                juncoes.append('dissolve')
-            elif ant.sem_narracao and not b.sem_narracao:
-                juncoes.append('acende')
-            else:
-                if not ant.sem_narracao and ant.fade is None:
-                    raise SystemExit(f'{ant.nome} vem antes de {b.nome} (peça comum) e não escurece: declare FADE no script de cena.')
-                juncoes.append('corte')
+    juncoes = entrega.juncoes(blocos)
     base = Bloco(a.video, next(n for n in a.blocos if str(n).isdigit()))
     pasta = base.final
     pasta.mkdir(parents=True, exist_ok=True)
@@ -243,6 +230,23 @@ def cmd_juntar(a):
         entrega.exportar_4k(saida, s4)
         print(f'4K: {s4.relative_to(config.CANAL)}')
     _backup_automatico(base.pasta_video)
+
+
+def cmd_shorts(a):
+    from marbleash import producao, shorts
+    from marbleash.projeto import Bloco, nome_video
+    video = nome_video(a.video)
+    pasta = config.VIDEOS / video
+    defs = pasta / 'shorts.txt'
+    if not defs.exists():
+        raise SystemExit(f'Falta {defs.relative_to(config.CANAL)} (formato em pipeline/marbleash/shorts.py).')
+    final = producao.ler_status(pasta).final
+    if not final:
+        raise SystemExit('Falta o vídeo final. Rode antes: ma juntar')
+    lista = [s for s in shorts.ler(defs) if not a.numeros or s.numero in a.numeros]
+    print(f'{len(lista)} short(s) a partir de {final.name}')
+    for s in lista:
+        shorts.renderizar(s, final, video, pasta / 'shorts' / s.arquivo)
 
 
 def cmd_youtube(a):
@@ -433,6 +437,11 @@ def main(argv=None):
     sp.add_argument('--saida', help='nome do arquivo (sem extensão)')
     sp.add_argument('--som', help='troca o som de transição das peças sem narração (brasa, pedra, tambor, vento-sino, aurora)')
     sp.set_defaults(f=cmd_juntar)
+
+    sp = sub.add_parser('shorts', help='shorts verticais (1080x1920) cortados do vídeo final, definidos em shorts.txt')
+    sp.add_argument('video')
+    sp.add_argument('numeros', nargs='*', help='só estes shorts (ex.: 01 03); sem nada, todos')
+    sp.set_defaults(f=cmd_shorts)
 
     sp = sub.add_parser('youtube', help='simula a compressão do YouTube e tira stills lado a lado')
     sp.add_argument('arquivo')

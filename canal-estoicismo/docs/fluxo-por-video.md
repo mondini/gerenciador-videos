@@ -34,7 +34,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 
 ## 6. Entregáveis de publicação
 - 2 thumbnails (A Palavra, C Gancho) para o teste A/B do YouTube, em teatro de sombras com quadros reais do vídeo (ver `docs/plano-canal.md`); os arquivos finais (1280×720 PNG, < 2 MB) vão para `thumbnails/` (`MA-NNN_thumb_A.png`, `MA-NNN_thumb_C.png`). Conferir em 320×180.
-- Shorts verticais 1080×1920 (5–6 por vídeo, incluindo um de The Pause) em `shorts/`.
+- Shorts verticais 1080×1920 (5–6 por vídeo, incluindo um de The Pause *"Take 30 seconds with Marcus Aurelius"*): escrever `videos/MA-NNN-slug/shorts.txt` (trechos por deixa, títulos em inglês) e rodar `./ma shorts N`; saem em `shorts/`. Formato (decisão de 12/10/2026): faixa central com a cena inteira, título em Cinzel em cima, legenda frase a frase embaixo; trechos do próprio vídeo, sem narração nova.
 - **Pacote de Publicação** (15 seções) em `videos/MA-NNN-slug/pacote-de-publicacao.md` — pedir os links do canal ao criador.
 
 ## 7. Fechar a sessão

@@ -27,32 +27,55 @@ def concatenar(videos, saida):
     return Path(saida)
 
 
+def juncoes(pecas):
+    """Transição em cada junção de uma sequência de peças (Bloco): 'dissolve' entre peças narradas,
+    'acende' de peça sem narração para bloco, 'corte' para peça sem narração (o bloco antes dela escurece)."""
+    out = []
+    for ant, b in zip(pecas, pecas[1:]):
+        if not ant.sem_narracao and not b.sem_narracao:
+            out.append('dissolve')
+        elif ant.sem_narracao and not b.sem_narracao:
+            out.append('acende')
+        else:
+            if not ant.sem_narracao and ant.fade is None:
+                raise SystemExit(f'{ant.nome} vem antes de {b.nome} (peça comum) e não escurece: declare FADE no script de cena.')
+            out.append('corte')
+    return out
+
+
+def inicios(duracoes, juncoes_, dissolve):
+    """Início de cada peça na montagem e a duração total (o dissolve sobrepõe as peças)."""
+    ini, fim = [0.0], duracoes[0]
+    for d, j in zip(duracoes[1:], juncoes_):
+        ini.append(fim - dissolve if j == 'dissolve' else fim)
+        fim = ini[-1] + d
+    return ini, fim
+
+
 def montar(videos, juncoes, saida, dissolve, crf=14, preset='veryfast'):
     """Junta os vídeos com uma transição em cada junção (len(juncoes) == len(videos) - 1):
     'dissolve' (sobrepõe `dissolve` s), 'acende' (o seguinte nasce do escuro em `dissolve` s) ou 'corte'.
     Devolve o início de cada vídeo na montagem (s)."""
     durs = [duracao_video(v) for v in videos]
-    entradas, filtros, inicios = [], [], [0.0]
+    entradas, filtros = [], []
     for i, v in enumerate(videos):
         entradas += ['-i', str(v)]
         f = f'[{i}:v]setpts=PTS-STARTPTS,fps={FPS},settb=AVTB'
         if i and juncoes[i - 1] == 'acende':
             f += f',fade=t=in:st=0:d={dissolve}'
         filtros.append(f + f'[p{i}]')
-    atual, fim = '[p0]', durs[0]
+    inis, fim = inicios(durs, juncoes, dissolve)
+    atual = '[p0]'
     for i in range(1, len(videos)):
         saida_i = f'[m{i}]'
         if juncoes[i - 1] == 'dissolve':
-            ini = fim - dissolve
-            filtros.append(f'{atual}[p{i}]xfade=transition=fade:duration={dissolve}:offset={ini:.4f}{saida_i}')
+            filtros.append(f'{atual}[p{i}]xfade=transition=fade:duration={dissolve}:offset={inis[i]:.4f}{saida_i}')
         else:
-            ini = fim
             filtros.append(f'{atual}[p{i}]concat=n=2:v=1{saida_i}')
-        inicios.append(ini)
-        atual, fim = saida_i, ini + durs[i]
+        atual = saida_i
     subprocess.run([ffmpeg(), '-y', '-v', 'error', *entradas, '-filter_complex', ';'.join(filtros), '-map', atual,
                     '-c:v', 'libx264', '-preset', preset, '-crf', str(crf), '-pix_fmt', 'yuv420p', str(saida)], check=True)
-    return inicios, fim
+    return inis, fim
 
 
 def exportar_4k(entrada, saida, crf=16):

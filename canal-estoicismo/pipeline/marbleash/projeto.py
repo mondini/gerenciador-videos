@@ -52,6 +52,12 @@ def nome_video(v) -> str:
 class Bloco:
     """Um bloco de um vídeo: caminhos, script de cena, deixas e duração."""
 
+    @classmethod
+    def peca(cls, video, n):
+        """Bloco numerado ou peça com nome: a do próprio vídeo (ex.: pausa) ou a comum (abertura, encerramento)."""
+        b = cls(video, n)
+        return b if str(n).isdigit() or b.pasta.is_dir() else cls('comum', n)
+
     def __init__(self, video, numero):
         self.video = nome_video(video)
         n = str(numero)

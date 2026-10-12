@@ -1,0 +1,7 @@
+# Shorts do MA-001 (gerados por `./ma shorts 1`; formato em pipeline/marbleash/shorts.py)
+# NN | TÍTULO | subtítulo | peça | deixa de início | deixa de fim (exclusiva; fim = fim da narração) | crédito
+01 | STILL NOT ENOUGH? |  | 1 | maybe_you | fim |
+02 | TAKE 30 SECONDS | with Marcus Aurelius | pausa | wherever_you | fim |
+03 | DON'T BECOME THE CROWN |  | 3 | nights | fim | Marcus Aurelius, Meditations 6.30 · trans. George Long
+04 | THE PHONE THAT GOT OLD |  | 4 | phone | proverbs |
+05 | PRIDE BEFORE THE FALL |  | 5 | pride_goes | two_men | Proverbs 16:18–19 · World English Bible
