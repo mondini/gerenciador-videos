@@ -142,6 +142,16 @@ def _final(pasta: Path) -> Path | None:
     return max(cands, key=lambda p: p.stat().st_mtime) if cands else None
 
 
+def _previa(pasta: Path, nome: str) -> bool:
+    """A prévia do bloco no Mac ou, depois do `ma limpar`, a cópia no Drive (04_video/)."""
+    if (pasta / 'previas' / f'{nome}.mp4').exists():
+        return True
+    try:
+        return (pasta_drive_do_video(pasta) / '04_video' / f'{nome}.mp4').exists()
+    except SystemExit:              # Drive indisponível: só vale o que está no Mac
+        return False
+
+
 def ler_status(pasta_video: Path) -> Status:
     pasta = Path(pasta_video)
     m = re.match(rf'({re.escape(config.PREFIXO)}-\d{{3}})(?:-(.*))?$', pasta.name)
@@ -166,7 +176,7 @@ def ler_status(pasta_video: Path) -> Status:
             mp3=_mp3(pasta, nome),
             tempos=(sub / 'tempos.txt').exists(),
             cena=(sub / 'cena.py').exists(),
-            previa=(pasta / 'previas' / f'{nome}.mp4').exists(),
+            previa=_previa(pasta, nome),
         ))
     st.final = _final(pasta)
     st.thumbnails = sum(1 for p in (pasta / 'thumbnails').glob('*') if p.suffix.lower() in _IMAGEM)
