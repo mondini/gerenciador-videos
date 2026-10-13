@@ -151,13 +151,14 @@ def lua(cx, cy, r, crescente=0.0):
     """Disco claro projetado: máscara de luz 0..1 com borda de 4 px.
 
     crescente = 0 dá lua cheia; entre 0 e 1 um segundo disco "corta" a lua (como um recorte de papel)
-    e sobra um crescente voltado para a esquerda — quanto maior, mais fino.
+    e sobra um crescente voltado para a esquerda — quanto maior, mais fino. Negativo (0 a -1): o corte vem
+    da esquerda e sobra a minguante, voltada para a direita. O canal usa sempre crescente ou minguante.
     """
     yy, xx = _malha()
     d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2)
     m = np.clip((r - d) / 4 + 0.5, 0, 1).astype(np.float32)
-    if crescente > 0:
-        d2 = np.sqrt((xx - (cx + r * crescente)) ** 2 + (yy - (cy - r * 0.25 * crescente)) ** 2)
+    if crescente != 0:
+        d2 = np.sqrt((xx - (cx + r * crescente)) ** 2 + (yy - (cy - r * 0.25 * abs(crescente))) ** 2)
         m *= 1 - np.clip((r * 0.95 - d2) / 4 + 0.5, 0, 1).astype(np.float32)
     ys, xs = np.nonzero(m)
     return m, (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)

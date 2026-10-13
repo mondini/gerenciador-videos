@@ -1210,3 +1210,683 @@ def fio(x0=330, x1=1590, y=300, curva=50):
     stroke(d, pts[6:], 5.0, 2.0, AMBAR, n=8)
     ell(d, (x0 + x1) / 2, y - curva, 8, 8, AMBAR)
     return Static(down(im))
+
+
+# =====================================================================================================
+# MA-002 · On Anger — peças novas (13/10/2026). Nada aqui repete objeto marcante do MA-001.
+# Figuras fixas na altura do homem (escala 1.35: cabeça em y≈336, pés no chão BASE).
+# O pano "pesado" cobre até y≈870: o que pousa no chão fica em CHAO2 (acima da borda do pano).
+# =====================================================================================================
+
+# ---------------- bloco 1: onde a discussão volta (bica, estrada, cama) ----------------
+CHAO2 = BASE - 56
+
+
+def bica(cx=1460):
+    """Fonte de parede romana: estela com cabeça de leão, bica e bacia; fios d'água caindo (o "chuveiro")."""
+    def desenho(d):
+        b = BASE
+        poly(d, [(cx - 110, b), (cx + 110, b), (cx + 110, b - 420), (cx - 110, b - 420)])               # estela
+        shape(d, [(cx - 130, b - 420), (cx + 130, b - 420), (cx + 120, b - 446), (cx - 120, b - 446)], n=4)
+        shape(d, [(cx - 90, b - 446), (cx, b - 500), (cx + 90, b - 446)], n=6)                         # frontão
+        ell(d, cx, b - 466, 10, 10, HOLE)
+        for k in range(2):                                                                             # moldura vazada
+            stroke(d, [(cx - 84 + k * 168, b - 400), (cx - 84 + k * 168, b - 150)], 3, 3, HOLE)
+        stroke(d, [(cx - 84, b - 400), (cx + 84, b - 400)], 3, 3, HOLE)
+        # cabeça de leão: juba em pétalas vazadas, focinho, boca com a bica
+        ly = b - 310
+        for k in range(12):
+            a = k * math.pi / 6
+            stroke(d, [(cx + 30 * math.cos(a), ly + 30 * math.sin(a)), (cx + 52 * math.cos(a + 0.12), ly + 52 * math.sin(a + 0.12))], 4, 1, HOLE)
+        ell(d, cx - 12, ly - 8, 5, 4, HOLE)
+        ell(d, cx + 12, ly - 8, 5, 4, HOLE)
+        shape(d, [(cx - 8, ly + 6), (cx + 8, ly + 6), (cx, ly + 16)], HOLE, n=4)
+        poly(d, [(cx - 6, ly + 20), (cx + 6, ly + 20), (cx + 4, ly + 44), (cx - 4, ly + 44)])           # bica
+        # bacia
+        shape(d, [(cx - 160, b - 150), (cx + 160, b - 150), (cx + 140, b - 100), (cx + 120, b - 60), (cx - 120, b - 60), (cx - 140, b - 100)], n=6)
+        stroke(d, [(cx - 150, b - 136), (cx + 150, b - 136)], 3, 3, HOLE)
+        poly(d, [(cx - 40, b - 60), (cx + 40, b - 60), (cx + 50, b), (cx - 50, b)])
+    return full(desenho)
+
+
+def agua(k=0, cx=1460):
+    """Fios d'água caindo da bica na bacia (k = 0..3 alterna as ondulações)."""
+    def desenho(d):
+        ly = BASE - 310
+        for j in range(3):
+            x0 = cx - 3 + j * 3
+            pts = [(x0 + 3 * math.sin(i * 0.9 + k * 1.6 + j), ly + 44 + i * 12) for i in range(11)]
+            stroke(d, pts, 2.4, 1.2, (24, 18, 13, 200), n=4)
+        for j in range(5):                                                                              # respingos
+            a = math.pi * (0.15 + 0.7 * j / 4)
+            r = 18 + 8 * ((j + k) % 3)
+            ell(d, cx - math.cos(a) * r * 1.6, BASE - 160 - math.sin(a) * r * 0.6, 2.4, 2.4)
+    return full(desenho)
+
+
+def estrada(cx=1300):
+    """A volta para casa: marco miliário com inscrição vazada e a estrada de lajes fugindo para o fundo."""
+    def desenho(d):
+        b = CHAO2 + 10
+        shape(d, [(cx - 44, b), (cx + 44, b), (cx + 40, b - 300), (cx + 30, b - 326), (cx - 30, b - 326), (cx - 40, b - 300)], n=6)
+        shape(d, [(cx - 56, b + 30), (cx + 56, b + 30), (cx + 52, b), (cx - 52, b)], n=4)
+        for j, w in enumerate((40, 28, 34, 22)):                                                        # "MP XII"
+            stroke(d, [(cx - w / 2, b - 280 + j * 28), (cx + w / 2, b - 280 + j * 28)], 4, 4, HOLE)
+        for j in range(5):                                                                              # lajes da estrada
+            y = b - 6 - j * 9
+            x0, x1 = 120 + j * 120, 1700 - j * 40
+            stroke(d, [(x0, y), (x1, y - j * 2)], 2.4 - j * 0.3, 2.0 - j * 0.3, (24, 18, 13, 160))
+    return full(desenho)
+
+
+def cama(cx=1000):
+    """Leito romano (lectus) com cabeceira curva (fulcro em voluta), colchão e pés torneados."""
+    def desenho(d):
+        b, top = BASE, CHAO2 - 150
+        x0, x1 = cx - 260, cx + 260
+        shape(d, [(x0, top), (x1, top), (x1, top + 30), (x0, top + 30)], n=4)                           # estrado
+        shape(d, [(x0 + 10, top - 36), (x1 - 40, top - 40), (x1 - 20, top - 10), (x0 + 6, top - 6)], n=6)  # colchão
+        for k in range(5):
+            stroke(d, [(x0 + 60 + k * 90, top - 30), (x0 + 70 + k * 90, top - 10)], 2, 0.6, HOLE)
+        stroke(d, [(x0 - 10, top + 10), (x0 - 30, top - 60), (x0 - 10, top - 120), (x0 + 30, top - 130)], 18, 10, n=8)  # fulcro
+        spiral(d, x0 + 30, top - 118, 14, 1.4, 3, HOLE)
+        for x in (x0 + 20, x1 - 20):
+            for j, (w, y) in enumerate(((16, top + 30), (22, top + 54), (12, top + 80), (18, b - 8))):
+                ell(d, x, y, w, 10)
+            stroke(d, [(x, top + 30), (x, b)], 12, 12)
+    return full(desenho)
+
+
+def homem_deitado(cx=1000, olho=1.0):
+    """O homem deitado de costas na cama, perfil voltado para cima, olho aberto (`olho` 0 = fechado)."""
+    def desenho(d):
+        top = CHAO2 - 186
+        shape(d, [(cx - 200, top), (cx - 170, top - 30), (cx + 120, top - 34), (cx + 170, top - 20), (cx + 200, top)], n=8)   # corpo sob o lençol
+        for k in range(4):
+            stroke(d, [(cx - 120 + k * 70, top - 24), (cx - 100 + k * 70, top - 6)], 2.4, 0.6, HOLE)
+        hx, hy = cx - 228, top - 26                                                                     # cabeça de perfil, olhando para cima
+        shape(d, [(hx + 40, hy + 26), (hx + 4, hy + 30), (hx - 20, hy + 18), (hx - 28, hy - 4), (hx - 16, hy - 24),
+                  (hx + 6, hy - 30), (hx + 10, hy - 44), (hx + 18, hy - 38), (hx + 24, hy - 30), (hx + 36, hy - 24), (hx + 42, hy - 6)], n=10)
+        for k in range(5):
+            ell(d, hx - 24 + k * 6, hy + 22 - k * 9, 8, 8)
+            spiral(d, hx - 24 + k * 6, hy + 22 - k * 9, 5, 1.2, 1.4, HOLE)
+        if olho > 0.05:
+            shape(d, [(hx + 14, hy - 14), (hx + 22, hy - 16 - 4 * olho), (hx + 26, hy - 12)], HOLE, n=6)
+    return full(desenho)
+
+
+def _perfil(d, T, cabelo=None):
+    """Cabeça de perfil voltada para a esquerda (mesmo desenho do homem, espelhado), no sistema T(x, y)."""
+    pts = [(10, 4), (12, -16), (22, -30), (26, -50), (20, -70), (4, -82), (-14, -80), (-24, -68), (-26, -56), (-36, -44), (-28, -40),
+           (-27, -32), (-32, -27), (-26, -24), (-24, -16), (-16, -6), (-8, 0), (-10, 6)]
+    poly(d, cr([T(x, y) for x, y in pts], True, 12))
+    shape(d, [T(-12, -58), T(-20, -61), T(-16, -55)], HOLE, n=6)                                      # olho
+    stroke(d, [T(-6, -66), T(-14, -68), T(-22, -65)], 2.2, 0.6, HOLE)                                  # sobrancelha
+    spiral(d, *T(6, -46), 5, 1.3, 1.5, HOLE, sign=-1)                                                 # orelha
+
+
+def figura_mulher(cx=1300, s=1.9, braco=0.0):
+    """A mãe: stola longa e palla cobrindo a cabeça, de perfil para a esquerda; `braco` 0..1 ergue o dedo em riste."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, BASE + y * s)
+        corpo = [(-14, -228), (-30, -214), (-38, -170), (-34, -110), (-42, -60), (-54, -10), (-58, 0), (54, 0), (50, -30),
+                 (44, -90), (40, -160), (34, -206), (14, -230)]
+        poly(d, cr([T(x * 0.85, y) for x, y in corpo], True, 10))
+        H_ = lambda x, y: T(x * 0.72, y * 0.72 - 226)
+        _perfil(d, H_)
+        # véu (palla) cobrindo a cabeça e descendo pelas costas
+        shape(d, [H_(-8, -86), H_(14, -90), H_(30, -74), H_(34, -40), H_(30, 0), T(40, -170), T(48, -110), T(30, -120), T(20, -190),
+                  H_(14, -10), H_(16, -50), H_(4, -78)], n=8)
+        stroke(d, [H_(-6, -84), H_(18, -70), H_(22, -30), T(30, -180)], 2.4, 0.6, HOLE, n=6)          # borda do véu
+        ell(d, *H_(-6, -40), 2.6 * s, 2.6 * s, HOLE)                                                  # brinco
+        for k in range(6):                                                                            # dobras da stola
+            stroke(d, [T(-24 + k * 12, -190), T(-28 + k * 14, -100), T(-34 + k * 16, -8)], 2.6, 0.6, HOLE)
+        # braço: do ombro para a frente; em braco = 1, dedo em riste
+        ombro = T(-14, -200)
+        cot = T(-40 - 20 * braco, -150 - 30 * braco)
+        mao = T(-70 - 30 * braco, -150 - 80 * braco)
+        stroke(d, [ombro, cot, mao], 15 * s, 9 * s, n=6)
+        if braco > 0.3:
+            stroke(d, [mao, T(-74 - 30 * braco, -170 - 80 * braco)], 4 * s, 2.4 * s)
+    return full(desenho)
+
+
+def figura_chefe(cx=1300, s=1.9, ergue=0.0):
+    """O chefe: barrigudo, toga larga, queixo para cima, de perfil para a esquerda; `ergue` 0..1 levanta o
+    rolo (o trabalho do outro) acima da cabeça, para receber os aplausos."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, BASE + y * s)
+        corpo = [(-10, -230), (-30, -222), (-44, -196), (-58, -150), (-64, -110), (-58, -70), (-48, -30), (-52, 0), (56, 0), (54, -50),
+                 (50, -120), (44, -180), (30, -214), (12, -232)]
+        poly(d, cr([T(x, y) for x, y in corpo], True, 10))
+        H_ = lambda x, y: T(x * 0.72 + 2, y * 0.72 - 226 - 4 * ergue)
+        _perfil(d, H_)
+        shape(d, [H_(2, -86), H_(20, -82), H_(26, -66), H_(18, -64), H_(8, -72), H_(-4, -78)], n=6)   # cabelo ralo
+        for k in range(3):
+            stroke(d, [H_(-2 + k * 8, -82), H_(-10 + k * 8, -72)], 2.2, 0.6, HOLE)
+        shape(d, [H_(-26, -26), H_(-30, -10), H_(-20, 4), H_(-8, 2), H_(-14, -14)], n=6)              # papada
+        for k in range(5):                                                                            # dobras em diagonal da toga
+            stroke(d, [T(30 - k * 8, -210), T(-14 - k * 8, -130), T(-36 - k * 3, -30)], 3, 0.6, HOLE)
+        stroke(d, [T(-50, -150), T(0, -120), T(46, -150)], 3, 3, HOLE, n=6)                            # cinta da toga
+        # braço erguido segurando o rolo
+        ombro = T(-10, -205)
+        mao = T(-30 - 20 * ergue, -150 - 170 * ergue)
+        cot = T(-46 + 6 * ergue, -170 - 60 * ergue)
+        stroke(d, [ombro, cot, mao], 17 * s, 11 * s, n=6)
+        rx, ry = mao[0], mao[1] - 12 * s
+        poly(d, [(rx - 44 * s, ry - 8 * s), (rx + 34 * s, ry - 8 * s), (rx + 34 * s, ry + 8 * s), (rx - 44 * s, ry + 8 * s)])
+        for x in (rx - 44 * s, rx + 34 * s):
+            ell(d, x, ry, 7 * s, 11 * s)
+        holes_row(d, rx - 32 * s, ry, rx + 24 * s, ry, 8, 1.6)
+    return full(desenho)
+
+
+# ---------------- bloco 2: a fogueira alimentada, a lista, a pedra, os halteres, o jantar ----------------
+def fogueira_toras(n=3, cx=960):
+    """Fogueira de lenha cruzada no chão do palco; `n` = quantas toras já foram jogadas (1 a 7)."""
+    def desenho(d):
+        b = CHAO2 + 6
+        pedras = [(cx - 120 + k * 40, b - 6) for k in range(7)]
+        for x, y in pedras:                                                                             # anel de pedras
+            shape(d, [(x - 18, y + 8), (x - 16, y - 8), (x, y - 14), (x + 16, y - 8), (x + 18, y + 8)], n=5)
+        for k in range(min(n, 7)):
+            a = math.radians([-28, 26, -10, 40, -42, 12, -20][k])
+            L = 150 + 20 * (k % 3)
+            yc = b - 20 - 14 * (k // 2)
+            p0 = (cx - math.cos(a) * L / 2, yc - math.sin(a) * L / 2)
+            p1 = (cx + math.cos(a) * L / 2, yc + math.sin(a) * L / 2)
+            stroke(d, [p0, p1], 22, 18, n=3)
+            ell(d, *p1, 10, 11)
+            spiral(d, *p1, 6, 1.6, 1.2, HOLE)
+            stroke(d, [(p0[0] * 0.7 + p1[0] * 0.3, p0[1] * 0.7 + p1[1] * 0.3 - 4), (p0[0] * 0.4 + p1[0] * 0.6, p0[1] * 0.4 + p1[1] * 0.6 - 4)],
+                   1.8, 0.6, HOLE)
+    return full(desenho)
+
+
+def labareda(k=0, tam=1.0, cx=960):
+    """Chamas da fogueira de toras (4 formas para alternar); `tam` escala a altura (o fogo cresce e baixa)."""
+    im, d = canvas(W, H)
+    g = np.random.default_rng(140 + k)
+    for dx, h, w in ((0, 170, 34), (-44, 110, 24), (40, 128, 26), (-18, 80, 18), (22, 64, 15), (-62, 56, 14), (60, 60, 14)):
+        h *= float(g.uniform(0.82, 1.15)) * tam
+        w *= 0.6 + 0.4 * min(tam, 1.4)
+        sw = float(g.uniform(-18, 18)) * tam
+        x, y = cx + dx * (0.6 + 0.4 * min(tam, 1.4)), CHAO2 - 40
+        if h < 6:
+            continue
+        shape(d, [(x - w, y), (x - w * 1.1, y - h * 0.3), (x - w * 0.4 + sw * 0.3, y - h * 0.62), (x + sw * 0.8 - 4, y - h * 0.86),
+                  (x + sw, y - h), (x + sw * 0.5 + 6, y - h * 0.72), (x + w * 0.7, y - h * 0.42), (x + w, y - h * 0.12), (x + w * 0.8, y)],
+              (255, 226, 160, 255), n=10)
+    return Static(down(im))
+
+
+def tora():
+    """Uma tora solta (para jogar no fogo). Âncora (0, 0) = centro."""
+    im, d = canvas(240, 80)
+    stroke(d, [(30, 44), (120, 38), (210, 34)], 30, 26, n=4)
+    ell(d, 210, 34, 13, 14)
+    spiral(d, 210, 34, 8, 1.6, 1.4, HOLE)
+    stroke(d, [(70, 36), (110, 32)], 1.8, 0.6, HOLE)
+    stroke(d, [(140, 44), (176, 40)], 1.8, 0.6, HOLE)
+    shape(d, [(60, 30), (52, 12), (66, 26)], n=3)                                                       # galho cortado
+    return Static(down(im), -120, -40)
+
+
+def tabuinha(n=0, cx=960, cy=470):
+    """Tabuinha de cera dupla (díptico) aberta: moldura de madeira e `n` regras (0 a 9) riscadas com estilete,
+    numeradas I–IX à esquerda. As linhas são vazadas (a luz passa pela cera riscada)."""
+    def desenho(d):
+        w, h = 250, 300
+        for side in (-1, 1):
+            x0 = cx + (0 if side > 0 else -w - 14)
+            x1 = x0 + w
+            shape(d, [(x0, cy - h / 2), (x1, cy - h / 2), (x1, cy + h / 2), (x0, cy + h / 2)], n=4)
+            stroke(d, [(x0 + 18, cy - h / 2 + 18), (x1 - 18, cy - h / 2 + 18), (x1 - 18, cy + h / 2 - 18), (x0 + 18, cy + h / 2 - 18),
+                       (x0 + 18, cy - h / 2 + 18)], 3, 3, HOLE, n=2)
+        for k in range(4):                                                                              # cordões da dobradiça
+            ell(d, cx - 7, cy - 110 + k * 72, 5, 9, HOLE)
+        g = np.random.default_rng(9)
+        for j in range(min(n, 9)):
+            col = 0 if j < 5 else 1
+            x0 = cx - w + 20 if col == 0 else cx + 30
+            y = cy - h / 2 + 50 + (j % 5) * 50
+            for t in range(len(_ROMANOS[j])):                                                           # numeral (I..IX)
+                ch = _ROMANOS[j][t]
+                xx = x0 + t * 12
+                if ch == 'I':
+                    stroke(d, [(xx, y - 12), (xx, y + 10)], 3, 3, HOLE)
+                elif ch == 'V':
+                    stroke(d, [(xx - 5, y - 12), (xx, y + 10), (xx + 5, y - 12)], 3, 3, HOLE, n=2)
+                else:
+                    stroke(d, [(xx - 5, y - 12), (xx + 5, y + 10)], 3, 3, HOLE)
+                    stroke(d, [(xx + 5, y - 12), (xx - 5, y + 10)], 3, 3, HOLE)
+            xs = x0 + 50
+            pts = []
+            while xs < x0 + w - 40:
+                pts.append((xs, y + float(g.uniform(-6, 6))))
+                xs += float(g.uniform(10, 16))
+            ln(d, pts, 2.4, HOLE)
+    return full(desenho)
+
+
+_ROMANOS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+
+
+_PEDRA = [(30, 120), (24, 80), (50, 40), (100, 22), (160, 30), (196, 70), (198, 120), (170, 156), (100, 164), (50, 152)]
+
+
+def pedra_grande(s=1.0, contorno=False):
+    """A pedra que o homem carrega (rancor): bloco irregular com veios vazados. Âncora (0, 0) = centro.
+    `contorno`: fio vazado por dentro da borda, para a pedra se destacar quando está sobre o corpo."""
+    w, h = int(220 * s), int(180 * s)
+    im, d = canvas(w, h)
+    T = lambda x, y: (x * s, y * s)
+    shape(d, [T(x, y) for x, y in _PEDRA], n=8)
+    if contorno:
+        borda = cr([T(110 + (x - 110) * 0.9, 93 + (y - 93) * 0.88) for x, y in _PEDRA], True, 8)
+        ln(d, borda + borda[:1], 3.2, HOLE)
+    stroke(d, [T(44, 96), T(90, 84), T(130, 98), T(186, 88)], 2.6, 0.6, HOLE, n=5)
+    stroke(d, [T(70, 132), T(120, 126), T(160, 134)], 2.0, 0.5, HOLE, n=5)
+    ell(d, *T(150, 60), 5, 4, HOLE)
+    return Static(down(im), -w // 2, -h // 2)
+
+
+def rolo_icone(cx=1680, cy=150, s=1.0):
+    """O rolo hebraico como ícone fixo de Provérbios (pequeno, num canto): dois cilindros e a folha com linhas."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, cy + y * s)
+        poly(d, [T(-60, -40), T(60, -40), T(60, 40), T(-60, 40)])
+        for j in range(4):
+            stroke(d, [T(-46, -24 + j * 16), T(46, -24 + j * 16)], 2.2, 2.2, HOLE)
+        stroke(d, [T(0, -34), T(0, 34)], 1.2, 1.2, HOLE)
+        for x in (-66, 66):
+            shape(d, [T(x - 8, -48), T(x + 8, -48), T(x + 9, 48), T(x - 9, 48)], n=4)
+            for y, sg in ((-52, -1), (52, 1)):
+                ell(d, *T(x, y), 15 * s, 5 * s)
+                stroke(d, [T(x, y), T(x, y + sg * 22)], 5, 4)
+                ell(d, *T(x, y + sg * 26), 5 * s, 6 * s)
+    return full(desenho)
+
+
+def halteres():
+    """Halteres antigos de pedra (os gregos saltavam e treinavam com eles): par visto de lado. Âncora = centro."""
+    im, d = canvas(200, 120)
+    for ox in (50, 150):
+        shape(d, [(ox - 34, 30), (ox + 30, 24), (ox + 40, 46), (ox + 28, 72), (ox - 30, 86), (ox - 42, 62)], n=8)
+        ell(d, ox, 56, 14, 10, HOLE)                                                                    # pegada vazada
+    return Static(down(im), -100, -60)
+
+
+def mesa_jantar(cx=960):
+    """Mesa de jantar simples (não a de pés de leão do MA-001): tampo reto, pés retos, duas tigelas e um jarro."""
+    def desenho(d):
+        top = CHAO2 - 160
+        shape(d, [(cx - 240, top), (cx + 240, top), (cx + 240, top + 16), (cx - 240, top + 16)], n=4)
+        for x in (cx - 210, cx + 210):
+            stroke(d, [(x, top + 16), (x, BASE)], 14, 12)
+        for x in (cx - 120, cx + 60):
+            shape(d, [(x - 40, top), (x + 40, top), (x + 30, top - 22), (x - 30, top - 22)], n=6)
+        shape(d, [(cx + 170, top), (cx + 150, top - 40), (cx + 160, top - 90), (cx + 190, top - 96), (cx + 200, top - 40), (cx + 196, top)], n=8)
+        stroke(d, [(cx + 196, top - 80), (cx + 216, top - 70), (cx + 200, top - 40)], 4, 3, n=4)
+    return full(desenho)
+
+
+# ---------------- bloco 3: a reunião, as mãos, a linha, a voz calma, o rancor à beira da cama ----------------
+def mesa_reuniao(cx=1000):
+    """Mesa comprida da reunião (tampo em três quartos) com tabuinhas e um tinteiro."""
+    def desenho(d):
+        top = CHAO2 - 170
+        a, b = (cx - 380, top), (cx + 380, top)
+        poly(d, [a, b, toward(b, 0.04), toward(a, 0.04)])
+        shape(d, [(cx - 386, top), (cx + 386, top), (cx + 380, top + 18), (cx - 380, top + 18)], n=4)
+        for x in (cx - 340, cx - 120, cx + 120, cx + 340):
+            stroke(d, [(x, top + 18), (x + 4, CHAO2 + 20)], 14, 12)
+        for x in (cx - 260, cx - 40, cx + 200):
+            poly(d, [(x, top - 6), (x + 60, top - 8), (x + 62, top), (x, top)])
+        shape(d, [(cx + 300, top), (cx + 292, top - 26), (cx + 316, top - 26), (cx + 308, top)], n=4)
+        stroke(d, [(cx + 304, top - 26), (cx + 290, top - 70)], 2, 1)
+    return full(desenho)
+
+
+def ouvinte(cx=800, palmas=0.0, s=1.9):
+    """Figura sentada à mesa, de perfil para a direita (vira-se para o chefe); `palmas` 0..1 junta as mãos à frente."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, CHAO2 - 30 + y * s)
+        shape(d, [T(-20, -160), T(10, -158), T(22, -120), T(26, -70), T(40, -60), T(70, -58), T(72, -40), T(30, -36), T(-6, -30),
+                  T(-26, -60), T(-30, -120)], n=8)                                                    # tronco e coxa
+        _perfil(d, lambda x, y: T(-x * 0.72 + 2, y * 0.72 - 156))
+        for k, (x, y) in enumerate(((-18, -200), (-12, -212), (-2, -218), (-20, -188))):             # cachos na nuca
+            ell(d, *T(x, y), 5 * s, 5 * s)
+            spiral(d, *T(x, y), 3 * s, 1.2, 1.4, HOLE)
+        ombro = T(4, -140)
+        a = palmas
+        cot = T(30 + 6 * a, -110 - 20 * a)
+        mao = T(52 + 4 * a, -120 - 40 * a)
+        stroke(d, [ombro, cot, mao], 12 * s, 8 * s, n=6)
+        ell(d, *mao, 6 * s, 5 * s)
+        stroke(d, [T(-6, -40), T(-4, 0), T(0, 28)], 12 * s, 10 * s)                                    # perna
+        shape(d, [T(-40, -40), T(30, -40), T(26, -32), T(-36, -32)], n=4)                               # banco
+        for x in (-30, 20):
+            stroke(d, [T(x, -32), T(x - 4, 30)], 4 * s, 3 * s)
+    return full(desenho)
+
+
+def mao_estendida(cx=600, cy=760, ang=-60.0, s=1.6):
+    """Mão aberta, palma para cima, entrando de baixo no ângulo `ang` (o pedido de "mais um favor")."""
+    def desenho(d):
+        a = math.radians(ang)
+        c, s_ = math.cos(a), math.sin(a)
+        T = lambda u, v: (cx + (c * u - s_ * v) * s, cy + (s_ * u + c * v) * s)
+        stroke(d, [T(-300, 0), T(-160, 4), T(-20, 0)], 46 * s, 40 * s)                                 # antebraço com manga
+        shape(d, [T(-130, -34), T(-90, -36), T(-80, 36), T(-124, 40)], n=4)
+        stroke(d, [T(-120, -30), T(-100, 30)], 2, 1, HOLE)
+        shape(d, [T(-24, -24), T(30, -30), T(60, -22), T(64, 10), T(30, 26), T(-20, 22)], n=8)          # palma
+        for k, (L, off) in enumerate(((50, -20), (58, -8), (54, 4), (44, 15))):                         # dedos curvados
+            stroke(d, [T(56, off), T(56 + L * 0.6, off - 12), T(56 + L, off - 24)], 12 * s, 8 * s, n=5)
+        stroke(d, [T(-4, -22), T(20, -54), T(44, -64)], 13 * s, 9 * s, n=5)                             # polegar
+        stroke(d, [T(10, 0), T(40, -6)], 1.6, 0.6, HOLE)
+    return full(desenho)
+
+
+def linha_chao(q=1.0, cx=960):
+    """Linha âmbar traçada no chão ("draw the line"), crescendo do centro para os lados (q = 0..1). Para Chama."""
+    im, d = canvas(W, H)
+    if q > 0:
+        w = 420 * q
+        y = CHAO2 - 4
+        stroke(d, [(cx - w, y + 3), (cx - w / 2, y - 2), (cx, y), (cx + w / 2, y - 3), (cx + w, y + 2)], 6, 6, (255, 226, 160, 255), n=6)
+    return Static(down(im))
+
+
+def onda_voz(k=0, x0=900, y0=520):
+    """Ondas suaves saindo da boca (a voz calma): três arcos concêntricos que avançam com k = 0..7."""
+    def desenho(d):
+        for j in range(3):
+            r = 30 + ((k * 12 + j * 34) % 110)
+            fade = 1 - r / 150
+            d.arc([*P(x0 - r, y0 - r), *P(x0 + r, y0 + r)], -40, 40, fill=(14, 10, 7, int(255 * max(fade, 0.15))), width=int(5 * S))
+    return full(desenho)
+
+
+def vulto_sentado(cx=900, s=1.9):
+    """O rancor: vulto curvado sentado à beira da cama, sem rosto, só um olho vazado, esperando."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, CHAO2 - 150 + y * s)
+        shape(d, [T(-30, 0), T(-40, -60), T(-30, -120), T(0, -150), T(30, -146), T(46, -120), T(40, -90), T(60, -80), T(66, -40),
+                  T(60, 0), T(66, 60), T(40, 80), T(30, 40), T(10, 20)], n=10)
+        ell(d, *T(30, -128), 3 * s, 2 * s, HOLE)
+        stroke(d, [T(40, 0), T(56, 60), T(52, 80)], 10 * s, 8 * s)
+    return full(desenho)
+
+
+# ---------------- bloco 4: a traição de Avídio Cássio ----------------
+def _mar_oriente(cx, cy):
+    """Mar Mediterrâneo oriental (contorno do mar no mapa): Grécia à esquerda, Ásia Menor em cima, Levante à direita,
+    Egito embaixo."""
+    pts = [(-300, -120), (-200, -98), (-80, -90), (60, -112), (180, -82), (232, -60), (216, 20), (202, 100), (186, 170),
+           (100, 176), (40, 168), (14, 186), (-6, 162), (-120, 172), (-300, 178), (-470, 166), (-470, 40), (-430, -10),
+           (-450, -60), (-400, -110), (-350, -128)]
+    return [(cx + x, cy + y) for x, y in pts]
+
+
+def _hachura_oriente(cx, cy, q=1.0):
+    """Hachura diagonal das terras do Oriente (Síria, Judeia, Egito), à direita da costa do Levante;
+    q = 0..1 acende da fronteira (direita) para a costa."""
+    linhas = []
+    for k in range(26):
+        x = cx + 500 - k * 14
+        if x < cx + 500 - 400 * q:
+            break
+        linhas.append([(x, cy - 270), (x - 60, cy + 270)])
+    return linhas
+
+
+def mapa_oriente(cx=960, cy=460):
+    """Mapa em pergaminho do Mediterrâneo oriental: o mar vazado deixa a luz passar; Chipre, Creta, o Nilo, as
+    cidades e a hachura das terras do Oriente (por onde a gelatina âmbar acende)."""
+    def desenho(d):
+        w, h = 520, 300
+        poly(d, [(cx - w, cy - h), (cx + w, cy - h), (cx + w, cy + h), (cx - w, cy + h)])
+        for x in (cx - w, cx + w):
+            ell(d, x, cy, 22, h + 10)
+            ell(d, x, cy, 8, h - 20, HOLE)
+        for a, b in _hachura_oriente(cx, cy):
+            stroke(d, [a, b], 3, 3, HOLE, n=2)
+        shape(d, _mar_oriente(cx, cy), HOLE, n=4)
+        for j in range(5):                                                                            # ondinhas no mar
+            y = cy - 20 + j * 34
+            stroke(d, [(cx - 380 + j * 30, y), (cx - 340 + j * 30, y - 6), (cx - 300 + j * 30, y)], 2.4, 2.4, INK, n=4)
+        shape(d, [(cx - 60, cy + 10), (cx + 10, cy - 4), (cx + 30, cy + 14), (cx - 40, cy + 26)], n=5)    # Chipre
+        shape(d, [(cx - 330, cy + 100), (cx - 250, cy + 94), (cx - 240, cy + 110), (cx - 320, cy + 118)], n=5)  # Creta
+        stroke(d, [(cx + 4, cy + 176), (cx + 14, cy + 220), (cx + 6, cy + 290)], 5, 3, HOLE, n=5)          # o Nilo
+        for x, y in ((cx + 270, cy - 30), (cx + 250, cy + 60), (cx + 4, cy + 196), (cx - 160, cy - 140)):
+            ell(d, x, y, 8, 8, HOLE)                                                                  # cidades
+    return full(desenho)
+
+def oriente_brasa(q=1.0, cx=960, cy=460):
+    """Gelatina âmbar na hachura do Oriente, acendendo da fronteira para a costa (q = 0..1)."""
+    def desenho(d):
+        for a, b in _hachura_oriente(cx, cy, q):
+            stroke(d, [a, b], 3, 3, (255, 255, 255, 255), n=2)
+        if q > 0:
+            shape(d, _mar_oriente(cx, cy), (0, 0, 0, 0), n=4)
+    return full(desenho)
+
+def cavalo(k=0, s=1.0):
+    """Mensageiro a cavalo galopando para a direita (k = 0..3: quadros do galope). Âncora (0, 0) = cascos no chão."""
+    im, d = canvas(560, 520)
+    ox, oy = 280, 480
+    T = lambda x, y: ((x * s + ox), (y * s + oy))
+    fase = k * math.pi / 2
+    sobe = 10 * math.sin(fase)
+    def Tb(x, y):
+        return T(x, y - sobe)
+    # corpo, pescoço e cabeça
+    shape(d, [Tb(-150, -200), Tb(-100, -226), Tb(40, -230), Tb(110, -250), Tb(150, -320), Tb(176, -340), Tb(214, -320), Tb(226, -300),
+              Tb(206, -290), Tb(170, -280), Tb(140, -220), Tb(130, -170), Tb(60, -150), Tb(-90, -146), Tb(-150, -160)], n=8)
+    for j in range(6):                                                                                 # crina
+        stroke(d, [Tb(110 + j * 10, -262 - j * 12), Tb(96 + j * 10, -280 - j * 12)], 6, 1)
+    shape(d, [Tb(-150, -196), Tb(-200, -180), Tb(-224, -140), Tb(-196, -150), Tb(-150, -170)], n=6)       # cauda
+    shape(d, [Tb(190, -330), Tb(196, -350), Tb(204, -330)], n=3)                                       # orelha
+    ell(d, *Tb(196, -318), 3, 2.4, HOLE)
+    stroke(d, [Tb(214, -306), Tb(180, -300), Tb(120, -246)], 1.6, 1.6, HOLE)                           # rédea
+    # pernas: dianteiras e traseiras alternando
+    for j, (bx, f0) in enumerate(((100, 0.0), (80, math.pi), (-110, math.pi / 2), (-130, 3 * math.pi / 2))):
+        a = math.sin(fase + f0)
+        joelho = (bx + 30 * a, -100 - sobe * 0.5)
+        casco = (bx + 70 * a, -10 + (14 * max(0, -a) if j < 2 else 14 * max(0, a)))
+        stroke(d, [Tb(bx, -160), T(*joelho), T(*casco)], 22, 10, n=5)
+        ell(d, *T(casco[0] + 6, casco[1] + 4), 9, 7)
+    # cavaleiro com capa ao vento e o rolo da notícia
+    shape(d, [Tb(-10, -230), Tb(30, -228), Tb(40, -300), Tb(20, -350), Tb(-6, -346), Tb(-18, -300)], n=6)
+    ell(d, *Tb(14, -372), 16, 18)
+    shape(d, [Tb(2, -386), Tb(30, -392), Tb(26, -404), Tb(0, -400)], n=4)                              # elmo
+    shape(d, [Tb(-10, -340), Tb(-80, -330 - 10 * math.sin(fase * 2)), Tb(-130, -300 - 14 * math.cos(fase)), Tb(-60, -300), Tb(-14, -300)], n=6)
+    stroke(d, [Tb(30, -320), Tb(80, -306), Tb(110, -320)], 10, 7)
+    poly(d, [Tb(100, -330), Tb(130, -334), Tb(132, -318), Tb(102, -314)])
+    stroke(d, [Tb(10, -232), Tb(20, -190), Tb(10, -160)], 14, 10)                                       # perna do cavaleiro
+    return Static(down(im), -ox, -oy)
+
+
+def estandarte(cx=600, s=1.0):
+    """Estandarte da legião: haste, águia de asas abertas no alto e vexilo com franja."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, CHAO2 + 20 + y * s)
+        stroke(d, [T(0, 0), T(0, -560)], 8 * s, 7 * s)
+        shape(d, [T(-12, -560), T(-60, -600), T(-90, -640), T(-50, -616), T(-14, -600), T(-8, -630), T(0, -650), T(10, -630),
+                  T(14, -600), T(50, -616), T(90, -640), T(60, -600), T(12, -560)], n=6)                  # águia
+        ell(d, *T(4, -644), 3, 2.4, HOLE)
+        stroke(d, [T(-70, -480), T(70, -480)], 5, 5)                                                    # travessa
+        poly(d, [T(-62, -480), T(62, -480), T(62, -380), T(-62, -380)])                                 # vexilo
+        holes_row(d, *T(-50, -430), *T(50, -430), 5, 4, shape='diamond')
+        for j in range(12):                                                                            # franja
+            stroke(d, [T(-60 + j * 11, -380), T(-60 + j * 11, -364)], 2.4, 1)
+        for j in range(3):
+            ell(d, *T(0, -320 + j * 60), 16, 10)
+            ell(d, *T(0, -320 + j * 60), 8, 5, HOLE)
+    return full(desenho)
+
+
+def general(cx=1300, coroa=0.0, s=1.9):
+    """Avídio Cássio: couraça musculada, capa e manto, de perfil para a direita; `coroa` 0..1 ergue a coroa de louros
+    das mãos até a própria cabeça (ele se declara imperador)."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, BASE + y * s)
+        corpo = [(14, -230), (34, -214), (40, -170), (36, -120), (44, -80), (36, -40), (30, 0), (-40, 0), (-36, -40), (-46, -80),
+                 (-40, -130), (-40, -190), (-24, -222)]
+        poly(d, cr([T(x, y) for x, y in corpo], True, 10))
+        H_ = lambda x, y: T(-x * 0.72 - 2, y * 0.72 - 226)
+        _perfil(d, H_)
+        shape(d, [H_(-26, -78), H_(-6, -88), H_(18, -84), H_(28, -66), H_(24, -54), H_(8, -70), H_(-18, -70)], n=6)  # cabelo curto
+        shape(d, [T(-22, -214), T(-50, -180), T(-58, -80), T(-50, -6), T(-36, -40), T(-30, -170)], n=6)   # capa
+        stroke(d, [T(-30, -150), T(26, -150)], 3, 3, HOLE)                                              # couraça: peitoral e saiote
+        stroke(d, [T(-8, -190), T(18, -170), T(-6, -160)], 2.4, 1, HOLE, n=5)
+        for j in range(6):
+            stroke(d, [T(-36 + j * 12, -80), T(-38 + j * 13, -40)], 3, 2, HOLE)
+        # braços erguendo a coroa
+        # a coroa sobe à frente do peito até pairar sobre a cabeça
+        wx, wy = T(30 - 30 * coroa, -150 - 150 * coroa)
+        for side in (-1, 1):
+            mao = (wx + side * 30 * s, wy + 6 * s)
+            stroke(d, [T(4 * side + 6, -200), T(36 + side * 8, -170 - 30 * coroa), mao], 13 * s, 8 * s, n=6)
+        stroke(d, [(wx - 34 * s, wy), (wx, wy + 10 * s), (wx + 34 * s, wy)], 3 * s, 3 * s, n=6)       # aro
+        for side in (-1, 1):
+            for j in range(5):
+                f = j / 4
+                lx, ly = wx + side * (8 + 28 * f) * s, wy + (8 - 12 * f * f) * s
+                leaf(d, lx, ly, 90 + side * (90 - 20 * f), 16 * s, INK)
+    return full(desenho)
+
+
+def caixa_coberta(cx=1300):
+    """A caixa coberta por um pano (o que trouxeram ao imperador; nunca mostrada)."""
+    def desenho(d):
+        b = CHAO2 - 110
+        poly(d, [(cx - 80, b), (cx + 80, b), (cx + 80, b - 90), (cx - 80, b - 90)])
+        shape(d, [(cx - 96, b - 70), (cx - 84, b - 104), (cx - 20, b - 118), (cx + 40, b - 112), (cx + 90, b - 100), (cx + 100, b - 60),
+                  (cx + 92, b - 20), (cx + 70, b - 50), (cx + 20, b - 60), (cx - 40, b - 56), (cx - 86, b - 30)], n=8)
+        for j in range(3):
+            stroke(d, [(cx - 50 + j * 40, b - 110), (cx - 40 + j * 40, b - 70)], 2.2, 0.6, HOLE)
+        for side in (-1, 1):                                                                           # varais de carregar
+            stroke(d, [(cx - 200, b - 40 + side * 0), (cx + 200, b - 40)], 6, 6)
+    return full(desenho)
+
+
+def capsa(cx=960, aberta=0.0, n_rolos=7):
+    """Capsa: estojo cilíndrico romano de rolos, com alça e tampa; `aberta` 0..1 levanta a tampa; rolos com selos."""
+    def desenho(d):
+        b = CHAO2 - 30
+        w, h = 84, 300
+        shape(d, [(cx - w, b), (cx + w, b), (cx + w, b - h), (cx - w, b - h)], n=4)
+        ell(d, cx, b, w, 18)
+        for j in range(3):
+            stroke(d, [(cx - w, b - 40 - j * 66), (cx + w, b - 40 - j * 66)], 3, 3, HOLE)
+        holes_row(d, cx - w + 16, b - 120, cx + w - 16, b - 120, 8, 3, shape='diamond')
+        stroke(d, [(cx - w + 10, b - h), (cx - w + 30, b - h - 70), (cx + w - 30, b - h - 70), (cx + w - 10, b - h)], 6, 6, n=4)  # alça
+        for j in range(n_rolos):                                                                       # rolos saindo pela boca
+            x = cx - 66 + j * 22
+            yt = b - h - 30 - 18 * (j % 3)
+            poly(d, [(x - 10, b - h + 4), (x + 10, b - h + 4), (x + 10, yt), (x - 10, yt)])
+            ell(d, x, yt, 10, 5)
+            ell(d, x, yt + 30, 7, 7, HOLE)                                                             # selo vazado
+            ell(d, x, yt + 30, 4, 4)
+        lid = aberta
+        lx, ly = cx + 160 * lid, b - h - 20 - 140 * lid
+        ell(d, lx, ly, w + 8, 20)
+        poly(d, [(lx - w - 8, ly), (lx + w + 8, ly), (lx + w + 8, ly - 30), (lx - w - 8, ly - 30)])
+        ell(d, lx, ly - 30, w + 8, 18)
+    return full(desenho)
+
+
+def carta(queima=0.0, s=1.0):
+    """Uma carta: rolo lacrado com selo de cera; `queima` 0..1 consome o rolo da direita para a esquerda,
+    com borda carcomida. Âncora (0, 0) = centro do rolo inteiro."""
+    im, d = canvas(260, 120)
+    ox, oy = 130, 60
+    T = lambda x, y: (ox + x * s, oy + y * s)
+    fim = 100 - 200 * queima
+    if fim > -96:
+        g = np.random.default_rng(int(queima * 50) + 3)
+        borda = [T(fim + float(g.uniform(-10, 10)), y) for y in range(-22, 23, 6)]
+        poly(d, [T(-100, -22)] + borda + [T(-100, 22)])
+        ell(d, *T(-100, 0), 10 * s, 22 * s)
+        ell(d, *T(-100, 0), 4 * s, 10 * s, HOLE)
+        if fim > -20:
+            ell(d, *T(-20, 0), 16 * s, 16 * s, HOLE)                                                  # selo
+            ell(d, *T(-20, 0), 11 * s, 11 * s)
+            spiral(d, *T(-20, 0), 7 * s, 1.2, 1.4, HOLE)
+        stroke(d, [T(-90, -12), T(min(fim, 90) - 10, -12)], 1.6, 1.6, HOLE)
+    return Static(down(im), -ox, -oy)
+
+
+def cinza(k=0):
+    """Floco de cinza subindo (papel queimado). Âncora (0, 0) = centro. k varia a forma."""
+    im, d = canvas(40, 40)
+    g = np.random.default_rng(300 + k)
+    pts = [(20 + float(g.uniform(5, 11)) * math.cos(a), 20 + float(g.uniform(3, 8)) * math.sin(a)) for a in np.linspace(0, 6.2, 7)]
+    shape(d, pts, (40, 30, 22, 200), n=4)
+    return Static(down(im), -20, -20)
+
+
+# ---------------- The Pause: a brasa que respira ----------------
+def carvao(cx=960, cy=560, s=1.6):
+    """O carvão da Pausa: pedaço de lenha queimada com rachaduras vazadas (por onde a brasa aparece)."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, cy + y * s)
+        shape(d, [T(-150, 40), T(-160, -10), T(-120, -50), T(-40, -66), T(60, -70), T(140, -40), T(160, 10), T(130, 50), T(20, 64), T(-80, 60)], n=8)
+        for k, pts in enumerate(_RACHAS_CARVAO):
+            stroke(d, [T(x, y) for x, y in pts], (5 if k < 2 else 3.6) * s, 1.4 * s, HOLE, n=4)
+        for x, y in ((-140, 0), (150, -6), (0, -62), (-40, 58)):                                       # lascas soltas
+            shape(d, [T(x - 14, y), T(x, y - 10), T(x + 16, y - 2), T(x + 4, y + 10)], n=3)
+    return full(desenho)
+
+
+_RACHAS_CARVAO = [[(-130, -14), (-96, -8), (-70, -22), (-30, -16), (10, -30), (46, -22), (90, -38), (130, -24)],
+                  [(-120, 26), (-80, 18), (-50, 30), (-10, 22), (30, 36), (70, 24), (120, 30)],
+                  [(-30, -16), (-24, 4), (-10, 22)], [(46, -22), (50, 0), (30, 36)], [(90, -38), (96, -10), (70, 24)],
+                  [(-70, -22), (-76, 0), (-80, 18)], [(10, -30), (4, -52)], [(-96, -8), (-110, -36)], [(70, 24), (84, 50)]]
+
+
+def brasa(cx=960, cy=560, s=1.6):
+    """Gelatina âmbar nas rachaduras do carvão (mesmo traço de `carvao`): acende na inspiração, esfria na expiração."""
+    def desenho(d):
+        T = lambda x, y: (cx + x * s, cy + y * s)
+        for k, pts in enumerate(_RACHAS_CARVAO):
+            stroke(d, [T(x, y) for x, y in pts], (7 if k < 2 else 5) * s, 2.4 * s, (255, 255, 255, 255), n=4)
+    return full(desenho)
+
+
+# ---------------- bloco 5: a cidade tomada (a tora que não é jogada usa `tora` na mão do homem) ----------------
+def cidade_sitiada(cx=1250):
+    """Cidade murada em primeiro plano: muralha com ameias, duas torres e o portão (a cidade que se toma)."""
+    def desenho(d):
+        b = CHAO2 + 10
+        x0, x1, top = cx - 330, cx + 330, b - 300
+        poly(d, [(x0, b), (x1, b), (x1, top), (x0, top)])
+        for x in range(int(x0), int(x1), 34):
+            poly(d, [(x, top), (x + 18, top), (x + 18, top - 22), (x, top - 22)])
+        for tx in (x0 + 10, x1 - 90):
+            poly(d, [(tx, b), (tx + 80, b), (tx + 80, top - 110), (tx, top - 110)])
+            for j in range(3):
+                poly(d, [(tx + j * 30, top - 110), (tx + j * 30 + 18, top - 110), (tx + j * 30 + 18, top - 134), (tx + j * 30, top - 134)])
+            ell(d, tx + 40, top - 60, 8, 16, HOLE)
+        ell(d, cx, b - 130, 60, 60, HOLE)                                                              # portão
+        poly(d, [(cx - 60, b - 130), (cx + 60, b - 130), (cx + 60, b), (cx - 60, b)], HOLE)
+        for j in range(5):
+            stroke(d, [(cx - 50 + j * 25, b - 180), (cx - 50 + j * 25, b)], 4, 4)                       # grade
+        for row, y in enumerate(range(int(top) + 40, int(b), 44)):
+            stroke(d, [(x0 + 90, y), (x1 - 90, y)], 2, 2, HOLE)
+        for x in (cx - 260, cx - 140, cx + 140, cx + 240):                                             # telhados atrás
+            poly(d, [(x - 40, top - 22), (x, top - 70), (x + 40, top - 22)])
+    return full(desenho)
+
+
+def espelhado(arte, *args):
+    """A mesma peça virada para o outro lado (espelho em torno de x = 0 da âncora): soldados frente a frente,
+    figuras de perfil invertido. Use com uma peça de âncora (0, 0), como `soldado`."""
+    sp = arte(*args)
+    out = Static.__new__(Static)
+    out.a = np.ascontiguousarray(sp.a[:, ::-1])
+    out.x0, out.y0 = -(sp.x0 + sp.w), sp.y0
+    out.h, out.w = sp.h, sp.w
+    return out

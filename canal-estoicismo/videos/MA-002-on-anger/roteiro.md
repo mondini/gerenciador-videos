@@ -139,6 +139,8 @@ and did something with the traitor's letters... that almost no one would do.
 [softly] We'll get there.
 ```
 
+**Deixas:** won = "You've already won" · hundred = "a hundred times" · shower = "In the shower" · drive = "On the drive home" · three = "At three in the morning" · know = "You know exactly" · boss = "To your boss" · mother = "To your mother" · person = "To that person" · every = "And every time" · lose = "you lose a little" · strange = "Here is the strange" · anger = "Your anger is not" · human = "Anger is human" · comes = "It comes" · goes = "and it goes" · grudge = "The problem is the grudge" · stays = "The part that stays" · stoics = "The Stoics" · marcus = "And Marcus Aurelius" · betrayal = "once faced" · letters = "and did something" · there = "We'll get there"
+
 Escolhido entre três variações (13/10/2026). "Anger" aos ~28 s, "Stoics" aos ~37 s; *loop* aberto para o bloco 4.
 **Short:** "You've already won this argument... a hundred times." até "...a little more of your peace."
 **Créditos:** nenhum (texto do canal).
@@ -175,6 +177,8 @@ And unlike the gym... carrying it won't make you any stronger.
 [softly] And still... most of us carry it.
 Home. To the dinner table. And into bed.
 ```
+
+**Deixas:** hundred = "About a hundred years" · seneca = "His name was Seneca" · noticed = "And he noticed" · feed = "we feed it" · suspect = "Even when we begin" · because = "Because stopping" · put = "He put it like this" · nurse = "we nurse it" · words = "In other words" · keep = "we keep the fire" · trap = "Marcus knew the same trap" · longest = "In one of the longest" · list = "he left himself a list" · consider = "consider how much more pain" · simple = "In simple words" · once = "what they did to you" · what = "What you do with it" · every = "happens every day" · insult = "The insult took" · grudge = "The grudge" · years = "can take years" · proverbs = "The book of Proverbs" · stone = "A stone is heavy" · fool = "but a fool's provocation" · words2 = "In other words" · gym = "one careless comment" · unlike = "And unlike the gym" · stronger = "carrying it won't" · still = "And still" · home = "Home" · dinner = "To the dinner table" · bed = "And into bed"
 
 Toque leve de humor na academia a pedido do criador (13/10/2026).
 **Short:** "In simple words... what they did to you happened once." até "...can take years."
@@ -215,6 +219,8 @@ Anger, used well... becomes an action. A boundary. A conversation.
 A grudge becomes nothing.
 It just sits there... and waits for you, every night.
 ```
+
+**Deixas:** sometimes = "And sometimes" · person = "It's a person" · boss = "The boss who presents" · name = "And never once" · relative = "The relative" · friend = "The friend who" · give = "You give more" · more = "they want more" · marcus = "Marcus had people" · question = "And he left himself" · offends = "When someone's behavior" · could = "could the world" · couldnt = "It couldn't" · impossible = "So stop demanding" · expecting = "Expecting a world" · winter = "is like getting angry" · right = "That doesn't mean" · waiting = "It means you stop" · peace = "before you allow" · help = "And here is where" · signal = "Anger is a signal" · crossed = "It tells you" · entry = "In another entry" · act = "why not act" · soact = "So act" · no = "Say no" · conversa = "Ask for that" · line = "Draw the line" · proverbs = "And Proverbs has" · patience = "By patience" · tongue = "A soft tongue" · calm = "The calm voice" · stubborn = "Sometimes it's the only" · difference = "That is the difference" · anger = "Anger" · action = "becomes an action" · boundary = "A boundary" · nothing = "A grudge becomes nothing" · sits = "It just sits" · night = "every night"
 
 Exemplo de trabalho: o chefe que apresenta o seu trabalho como dele e não dá crédito (pedido do criador). Primeira aplicação da regra 3 revisada: 9.42 e 8.47 parafraseados, só o 25:15 literal. O 8.47, no original, trata do que nos incomoda em geral; por isso "another entry" + "blunt question", sem dizer que fala de pessoas.
 **Short:** "Anger, used well... becomes an action." até "...every night."
@@ -262,6 +268,8 @@ Anger looks like strength. It isn't. It's a wound.
 [softly] Let's pause here.
 ```
 
+**Deixas:** now = "Now" · year = "In the year 175" · cassius = "one of his most trusted" · hero = "A hero of the wars" · east = "Marcus had placed" · rumor = "Then a false rumor" · dead = "that the emperor was dead" · declared = "And Cassius declared" · imagine = "Imagine hearing that" · raised = "The man you raised" · war = "Rome began to prepare" · gathered = "Marcus gathered" · dio = "And the old historian" · afraid = "He was afraid of only" · defeat = "Not defeat" · would = "He was afraid that" · forgive = "To forgive a man" · prize = "that would be a greater" · chance = "He never got" · months = "Three months later" · killed = "Cassius was killed" · head = "They brought his head" · look = "Marcus would not look" · buried = "He ordered it buried" · spared = "And he spared" · then = "And then" · letters = "the letters" · among = "Among the rebels" · names = "Names" · every = "Every man who" · ruler = "Any other ruler" · burned = "Marcus burned them" · without = "Without reading" · because = "Because he did not" · hate = "and be forced" · account = "One old account" · reason = "But it is Marcus" · think = "Think about that" · wait = "He didn't wait" · refused = "He simply refused" · journal = "In his journal" · pain = "as the sense of pain" · looks = "Anger looks like" · wound = "It's a wound" · knew = "And the most powerful" · unread = "some letters are better" · pause = "Let's pause here"
+
 História de Cássio Dio contada com nossas palavras (Loeb 1927); fora a fofoca sobre Faustina. Única citação literal: 11.18. Fecha o *loop* do gancho; "refused to feed it" prepara o Provérbios 26:20 do bloco 5.
 **Short (o mais forte):** "And then... the letters." até "...be forced to hate them."
 **Ideias de cena:** mapa com o Oriente se acendendo em âmbar nas mãos do general; mensageiro a cavalo com o boato; a silhueta de Cássio erguendo uma coroa; legiões se alinhando; Marco falando aos soldados; a cabeça trazida numa caixa/pano (nunca mostrada: Marco vira o rosto); baú de cartas, rolos com selos; as cartas no fogo, ainda fechadas, virando cinza; coluna/lista do diário com a citação.
@@ -283,6 +291,8 @@ What are you still carrying... that happened days ago?
 [softly] You don't have to put it down yet.
 Just notice... how heavy it is.
 ```
+
+**Deixas:** seneca = "Seneca wrote" · delay = "So let's take" · jaw = "Unclench your jaw" · breathe_in = "Breathe in" · two = "two" · three = "three" · four = "four" · let_go = "And let it go" · one_more = "One more time" · breathe_in2 = "Breathe in" · and_out = "And out" · now = "Now" · what = "What are you still" · put = "You don't have to" · notice = "Just notice"
 
 ~30 s, mesmo formato do MA-001 (contagem falada, pergunta lida), com o corpo da raiva (maxilar, mãos) e a pergunta ligada à pedra do bloco 2. Soltar o peso fica para o fechamento.
 **Ideias de cena:** no lugar do sol do logo, **uma brasa** que acende na inspiração e esfria na expiração (mesmo formato, outra animação); a pergunta na tela em Cormorant Garamond itálico.
@@ -310,6 +320,8 @@ You only have to stop feeding it.
 But a fire with no wood... can only do one thing.
 [softly] Slowly... it turns to ash.
 ```
+
+**Deixas:** took = "Marcus took cities" · won = "He won wars" · victory = "But the victory" · proverbs = "The book of Proverbs" · slow = "One who is slow" · rules = "one who rules" · army = "Taking a city" · alone = "Ruling your own" · every = "Every day" · night = "And usually at night" · another = "And there is another" · wood = "Without wood" · all = "That's all" · fire = "A grudge is a fire" · replay = "And every time you replay" · story = "every time you tell" · rehearse = "every time you rehearse" · add = "you add another" · fight = "You don't have to fight" · feeding = "You only have to stop" · tonight = "It won't go out" · stubborn = "Grudges are stubborn" · nowood = "But a fire with no wood" · slowly = "Slowly"
 
 Literal só o 16:32; o 26:20 simplificado ("tell the story again" vem da 2ª metade: "Without gossip, a quarrel dies down"). Sem atribuir a Salomão e sem o "two men who never met" do MA-001.
 **Short:** "A grudge is a fire." até "...stop feeding it."
@@ -339,6 +351,8 @@ Only... with warmth.
 
 [softly] Old wisdom... for quiet hours.
 ```
+
+**Deixas:** so = "So" · tonight = "tonight" · argument = "if that argument" · hundred = "the one you've already won" · win = "you don't have to win" · like = "You don't have to like" · pretend = "You don't have to pretend" · replay = "When the next replay" · letpass = "you can simply let it pass" · leave = "And leave the fire" · end = "Let the conversation end" · sorry = "Some of them will never" · know = "Some will never even" · point = "That was never" · peace = "Your peace" · emperor = "Almost two thousand" · names = "He never learned" · carry = "He never had to" · ember = "And somewhere in those" · anger = "Not with anger" · warmth = "Only" · slogan = "Old wisdom"
 
 "Notice the wood in your hand" trocado por "let it pass / leave the fire unfed" (duplo sentido em inglês). Encerramento padrão do canal.
 **Short (obrigatório, pedido do criador):** "So... tonight, if that argument starts again in your head..." até "...without you." Frase-chave: *you don't have to win it one more time*.
