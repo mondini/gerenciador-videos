@@ -148,9 +148,9 @@ def mover(m, ret, dx=0.0, dy=0.0, rot=0.0, piv=(960, 1080)):
 class Quadro:
     """Um quadro em construção (ver docstring do módulo)."""
 
-    def __init__(self, t, u, fim=None, fade=(1.0, 0.9), acende=(0.0, 0.0, 'suave')):
+    def __init__(self, t, u, fim=None, fade=(1.0, 0.9), acende=(0.0, 0.0, 'suave'), pano='romano'):
         self.t, self.u, self.fim, self._fade, self._acende = t, u, fim, fade, acende
-        self.D = lencol.dados()
+        self.D = lencol.dados(pano)
         self.nivel = 1.0
         self.L = None
         self._foco = None

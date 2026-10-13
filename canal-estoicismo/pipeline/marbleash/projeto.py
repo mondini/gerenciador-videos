@@ -188,6 +188,11 @@ class Bloco:
         return getattr(self.cena_ou_nada, 'ACENDE', (0.0, 0.0, 'suave'))
 
     @property
+    def pano(self) -> str:
+        """Pano da base do lençol (ver lencol.PANOS); cada vídeo escolhe o seu com PANO na cena."""
+        return getattr(self.cena_ou_nada, 'PANO', 'romano')
+
+    @property
     def fim(self) -> float:
         return self.entrada + self.duracao + self.saida
 

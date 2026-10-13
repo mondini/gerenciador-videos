@@ -18,7 +18,7 @@ Não mostramos os bonecos: mostramos **as sombras deles projetadas num lençol i
 - Desfoque pela distância do pano:
   - Personagem principal: quase nítido (encostado no lençol).
   - Objetos de cena (templo, mesa, lamparina): levemente suaves.
-  - Elementos das laterais (pinheiro à esquerda, coluna com galho à direita): bem difusos, como se estivessem perto da lâmpada.
+  - Elementos das laterais (MA-001: pinheiro à esquerda, coluna com galho à direita; MA-002: oliveira e ruína com loureiro): bem difusos, como se estivessem perto da lâmpada. Cada vídeo tem a sua moldura (ver "Moldura fixa por vídeo" em `plano-canal.md`).
   - Fundo distante (colinas, aqueduto, templo no morro, ciprestes): só vulto claro e muito desfocado.
 - Câmera levemente de lado: objetos em três quartos (lateral visível do templo, tampo da mesa visto de cima), linhas fugindo para um ponto à direita fora da tela.
 - As laterais da tela são definidas por elementos do cenário entrando de fora (árvore, coluna, galhos), nunca por moldura.
@@ -49,3 +49,7 @@ Não mostramos os bonecos: mostramos **as sombras deles projetadas num lençol i
 
 ## Onde está a ferramenta
 O código que gera este estilo está em `pipeline/` (biblioteca `pipeline/marbleash/` e comando `./ma`; ver `pipeline/LEIA-ME.md`) na pasta do canal no Mac (`~/Projects/gerenciador-de-canais/canal-estoicismo`). Os dados de cada bloco ficam em `videos/MA-NNN-slug/blocoN/` (script de cena, tempos, análise do áudio); o modelo oficial é `videos/MA-001-the-man-who-had-everything/bloco1/cena.py`. Todo o trabalho fica centralizado nesta pasta (não há cópia no Claude.ai). Fontes em `fontes-tipograficas/`. Referência visual aprovada: `docs/referencias/frame-referencia-estilo-aprovado.png` (sem as mãos dos manipuladores).
+
+## Lua
+
+Sempre **crescente ou minguante** (`q.lua(alpha, crescente=...)`), nunca o disco cheio: a lua cheia projetada no lençol não parece lua (decisão de 13/10/2026, vale do MA-002 em diante).

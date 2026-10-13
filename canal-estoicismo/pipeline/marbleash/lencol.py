@@ -47,15 +47,17 @@ def _dobras(xx, yy, g):
     return ndimage.gaussian_filter(f, 3)
 
 
-def _pano(xx, yy, g, top, vign):
+def _pano(xx, yy, g, top, vign, dobras=(16, (10, 40), (120, 420), (14, 46))):
+    """Pano amontoado na base. `dobras` = (quantas, amplitude, período, largura) das dobras sorteadas."""
+    n, amp_, per_, w_ = dobras
     h = np.zeros((H, W), np.float32)
-    for k in range(16):
+    for k in range(n):
         c = float(g.uniform(820, 1100))
-        amp = float(g.uniform(10, 40))
-        per = float(g.uniform(120, 420))
+        amp = float(g.uniform(*amp_))
+        per = float(g.uniform(*per_))
         ph = float(g.uniform(0, 6.3))
         tilt = float(g.uniform(-0.12, 0.12))
-        w = float(g.uniform(14, 46))
+        w = float(g.uniform(*w_))
         A = float(g.uniform(0.6, 1.4))
         x0, x1 = float(g.uniform(-400, 900)), float(g.uniform(1000, 2400))
         span = np.clip((xx - x0) / 200, 0, 1) * np.clip((x1 - xx) / 200, 0, 1)
@@ -71,9 +73,29 @@ def _pano(xx, yy, g, top, vign):
     return lum + edge * a, a
 
 
+def _borda_romano(x):
+    """Borda do pano do MA-001: ondas finas que, iluminadas, lembram capim."""
+    return 850 + 30 * np.sin(x / 170) + 16 * np.sin(x / 63 + 1) + 9 * np.sin(x / 23) + 5 * np.sin(x / 9)
+
+
+def _borda_lisa(x):
+    """Borda de pano pesado caído: poucas ondas largas e mais baixas, sem o serrilhado de capim."""
+    return 872 + 22 * np.sin(x / 290 + 0.8) + 10 * np.sin(x / 120 + 2.1) + 3 * np.sin(x / 47)
+
+
+# cada vídeo escolhe o seu pano no script de cena (PANO = '...'); o padrão é o do MA-001
+PANOS = {
+    'romano': dict(borda=_borda_romano, dobras=(16, (10, 40), (120, 420), (14, 46)), semente=None),
+    'pesado': dict(borda=_borda_lisa, dobras=(9, (6, 22), (260, 620), (30, 70)), semente=77),
+}
+
+
 @em_disco
-def dados():
-    """Luz, dobras, pano, bokeh/poeira, grão e mapas de deformação (calculado uma vez, fica em cache)."""
+def dados(pano='romano'):
+    """Luz, dobras, pano, bokeh/poeira, grão e mapas de deformação (calculado uma vez, fica em cache).
+
+    `pano` escolhe a borda e as dobras do pano da base (ver PANOS); o resto do lençol é igual em todos."""
+    P_ = PANOS[pano]
     yy, xx = _malha()
     g = np.random.default_rng(31)
     F = _dobras(xx, yy, g)
@@ -85,8 +107,9 @@ def dados():
     LIGHT = (0.10 + 0.95 * hot) * shade
     vign = np.clip(1 - 0.75 * (((xx - W / 2) / (W * 0.62)) ** 2 + ((yy - H * 0.45) / (H * 0.72)) ** 2), 0, 1) ** 1.3
     LIGHT *= 0.25 + 0.75 * vign
-    top = 850 + 30 * np.sin(xx[0] / 170) + 16 * np.sin(xx[0] / 63 + 1) + 9 * np.sin(xx[0] / 23) + 5 * np.sin(xx[0] / 9)
-    CLOTH, CLOTH_A = _pano(xx, yy, g, top, vign)
+    top = P_['borda'](xx[0])
+    gp = g if P_['semente'] is None else np.random.default_rng(P_['semente'])
+    CLOTH, CLOTH_A = _pano(xx, yy, gp, top, vign, P_['dobras'])
 
     # bokeh, poeirinhas e grão fixo (gerador próprio)
     g = np.random.default_rng(31)

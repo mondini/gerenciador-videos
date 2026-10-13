@@ -21,7 +21,7 @@ from .quadro import Quadro
 
 def quadro(bloco: Bloco, t: float) -> np.ndarray:
     """O quadro do instante t (segundos no vídeo do bloco), RGB uint8 (H x W x 3)."""
-    q = Quadro(t, t - bloco.entrada, fim=bloco.fim, fade=bloco.fade, acende=bloco.acende)
+    q = Quadro(t, t - bloco.entrada, fim=bloco.fim, fade=bloco.fade, acende=bloco.acende, pano=bloco.pano)
     bloco.cena.quadro(q, bloco.deixas)
     return q.finalizar()
 
@@ -29,7 +29,7 @@ def quadro(bloco: Bloco, t: float) -> np.ndarray:
 def preparar(bloco: Bloco, avisar=print) -> float:
     """Gera (ou lê do cache) o lençol e toda a arte do elenco. Devolve os segundos gastos."""
     t0 = time.time()
-    lencol.dados()
+    lencol.dados(bloco.pano)
     elenco = bloco.elenco()
     for i, item in enumerate(elenco):
         item.preparar()

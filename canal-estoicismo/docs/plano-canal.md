@@ -27,6 +27,8 @@ Links (claude.ai):
 - Tipografia: **Cinzel** (títulos, nomes, logo), **Cormorant Garamond** (citações, itálico), **Inter** (créditos e legendas).
 - Logo: A — Horizonte. Banner: B — Centro silencioso.
 - Vídeos: teatro de sombras projetadas (padrão aprovado). Logo e banner continuam na arte de linhas.
+- **Moldura fixa por vídeo (decisão de 13/10/2026):** os elementos que ficam na tela o vídeo inteiro (laterais, base, fundo distante, plano do meio e a borda do pano) mudam a cada vídeo, para nenhum parecer cópia do anterior. MA-001: pinheiro-manso + coluna jônica, pano "romano" (borda que parece capim), aqueduto. MA-002: **moldura "oliveira"** (oliveira antiga + muro em ruína com arco quebrado e loureiro, lenha empilhada e pedras na base, pano "pesado" de borda lisa, cidade murada no morro, vinhedo). **Depois de 4 vídeos**, pode-se misturar peças de molduras já feitas e criar só uma parte nova (só a lateral ou só a base), para economizar arte. Código: `pipeline/marbleash/cenario.py` (uma seção por moldura) e `PANO = '...'` no script de cena (`lencol.PANOS`).
+- **Lua (decisão de 13/10/2026):** usar sempre **lua crescente ou minguante** (`q.lua(..., crescente=...)`); a lua cheia (disco liso) não tem cara de lua. Vale do MA-002 em diante; o MA-001 fica como está.
 - **Thumbnails em sombras (decisão de 12/10/2026):** feitas com quadros reais do vídeo, gradação puxada para o âmbar vivo e texto em Cinzel Black (mármore, destaque em âmbar), sempre à esquerda e longe do canto inferior direito (selo de duração). Assim a capa promete o que o vídeo mostra.
 - Thumbnails: **3 versões** para o teste A/B do YouTube — A Palavra (1–2 palavras), B (Símbolo, sem texto) e C Gancho (até 3 palavras; guia de embalagem). O texto da thumb nunca repete o título.
 
