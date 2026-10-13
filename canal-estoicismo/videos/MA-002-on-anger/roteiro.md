@@ -287,3 +287,31 @@ Just notice... how heavy it is.
 ~30 s, mesmo formato do MA-001 (contagem falada, pergunta lida), com o corpo da raiva (maxilar, mãos) e a pergunta ligada à pedra do bloco 2. Soltar o peso fica para o fechamento.
 **Ideias de cena:** no lugar do sol do logo, **uma brasa** que acende na inspiração e esfria na expiração (mesmo formato, outra animação); a pergunta na tela em Cormorant Garamond itálico.
 **Créditos:** *Seneca, Of Anger II.29 · trans. Aubrey Stewart*
+
+## Bloco 5 — Provérbio-ponte (aprovado)
+
+```
+[thoughtful] Marcus took cities. He won wars at the edge of the empire.
+But the victory that says the most about him... is a box of letters he never opened.
+The book of Proverbs, written centuries before him, already knew which victory matters more:
+One who is slow to anger is better than the mighty; one who rules his spirit, than he who takes a city.
+[warmly] Taking a city takes an army.
+Ruling your own spirit... you do alone. Every day. And usually at night.
+
+[thoughtful] And there is another proverb... one of the simplest in the whole book.
+Without wood... a fire goes out.
+That's all. No magic. No great effort.
+[softly] A grudge is a fire.
+And every time you replay the scene... every time you tell the story again... every time you rehearse what you should have said...
+you add another piece of wood.
+You don't have to fight the fire.
+You only have to stop feeding it.
+[warmly] It won't go out tonight. Grudges are stubborn.
+But a fire with no wood... can only do one thing.
+[softly] Slowly... it turns to ash.
+```
+
+Literal só o 16:32; o 26:20 simplificado ("tell the story again" vem da 2ª metade: "Without gossip, a quarrel dies down"). Sem atribuir a Salomão e sem o "two men who never met" do MA-001.
+**Short:** "A grudge is a fire." até "...stop feeding it."
+**Ideias de cena:** cidade murada tomada por legiões × silhueta sozinha à noite (governar a si mesmo); caixa de cartas fechada em âmbar; fogueira que cresce a cada "every time…" (lenha jogada três vezes); a mão que segura a lenha e não joga; o fogo baixa até virar cinza.
+**Créditos:** *Proverbs 16:32 · World English Bible* · *Proverbs 26:20 · World English Bible*
