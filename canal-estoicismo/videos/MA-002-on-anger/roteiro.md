@@ -266,3 +266,24 @@ História de Cássio Dio contada com nossas palavras (Loeb 1927); fora a fofoca 
 **Short (o mais forte):** "And then... the letters." até "...be forced to hate them."
 **Ideias de cena:** mapa com o Oriente se acendendo em âmbar nas mãos do general; mensageiro a cavalo com o boato; a silhueta de Cássio erguendo uma coroa; legiões se alinhando; Marco falando aos soldados; a cabeça trazida numa caixa/pano (nunca mostrada: Marco vira o rosto); baú de cartas, rolos com selos; as cartas no fogo, ainda fechadas, virando cinza; coluna/lista do diário com a citação.
 **Créditos:** *Cassius Dio, Roman History 72.26–29 · Loeb Classical Library* · *Marcus Aurelius, Meditations 11.18 · trans. George Long*
+
+## The Pause (aprovado)
+
+```
+[softly] Seneca wrote that the greatest remedy for anger... is delay.
+So let's take a small delay. Right now.
+Unclench your jaw. Let your hands fall open.
+Breathe in... slowly... two... three... four.
+And let it go... two... three... four... five... six.
+One more time.
+Breathe in... two... three... four.
+And out... two... three... four... five... six.
+[warmly] Now... one question. Just for you.
+What are you still carrying... that happened days ago?
+[softly] You don't have to put it down yet.
+Just notice... how heavy it is.
+```
+
+~30 s, mesmo formato do MA-001 (contagem falada, pergunta lida), com o corpo da raiva (maxilar, mãos) e a pergunta ligada à pedra do bloco 2. Soltar o peso fica para o fechamento.
+**Ideias de cena:** no lugar do sol do logo, **uma brasa** que acende na inspiração e esfria na expiração (mesmo formato, outra animação); a pergunta na tela em Cormorant Garamond itálico.
+**Créditos:** *Seneca, Of Anger II.29 · trans. Aubrey Stewart*
