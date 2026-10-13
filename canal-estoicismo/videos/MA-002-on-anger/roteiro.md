@@ -180,3 +180,43 @@ Toque leve de humor na academia a pedido do criador (13/10/2026).
 **Short:** "In simple words... what they did to you happened once." até "...can take years."
 **Ideias de cena:** fogueira sendo alimentada (lenha a cada "we feed it"); a lista de regras de Marco escrita em coluna; a pedra pesando nas costas da silhueta; academia em sombras (halteres) na piada; a silhueta com a pedra chega à mesa de jantar e à cama.
 **Créditos:** *Seneca, Of Anger III.29 · trans. Aubrey Stewart* · *Marcus Aurelius, Meditations 11.18 · trans. George Long* · *Proverbs 27:3 · World English Bible*
+
+## Bloco 3 — A pessoa que sempre quer mais (aprovado)
+
+```
+[thoughtful] And sometimes... it isn't one careless comment.
+It's a person.
+The boss who presents your work in the meeting... as if it were his own. And never once says your name.
+The relative who always expects one more favor.
+The friend who only calls... when they need something.
+You give more than you should. And still... they want more.
+
+[softly] Marcus had people like that around him too. Every single day.
+And he left himself a simple question for those moments.
+When someone's behavior offends you... ask yourself: could the world exist without people like this?
+It couldn't. So stop demanding the impossible.
+[warmly] Expecting a world without them... is like getting angry at winter for being cold.
+[thoughtful] That doesn't mean they're right.
+It means you stop waiting for them to change... before you allow yourself some peace.
+
+[thoughtful] And here is where anger can actually help you.
+Anger is a signal. It tells you a line was crossed.
+In another entry, Marcus asks himself a blunt question:
+why not act... instead of complain?
+So act.
+Say no. Ask for that conversation. Draw the line... out loud.
+[warmly] And Proverbs has some surprising advice on how to do it:
+By patience a ruler is persuaded. A soft tongue breaks the bone.
+The calm voice is not the weak one.
+Sometimes it's the only voice strong enough to move a stubborn man.
+
+[softly] That is the difference.
+Anger, used well... becomes an action. A boundary. A conversation.
+A grudge becomes nothing.
+It just sits there... and waits for you, every night.
+```
+
+Exemplo de trabalho: o chefe que apresenta o seu trabalho como dele e não dá crédito (pedido do criador). Primeira aplicação da regra 3 revisada: 9.42 e 8.47 parafraseados, só o 25:15 literal. O 8.47, no original, trata do que nos incomoda em geral; por isso "another entry" + "blunt question", sem dizer que fala de pessoas.
+**Short:** "Anger, used well... becomes an action." até "...every night."
+**Ideias de cena:** reunião em sombras, o chefe ergue o papel/trabalho da silhueta e recebe os aplausos; parente e amigo com as mãos estendidas; inverno, neve caindo sobre uma silhueta irritada; uma linha traçada no chão em âmbar no "Draw the line"; a voz baixa como onda suave que move uma pedra; o rancor sentado à beira da cama esperando.
+**Créditos:** *Marcus Aurelius, Meditations 9.42 · trans. George Long* · *Marcus Aurelius, Meditations 8.47 · trans. George Long* · *Proverbs 25:15 · World English Bible*
