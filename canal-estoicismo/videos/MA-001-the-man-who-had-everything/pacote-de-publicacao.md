@@ -24,7 +24,7 @@
 
 ## 3. DESCRIÇÃO
 
-Pronta para colar (2.137 caracteres, limite 5.000):
+Pronta para colar (2.185 caracteres, limite 5.000):
 
 ```
 He had every coin in the empire. And still, every night, he wrote to himself about how not to lose himself in what he already had.
@@ -54,12 +54,12 @@ Narration voice generated with ElevenLabs. Script, shadow-theatre animation and 
 
 Educational content, not financial advice.
 
-If this helped you slow down tonight, you can subscribe for one quiet episode at a time: [CHANNEL LINK]
+If this helped you slow down tonight, you can subscribe for one quiet episode at a time: https://www.youtube.com/@marbleandashwisdom?sub_confirmation=1
 
 #Stoicism #MarcusAurelius #Meditations
 ```
 
-- Links do canal: **VERIFICAR** (o canal ainda não existe; trocar `[CHANNEL LINK]` antes de publicar).
+- Link do canal: `@marbleandashwisdom`, com `?sub_confirmation=1` para abrir a confirmação de inscrição.
 - O aviso "Educational content, not financial advice." entra porque o bloco 4 fala de dinheiro ("Money is not the enemy").
 - O crédito da voz não é exigido em plano pago: a página de ajuda da ElevenLabs diz que a atribuição só é obrigatória no plano gratuito ("subject to the agreement you have with ElevenLabs"). Deixei por transparência; pode remover.
 
@@ -252,7 +252,7 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
 | Direitos autorais pendentes (seção 10) | baixo | Nenhum pendente: licença da ElevenLabs comprovada e tradutor da Loeb confirmado. |
 
 **Conclusão: PUBLICAR APÓS CORREÇÕES**
-1. Criar o canal e trocar `[CHANNEL LINK]` na descrição (única correção restante).
+1. ~~Criar o canal e trocar `[CHANNEL LINK]` na descrição~~ (feito em 13/10/2026: `@marbleandashwisdom`).
 2. Publicação continua em **espera** até a sua liberação.
 
 ## 15. BLOCO JSON (dossiê)

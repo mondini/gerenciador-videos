@@ -10,6 +10,7 @@ Links (claude.ai):
 ## Decisões do canal
 
 - **Nome:** Marble & Ash. Mármore = bustos romanos e a pedra onde a sabedoria foi gravada; cinza = *memento mori*; o âmbar = a brasa que ainda brilha.
+- **YouTube:** `@marbleandashwisdom` (criado em 13/10/2026; `@marbleandash` e `@marbleash` já eram de outros canais). Foto, banner, marca d'água, descrição e padrões de upload em `marca/personalizacao-youtube.md`; imagens geradas por `marca/gerar_marca.py`. O banner publicado diz "ONE QUIET ESSAY EVERY WEEK" (o canvas ainda tem "TWO", da cadência antiga).
 - **Formato:** canal dark (sem rosto), narração lenta e introspectiva, vídeos em **teatro de sombras projetadas** (ver `estilo-teatro-de-sombras.md`).
 - **Idioma:** 100% inglês (público: EUA, Reino Unido, Canadá). O criador é fluente, não nativo — revisar sempre se o inglês soa natural.
 - **Uso pretendido:** *slow learning* — ouvir limpando a casa, se exercitando ou tentando dormir.
