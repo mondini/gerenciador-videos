@@ -114,7 +114,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 
 ## Regras fixas para todos os vídeos
 
-1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). **Outras obras e traduções (decisão de 12/10/2026):** sempre que o tema pedir (ex.: *Sobre a ira*, de Sêneca, que não está no Gummere), o Claude procura a melhor tradução em domínio público, confere a situação de direitos e propõe; o criador valida antes do uso, e a tradução aprovada entra nesta lista. Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
+1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). **Outras obras e traduções (decisão de 12/10/2026):** sempre que o tema pedir (ex.: *Sobre a ira*, de Sêneca, que não está no Gummere), o Claude procura a melhor tradução em domínio público, confere a situação de direitos e propõe; o criador valida antes do uso, e a tradução aprovada entra nesta lista. **Aprovadas (13/10/2026, vídeo 2):** Sêneca, *Of Anger* (*De Ira*), trad. **Aubrey Stewart** (George Bell & Sons, 1889; Project Gutenberg #64576), citável literalmente; Cássio Dio, *Roman History*, **Loeb vol. IX (1927, trad. Earnest Cary)**, contada como relato antigo com as nossas palavras e crédito na tela (domínio público nos EUA; no Reino Unido, incerto). Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
 2. **Crédito na tela, sempre:** toda citação ou informação de fora mostra a fonte no canto inferior esquerdo (Inter, discreto). Ex.: *Marcus Aurelius, Meditations 6.30 · trans. George Long*; *Proverbs 16:18 · World English Bible*.
 3. **Citações:** lidas no inglês antigo da tradução e, logo depois, repetidas em palavras simples ("In other words...", "In simple words...").
 4. **Narração pronta para colar no ElevenLabs:** só o texto falado + audio tags (`[softly]`, `[thoughtful]`, `[warmly]`, `[whispers]`, `[sighs]`) e reticências para pausas. Deixas visuais e créditos ficam fora do bloco de texto. Um arquivo de áudio por bloco.
@@ -128,7 +128,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 | # | Nome interno | Título de publicação | Tema central | Provérbio-ponte |
 |---|---|---|---|---|
 | 1 | The Man Who Had Everything | The Richest Man in Rome Wrote This to Himself Every Night | Poder e humildade | 30:8-9 e 16:18-19 |
-| 2 | On Anger | How to Stay Calm When Work and Money Push You to the Edge | Ira | 16:32 |
+| 2 | On Anger | Your Anger Isn't the Problem. The Grudge Is. (trocado em 13/10/2026; antes: How to Stay Calm When Work and Money Push You to the Edge) | Ira e rancor | 16:32 |
 | 3 | The Last Hour | Memento Mori for Busy Minds: Stop Spending Your Life on Tomorrow | Memento mori | 27:1 |
 | 4 | What You Cannot Control | Stoicism for Financial Stress: Let Go of What You Can't Control | Dicotomia do controle | 19:21 |
 | 5 | The Noise of Others | Stop Living for Their Approval: Stoic Wisdom for Leaders | Opinião alheia | 29:25 |
