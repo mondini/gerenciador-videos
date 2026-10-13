@@ -358,3 +358,21 @@ Only... with warmth.
 | 5 | The Pause — *Take 30 seconds with Marcus Aurelius* | Pausa |
 
 Reserva: bloco 2 ("what they did to you happened once…") e bloco 3 ("Anger, used well…").
+
+---
+
+## Plano de arte (aprovado em 13/10/2026)
+
+Critério: o que é identidade da série volta; objetos marcantes e composições de cena do MA-001 não se repetem.
+
+- **Moldura:** "oliveira" (`cenario.laterais_oliveira`, `cenario.base_lenha`, `cenario.cidade`, `cenario.vinhedo`, `PANO = 'pesado'`). Lua sempre crescente ou minguante.
+- **Reaproveitar como está:** imperador; **homem comum** (o mesmo do MA-001, personagem recorrente "o ouvinte"); letreiros, créditos, lua, foco, zoom, chamas; flocos de neve (bloco 3); coroa de louros (Cássio se coroando, bloco 4); **rolo hebraico como ícone fixo de Provérbios**, pequeno, num canto, junto da citação (nunca a cena grande do MA-001).
+- **Reaproveitar com outra cara:** soldados (dois exércitos parados frente a frente, com estandartes, sem marcha); chamas (fogueira de lenha cruzada no chão, que cresce a cada tora).
+- **Arte nova:**
+  - Bloco 1: duas silhuetas discutindo; a sombra do outro voltando em loop (banho/bica, carroça na estrada, cama às 3h).
+  - Bloco 2: fogueira alimentada; tabuinha de cera com a lista de regras; a pedra nas costas; halteres antigos (piada da academia); mesa de jantar simples (não a de pés de leão).
+  - Bloco 3: reunião (o chefe ergue o trabalho e recebe os aplausos); mãos estendidas; linha âmbar no chão; a voz calma como onda que move a pedra; o rancor sentado à beira da cama.
+  - Bloco 4: mapa do Oriente; mensageiro a cavalo; caixa coberta (Marco vira o rosto); capsa (estojo de rolos com selos) no lugar do baú; cartas lacradas queimando até a cinza.
+  - Pausa: a brasa que respira (no lugar do sol/mar do logo).
+  - Bloco 5: cidade murada cercada × silhueta sozinha; a mão que segura a tora e não joga; fogo baixando até a cinza.
+  - Bloco 6: o alívio (punhos que abrem, ombros que caem, a sombra do outro se desfaz); pensamento que passa como fumaça; a última brasa nas cinzas.
