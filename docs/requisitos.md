@@ -196,7 +196,7 @@ Estes pontos são preenchidos no próprio app, depois que ele existir:
 
 - Nome do canal, prefixo do código (sugestão `STO`) e nome da pasta do canal no Drive.
 - Idioma do canal no cadastro: `en` (o cadastro ainda assume `pt-BR` por padrão; ajustar ao criar o canal).
-- Padrões do canal de estoicismo: formatos, temas, checklists (os padrões do sistema ainda vêm com exemplos de BJJ, como "Posições de luta conferidas") e modelo de descrição.
+- Padrões do canal de estoicismo: formatos, temas e modelo de descrição. (Checklists: feitos em 2026-10-12, ver `decisoes.md`; os padrões do sistema para canais novos ainda vêm com exemplos de BJJ.)
 - Dias e horário da grade de publicação.
 - Gerador de imagens, ferramenta de voz e editor (CapCut ou DaVinci): ficam como texto livre.
 - Textos finais dos modelos de checklist e do modelo de descrição (o sistema vem com padrões sugeridos).
