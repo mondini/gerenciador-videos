@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, fmtData, ler, paraInputData } from "./api";
+import { AgendaAba } from "./Agenda";
 import { DossieAba } from "./Dossie";
 import { botao, botaoClaro, campo, InfoNotas, Modal, Rotulo } from "./ui";
 
@@ -14,7 +15,7 @@ type Versao = { id: number; numero: number; origem: string; nota: string | null;
 type Ficha = { video: Video; checklist: Item[]; versoes: Versao[] };
 type Arquivos = { pasta: string | null; subpastas: { subpasta: string; arquivos: number; soOnline: number }[] };
 
-const ABAS = ["Básico", "Roteiro", "Direitos", "Checklist", "Arquivos"] as const;
+const ABAS = ["Básico", "Roteiro", "Direitos", "Agenda", "Checklist", "Arquivos"] as const;
 const PALAVRAS_POR_MIN = 150;
 
 export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId: number; onFechar: () => void; onAlterado: () => void; onAviso: (m: string, erro?: boolean) => void }) {
@@ -54,6 +55,7 @@ export function FichaVideo({ videoId, onFechar, onAlterado, onAviso }: { videoId
       <div hidden={aba !== "Básico"}><Basico v={v} formatos={formatos} series={series} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Roteiro"}><Roteiro v={v} versoes={ficha.versoes} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Direitos"}><DossieAba videoId={v.id} onAviso={onAviso} onSalvo={onAlterado} /></div>
+      <div hidden={aba !== "Agenda"}><AgendaAba videoId={v.id} codigo={v.codigo} titulo={v.tituloFinal ?? v.tituloProvisorio} dataPlanejada={v.dataPlanejada} onSalvo={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Checklist"}><Checklist itens={ficha.checklist} etapaAtual={v.etapa} onMudou={() => { void carregar(); onAlterado(); }} onAviso={onAviso} /></div>
       <div hidden={aba !== "Arquivos"}><ArquivosAba videoId={v.id} etapa={v.etapa} onAviso={onAviso} /></div>
     </Modal>
@@ -66,6 +68,8 @@ function Basico({ v, formatos, series, onSalvo, onAviso }: { v: Video; formatos:
     dataPlanejada: paraInputData(v.dataPlanejada), notaApelo: v.notaApelo ?? "", notaIlustracao: v.notaIlustracao ?? "", notaPesquisa: v.notaPesquisa ?? "",
     gancho: v.gancho, resumo: v.resumo,
   });
+  // a aba Agenda também grava a data planejada; sem isto, salvar aqui voltaria a data antiga
+  useEffect(() => setF((atual) => ({ ...atual, dataPlanejada: paraInputData(v.dataPlanejada) })), [v.dataPlanejada]);
   const n = (x: number | "") => (x === "" ? null : x);
 
   async function salvar() {
@@ -111,7 +115,7 @@ function Basico({ v, formatos, series, onSalvo, onAviso }: { v: Video; formatos:
           {series.map((o) => <option key={o.id} value={o.id}>{o.nome}</option>)}
         </select>
       </Rotulo>
-      <Rotulo texto="Data planejada de publicação"><input type="datetime-local" className={campo} value={f.dataPlanejada} onChange={(e) => setF({ ...f, dataPlanejada: e.target.value })} /></Rotulo>
+      <Rotulo texto="Data planejada de publicação (seu horário)"><input type="datetime-local" className={campo} value={f.dataPlanejada} onChange={(e) => setF({ ...f, dataPlanejada: e.target.value })} /></Rotulo>
       <div className="grid grid-cols-3 gap-3 sm:col-span-2">{sel("notaApelo", "Apelo (1–5)")}{sel("notaIlustracao", "Ilustrar (1–5)")}{sel("notaPesquisa", "Pesquisa (1–5)")}</div>
       <div className="sm:col-span-2"><Rotulo texto="Gancho dos primeiros 15s"><textarea className={`${campo} h-20`} value={f.gancho} onChange={(e) => setF({ ...f, gancho: e.target.value })} /></Rotulo></div>
       <div className="sm:col-span-2"><Rotulo texto="Resumo"><textarea className={`${campo} h-20`} value={f.resumo} onChange={(e) => setF({ ...f, resumo: e.target.value })} /></Rotulo></div>

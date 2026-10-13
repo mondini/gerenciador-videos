@@ -7,9 +7,10 @@ import { Hono } from "hono";
 import { z } from "zod";
 import { ETAPAS } from "../shared/etapas";
 import { emRisco } from "../shared/risco";
+import { montarAgenda } from "../shared/agenda";
 import { proximoHorarioLivre } from "../shared/grade";
 import { statusSubpastas } from "./drive/estrutura";
-import { canal, checklistItem, formato, gradePublicacao, versaoRoteiro, video } from "./db/schema";
+import { agendaItem, canal, checklistItem, formato, gradePublicacao, versaoRoteiro, video } from "./db/schema";
 import { criarCanal, novoCanalSchema } from "./servicos/canais";
 import { agoraDe, type Contexto } from "./servicos/contexto";
 import { dossieSchema, lerDossie, substituirDossie } from "./servicos/dossie";
@@ -18,9 +19,9 @@ import { sincronizarSchema, sincronizarVideo } from "./servicos/sincronizar";
 import { exportarVersaoRoteiro, acharPastaVideo } from "./drive/estrutura";
 import { relative } from "node:path";
 import {
-  apagarSerie, apagarTema, checklistSchema, criarFormato, criarSerie, criarTema, editarCanalSchema, editarFormato,
+  agendaSchema, apagarSerie, apagarTema, checklistSchema, criarFormato, criarSerie, criarTema, editarCanalSchema, editarFormato,
   editarFormatoSchema, editarSerie, editarSerieSchema, etapaSchema, gradeSchema, lerConfiguracao, nomeSchema,
-  serieSchema, substituirChecklist, substituirGrade,
+  serieSchema, substituirAgenda, substituirChecklist, substituirGrade,
 } from "./servicos/configuracao";
 
 /** Validador de corpo JSON: erros saem sempre no formato { erro } com status 400. */
@@ -84,6 +85,10 @@ export function criarRotas(ctx: Contexto) {
       substituirGrade(ctx, Number(c.req.param("id")), c.req.valid("json").grade);
       return c.json({ ok: true });
     })
+    .put("/api/canais/:id/agenda", corpo(agendaSchema), (c) => {
+      substituirAgenda(ctx, Number(c.req.param("id")), c.req.valid("json").itens);
+      return c.json({ ok: true });
+    })
     .post("/api/canais/:id/formatos", corpo(nomeSchema), (c) => c.json(criarFormato(ctx, Number(c.req.param("id")), c.req.valid("json").nome), 201))
     .patch("/api/formatos/:id", corpo(editarFormatoSchema), (c) => {
       const f = editarFormato(ctx, Number(c.req.param("id")), c.req.valid("json"));
@@ -141,7 +146,7 @@ export function criarRotas(ctx: Contexto) {
         canal: canalRow,
         etapas: ETAPAS,
         cards,
-        proximoHorarioLivre: proximoHorarioLivre(grade, ocupados, agora),
+        proximoHorarioLivre: proximoHorarioLivre(grade, ocupados, agora, canalRow.fusoPublico),
       });
     })
 
@@ -169,6 +174,17 @@ export function criarRotas(ctx: Contexto) {
       if (Object.keys(campos).length === 0) return c.json({ erro: "Nada para alterar" }, 400);
       const atualizado = db.update(video).set(campos).where(eq(video.id, id)).returning().get();
       return atualizado ? c.json(atualizado) : c.json({ erro: "Vídeo não encontrado" }, 404);
+    })
+    .get("/api/videos/:id/agenda", (c) => {
+      const v = db.select().from(video).where(eq(video.id, Number(c.req.param("id")))).get();
+      if (!v) return c.json({ erro: "Vídeo não encontrado" }, 404);
+      const { fusoPublico } = db.select({ fusoPublico: canal.fusoPublico }).from(canal).where(eq(canal.id, v.canalId)).get()!;
+      const modelo = db.select().from(agendaItem).where(eq(agendaItem.canalId, v.canalId)).orderBy(asc(agendaItem.ordem)).all();
+      return c.json({
+        fusoPublico,
+        dataPlanejada: v.dataPlanejada,
+        materiais: v.dataPlanejada ? montarAgenda(v.dataPlanejada, fusoPublico, modelo) : [],
+      });
     })
     .get("/api/videos/:id/dossie", (c) => {
       const d = lerDossie(ctx, Number(c.req.param("id")));

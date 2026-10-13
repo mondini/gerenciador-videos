@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { TIPOS_AGENDA } from "../../shared/agenda";
 import { ETAPAS } from "../../shared/etapas";
 
 const id = () => integer("id").primaryKey({ autoIncrement: true });
@@ -23,6 +24,8 @@ export const canal = sqliteTable("canal", {
   vozPadrao: text("voz_padrao").notNull().default(""),
   estiloImagemPadrao: text("estilo_imagem_padrao").notNull().default(""),
   referenciasIdentidade: text("referencias_identidade").notNull().default(""),
+  /** Fuso IANA do público principal; a grade e a agenda são lidas nele. */
+  fusoPublico: text("fuso_publico").notNull().default("America/Sao_Paulo"),
   criadoEm: criadoEm(),
 });
 
@@ -31,6 +34,17 @@ export const gradePublicacao = sqliteTable("grade_publicacao", {
   canalId: integer("canal_id").notNull().references(() => canal.id, { onDelete: "cascade" }),
   /** 0 = domingo … 6 = sábado */
   diaSemana: integer("dia_semana").notNull(),
+  hora: text("hora").notNull(),
+});
+
+/** Modelo de agenda do canal: cada material sai N dias depois do upload do vídeo longo, numa hora do fuso do público. */
+export const agendaItem = sqliteTable("agenda_item", {
+  id: id(),
+  canalId: integer("canal_id").notNull().references(() => canal.id, { onDelete: "cascade" }),
+  ordem: integer("ordem").notNull(),
+  rotulo: text("rotulo").notNull(),
+  tipo: text("tipo", { enum: TIPOS_AGENDA }).notNull(),
+  diasApos: integer("dias_apos").notNull(),
   hora: text("hora").notNull(),
 });
 

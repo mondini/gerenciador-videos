@@ -168,6 +168,32 @@ describe("configurações do canal", () => {
     expect((await app.request(`/api/temas/${t.id}`, { method: "DELETE" })).status).toBe(200);
   });
 
+  it("agenda do vídeo: modelo padrão, fuso do público e datas calculadas", async () => {
+    const { id } = await criarCanalBase();
+    const cfg = (await (await app.request(`/api/canais/${id}/config`)).json()) as { canal: { fusoPublico: string }; agenda: { rotulo: string; tipo: string }[] };
+    expect(cfg.canal.fusoPublico).toBe("America/Sao_Paulo");
+    expect(cfg.agenda.map((a) => a.tipo)).toEqual(["short", "short", "short", "short", "reserva"]);
+
+    expect((await app.request(`/api/canais/${id}`, patch({ fusoPublico: "Nova York" }))).status).toBe(400);
+    expect((await app.request(`/api/canais/${id}`, patch({ fusoPublico: "America/New_York" }))).status).toBe(200);
+    expect((await app.request(`/api/canais/${id}/agenda`, put({ itens: [{ rotulo: "Short 1", tipo: "short", diasApos: 0, hora: "25:00" }] }))).status).toBe(400);
+    expect((await app.request(`/api/canais/${id}/agenda`, put({ itens: [{ rotulo: "Short 1", tipo: "short", diasApos: 0, hora: "18:00" }, { rotulo: "Reserva", tipo: "reserva", diasApos: 5, hora: "10:00" }] }))).status).toBe(200);
+
+    const { video } = (await (await app.request("/api/videos", json({ canalId: id, tituloProvisorio: "x" }))).json()) as { video: { id: number } };
+    const vazia = (await (await app.request(`/api/videos/${video.id}/agenda`)).json()) as { materiais: unknown[] };
+    expect(vazia.materiais).toEqual([]);
+
+    await app.request(`/api/videos/${video.id}`, patch({ dataPlanejada: "2026-10-27T18:00:00.000Z" })); // terça 14:00 em Nova York
+    const agenda = (await (await app.request(`/api/videos/${video.id}/agenda`)).json()) as { fusoPublico: string; materiais: { rotulo: string; tipo: string; quando: string }[] };
+    expect(agenda.fusoPublico).toBe("America/New_York");
+    expect(agenda.materiais.map((m) => [m.tipo, m.quando])).toEqual([
+      ["longo", "2026-10-27T18:00:00.000Z"],
+      ["short", "2026-10-27T22:00:00.000Z"],
+      ["reserva", "2026-11-01T15:00:00.000Z"], // domingo, já no horário de inverno
+    ]);
+    expect((await app.request("/api/videos/9999/agenda")).status).toBe(404);
+  });
+
   it("não apaga série em uso e recusa etapa inválida", async () => {
     const { id } = await criarCanalBase();
     const s = (await (await app.request(`/api/canais/${id}/series`, json({ nome: "Faixas" }))).json()) as { id: number };

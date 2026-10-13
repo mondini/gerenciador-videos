@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { ETAPAS } from "../shared/etapas";
-import { api, ler, NOMES_DIAS } from "./api";
+import { api, FUSOS, ler, NOMES_DIAS, nomeFuso } from "./api";
 import { botao, botaoClaro, campo, Modal, Rotulo } from "./ui";
 
 type Aviso = (m: string, erro?: boolean) => void;
 type Canal = {
   id: number; nome: string; nicho: string; prefixoCodigo: string; pastaRelativa: string; urlYoutube: string | null;
-  referenciasIdentidade: string; modeloDescricao: string; tagsPadrao: string[]; vozPadrao: string; estiloImagemPadrao: string;
+  referenciasIdentidade: string; modeloDescricao: string; tagsPadrao: string[]; vozPadrao: string; estiloImagemPadrao: string; fusoPublico: string;
 };
 type Config = {
   canal: Canal;
@@ -15,9 +15,11 @@ type Config = {
   series: { id: number; nome: string; descricao: string }[];
   temas: { id: number; nome: string }[];
   modelos: { id: number; etapa: string; ordem: number; texto: string }[];
+  agenda: ItemAgenda[];
 };
+type ItemAgenda = { rotulo: string; tipo: "short" | "reserva"; diasApos: number; hora: string };
 
-const ABAS = ["Geral", "Grade", "Formatos e séries", "Temas", "Checklists", "Padrões"] as const;
+const ABAS = ["Geral", "Grade", "Agenda", "Formatos e séries", "Temas", "Checklists", "Padrões"] as const;
 
 export function ConfiguracoesCanal({ canalId, onFechar, onAlterado, onAviso }: { canalId: number; onFechar: () => void; onAlterado: () => void; onAviso: Aviso }) {
   const [cfg, setCfg] = useState<Config | null>(null);
@@ -57,7 +59,8 @@ export function ConfiguracoesCanal({ canalId, onFechar, onAlterado, onAviso }: {
       </div>
       {/* abas ficam montadas (só escondidas) para não perder o que foi digitado */}
       <div hidden={aba !== "Geral"}><Geral canal={cfg.canal} rodar={rodar} /></div>
-      <div hidden={aba !== "Grade"}><Grade canalId={canalId} grade={cfg.grade} rodar={rodar} /></div>
+      <div hidden={aba !== "Grade"}><Grade canalId={canalId} fuso={cfg.canal.fusoPublico} grade={cfg.grade} rodar={rodar} /></div>
+      <div hidden={aba !== "Agenda"}><AgendaModelo canalId={canalId} fuso={cfg.canal.fusoPublico} agenda={cfg.agenda} rodar={rodar} /></div>
       <div hidden={aba !== "Formatos e séries"}><FormatosESeries canalId={canalId} cfg={cfg} rodar={rodar} /></div>
       <div hidden={aba !== "Temas"}><Temas canalId={canalId} temas={cfg.temas} rodar={rodar} /></div>
       <div hidden={aba !== "Checklists"}><Checklists canalId={canalId} modelos={cfg.modelos} rodar={rodar} /></div>
@@ -86,12 +89,20 @@ function Geral({ canal, rodar }: { canal: Canal; rodar: Rodar }) {
   );
 }
 
-function Grade({ canalId, grade, rodar }: { canalId: number; grade: Config["grade"]; rodar: Rodar }) {
+function Grade({ canalId, fuso, grade, rodar }: { canalId: number; fuso: string; grade: Config["grade"]; rodar: Rodar }) {
   const [itens, setItens] = useState(grade.map(({ diaSemana, hora }) => ({ diaSemana, hora })));
   const [novo, setNovo] = useState({ diaSemana: 2, hora: "12:00" });
+  const [fusoPublico, setFusoPublico] = useState(fuso);
+  const fusos = FUSOS.some((x) => x.id === fuso) ? FUSOS : [...FUSOS, { id: fuso, nome: nomeFuso(fuso), detalhe: fuso }];
   return (
     <div className="max-w-md">
-      <p className="mb-3 text-sm text-slate-600">Dias e horários de publicação. A data planejada dos vídeos é sugerida como o próximo horário livre desta grade.</p>
+      <Rotulo texto="Fuso do público principal">
+        <select className={campo} value={fusoPublico} onChange={(e) => setFusoPublico(e.target.value)}>
+          {fusos.map((x) => <option key={x.id} value={x.id}>{x.nome} ({x.detalhe})</option>)}
+        </select>
+      </Rotulo>
+      <p className="mb-3 mt-1 text-xs text-slate-500">Os horários da grade e da agenda são lidos neste fuso, com o horário de verão resolvido automaticamente.</p>
+      <p className="mb-3 text-sm text-slate-600">Dias e horários de publicação do vídeo longo. A data planejada dos vídeos é sugerida como o próximo horário livre desta grade.</p>
       <ul className="mb-3 space-y-1">
         {itens.length === 0 && <li className="text-sm text-slate-500">Nenhum horário.</li>}
         {itens.map((g, i) => (
@@ -108,7 +119,47 @@ function Grade({ canalId, grade, rodar }: { canalId: number; grade: Config["grad
         <input type="time" className={`${campo} w-auto`} value={novo.hora} onChange={(e) => setNovo({ ...novo, hora: e.target.value })} />
         <button className={botaoClaro} disabled={!novo.hora || itens.some((g) => g.diaSemana === novo.diaSemana && g.hora === novo.hora)} onClick={() => setItens([...itens, novo].sort((a, b) => a.diaSemana - b.diaSemana || a.hora.localeCompare(b.hora)))}>Adicionar</button>
       </div>
-      <button className={botao} onClick={() => rodar(() => ler(api.api.canais[":id"].grade.$put({ param: { id: String(canalId) }, json: { grade: itens } })))}>Salvar grade</button>
+      <button className={botao} onClick={() => rodar(async () => {
+        if (fusoPublico !== fuso) await ler(api.api.canais[":id"].$patch({ param: { id: String(canalId) }, json: { fusoPublico } }));
+        await ler(api.api.canais[":id"].grade.$put({ param: { id: String(canalId) }, json: { grade: itens } }));
+      })}>Salvar grade</button>
+    </div>
+  );
+}
+
+function AgendaModelo({ canalId, fuso, agenda, rodar }: { canalId: number; fuso: string; agenda: ItemAgenda[]; rodar: Rodar }) {
+  const [itens, setItens] = useState<ItemAgenda[]>(agenda.map(({ rotulo, tipo, diasApos, hora }) => ({ rotulo, tipo, diasApos, hora })));
+  const mudar = (i: number, parcial: Partial<ItemAgenda>) => setItens(itens.map((x, j) => (j === i ? { ...x, ...parcial } : x)));
+  const ordenados = () => [...itens].sort((a, b) => a.diasApos - b.diasApos || a.hora.localeCompare(b.hora));
+  return (
+    <div className="max-w-2xl">
+      <p className="mb-3 text-sm text-slate-600">
+        O vídeo longo sai na data de upload do vídeo. Cada material abaixo sai <b>N dias depois</b>, na hora indicada no fuso do público ({nomeFuso(fuso)}).
+        A aba Agenda da ficha do vídeo monta as datas a partir deste modelo.
+      </p>
+      <div className="mb-1 grid grid-cols-[1fr_11rem_5rem_6rem_1.5rem] gap-2 text-xs font-medium text-slate-500">
+        <span>Material</span><span>Tipo</span><span>Dias depois</span><span>Hora</span><span />
+      </div>
+      <ul className="mb-3 space-y-1">
+        {itens.length === 0 && <li className="text-sm text-slate-500">Só o vídeo longo.</li>}
+        {itens.map((m, i) => (
+          <li key={i} className="grid grid-cols-[1fr_11rem_5rem_6rem_1.5rem] items-center gap-2">
+            <input className={campo} value={m.rotulo} onChange={(e) => mudar(i, { rotulo: e.target.value })} />
+            <select className={campo} value={m.tipo} onChange={(e) => mudar(i, { tipo: e.target.value as ItemAgenda["tipo"] })}>
+              <option value="short">Short deste vídeo</option>
+              <option value="reserva">Short da reserva</option>
+            </select>
+            <input type="number" min={0} max={30} className={campo} value={m.diasApos} onChange={(e) => mudar(i, { diasApos: Number(e.target.value) })} />
+            <input type="time" className={campo} value={m.hora} onChange={(e) => mudar(i, { hora: e.target.value })} />
+            <button className="text-slate-400 hover:text-red-600" onClick={() => setItens(itens.filter((_, j) => j !== i))} aria-label="Remover">×</button>
+          </li>
+        ))}
+      </ul>
+      <p className="mb-3 text-xs text-slate-500">Short deste vídeo: o "Vídeo relacionado" aponta para o próprio vídeo. Short da reserva: aponta para o vídeo de onde o short saiu.</p>
+      <div className="flex gap-2">
+        <button className={botaoClaro} onClick={() => setItens([...itens, { rotulo: `Short ${itens.length + 1}`, tipo: "short", diasApos: 1, hora: "12:00" }])}>+ Material</button>
+        <button className={botao} disabled={itens.some((m) => !m.rotulo.trim() || !m.hora)} onClick={() => { const lista = ordenados(); setItens(lista); void rodar(() => ler(api.api.canais[":id"].agenda.$put({ param: { id: String(canalId) }, json: { itens: lista } }))); }}>Salvar agenda</button>
+      </div>
     </div>
   );
 }

@@ -40,7 +40,8 @@ Etapas fixas (no código), iguais para todos os canais:
 `Ideia → Pesquisa → Roteiro → Narração → Imagens → Edição → Thumbnail → Agendado → Publicado`
 
 - **Checklist:** cada canal tem um modelo por etapa (editável e com padrão sugerido), copiado para o vídeo ao criá-lo. Itens podem ser adicionados ao vídeo avulso. **Não bloqueia** o avanço: pendências aparecem como ⚠️ no card.
-- **Grade de publicação** por canal (dias da semana + horário). A data planejada do vídeo é sugerida como o próximo horário livre.
+- **Grade de publicação** por canal (dias da semana + horário, lidos no **fuso do público** do canal). A data planejada do vídeo é sugerida como o próximo horário livre.
+- **Agenda de publicação** por vídeo (2026-10-12): a data planejada é a data de upload do vídeo longo; o **modelo de agenda** do canal diz em quantos dias depois e a que hora (fuso do público) sai cada short. A ficha mostra a data e a hora de cada material no fuso do público e no horário do Mac, e o que programar no YouTube Studio.
 - **Alerta de risco:** faltam menos de 7 dias para a data planejada e o vídeo ainda está antes de Edição.
 - **Histórico:** cada mudança de etapa é registrada (para a linha do tempo e os gargalos).
 - **Ideia → Pesquisa** cria a pasta do vídeo no Drive, com um aviso na tela.
@@ -50,6 +51,7 @@ Etapas fixas (no código), iguais para todos os canais:
 
 ```
 Canal 1─N GradePublicacao       Canal 1─N Formato
+Canal 1─N AgendaItem
 Canal 1─N Serie                 Canal 1─N Tema
 Canal 1─N ModeloChecklist       Canal 1─N PromptBanco
 Canal 1─N Ativo                 Canal 1─1 CriteriosExperimento
@@ -68,9 +70,11 @@ Video 1─N DossieItem (direitos · ia · monetizacao)
 
 ### Entidades e campos principais
 
-**Canal:** nome, nicho, idioma (`pt-BR`), prefixoCodigo (`BJJ`, único), pastaRelativa (relativa ao `DRIVE_ROOT`), urlYoutube?, youtubeChannelId?, modeloDescricao (com variáveis `{titulo}`, `{resumo}`, `{capitulos}`, `{fontes}`, `{creditos}`), tagsPadrao[], vozPadrao (ferramenta, voz, configurações), estiloImagemPadrao (prompt base), referenciasIdentidade (links do Design System e artes).
+**Canal:** nome, nicho, idioma (`pt-BR`), prefixoCodigo (`BJJ`, único), pastaRelativa (relativa ao `DRIVE_ROOT`), urlYoutube?, youtubeChannelId?, modeloDescricao (com variáveis `{titulo}`, `{resumo}`, `{capitulos}`, `{fontes}`, `{creditos}`), tagsPadrao[], vozPadrao (ferramenta, voz, configurações), estiloImagemPadrao (prompt base), referenciasIdentidade (links do Design System e artes), fusoPublico (IANA, ex.: `America/New_York`; padrão `America/Sao_Paulo`).
 
-**GradePublicacao:** canal, diaSemana, hora.
+**GradePublicacao:** canal, diaSemana, hora (no fuso do público).
+
+**AgendaItem:** canal, ordem, rotulo, tipo (`short` = corte deste vídeo, o "Vídeo relacionado" aponta para ele · `reserva` = short guardado de um vídeo anterior, aponta para o vídeo de origem), diasApos (0 = dia do upload), hora (no fuso do público). Canal novo recebe a semana padrão: Short 1 no dia às 18:00, Short 2 e 3 nos dias +1 e +2 às 12:00, Short 4 no dia +4 às 10:00 e o short da reserva no dia +5 às 10:00.
 
 **Formato:** canal, nome (padrões: História · Mito x verdade · Ranking · Origem · Rivalidade), ativo.
 
@@ -154,10 +158,11 @@ Convenção de arquivos: `BJJ-001_narracao_v2.mp3`, `BJJ-001_thumb_B.png`.
    - *Fontes:* lista com tipo, fato, confiabilidade, texto de tela e cenas ligadas (⚠️ "sem exibição no vídeo" quando não há cena).
    - *Produção:* voz usada, duração final, notas de corte.
    - *Direitos:* marcação de conteúdo sintético, itens de direitos (com contestação pronta e provas), uso de IA e riscos de monetização, e "Colar JSON" para importar o dossiê gerado pela sessão de produção.
+   - *Agenda:* data e hora de upload (no fuso do público, grava a data planejada) e a tabela de materiais (vídeo longo e shorts) com data e hora no fuso do público e no horário do Mac, o que programar no Studio ("Programar" e "Vídeo relacionado") e aviso quando o horário de verão muda dentro da agenda.
    - *Publicação:* descrição, tags, capítulos, variantes de thumbnail (A/B/C, escolhida, resultado do teste) e links do YouTube.
    - *Arquivos:* listagem por subpasta, com ☁️ para arquivos só online, miniaturas de imagens, "Abrir no Finder" e "Criar pasta" / "Renomear pasta" (com confirmação).
    - *Checklist e histórico:* itens por etapa e linha do tempo das etapas.
-6. **Configurações do canal:** dados gerais, grade, formatos, séries, temas, modelos de checklist, padrões (descrição, tags, voz, estilo de imagem) e referências de identidade.
+6. **Configurações do canal:** dados gerais, fuso do público e grade, modelo de agenda, formatos, séries, temas, modelos de checklist, padrões (descrição, tags, voz, estilo de imagem) e referências de identidade.
 7. **Banco de prompts do canal:** prompts ⭐ com exemplo e origem.
 
 ### v0.2: Publicação e análise

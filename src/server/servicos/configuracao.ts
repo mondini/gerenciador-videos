@@ -1,7 +1,9 @@
 import { and, asc, count, eq } from "drizzle-orm";
 import { z } from "zod";
 import { ETAPAS, type Etapa } from "../../shared/etapas";
-import { canal, formato, gradePublicacao, modeloChecklist, serie, tema, video } from "../db/schema";
+import { TIPOS_AGENDA } from "../../shared/agenda";
+import { fusoValido } from "../../shared/fuso";
+import { agendaItem, canal, formato, gradePublicacao, modeloChecklist, serie, tema, video } from "../db/schema";
 import type { Contexto } from "./contexto";
 
 export class ConflitoError extends Error {}
@@ -16,11 +18,21 @@ export const editarCanalSchema = z
     tagsPadrao: z.array(z.string().trim().min(1)),
     vozPadrao: z.string(),
     estiloImagemPadrao: z.string(),
+    fusoPublico: z.string().refine(fusoValido, "Fuso desconhecido (use o nome IANA, ex.: America/New_York)"),
   })
   .partial();
 
 export const gradeSchema = z.object({
   grade: z.array(z.object({ diaSemana: z.number().int().min(0).max(6), hora: z.string().regex(/^\d{2}:\d{2}$/) })),
+});
+const hora = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Hora no formato HH:MM");
+export const agendaSchema = z.object({
+  itens: z.array(z.object({
+    rotulo: z.string().trim().min(1),
+    tipo: z.enum(TIPOS_AGENDA),
+    diasApos: z.number().int().min(0).max(30),
+    hora,
+  })),
 });
 export const nomeSchema = z.object({ nome: z.string().trim().min(1) });
 export const editarFormatoSchema = z.object({ nome: z.string().trim().min(1), ativo: z.boolean() }).partial();
@@ -49,6 +61,7 @@ export function lerConfiguracao(ctx: Contexto, canalId: number) {
     formatos: db.select().from(formato).where(eq(formato.canalId, canalId)).orderBy(asc(formato.id)).all(),
     series: db.select().from(serie).where(eq(serie.canalId, canalId)).orderBy(asc(serie.id)).all(),
     temas: db.select().from(tema).where(eq(tema.canalId, canalId)).orderBy(asc(tema.nome)).all(),
+    agenda: db.select().from(agendaItem).where(eq(agendaItem.canalId, canalId)).orderBy(asc(agendaItem.ordem)).all(),
     modelos: db.select().from(modeloChecklist).where(eq(modeloChecklist.canalId, canalId)).orderBy(asc(modeloChecklist.ordem)).all(),
   };
 }
@@ -57,6 +70,13 @@ export function substituirGrade(ctx: Contexto, canalId: number, grade: z.infer<t
   ctx.db.transaction((tx) => {
     tx.delete(gradePublicacao).where(eq(gradePublicacao.canalId, canalId)).run();
     if (grade.length) tx.insert(gradePublicacao).values(grade.map((g) => ({ ...g, canalId }))).run();
+  });
+}
+
+export function substituirAgenda(ctx: Contexto, canalId: number, itens: z.infer<typeof agendaSchema>["itens"]) {
+  ctx.db.transaction((tx) => {
+    tx.delete(agendaItem).where(eq(agendaItem.canalId, canalId)).run();
+    if (itens.length) tx.insert(agendaItem).values(itens.map((m, i) => ({ ...m, canalId, ordem: i + 1 }))).run();
   });
 }
 
