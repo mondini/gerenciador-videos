@@ -17,8 +17,8 @@ REGRAS GERAIS
   avisos e justificativas para mim: em pt-BR.
 - Respeite os limites do YouTube: título ≤ 100 caracteres (ideal ≤ 60),
   descrição ≤ 5.000 caracteres, tags ≤ 500 caracteres no total.
-- Responda em Markdown, com EXATAMENTE as 15 seções abaixo, na mesma ordem e
-  com os mesmos títulos. Termine com o bloco JSON da seção 15.
+- Responda em Markdown, com EXATAMENTE as 16 seções abaixo, na mesma ordem e
+  com os mesmos títulos. Termine com o bloco JSON da seção 16.
 - Isto não é aconselhamento jurídico: diga o que é regra do YouTube, o que é
   licença do ativo e o que é sua avaliação, e sinalize o que devo conferir.
 
@@ -123,7 +123,18 @@ Avalie e liste, com risco (baixo/médio/alto) e mitigação:
 Conclua com: PRONTO PARA PUBLICAR, PUBLICAR APÓS CORREÇÕES (liste) ou NÃO
 PUBLICAR (motivo).
 
-## 15. BLOCO JSON (dossiê)
+## 15. SHORTS
+Tudo pronto para copiar e colar no YouTube Studio (pedido do criador em 13/10/2026), um short por vez:
+- Agenda da semana do vídeo: dia, hora em ET e em Brasília (conferindo o horário de verão americano na
+  data) e a ordem dos shorts, seguindo "Cadência e calendário de publicação" do `plano-canal.md`.
+- Para cada short: arquivo em `shorts/`, título e descrição em blocos de código separados. Descrição em
+  2 a 4 linhas: uma frase de contexto, o crédito exato quando o short mostra citação (igual ao da tela),
+  o título do vídeo completo ("linked above", porque links na descrição de Shorts não são clicáveis) e
+  3 hashtags terminando em #Shorts.
+- Configurações comuns: "Vídeo relacionado" (o vídeo de origem), público e conteúdo sintético.
+- Confira cada citação no roteiro antes de colocá-la na descrição.
+
+## 16. BLOCO JSON (dossiê)
 Um único bloco ```json, válido, que eu possa colar no gerenciador, com este
 formato EXATO (os valores de enum devem ser escritos exatamente assim, sem
 acento):
