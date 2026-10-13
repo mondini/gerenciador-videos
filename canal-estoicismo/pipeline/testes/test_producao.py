@@ -2,6 +2,8 @@
 import os
 from datetime import datetime
 
+import pytest
+
 from marbleash import config, producao
 
 ROTEIRO = '''# Vídeo 1 — The Man Who Had Everything
@@ -151,3 +153,19 @@ def test_le_drive_root_do_env_do_repositorio(tmp_path, monkeypatch):
     monkeypatch.setenv('PORT', '9999')
     assert config.env_repo('PORT') == '9999'
     assert os.environ['PORT'] == '9999'
+
+
+def test_novo_video_a_partir_do_plano(tmp_path, monkeypatch):
+    from marbleash import config, producao
+    plano = tmp_path / 'plano.md'
+    plano.write_text('| # | Nome interno | Título | Tema | Provérbio |\n|---|---|---|---|---|\n'
+                     '| 3 | The Last Hour | Memento Mori for Busy Minds | Memento mori | 27:1 |\n\n'
+                     '| Formato | O que promete | Vídeos |\n|---|---|---|\n| Conceito estoico | uma ideia | 3, 7 |\n\n'
+                     '- **Vídeo 3 — The Last Hour:** memento mori para viver melhor.\n', encoding='utf-8')
+    monkeypatch.setattr(config, 'VIDEOS', tmp_path / 'videos')
+    pasta = producao.novo_video(3, plano)
+    assert pasta.name == f'{config.PREFIXO}-003-the-last-hour'
+    txt = (pasta / 'roteiro.md').read_text(encoding='utf-8')
+    assert '# Vídeo 3 — The Last Hour' in txt and 'Conceito estoico (uma ideia)' in txt and 'memento mori para viver melhor' in txt
+    with pytest.raises(SystemExit):
+        producao.novo_video(3, plano)

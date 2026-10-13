@@ -95,3 +95,41 @@ def test_sugestao_com_transcritor_encaixa_na_pausa():
                                                 [0.0, 0.2, 0.4, 0.6, 0.9, 2.1, 2.6, 2.8, 3.0, 3.3, 3.5, 3.7, 4.2, 5.2, 5.4, 5.7, 5.9, 6.2])]
     linhas = tempos.sugerir(TEXTO, PAUSAS_TEXTO, 7.0, palavras)
     assert [s for _, s, _, _ in linhas] == [0.0, 2.4, 5.0]
+
+
+ROTEIRO = '''# Vídeo
+
+## Bloco 1 — Gancho (aprovado)
+
+```
+[softly] You've already won this argument... a hundred times.
+In the shower. On the drive home.
+```
+
+**Deixas:** won = "You've already won" · shower = "In the shower" · nada = "Never said"
+
+## Bloco 2 — Outro
+
+```
+Text.
+```
+'''
+
+
+def test_deixas_escritas_no_roteiro(tmp_path):
+    p = tmp_path / 'roteiro.md'
+    p.write_text(ROTEIRO, encoding='utf-8')
+    assert tempos.deixas_do_bloco(p, 1) == [('won', "You've already won"), ('shower', 'In the shower'), ('nada', 'Never said')]
+    assert tempos.deixas_do_bloco(p, 2) == []
+    assert 'Deixas' not in tempos.texto_do_bloco(p, 1)              # o texto do ElevenLabs continua limpo
+
+
+def test_nomear_com_as_deixas_do_roteiro():
+    linhas = [('youve_already', 0.0, "You've already won this argument...", 'início'),
+              ('a_hundred', 1.2, 'a hundred times.', 'voz'),
+              ('in_the', 3.0, 'In the shower.', 'pausa'),
+              ('won', 4.0, 'On the drive home.', 'pausa')]
+    novas, faltando = tempos.nomear(linhas, [('won', "You've already won"), ('shower', 'In the shower'), ('nada', 'Never')])
+    assert [l[0] for l in novas] == ['won', 'a_hundred', 'shower', 'won_']
+    assert novas[2][1:] == linhas[2][1:]
+    assert faltando == ['nada']

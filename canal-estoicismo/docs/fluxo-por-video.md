@@ -5,7 +5,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 ## 1. Preparar o ambiente (começo de toda sessão)
 - O ambiente já fica em `.venv/` dentro da pasta. Conferir com `./ma -h`. Se faltar, instalar como em `pipeline/LEIA-ME.md` (seção 1).
 - Conferir que o pipeline continua fiel ao padrão aprovado: `.venv/bin/python -m pytest pipeline/testes`.
-- Vídeo novo: criar a pasta `videos/MA-NNN-slug/` (código seguinte + slug do nome interno em inglês, minúsculo, com hífens) com o `roteiro.md`.
+- Vídeo novo: `./ma novo N` cria a pasta `videos/MA-NNN-slug/` e o `roteiro.md` inicial a partir da ficha do plano.
 - Processo do vídeo 2 em diante: ver "Processo mais eficiente" em `docs/plano-canal.md` (inclui as melhorias do pipeline a fazer no começo da sessão do vídeo 2).
 
 ## 2. Roteiro (se ainda não estiver aprovado)
@@ -23,7 +23,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - Com o roteiro todo aprovado, o criador gera todos os blocos de uma vez no ElevenLabs (plano Starter, mesma voz) e envia os mp3. Enquanto isso, o Claude já escreve as cenas (por nome de deixa) e cria a arte nova.
 - Salvar em `videos/MA-NNN-slug/audio/` com `blocoN` no nome (ex.: `MA-002-bloco2-starter.mp3`).
 - `./ma audio N N` — detecta as pausas e alonga-as levemente (ritmo final ~150 palavras/min) (grava `videos/MA-NNN-slug/blocoN/audio.json`).
-- `./ma tempos N N` — sugere `videos/MA-NNN-slug/blocoN/tempos.txt` com o início de cada frase (transcritor + pausas + texto do roteiro). Conferir a tabela impressa e dar nomes curtos às deixas que a cena vai usar. `./ma deixas N N` mostra os tempos no vídeo.
+- `./ma tempos N N` — sugere `videos/MA-NNN-slug/blocoN/tempos.txt` com o início de cada frase (transcritor + pausas + texto do roteiro). Os nomes das deixas vêm da linha `**Deixas:**` de cada seção do roteiro (escrita junto com as cenas); conferir a tabela impressa. `./ma deixas N N` mostra os tempos no vídeo.
 
 ## 4. Animação (padrão Teatro de Sombras Projetadas)
 - Para cada bloco, escrever o roteiro visual (cenas, entradas, foco de luz, zoom) a partir das ideias de cena do roteiro.

@@ -45,6 +45,7 @@ Rode na pasta do canal. `VIDEO` = `1`, `MA-001` ou o nome da pasta (`MA-001-the-
 
 | Etapa | Comando | O que faz | Gera |
 |---|---|---|---|
+| Vídeo novo | `./ma novo N` | Cria `videos/MA-NNN-slug/` e o `roteiro.md` inicial a partir da tabela "Os 12 vídeos", dos formatos e da ficha inicial do plano | `videos/MA-NNN-slug/roteiro.md` |
 | Áudio | `./ma audio VIDEO BLOCO` | Detecta as pausas do mp3, alonga levemente as pausas (ritmo final ~150 palavras/min) | `blocoN/audio.json`, `trabalho/blocoN-lento.wav` |
 | Tempos | `./ma tempos VIDEO BLOCO` | Sugere o início de cada frase do roteiro (transcritor + pausas) | `blocoN/tempos.txt` (ou `tempos-sugerido.txt` se já existir) |
 | Conferir tempos | `./ma deixas VIDEO BLOCO` | Lista as deixas com o tempo no vídeo | — |
@@ -92,8 +93,10 @@ Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos
    `videos/MA-001-the-man-who-had-everything/bloco2/tempos.txt`, uma linha por frase (ver seção 4). Leia a tabela impressa:
    - frases com origem `pausa` estão exatas; `voz` vem do transcritor (±0,1 s); `estimado`, sem
      transcritor, precisa de conferência ouvindo o áudio;
-   - **renomeie** as deixas que a cena vai usar para nomes curtos (`name`, `plague`, `danube`...).
-     Só letras, números e `_`. As outras podem ficar como estão.
+   - os **nomes** das deixas vêm do roteiro (desde o MA-002): abaixo do bloco de código de cada seção, uma linha
+     `**Deixas:** won = "You've already won" · shower = "In the shower"` (nome curto = começo da frase, só letras,
+     números e `_`). O `./ma tempos` aplica os nomes e avisa se algum começo não casou. Fica fora do bloco de código,
+     então o texto colado no ElevenLabs continua limpo. Frases sem nome no roteiro ganham nome automático.
 4. **Script de cena.** Copie `videos/MA-001-the-man-who-had-everything/bloco1/cena.py` para `videos/MA-001-the-man-who-had-everything/bloco2/cena.py` e:
    - troque a docstring (o que acontece em cada cena, seguindo as "Ideias de cena" do roteiro);
    - monte o ELENCO com peças da biblioteca (`cenario.*`, `objetos.*`, `bonecos.*`) — ver seção 5;

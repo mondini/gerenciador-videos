@@ -175,8 +175,8 @@ Ver `fluxo-por-video.md`.
 5. **Revisão única:** o criador não revisa prévias bloco a bloco; recebe o vídeo montado inteiro e aprova ou pede ajustes de uma vez.
 6. **Shorts marcados no roteiro:** ao aprovar cada bloco, anotar no `roteiro.md` as frases que dão short (5 por vídeo).
 7. **Pacote a partir do anterior:** seções fixas (links, licenças, créditos) reaproveitadas do pacote do vídeo anterior; só o conteúdo do vídeo é novo.
-8. **Melhorias do pipeline aprovadas (fazer no começo da sessão do vídeo 2, antes do roteiro):**
-   - nomes das deixas escritos direto no roteiro (marca curta na frase), para o `./ma tempos` já sair com os nomes e acabar a renomeação manual;
+8. **Melhorias do pipeline aprovadas (feitas em 13/10/2026, na sessão do vídeo 2):**
+   - nomes das deixas escritos no roteiro: linha `**Deixas:** nome = "começo da frase" · ...` abaixo do bloco de código (fora do texto do ElevenLabs); o `./ma tempos` já sai com os nomes;
    - `./ma novo N`: cria a pasta `videos/MA-NNN-slug/` e o `roteiro.md` a partir da ficha deste plano.
 
 ## Status

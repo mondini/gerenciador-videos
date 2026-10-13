@@ -342,3 +342,63 @@ def sincronizar(st: Status, url: str | None = None) -> dict:
         raise SystemExit(f'O sistema recusou: {json.loads(e.read()).get("erro", e)}')
     except urllib.error.URLError:
         raise SystemExit(f'O sistema de gestão não está rodando em {base}. Na raiz do repositório: npm run dev')
+
+
+# ---------------- vídeo novo (ma novo N) ----------------
+def _celulas(linha):
+    return [c.strip() for c in linha.strip().strip('|').split('|')]
+
+
+def ficha_do_plano(numero, plano=None):
+    """A ficha do vídeo N em docs/plano-canal.md: tabela "Os 12 vídeos", tabela de formatos e a ficha inicial."""
+    plano = Path(plano or config.CANAL / 'docs' / 'plano-canal.md')
+    txt = plano.read_text(encoding='utf-8')
+    ficha, tabela = {}, None
+    for linha in txt.splitlines():
+        if not linha.startswith('|'):
+            tabela = None
+            continue
+        c = _celulas(linha)
+        tabela = tabela or c[0]                                  # a tabela é reconhecida pelo cabeçalho
+        if tabela == '#' and len(c) == 5 and c[0] == str(numero):
+            ficha.update(nome=c[1], titulo=c[2], tema=c[3], proverbio=c[4])
+        elif tabela == 'Formato' and len(c) == 3 and str(numero) in re.findall(r'\d+', c[2]):
+            ficha['formato'] = f'{c[0]} ({c[1]})'
+    if 'nome' not in ficha:
+        raise SystemExit(f'O vídeo {numero} não está na tabela "Os 12 vídeos" de {plano.name}')
+    m = re.search(rf'^- \*\*Vídeo {numero} — [^*]+:\*\* (.+)$', txt, re.M)
+    ficha['ficha'] = m.group(1).strip() if m else ''
+    return ficha
+
+
+def slug(nome):
+    return re.sub(r'[^a-z0-9]+', '-', nome.lower()).strip('-')
+
+
+def novo_video(numero, plano=None):
+    """Cria videos/MA-NNN-slug/ com o roteiro.md inicial a partir da ficha do plano. Devolve a pasta."""
+    codigo = f'{config.PREFIXO}-{int(numero):03d}'
+    existentes = [p for p in config.VIDEOS.glob(f'{codigo}*') if p.is_dir()]
+    if existentes:
+        raise SystemExit(f'Já existe: videos/{existentes[0].name}')
+    f = ficha_do_plano(numero, plano)
+    pasta = config.VIDEOS / f'{codigo}-{slug(f["nome"])}'
+    pasta.mkdir(parents=True)
+    linhas = [f'# Vídeo {int(numero)} — {f["nome"]}', '',
+              f'- **Título de publicação (plano):** {f["titulo"]}',
+              f'- **Nome interno:** {f["nome"]}']
+    if f.get('formato'):
+        linhas.append(f'- **Formato:** {f["formato"]}')
+    linhas += [f'- **Tema:** {f["tema"]}',
+               f'- **Provérbio-ponte (plano):** {f["proverbio"]}']
+    if f['ficha']:
+        linhas.append(f'- **Ficha inicial (plano):** {f["ficha"]}')
+    linhas += ['- **Duração-alvo:** ~10 minutos (~1.300–1.500 palavras faladas)', '',
+               '## Notas de produção', '',
+               f'> Status (o que existe e o que falta): `./ma status {int(numero)}`. Aqui ficam só decisões e notas.', '',
+               '- Gancho segue a seção 5 do guia de embalagem (promessa do título nos primeiros 15 s, palavra-chave nos primeiros 30 s, *loop* aberto).',
+               '- Moldura fixa nova para este vídeo (ver "Moldura fixa por vídeo" em `docs/plano-canal.md`).',
+               '- Nomes das deixas: uma linha `**Deixas:** nome = "começo da frase" · ...` abaixo do texto de cada bloco (fora do bloco de código).',
+               '', '---', '', '## Banco de citações', '', '(conferir cada citação na fonte de domínio público antes de propor)', '']
+    (pasta / 'roteiro.md').write_text('\n'.join(linhas), encoding='utf-8')
+    return pasta

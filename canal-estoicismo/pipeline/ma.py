@@ -13,6 +13,7 @@ Um comando por etapa (VIDEO = 1, MA-001 ou a pasta inteira MA-001-slug; BLOCO = 
   limpar-cache                    apaga o cache de arte (é refeito sozinho)
 
 Produção (status, backup e sistema de gestão):
+  novo        N                   cria videos/MA-NNN-slug/ e o roteiro.md a partir da ficha do plano
   status      VIDEO               o que já existe, o que falta e a etapa do kanban
   backup      VIDEO               copia para o Google Drive (nunca apaga nada lá)
   sincronizar VIDEO               manda status, roteiro e pendências para o sistema de gestão
@@ -86,12 +87,18 @@ def cmd_tempos(a):
                 info['palavras'] = [[w, round(s, 3), round(e, 3)] for w, s, e in palavras]
                 tempos.gravar_audio_json(b.arquivo_audio_json, info)
     linhas = tempos.sugerir(texto, info['pausas'], info['duracao_original'], palavras)
+    deixas = tempos.deixas_do_bloco(b.roteiro, b.numero)
+    if deixas:
+        linhas, faltando = tempos.nomear(linhas, deixas)
+        print(f'deixas do roteiro: {len(deixas) - len(faltando)} de {len(deixas)} com nome')
+        for nome in faltando:
+            print(f'  AVISO: a deixa {nome!r} do roteiro não casou com o começo de nenhuma frase; confira a linha **Deixas:**')
     destino = b.arquivo_tempos if (a.refazer or not b.arquivo_tempos.exists()) else b.pasta / 'tempos-sugerido.txt'
     cab = [f'Tempos do {b.nome} · {b.video} — deixas da narração.',
            f'Áudio: {info["fonte"]} ({info["duracao_original"]:.2f} s). Gerado por `ma tempos`; revise à mão.',
            'Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)',
            '  SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.',
-           '  NOME    = como o script de cena usa a deixa (c.NOME). Renomeie à vontade; "-" = não usada.',
+           '  NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.',
            '  origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.',
            '']
     tempos.escrever(destino, linhas, cab)
@@ -343,6 +350,12 @@ def cmd_status(a):
         print(f'  - {f}')
 
 
+def cmd_novo(a):
+    from marbleash import producao
+    pasta = producao.novo_video(a.numero)
+    print(f'criado: {(pasta / "roteiro.md").relative_to(config.CANAL)}')
+
+
 def cmd_backup(a):
     from marbleash import producao
     pasta = _pasta_video(a.video)
@@ -457,6 +470,10 @@ def main(argv=None):
 
     sp = sub.add_parser('limpar-cache', help='apaga o cache de arte e máscaras')
     sp.set_defaults(f=cmd_limpar_cache)
+
+    sp = sub.add_parser('novo', help='cria a pasta do vídeo N e o roteiro.md a partir da ficha do plano')
+    sp.add_argument('numero', type=int, help='número do vídeo na tabela "Os 12 vídeos" (ex.: 3)')
+    sp.set_defaults(f=cmd_novo)
 
     for nome, f, ajuda in (('status', cmd_status, 'o que já existe e o que falta'),
                            ('backup', cmd_backup, 'copia o vídeo para o Google Drive'),

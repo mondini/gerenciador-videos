@@ -118,6 +118,52 @@ def texto_do_bloco(roteiro_md, numero):
     return m.group(1)
 
 
+def _secao(roteiro_md, numero):
+    """O texto da seção "## Bloco N" (ou da peça de TITULOS) até a próxima seção "## "."""
+    txt = Path(roteiro_md).read_text(encoding='utf-8')
+    titulo = TITULOS.get(str(numero), f'Bloco {numero}')
+    m = re.search(rf'^## {re.escape(titulo)}\b.*?(?=^## |\Z)', txt, re.S | re.M)
+    return m.group(0) if m else ''
+
+
+_DEIXA = re.compile(r'([A-Za-z_][A-Za-z0-9_]*)\s*=\s*"([^"]+)"')
+
+
+def deixas_do_bloco(roteiro_md, numero):
+    """Nomes das deixas escritos no roteiro, fora do texto do ElevenLabs, numa linha da seção do bloco:
+
+        **Deixas:** won = "You've already won" · shower = "In the shower"
+
+    Devolve [(nome, começo da frase)] na ordem escrita ([] se o bloco não tiver a linha)."""
+    for linha in _secao(roteiro_md, numero).splitlines():
+        if linha.startswith('**Deixas:**'):
+            return _DEIXA.findall(linha)
+    return []
+
+
+def nomear(linhas, deixas):
+    """Troca os nomes automáticos pelos do roteiro: cada deixa vai para a primeira frase (depois da anterior)
+    que começa com as palavras dela. Devolve (linhas, deixas não encontradas)."""
+    palavras = [[_norm(w) for w in frase.split()] for _, _, frase, *_ in linhas]
+    achadas, faltando, k = {}, [], 0
+    for nome, comeco in deixas:
+        alvo = [_norm(w) for w in comeco.split()]
+        i = next((i for i in range(k, len(linhas)) if palavras[i][:len(alvo)] == alvo), None)
+        if i is None:
+            faltando.append(nome)
+        else:
+            achadas[i], k = nome, i + 1
+    do_roteiro = set(achadas.values())
+    saida = []
+    for i, (nome, *resto) in enumerate(linhas):
+        if i in achadas:
+            nome = achadas[i]
+        elif nome in do_roteiro:                       # nome automático igual a um do roteiro
+            nome = f'{nome}_'
+        saida.append((nome, *resto))
+    return saida, faltando
+
+
 _TAG = re.compile(r'\[[a-z ]+\]')
 
 
