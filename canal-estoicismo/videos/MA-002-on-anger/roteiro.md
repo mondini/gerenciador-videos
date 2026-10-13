@@ -145,3 +145,38 @@ Escolhido entre três variações (13/10/2026). "Anger" aos ~28 s, "Stoics" aos 
 
 ## Abertura padrão (3 s)
 Peça comum `videos/comum/abertura`. Sem narração.
+
+## Bloco 2 — A raiva e o rancor (aprovado)
+
+```
+[thoughtful] About a hundred years before Marcus, another Roman wrote an entire book about anger.
+His name was Seneca.
+And he noticed something we rarely admit.
+We don't just feel anger... we feed it.
+Even when we begin to suspect it was something small... we keep going. Because stopping would mean admitting we were angry for nothing.
+He put it like this:
+we nurse it and inflame it, as though to be violently angry proved our anger to be just.
+[warmly] In other words... we keep the fire burning, just to prove we were right to light it.
+
+[thoughtful] Marcus knew the same trap.
+In one of the longest entries of his journal, he left himself a list of rules... for the days when someone wronged him.
+And one of them says this:
+consider how much more pain is brought on us by the anger and vexation caused by such acts than by the acts themselves.
+[softly] In simple words... what they did to you happened once.
+What you do with it... happens every day.
+
+The insult took a few seconds.
+The grudge... can take years.
+
+[thoughtful] The book of Proverbs has an image for this.
+A stone is heavy, and sand is a burden; but a fool's provocation is heavier than both.
+[warmly] In other words... one careless comment can weigh more than everything you lift at the gym.
+And unlike the gym... carrying it won't make you any stronger.
+[softly] And still... most of us carry it.
+Home. To the dinner table. And into bed.
+```
+
+Toque leve de humor na academia a pedido do criador (13/10/2026).
+**Short:** "In simple words... what they did to you happened once." até "...can take years."
+**Ideias de cena:** fogueira sendo alimentada (lenha a cada "we feed it"); a lista de regras de Marco escrita em coluna; a pedra pesando nas costas da silhueta; academia em sombras (halteres) na piada; a silhueta com a pedra chega à mesa de jantar e à cama.
+**Créditos:** *Seneca, Of Anger III.29 · trans. Aubrey Stewart* · *Marcus Aurelius, Meditations 11.18 · trans. George Long* · *Proverbs 27:3 · World English Bible*
