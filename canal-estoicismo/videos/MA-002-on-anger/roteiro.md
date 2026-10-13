@@ -220,3 +220,49 @@ Exemplo de trabalho: o chefe que apresenta o seu trabalho como dele e não dá c
 **Short:** "Anger, used well... becomes an action." até "...every night."
 **Ideias de cena:** reunião em sombras, o chefe ergue o papel/trabalho da silhueta e recebe os aplausos; parente e amigo com as mãos estendidas; inverno, neve caindo sobre uma silhueta irritada; uma linha traçada no chão em âmbar no "Draw the line"; a voz baixa como onda suave que move uma pedra; o rancor sentado à beira da cama esperando.
 **Créditos:** *Marcus Aurelius, Meditations 9.42 · trans. George Long* · *Marcus Aurelius, Meditations 8.47 · trans. George Long* · *Proverbs 25:15 · World English Bible*
+
+## Bloco 4 — A traição (aprovado)
+
+```
+[thoughtful] Now... let me tell you what happened to Marcus.
+In the year 175, one of his most trusted generals was a man named Avidius Cassius.
+A hero of the wars in the East. Marcus had placed the entire East in his hands.
+Then a false rumor reached him... that the emperor was dead.
+And Cassius declared himself emperor.
+[softly] Imagine hearing that.
+The man you raised up... now calling himself by your title.
+Rome began to prepare for civil war.
+
+[thoughtful] Marcus gathered his soldiers. And the old historian Cassius Dio tells us what he said.
+He was afraid of only one thing.
+Not defeat. Not death.
+He was afraid that Cassius would die... before Marcus had the chance to forgive him.
+To forgive a man who wronged you, he said... that would be a greater prize than any victory.
+
+[softly] He never got that chance.
+Three months later, Cassius was killed by his own officers. They brought his head to the emperor... like a gift.
+Marcus would not look at it. He ordered it buried.
+And he spared almost everyone who had joined the revolt.
+
+[thoughtful] And then... the letters.
+Among the rebels' papers, there were letters. Names. Every man who had written in support of the traitor.
+Any other ruler would have read every line.
+Marcus burned them. Without reading a single one.
+Because he did not want to learn their names... and be forced to hate them.
+One old account says a governor burned them in his place. But it is Marcus's reason that survived.
+
+[warmly] Think about that.
+He didn't wait for the hatred to come... and then fight it.
+He simply refused to feed it.
+In his journal, he wrote:
+as the sense of pain is a characteristic of weakness, so also is anger.
+Anger looks like strength. It isn't. It's a wound.
+[softly] And the most powerful man in the world knew... some letters are better left unread.
+
+[softly] Let's pause here.
+```
+
+História de Cássio Dio contada com nossas palavras (Loeb 1927); fora a fofoca sobre Faustina. Única citação literal: 11.18. Fecha o *loop* do gancho; "refused to feed it" prepara o Provérbios 26:20 do bloco 5.
+**Short (o mais forte):** "And then... the letters." até "...be forced to hate them."
+**Ideias de cena:** mapa com o Oriente se acendendo em âmbar nas mãos do general; mensageiro a cavalo com o boato; a silhueta de Cássio erguendo uma coroa; legiões se alinhando; Marco falando aos soldados; a cabeça trazida numa caixa/pano (nunca mostrada: Marco vira o rosto); baú de cartas, rolos com selos; as cartas no fogo, ainda fechadas, virando cinza; coluna/lista do diário com a citação.
+**Créditos:** *Cassius Dio, Roman History 72.26–29 · Loeb Classical Library* · *Marcus Aurelius, Meditations 11.18 · trans. George Long*
