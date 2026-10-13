@@ -16,7 +16,7 @@ Links (claude.ai):
 - **Tema:** estoicismo com foco em **Marco Aurélio** e as *Meditações*, cruzado de forma sutil com **Provérbios** (sabedorias que se encontram, nunca pregação).
 - **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
 - **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
-- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência planejada: 2 vídeos/semana, 5 shorts por vídeo. Meta: 12 vídeos prontos antes de lançar.
+- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência: **1 vídeo/semana** no lançamento, 5 shorts por vídeo (detalhes em "Cadência e calendário de publicação"). Meta: 12 vídeos prontos antes de lançar.
 - **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs (**plano Starter**; voz e custo em "Voz e créditos do ElevenLabs"). Sem Canva nem Photoshop.
 - **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
 
@@ -78,6 +78,38 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 - **Cores das thumbnails:** **mantém** a paleta do canal (carvão, mármore, âmbar), apesar de o guia desaconselhar tons marrons/neutros. Conferir a legibilidade em tamanho de celular (320×180).
 - **Rostos:** canal dark; as silhuetas fazem o papel do "fator humano".
 - **Vídeo 1:** mantém o título de 57 caracteres e o gancho como está (sem regravar para falar a palavra-chave nos primeiros 30 s). Do vídeo 2 em diante, o roteiro segue a seção 5 do guia.
+
+## Cadência e calendário de publicação (decisão de 12/10/2026)
+
+- **Lançamento: 1 vídeo longo por semana.** Motivo: 12 vídeos de reserva duram 12 semanas (com 2/semana durariam 6), dá tempo de aplicar o que as métricas dos primeiros vídeos ensinarem e o ritmo moderado pesa a favor na revisão de monetização (risco de "conteúdo em massa").
+- **Passar para 2 vídeos/semana** só quando: reserva com **6+ vídeos prontos** E produção de 2/semana mantida por **um mês** sem a reserva cair. O criador decide.
+- **Créditos:** o criador vai comprar créditos extras do ElevenLabs além do Starter.
+- **Horários em Nova York (ET)**, porque o público principal é dos EUA; 14:00 ET = 19:00 em Londres. Os EUA saem do horário de verão em **1º/11/2026** (e voltam no 2º domingo de março); o Brasil não tem horário de verão:
+
+| Nova York (ET) | Brasília com EDT (mar–out) | Brasília com EST (nov–mar) |
+|---|---|---|
+| 10:00 | 11:00 | 12:00 |
+| 12:00 | 13:00 | 14:00 |
+| 14:00 | 15:00 | 16:00 |
+| 18:00 | 19:00 | 20:00 |
+
+- **Semana padrão (fase 1).** Cada vídeo rende 5 shorts: 4 saem na semana e 1 vai para a **reserva de shorts**.
+
+| Dia | Hora (ET) | O que sai |
+|---|---|---|
+| Terça | 14:00 | Vídeo longo |
+| Terça | 18:00 | Short 1 — o corte mais forte |
+| Quarta | 12:00 | Short 2 |
+| Quinta | 12:00 | Short 3 |
+| Sábado | 10:00 | Short 4 |
+| Domingo | 10:00 | Short da reserva, ligado a um vídeo antigo (a partir da 2ª semana; na 1ª, sai o short 5 do próprio vídeo, e a reserva começa no vídeo 2) |
+| Segunda | — | Métricas e preparação |
+
+- **Em todo short:** "Vídeo relacionado" no YouTube Studio apontando para o vídeo longo de origem (o short da reserva aponta para o vídeo dele).
+- **Reserva de shorts:** cobre as semanas em que o vídeo atrasar, para o canal não parar, e leva tráfego para o acervo.
+- **Fase 2 (2/semana, quando liberada):** longos terça e sexta às 14:00 ET, cada um com short às 18:00 do mesmo dia e mais 2 shorts nos dias seguintes (qua/qui e sáb/dom às 12:00 ou 10:00); 2 shorts de cada vídeo vão para a reserva; segunda às 12:00, short da reserva.
+- **Ajuste:** depois de 3–4 semanas no ar, trocar os horários pelos do relatório "Quando seus espectadores estão no YouTube" do Analytics e registrar aqui.
+- **Agendamento:** a aba **Agenda** da ficha do vídeo no sistema de gestão mostra datas, horas (Nova York e Brasília) e o que programar no Studio a partir da data de upload; o modelo fica em Configurações → Agenda e deve acompanhar esta seção. Se o criador pedir aqui, o Claude monta a agenda daquela semana com datas reais e as duas horas (ET e Brasília, conferindo o horário de verão americano na data), dizendo qual short vai em cada horário e para qual vídeo aponta o "Vídeo relacionado", pronta para programar no YouTube Studio.
 
 ## Regras fixas para todos os vídeos
 
