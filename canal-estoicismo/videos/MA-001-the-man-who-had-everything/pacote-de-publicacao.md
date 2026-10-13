@@ -2,6 +2,7 @@
 
 > Gerado em 12/10/2026 a partir do roteiro final, do vídeo final remontado (`final/MA-001-the-man-who-had-everything-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 8 min 33 s) e dos ativos reais do pipeline.
 > **Publicação: AGUARDAR** a liberação do criador. O canal ainda não foi criado, então todos os links do canal estão como **VERIFICAR**.
+> Atualizado em 12/10/2026: licença comercial da ElevenLabs confirmada (fatura, recibo e página de ajuda guardados) e tradutor da Historia Augusta confirmado (David Magie).
 > Isto não é aconselhamento jurídico: em cada item eu digo o que é regra do YouTube, o que é licença do ativo e o que é avaliação minha.
 
 ## 1. TÍTULOS
@@ -23,7 +24,7 @@
 
 ## 3. DESCRIÇÃO
 
-Pronta para colar (2.110 caracteres, limite 5.000):
+Pronta para colar (2.137 caracteres, limite 5.000):
 
 ```
 He had every coin in the empire. And still, every night, he wrote to himself about how not to lose himself in what he already had.
@@ -46,7 +47,7 @@ CHAPTERS
 SOURCES (all public domain)
 - Marcus Aurelius, Meditations 1.3, 2.1, 6.30, 7.27, translated by George Long (1862). Text: MIT Internet Classics Archive, classics.mit.edu/Antoninus/meditations.html
 - Proverbs 16:18-19 and 30:8, World English Bible (public domain). worldenglish.bible
-- Historia Augusta, Life of Marcus Aurelius 17 (the sale of the palace treasures), Loeb Classical Library, 1921. Text: penelope.uchicago.edu/Thayer/E/Roman/Texts/Historia_Augusta/Marcus_Aurelius/2*.html
+- Historia Augusta, Life of Marcus Aurelius 17 (the sale of the palace treasures), translated by David Magie, Loeb Classical Library, 1921. Text: penelope.uchicago.edu/Thayer/E/Roman/Texts/Historia_Augusta/Marcus_Aurelius/2*.html
 
 CREDITS
 Narration voice generated with ElevenLabs. Script, shadow-theatre animation and ambient sound: Marble & Ash. Fonts: Cinzel, Cormorant Garamond, Inter and GFS Baskerville (SIL Open Font License).
@@ -60,7 +61,7 @@ If this helped you slow down tonight, you can subscribe for one quiet episode at
 
 - Links do canal: **VERIFICAR** (o canal ainda não existe; trocar `[CHANNEL LINK]` antes de publicar).
 - O aviso "Educational content, not financial advice." entra porque o bloco 4 fala de dinheiro ("Money is not the enemy").
-- O crédito da voz não é exigido pela ElevenLabs em planos pagos (avaliação minha; ver seção 8). Deixei por transparência; pode remover.
+- O crédito da voz não é exigido em plano pago: a página de ajuda da ElevenLabs diz que a atribuição só é obrigatória no plano gratuito ("subject to the agreement you have with ElevenLabs"). Deixei por transparência; pode remover.
 
 ## 4. CAPÍTULOS
 
@@ -96,7 +97,7 @@ marcus aurelius meditations, marcus aurelius, meditations, stoicism, stoic philo
 | Meditations, Livro 7.27 | Marco Aurélio (trad. George Long) | classics.mit.edu/Antoninus/meditations.7.seven.html | livro | O exercício de olhar para o que se tem | alta | *Marcus Aurelius, Meditations 7.27 · trans. George Long* |
 | Proverbs 30:8 (e 30:9, parafraseado) | Bíblia, World English Bible | worldenglish.bible (Proverbs 30); conferido no Bible Gateway (WEB) em 11/10/2026 | livro (texto religioso) | A oração "neither poverty nor riches" | alta | *Proverbs 30:8 · World English Bible* |
 | Proverbs 16:18–19 | Bíblia, World English Bible | worldenglish.bible (Proverbs 16); conferido no Bible Gateway (WEB) em 11/10/2026 | livro (texto religioso) | "Pride goes before destruction..." e "better to be of a lowly spirit..." | alta | *Proverbs 16:18 · World English Bible* · *Proverbs 16:19 · World English Bible* |
-| Historia Augusta, Vida de Marco Aurélio 17.4 | autor anônimo (séc. IV); Loeb Classical Library, 1921 (tradutor: David Magie — **VERIFICAR**, a página não traz o nome) | penelope.uchicago.edu/Thayer/E/Roman/Texts/Historia_Augusta/Marcus_Aurelius/2*.html (conferido em 12/10/2026) | documento histórico | Leilão da mobília imperial no Fórum de Trajano para não criar imposto extra | média (a Historia Augusta é uma fonte antiga conhecida por exageros; o vídeo diz "whether every detail is true... we cannot know") | *Historia Augusta, Life of Marcus 17* |
+| Historia Augusta, Vida de Marco Aurélio 17.4 | autor anônimo (séc. IV); trad. David Magie, Loeb Classical Library, 1921 (confirmado pelo criador em 12/10/2026) | penelope.uchicago.edu/Thayer/E/Roman/Texts/Historia_Augusta/Marcus_Aurelius/2*.html (conferido em 12/10/2026) | documento histórico | Leilão da mobília imperial no Fórum de Trajano para não criar imposto extra | média (a Historia Augusta é uma fonte antiga conhecida por exageros; o vídeo diz "whether every detail is true... we cannot know") | *Historia Augusta, Life of Marcus 17* |
 | Fatos gerais do reinado (161–180, peste, guerras no Danúbio, Meditações escritas em grego, título "Ta eis heauton") | conhecimento histórico geral | **VERIFICAR**: fonte de referência para citar, se quiser (ex.: verbete da Encyclopaedia Britannica sobre Marcus Aurelius) | — | Contexto do bloco 2 e do bloco 3 | alta (consenso histórico) | — (sem crédito na tela) |
 
 ## 7. VERSÍCULOS E CITAÇÕES
@@ -110,7 +111,7 @@ marcus aurelius meditations, marcus aurelius, meditations, stoicism, stoic philo
 | "Give me neither poverty nor riches. Feed me with the food that is needful for me." | Proverbs 30:8 | World English Bible | domínio público | Bible Gateway (WEB) | Literal (recorte; o versículo começa com "Remove far from me falsehood and lies"). **"Not so poor that I am pushed to do wrong. And not so rich... that I forget who gave me everything." é paráfrase de 30:9**, apresentada como "In other words", sem crédito próprio. |
 | "Pride goes before destruction, and an arrogant spirit before a fall." | Proverbs 16:18 | World English Bible | domínio público | Bible Gateway (WEB) | Literal. |
 | "It is better to be of a lowly spirit with the poor, than to divide the plunder with the proud." | Proverbs 16:19 | World English Bible | domínio público | Bible Gateway (WEB) | Literal. |
-| (relato, sem citação literal) "He sold the treasures of his own palace instead." | Historia Augusta, Marcus 17.4 | Loeb, 1921 | domínio público (segundo a página do LacusCurtius) | LacusCurtius | Relato com palavras próprias, não citação. |
+| (relato, sem citação literal) "He sold the treasures of his own palace instead." | Historia Augusta, Marcus 17.4 | David Magie, Loeb, 1921 | domínio público (segundo a página do LacusCurtius) | LacusCurtius | Relato com palavras próprias, não citação. |
 
 Toda citação literal vem seguida da versão simples ("In other words..." / "In simple words..."), conforme a regra do canal.
 
@@ -118,7 +119,7 @@ Toda citação literal vem seguida da versão simples ("In other words..." / "In
 
 | Ativo | Origem | Link | Licença | Crédito exigido | Validade | Comprovante |
 |---|---|---|---|---|---|---|
-| Narração (voz *Flint — Deep, Raspy, and Warm*, Eleven v4) | ElevenLabs, plano Starter, gerada em 12/10/2026 (6.638 créditos) | elevenlabs.io | assinatura (plano pago com licença comercial — **VERIFICAR** os termos atuais em elevenlabs.io/terms e o plano na conta) | não exigido em plano pago (avaliação minha; conferir nos termos) | enquanto o áudio foi gerado com o plano pago ativo | recibo/fatura do plano Starter + histórico de gerações na conta (**guardar print**) |
+| Narração (voz *Flint — Deep, Raspy, and Warm*, Eleven v4) | ElevenLabs, plano Starter, gerada em 12/10/2026 (6.638 créditos) | elevenlabs.io | assinatura: plano Starter pago (US$ 6/mês; 1º mês US$ 1 com promoção), período 12/10–12/11/2026. Licença comercial confirmada: "All paid plans include a commercial license" e "Content generated during a paid subscription can be used commercially, and indefinitely" (help.elevenlabs.io, artigo 13313564601361) | não exigido em plano pago (a atribuição obrigatória é do plano gratuito) | **indefinida** para o áudio gerado durante a assinatura paga (não precisa manter o plano para continuar usando o vídeo 1) | Drive: MA - Marble & Ash/COMPROVANTES/elevenlabs/ (Invoice-79EAF490-0001.pdf, Receipt-2385-2587-0539.pdf, print da página de ajuda de 12/10/2026); pendente só o print do histórico de gerações de 12/10/2026 (opcional) |
 | Animação (teatro de sombras) | **próprio**: desenhada por código no pipeline do canal (`pipeline/marbleash/`, scripts `blocoN/cena.py`) | — | conteúdo próprio | — | — | scripts de cena e commits no repositório |
 | Som ambiente (vento) | **próprio**: gerado por código (`marbleash/audio.py`), sem amostras de terceiros | — | conteúdo próprio | — | — | código no repositório |
 | Som de transição "Brasa" (abertura) | **próprio**: gerado por código (`marbleash/sons.py`), sem amostras de terceiros | — | conteúdo próprio | — | — | código no repositório |
@@ -126,7 +127,7 @@ Toda citação literal vem seguida da versão simples ("In other words..." / "In
 | Fonte Cinzel | Google Fonts | fonts.google.com/specimen/Cinzel | SIL Open Font License 1.1 | não exigido em vídeo | perpétua | `fontes-tipograficas/OFL-Cinzel.txt` |
 | Fonte Cormorant Garamond (e Cormorant) | Google Fonts | fonts.google.com/specimen/Cormorant+Garamond | SIL OFL 1.1 | não exigido | perpétua | `OFL-CormorantGaramond.txt`, `OFL-Cormorant.txt` |
 | Fonte Inter | Google Fonts | fonts.google.com/specimen/Inter | SIL OFL 1.1 | não exigido | perpétua | `OFL-Inter.txt` |
-| Fonte GFS Baskerville (grego, título ΤΑ ΕΙΣ ΕΑΥΤΟΝ no bloco 3) | Greek Font Society | greekfontsociety-gfs.gr — **VERIFICAR** o link exato | SIL OFL 1.1 | não exigido | perpétua | `OFL-GFSBaskerville.txt` |
+| Fonte GFS Baskerville (grego, título ΤΑ ΕΙΣ ΕΑΥΤΟΝ no bloco 3) | Greek Font Society | http://www.greekfontsociety.org (endereço do aviso de copyright no próprio arquivo de licença) | SIL OFL 1.1 | não exigido | perpétua | `OFL-GFSBaskerville.txt` |
 | Logo, thumbnails e capas de shorts | **próprio**: Design System do canal (Claude Design) e quadros do próprio vídeo | — | conteúdo próprio | — | — | arquivos em `thumbnails/` e `shorts/` |
 
 Imagens de acervo, overlays e clipes de terceiros: **nenhum**.
@@ -134,7 +135,7 @@ Imagens de acervo, overlays e clipes de terceiros: **nenhum**.
 ## 9. IA E CONTEÚDO SINTÉTICO
 
 **Componentes gerados por IA:**
-- **Voz:** ElevenLabs (plano Starter, licença comercial do plano pago — conferir termos), voz de **biblioteca** *Flint*. Não é clone da sua voz nem de uma pessoa real identificável; a voz narra, ela não finge ser Marco Aurélio.
+- **Voz:** ElevenLabs (plano Starter pago; licença comercial confirmada e válida por tempo indefinido para o que foi gerado durante a assinatura), voz de **biblioteca** *Flint*. Não é clone da sua voz nem de uma pessoa real identificável; a voz narra, ela não finge ser Marco Aurélio.
 - **Roteiro:** escrito com apoio de IA (Claude), construído bloco a bloco com suas decisões e aprovação, citações conferidas nas fontes.
 - **Imagens/animação:** sem gerador de imagens. A arte é desenhada por código (escrito com apoio de IA). Estilo claramente irreal: silhuetas de teatro de sombras.
 - **Música:** nenhuma. Ambiente e transição sintetizados por código (não é IA generativa).
@@ -166,7 +167,7 @@ Custo de marcar sem precisar: um rótulo "Altered or synthetic content" na descr
 **4. Narração (ElevenLabs)**
 - Base: licença
 - Contestação: `The narration was generated with ElevenLabs on a paid plan that grants commercial rights to the generated audio. It uses a stock library voice and does not imitate any real person. Please release this claim.`
-- Provas: fatura do plano Starter, print do histórico de gerações de 12/10/2026, link dos termos da ElevenLabs.
+- Provas: fatura 79EAF490-0001 e recibo 2385-2587-0539 (plano Starter, 12/10–12/11/2026), print da página de ajuda "Can I publish the content I generate on the platform?" (Drive: MA - Marble & Ash/COMPROVANTES/elevenlabs/ (Invoice-79EAF490-0001.pdf, Receipt-2385-2587-0539.pdf, print da página de ajuda de 12/10/2026)); opcional: print do histórico de gerações de 12/10/2026.
 - Risco: baixo — o risco real é outro canal usar a mesma voz de biblioteca; o Content ID não identifica voz sintética como obra protegida.
 
 **5. Animação, ambiente e som de transição**
@@ -184,8 +185,8 @@ Custo de marcar sem precisar: um rótulo "Altered or synthetic content" na descr
 **Se o claim vier do Content ID e for indevido:** disputar no YouTube Studio com o texto acima; se a disputa for rejeitada, **recorrer** (appeal). **Não** apagar e reenviar o mesmo arquivo (o claim volta e perde-se o histórico), não cortar trechos às cegas e não aceitar o claim só para "limpar" o aviso.
 
 **Maiores riscos e o que fazer antes de publicar:**
-1. Narração: confirmar nos termos da ElevenLabs que o plano Starter dá direito comercial e guardar a fatura e o print do histórico (fazer agora, enquanto o plano está ativo).
-2. Historia Augusta: confirmar o nome do tradutor da edição Loeb 1921 (VERIFICAR) para a descrição.
+1. Narração: resolvido em 12/10/2026 — licença comercial confirmada e comprovantes guardados no Drive. Opcional: um print do histórico de gerações de 12/10/2026, para provar que o áudio foi gerado dentro da assinatura.
+2. Historia Augusta: resolvido — tradutor David Magie confirmado.
 3. Nada mais: não há música, acervo nem clipe de terceiros — é o perfil de menor risco possível.
 
 ## 11. THUMBNAILS
@@ -247,13 +248,11 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
 | Finanças | baixo | O dinheiro é ponte leve (bloco 4: "Money is not the enemy... another kind of poverty"); não há recomendação nem promessa de ganho. O aviso "Educational content, not financial advice." está na descrição. |
 | Temas sensíveis (religião) | baixo | Provérbios aparecem como sabedoria antiga lado a lado com Marco Aurélio ("Different faiths... the same quiet truth"), sem pregação. Anunciantes costumam aceitar bem. |
 | Saúde mental | baixo | O vídeo fala de ansiedade do "nunca é suficiente" e tem uma pausa de respiração, sem prometer tratamento. |
-| Direitos autorais pendentes (seção 10) | baixo | Só falta guardar a fatura e o print da ElevenLabs e confirmar o tradutor da Loeb. |
+| Direitos autorais pendentes (seção 10) | baixo | Nenhum pendente: licença da ElevenLabs comprovada e tradutor da Loeb confirmado. |
 
 **Conclusão: PUBLICAR APÓS CORREÇÕES**
-1. Criar o canal e trocar `[CHANNEL LINK]` na descrição.
-2. Confirmar nos termos da ElevenLabs o direito comercial do plano Starter e guardar fatura + print do histórico de gerações.
-3. Confirmar o tradutor da Historia Augusta (Loeb 1921) — VERIFICAR.
-4. Publicação continua em **espera** até a sua liberação.
+1. Criar o canal e trocar `[CHANNEL LINK]` na descrição (única correção restante).
+2. Publicação continua em **espera** até a sua liberação.
 
 ## 15. BLOCO JSON (dossiê)
 
@@ -350,7 +349,7 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
       "tipo": "direitos",
       "elemento": "Historia Augusta, Life of Marcus 17",
       "categoria": "outro",
-      "origem": "Historia Augusta, Loeb Classical Library 1921 (domínio público segundo o LacusCurtius); tradutor VERIFICAR",
+      "origem": "Historia Augusta, trad. David Magie, Loeb Classical Library 1921 (domínio público segundo o LacusCurtius)",
       "link": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Historia_Augusta/Marcus_Aurelius/2*.html",
       "base": "citacao-uso-transformativo",
       "descricao": "Relato com palavras próprias do leilão dos tesouros do palácio (17.4); sem citação literal.",
@@ -365,9 +364,9 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
       "origem": "ElevenLabs, plano Starter (pago), voz de biblioteca",
       "link": "https://elevenlabs.io",
       "base": "licenca",
-      "descricao": "Gerada em 12/10/2026, Eleven v4, 6.638 créditos; licença comercial do plano pago (VERIFICAR termos).",
+      "descricao": "Gerada em 12/10/2026, Eleven v4, 6.638 créditos, durante a assinatura Starter paga (12/10–12/11/2026). Licença comercial confirmada na página de ajuda da ElevenLabs: uso comercial por tempo indefinido do que foi gerado na assinatura paga; atribuição não obrigatória.",
       "contestacao": "The narration was generated with ElevenLabs on a paid plan that grants commercial rights to the generated audio. It uses a stock library voice and does not imitate any real person. Please release this claim.",
-      "provas": "fatura do plano Starter, print do histórico de gerações de 12/10/2026, link dos termos da ElevenLabs.",
+      "provas": "Fatura 79EAF490-0001, recibo 2385-2587-0539 e print da página de ajuda, em Drive: MA - Marble & Ash/COMPROVANTES/elevenlabs/ (Invoice-79EAF490-0001.pdf, Receipt-2385-2587-0539.pdf, print da página de ajuda de 12/10/2026).",
       "risco": "baixo"
     },
     {
@@ -449,7 +448,7 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
       "origem": "Greek Font Society",
       "link": "",
       "base": "licenca",
-      "descricao": "SIL Open Font License 1.1, perpétua; usada no título grego do bloco 3. Link VERIFICAR.",
+      "descricao": "SIL Open Font License 1.1, perpétua; usada no título grego do bloco 3. Copyright (c) 1995-2006 Greek Font Society, http://www.greekfontsociety.org.",
       "contestacao": "The typefaces used on screen are licensed under the SIL Open Font License 1.1, which allows use in videos. Please release this claim.",
       "provas": "arquivos OFL-*.txt da pasta `fontes-tipograficas/`.",
       "risco": "baixo"
@@ -458,7 +457,7 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
       "tipo": "ia",
       "elemento": "Narração",
       "categoria": "voz",
-      "origem": "ElevenLabs, plano Starter, voz de biblioteca Flint (Eleven v4)",
+      "origem": "ElevenLabs, plano Starter pago (licença comercial confirmada), voz de biblioteca Flint (Eleven v4)",
       "descricao": "Toda a narração em inglês; não é clone de voz real."
     },
     {
@@ -520,9 +519,9 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
     {
       "tipo": "monetizacao",
       "elemento": "Direitos autorais pendentes",
-      "descricao": "Comprovantes da ElevenLabs e tradutor da Loeb a confirmar.",
+      "descricao": "Nenhum pendente desde 12/10/2026.",
       "risco": "baixo",
-      "mitigacao": "Guardar fatura e print do histórico; confirmar o tradutor antes de publicar."
+      "mitigacao": "Licença da ElevenLabs comprovada (fatura, recibo, página de ajuda no Drive); tradutor da Loeb confirmado."
     }
   ]
 }
