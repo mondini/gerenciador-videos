@@ -315,3 +315,46 @@ Literal só o 16:32; o 26:20 simplificado ("tell the story again" vem da 2ª met
 **Short:** "A grudge is a fire." até "...stop feeding it."
 **Ideias de cena:** cidade murada tomada por legiões × silhueta sozinha à noite (governar a si mesmo); caixa de cartas fechada em âmbar; fogueira que cresce a cada "every time…" (lenha jogada três vezes); a mão que segura a lenha e não joga; o fogo baixa até virar cinza.
 **Créditos:** *Proverbs 16:32 · World English Bible* · *Proverbs 26:20 · World English Bible*
+
+## Bloco 6 — Fechamento (aprovado)
+
+```
+[softly] So... tonight, if that argument starts again in your head...
+the one you've already won a hundred times...
+you don't have to win it one more time.
+You don't have to like them. You don't have to pretend they were right.
+[warmly] When the next replay begins... you can simply let it pass.
+And leave the fire... unfed.
+Let the conversation end... without you.
+[thoughtful] Some of them will never say sorry. Some will never even know.
+That was never the point.
+Your peace was always yours to keep.
+
+[softly] Almost two thousand years ago, an emperor let a box of letters burn.
+He never learned the names.
+He never had to carry them.
+[thoughtful] And somewhere in those ashes... one small ember is still glowing.
+Not with anger.
+Only... with warmth.
+
+[softly] Old wisdom... for quiet hours.
+```
+
+"Notice the wood in your hand" trocado por "let it pass / leave the fire unfed" (duplo sentido em inglês). Encerramento padrão do canal.
+**Short (obrigatório, pedido do criador):** "So... tonight, if that argument starts again in your head..." até "...without you." Frase-chave: *you don't have to win it one more time*.
+**Ideias de cena:** a silhueta de punhos fechados discute com uma sombra; em "you don't have to win it one more time" ela **solta os ombros e abre as mãos**, a sombra do outro se desfaz e a luz âmbar da sala amolece (**alívio extremo**, peso saindo do corpo); o próximo "replay" passa como fumaça sem chegar ao fogo; a caixa de cartas queimando, as cinzas; uma única brasa âmbar brilhando, calor e não raiva; escurece; encerramento padrão.
+**Créditos:** nenhum (texto do canal).
+
+---
+
+## Shorts (5)
+
+| # | Trecho | Bloco |
+|---|---|---|
+| 1 | "So... tonight, if that argument starts again..." → "...without you." (obrigatório) | 6 |
+| 2 | "And then... the letters." → "...be forced to hate them." | 4 |
+| 3 | "You've already won this argument... a hundred times." → "...a little more of your peace." | 1 |
+| 4 | "A grudge is a fire." → "...stop feeding it." | 5 |
+| 5 | The Pause — *Take 30 seconds with Marcus Aurelius* | Pausa |
+
+Reserva: bloco 2 ("what they did to you happened once…") e bloco 3 ("Anger, used well…").
