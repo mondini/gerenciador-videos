@@ -191,15 +191,16 @@ Custo de marcar sem precisar: um rótulo "Altered or synthetic content" na descr
 
 ## 11. THUMBNAILS
 
-Feitas em teatro de sombras com quadros reais do vídeo (decisão de 12/10/2026). Duas variantes para o teste A/B do YouTube:
+Feitas em teatro de sombras com quadros reais do vídeo (decisão de 12/10/2026). Três variantes para o teste A/B do YouTube (Testar e comparar aceita até 3):
 
 | Variante | Texto (inglês) | Conceito visual | Arquivo |
 |---|---|---|---|
 | A — Palavra | ENOUGH? | O quadro do fechamento: a casa, a lamparina e a mesa em âmbar ("a roof, a little light, something to eat") e o casal em sombra; o resto escurecido para a brasa aparecer | `thumbnails/MA-001_thumb_A.png` |
+| B — Símbolo | (sem texto) | O imperador escrevendo à noite sob o foco de luz, a lamparina acesa na mesa; o círculo de luz puxado para o âmbar, o resto em carvão | `thumbnails/MA-001_thumb_B.png` |
 | C — Gancho ⭐ | HE HAD / EVERYTHING. | O imperador no pedestal, braço erguido, moedas caindo; céu puxado para o âmbar; "EVERYTHING." em âmbar vivo | `thumbnails/MA-001_thumb_C.png` |
 
 **Recomendada para começar: C** (casa com o título e confirma a promessa logo de cara).
-Prompt de geração: não há gerador de imagens; o "prompt" é a receita de composição: quadro do vídeo (A: bloco 6, ~70% do bloco; C: bloco 1, ~56%), gradação do sépia para o âmbar #FFB547, degradê de carvão para assentar o texto, Cinzel Black em mármore #EDE6DA, vinheta. Conferidas em 320×180.
+Prompt de geração: não há gerador de imagens; o "prompt" é a receita de composição: quadro do vídeo (A: bloco 6, ~70% do bloco; B: bloco 1, ~92%; C: bloco 1, ~56%), gradação do sépia para o âmbar #FFB547, degradê de carvão para assentar o texto, Cinzel Black em mármore #EDE6DA, vinheta. Conferidas em 320×180.
 
 ## 12. PROMPTS DE CENA
 

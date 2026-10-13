@@ -16,7 +16,7 @@ Links (claude.ai):
 - **Tema:** estoicismo com foco em **Marco Aurélio** e as *Meditações*, cruzado de forma sutil com **Provérbios** (sabedorias que se encontram, nunca pregação).
 - **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
 - **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
-- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência planejada: 2 vídeos/semana, 5–6 shorts por vídeo. Meta: 12 vídeos prontos antes de lançar.
+- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência planejada: 2 vídeos/semana, 5 shorts por vídeo. Meta: 12 vídeos prontos antes de lançar.
 - **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs (**plano Starter**; voz e custo em "Voz e créditos do ElevenLabs"). Sem Canva nem Photoshop.
 - **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
 
@@ -27,12 +27,12 @@ Links (claude.ai):
 - Logo: A — Horizonte. Banner: B — Centro silencioso.
 - Vídeos: teatro de sombras projetadas (padrão aprovado). Logo e banner continuam na arte de linhas.
 - **Thumbnails em sombras (decisão de 12/10/2026):** feitas com quadros reais do vídeo, gradação puxada para o âmbar vivo e texto em Cinzel Black (mármore, destaque em âmbar), sempre à esquerda e longe do canto inferior direito (selo de duração). Assim a capa promete o que o vídeo mostra.
-- Thumbnails: **2 versões** para o teste A/B do YouTube (decisão de 12/10/2026; antes eram 3) — A Palavra (1–2 palavras) e C Gancho (até 3 palavras; guia de embalagem). A variante B (Símbolo, sem texto) saiu. O texto da thumb nunca repete o título.
+- Thumbnails: **3 versões** para o teste A/B do YouTube — A Palavra (1–2 palavras), B (Símbolo, sem texto) e C Gancho (até 3 palavras; guia de embalagem). O texto da thumb nunca repete o título.
 
 ## Estrutura padrão de um vídeo (~10 min)
 
 1. **Gancho** (~45 s): fala direto com a dor do ouvinte, sem entregar a resposta.
-2. **Abertura** (3 s; 2 s até 12/10/2026): logo Horizonte + "MARBLE & ASH", com o som de transição **Brasa** (sintetizado por código em `pipeline/marbleash/sons.py`): um sopro sobe no escurecimento do gancho e um golpe grave e macio cai quando o sol acende, com faíscas na cauda.
+2. **Abertura** (3 s;): logo Horizonte + "MARBLE & ASH", com o som de transição **Brasa** (sintetizado por código em `pipeline/marbleash/sons.py`): um sopro sobe no escurecimento do gancho e um golpe grave e macio cai quando o sol acende, com faíscas na cauda.
 3. **Blocos de conteúdo** (história/contexto, a fonte antiga, a lição aplicada à vida de hoje).
 4. **The Pause** logo após a ideia mais forte.
 5. **Provérbio-ponte**.
@@ -81,7 +81,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 
 ## Regras fixas para todos os vídeos
 
-1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
+1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). **Outras obras e traduções (decisão de 12/10/2026):** sempre que o tema pedir (ex.: *Sobre a ira*, de Sêneca, que não está no Gummere), o Claude procura a melhor tradução em domínio público, confere a situação de direitos e propõe; o criador valida antes do uso, e a tradução aprovada entra nesta lista. Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
 2. **Crédito na tela, sempre:** toda citação ou informação de fora mostra a fonte no canto inferior esquerdo (Inter, discreto). Ex.: *Marcus Aurelius, Meditations 6.30 · trans. George Long*; *Proverbs 16:18 · World English Bible*.
 3. **Citações:** lidas no inglês antigo da tradução e, logo depois, repetidas em palavras simples ("In other words...", "In simple words...").
 4. **Narração pronta para colar no ElevenLabs:** só o texto falado + audio tags (`[softly]`, `[thoughtful]`, `[warmly]`, `[whispers]`, `[sighs]`) e reticências para pausas. Deixas visuais e créditos ficam fora do bloco de texto. Um arquivo de áudio por bloco.
@@ -130,9 +130,22 @@ O formato é a **promessa do título** e serve para comparar o desempenho no exp
 
 Ver `fluxo-por-video.md`.
 
+### Processo mais eficiente (decisão de 12/10/2026, vale do vídeo 2 em diante)
+
+1. **Banco de citações antes do texto:** a sessão de roteiro começa com as citações do tema já conferidas na fonte (obra, livro/capítulo, tradução), para o criador escolher.
+2. **Escaleta antes do texto:** aprovar o esqueleto do vídeo inteiro (blocos, ideia de cada um, ideias de cena, onde entra a Pausa) e só então escrever bloco a bloco.
+3. **Áudios de uma vez:** com o roteiro todo aprovado, o criador grava todos os blocos numa leva só no ElevenLabs.
+4. **Cenas e arte em paralelo:** enquanto o criador grava, o Claude escreve os `cena.py` (por nome de deixa) e cria a arte nova; com o mp3, faltam só os tempos e o render.
+5. **Revisão única:** o criador não revisa prévias bloco a bloco; recebe o vídeo montado inteiro e aprova ou pede ajustes de uma vez.
+6. **Shorts marcados no roteiro:** ao aprovar cada bloco, anotar no `roteiro.md` as frases que dão short (5 por vídeo).
+7. **Pacote a partir do anterior:** seções fixas (links, licenças, créditos) reaproveitadas do pacote do vídeo anterior; só o conteúdo do vídeo é novo.
+8. **Melhorias do pipeline aprovadas (fazer no começo da sessão do vídeo 2, antes do roteiro):**
+   - nomes das deixas escritos direto no roteiro (marca curta na frase), para o `./ma tempos` já sair com os nomes e acabar a renomeação manual;
+   - `./ma novo N`: cria a pasta `videos/MA-NNN-slug/` e o `roteiro.md` a partir da ficha deste plano.
+
 ## Status
 
 Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe e o que falta em cada vídeo, e `./ma sincronizar N` leva isso ao kanban do sistema de gestão.
 
-- MA-001 *The Man Who Had Everything*: produção concluída; faltam thumbnails, shorts e Pacote de Publicação. **Publicação: aguardar a liberação do criador.**
+- MA-001 *The Man Who Had Everything*: concluído com 2 thumbnails (A e C); pela regra das 3 thumbs, falta a B (Símbolo). **Publicação: aguardar a liberação do criador.**
 - Vídeos 2–12: roteiros a fazer. Pasta de cada um: `videos/MA-NNN-slug/` (slug do nome interno da tabela acima).
