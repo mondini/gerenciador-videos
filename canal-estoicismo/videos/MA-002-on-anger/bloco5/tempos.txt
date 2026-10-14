@@ -1,0 +1,42 @@
+# Tempos do bloco5 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco5.mp3 (69.64 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+took                 0.00  Marcus took cities.                                                 # início
+won                  2.24  He won wars at the edge of the empire.                              # pausa
+victory              5.24  But the victory that says the most about him...                     # pausa
+is_a                 8.01  is a box of letters he never opened.                                # pausa
+proverbs            10.93  The book of Proverbs,                                               # pausa
+written_centuries   12.30  written centuries before him,                                       # voz
+already_knew        14.14  already knew which victory matters more:                            # voz
+slow                17.39  One who is slow to anger is better than the mighty;                 # pausa
+rules               21.10  one who rules his spirit,                                           # pausa
+than_he             22.94  than he who takes a city.                                           # pausa
+army                25.11  Taking a city takes an army.                                        # pausa
+alone               27.35  Ruling your own spirit...                                           # pausa
+you_do              29.08  you do alone.                                                       # pausa
+every               30.45  Every day.                                                          # pausa
+night               31.67  And usually at night.                                               # pausa
+another             33.36  And there is another proverb...                                     # pausa
+one_of              35.02  one of the simplest in the whole book.                              # voz
+wood                37.40  Without wood...                                                     # pausa
+a_fire              38.60  a fire goes out.                                                    # pausa
+all                 40.34  That's all.                                                         # pausa
+no_magic            41.13  No magic.                                                           # pausa
+no_great            42.00  No great effort.                                                    # voz
+fire                43.48  A grudge is a fire.                                                 # pausa
+replay              45.65  And every time you replay the scene...                              # pausa
+story               48.16  every time you tell the story again...                              # pausa
+rehearse            50.68  every time you rehearse what you should have said...                # pausa
+add                 53.62  you add another piece of wood.                                      # pausa
+fight               56.02  You don't have to fight the fire.                                   # pausa
+feeding             57.83  You only have to stop feeding it.                                   # pausa
+tonight             60.27  It won't go out tonight.                                            # pausa
+stubborn            61.98  Grudges are stubborn.                                               # voz
+nowood              63.48  But a fire with no wood...                                          # pausa
+can_only            65.25  can only do one thing.                                              # pausa
+slowly              67.17  Slowly...                                                           # pausa
+it_turns            68.25  it turns to ash.                                                    # pausa

@@ -1,0 +1,7 @@
+# Shorts do MA-002 (gerados por `./ma shorts 2`; formato em pipeline/marbleash/shorts.py)
+# NN | TÍTULO | subtítulo | peça | deixa de início | deixa de fim (exclusiva; fim = fim da narração) | crédito
+01 | YOU DON'T HAVE TO WIN |  | 6 | so | sorry |
+02 | THE LETTERS HE NEVER READ |  | 4 | then | account | Cassius Dio, Roman History 72.26–29 · Loeb Classical Library
+03 | YOU ALREADY WON THIS |  | 1 | won | strange |
+04 | A GRUDGE IS A FIRE |  | 5 | fire | tonight |
+05 | TAKE 30 SECONDS | with Marcus Aurelius | pausa | seneca | fim | Seneca, Of Anger II.29 · trans. Aubrey Stewart

@@ -1,0 +1,48 @@
+# Tempos do bloco2 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco2.mp3 (90.36 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+hundred          0.00  About a hundred years before Marcus,                                # início
+another_roman    2.70  another Roman wrote an entire book about anger.                     # voz
+seneca           5.86  His name was Seneca.                                                # pausa
+noticed          7.74  And he noticed something we rarely admit.                           # pausa
+we_dont         10.57  We don't just feel anger...                                         # pausa
+feed            12.71  we feed it.                                                         # pausa
+suspect         14.12  Even when we begin to suspect it was something small...             # pausa
+we_keep         17.26  we keep going.                                                      # pausa
+because         18.66  Because stopping would mean admitting we were angry for nothing.    # pausa
+put             22.30  He put it like this:                                                # pausa
+nurse           23.77  we nurse it and inflame it,                                         # pausa
+as_though       25.66  as though to be violently angry proved our anger to be just.        # voz
+words           29.91  In other words...                                                   # pausa
+keep            31.10  we keep the fire burning,                                           # voz
+just_to         33.08  just to prove we were right to light it.                            # pausa
+trap            35.74  Marcus knew the same trap.                                          # pausa
+longest         37.81  In one of the longest entries of his journal,                       # pausa
+list            40.12  he left himself a list of rules...                                  # voz
+for_the         41.86  for the days when someone wronged him.                              # voz
+and_one         44.19  And one of them says this:                                          # pausa
+consider        46.13  consider how much more pain is brought on us by the anger and vexation caused by such acts than by the acts themselves.  # pausa
+simple          54.28  In simple words...                                                  # pausa
+once            55.75  what they did to you happened once.                                 # pausa
+what            58.13  What you do with it...                                              # pausa
+every           59.39  happens every day.                                                  # pausa
+insult          61.17  The insult took a few seconds.                                      # pausa
+grudge          63.47  The grudge...                                                       # pausa
+years           64.43  can take years.                                                     # pausa
+proverbs        66.05  The book of Proverbs has an image for this.                         # pausa
+stone           68.73  A stone is heavy,                                                   # pausa
+and_sand        70.08  and sand is a burden;                                               # voz
+fool            71.86  but a fool's provocation is heavier than both.                      # pausa
+words2          75.32  In other words...                                                   # pausa
+gym             76.38  one careless comment can weigh more than everything you lift at the gym.  # voz
+unlike          80.70  And unlike the gym...                                               # pausa
+stronger        82.10  carrying it won't make you any stronger.                            # pausa
+still           84.81  And still...                                                        # pausa
+most_of         85.83  most of us carry it.                                                # pausa
+home            87.37  Home.                                                               # pausa
+dinner          88.08  To the dinner table.                                                # voz
+bed             89.45  And into bed.                                                       # pausa

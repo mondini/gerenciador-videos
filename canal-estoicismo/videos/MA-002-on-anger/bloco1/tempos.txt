@@ -1,0 +1,34 @@
+# Tempos do bloco1 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco1.mp3 (49.55 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+won            0.00  You've already won this argument...                                 # início
+hundred        2.52  a hundred times.                                                    # pausa
+shower         4.36  In the shower.                                                      # pausa
+drive          5.57  On the drive home.                                                  # pausa
+three          7.02  At three in the morning,                                            # pausa
+staring_at     8.24  staring at the ceiling.                                             # voz
+know           9.92  You know exactly what you should have said.                         # pausa
+boss          12.70  To your boss.                                                       # pausa
+mother        13.85  To your mother.                                                     # pausa
+person        14.93  To that person who always wants a little more...                    # pausa
+than_you      17.50  than you can give.                                                  # voz
+every         19.23  And every time you win it...                                        # pausa
+lose          22.01  you lose a little more of your peace.                               # pausa
+strange       24.46  Here is the strange part.                                           # pausa
+anger         26.49  Your anger is not the problem.                                      # pausa
+human         28.76  Anger is human.                                                     # pausa
+comes         30.06  It comes...                                                         # pausa
+goes          30.54  and it goes.                                                        # voz
+grudge        32.12  The problem is the grudge.                                          # pausa
+stays         34.22  The part that stays.                                                # pausa
+stoics        36.03  The Stoics understood this better than anyone.                      # pausa
+marcus        38.79  And Marcus Aurelius,                                                # pausa
+emperor_of    40.18  emperor of Rome,                                                    # voz
+betrayal      41.46  once faced the worst betrayal of his life...                        # voz
+letters       44.08  and did something with the traitor's letters...                     # pausa
+that_almost   45.92  that almost no one would do.                                        # voz
+there         48.61  We'll get there.                                                    # pausa

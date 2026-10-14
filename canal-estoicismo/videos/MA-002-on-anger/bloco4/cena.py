@@ -67,7 +67,7 @@ def _texto(texto, y):
                   semente=70, pivo=(960, 170), balanco=(1.2, 0.15))
 
 
-CITACAO = [_texto('as the sense of pain is a characteristic of weakness,', 120), _texto('so also is anger.', 180)]
+CITACAO = [_texto(t, 110 + 56 * k) for k, t in enumerate(('as the sense of pain', 'is a characteristic of weakness,', 'so also is anger.'))]
 
 IMPERADOR = Boneco(bonecos.imperador, escala=1.3, desfoque=1.1, opacidade=0.9)
 
@@ -164,8 +164,9 @@ def quadro(q, c):
             if sai <= 0:
                 continue
             voa = q.ss(c.burned + i * 0.6, 1.2)
-            x = lerp(960 + (i - 2.5) * 120, 1240 + (i - 2.5) * 14, voa)
-            y = lerp(objetos.CHAO2 - 360, objetos.CHAO2 - 380 - 60 * sai - 70 * (i % 2), 1 - voa) + 220 * voa
+            col, fila = i % 3, i // 3                                        # duas fileiras de três, longe do rosto de Marco
+            x = lerp(1010 + (col - 1) * 260, 1240 + (i - 2.5) * 14, voa)
+            y = lerp(objetos.CHAO2 - 360, objetos.CHAO2 - 380 - 60 * sai - 80 * fila, 1 - voa) + 220 * voa
             queima = q.ss(c.burned + i * 0.6 + 1.0, 2.0)
             if queima < 0.99:
                 q.sombra(CARTA[int(round(10 * queima))], cartas, sai, dx=x - A[0], dy=y - A[1])
@@ -189,7 +190,7 @@ def quadro(q, c):
         q.boneco(IMPERADOR, 760, CHAO_IMP, {'uarmF': 8, 'farmF': -12, 'head': 10, 'torso': 2}, fim)
         q.sombra(TORA, fim, q.ss(c.refused - 0.4, 0.8), dx=980 - A[0], dy=objetos.CHAO2 - 70 - A[1])
         for k, linha in enumerate(CITACAO):
-            q.sombra(linha, fim, q.env(c.pain - 0.2 + 0.6 * k, 0.9, c.knew - 0.2, 0.9))
+            q.sombra(linha, fim, q.env((c.pain - 0.2, c.pain + 0.9, c.so_also - 0.2)[k], 0.9, c.knew - 0.2, 0.9))
         q.credito(CRED_MED, q.env(c.pain - 0.2, 0.8, c.knew, 0.8))
         q.sombra(CAPSA_FECHADA, fim, q.ss(c.knew, 1.2), dx=500)
         q.foco(q.ss(c.unread - 0.4, 1.4) * 0.6, 1460, 700, 280)

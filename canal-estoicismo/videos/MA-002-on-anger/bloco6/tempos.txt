@@ -1,0 +1,35 @@
+# Tempos do bloco6 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco6.mp3 (51.64 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+so             0.00  So...                                                               # início
+tonight        0.92  tonight,                                                            # voz
+argument       2.08  if that argument starts again in your head...                       # pausa
+hundred        4.91  the one you've already won a hundred times...                       # pausa
+win            7.70  you don't have to win it one more time.                             # pausa
+like          10.42  You don't have to like them.                                        # pausa
+pretend       11.99  You don't have to pretend they were right.                          # pausa
+replay        14.51  When the next replay begins...                                      # pausa
+letpass       16.53  you can simply let it pass.                                         # pausa
+leave         18.71  And leave the fire...                                               # pausa
+unfed         19.66  unfed.                                                              # voz
+end           21.11  Let the conversation end...                                         # pausa
+without_you   22.94  without you.                                                        # pausa
+sorry         24.12  Some of them will never say sorry.                                  # pausa
+know          26.51  Some will never even know.                                          # pausa
+point         28.40  That was never the point.                                           # pausa
+peace         30.07  Your peace was always yours to keep.                                # pausa
+emperor       33.02  Almost two thousand years ago,                                      # pausa
+an_emperor    35.22  an emperor let a box of letters burn.                               # voz
+names         37.95  He never learned the names.                                         # pausa
+carry         39.64  He never had to carry them.                                         # pausa
+ember         41.26  And somewhere in those ashes...                                     # pausa
+one_small     43.19  one small ember is still glowing.                                   # pausa
+anger         45.98  Not with anger.                                                     # pausa
+warmth        47.09  Only...                                                             # pausa
+with_warmth   47.87  with warmth.                                                        # pausa
+slogan        49.12  Old wisdom...                                                       # pausa
+for_quiet     50.39  for quiet hours.                                                    # pausa

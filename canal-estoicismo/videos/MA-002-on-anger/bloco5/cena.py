@@ -41,7 +41,8 @@ def _texto(texto, y):
                   semente=84, pivo=(960, 170), balanco=(1.2, 0.15))
 
 
-CITACAO = [_texto('One who is slow to anger is better than the mighty;', 200), _texto('one who rules his spirit, than he who takes a city.', 256)]
+CITACAO = [_texto(t, 222 + 54 * k) for k, t in enumerate(('One who is slow to anger', 'is better than the mighty;',
+                                                         'one who rules his spirit,', 'than he who takes a city.'))]
 CRED_1632 = Credito('Proverbs 16:32 · World English Bible')
 CRED_2620 = Credito('Proverbs 26:20 · World English Bible')
 

@@ -1,0 +1,65 @@
+# Tempos do bloco4 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco4.mp3 (121.23 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+now              0.00  Now...                                                              # início
+let_me           1.12  let me tell you what happened to Marcus.                            # voz
+year             3.78  In the year 175,                                                    # pausa
+cassius          6.48  one of his most trusted generals was a man named Avidius Cassius.   # voz
+hero            10.89  A hero of the wars in the East.                                     # pausa
+east            13.32  Marcus had placed the entire East in his hands.                     # pausa
+rumor           16.77  Then a false rumor reached him...                                   # pausa
+dead            19.23  that the emperor was dead.                                          # pausa
+declared        21.21  And Cassius declared himself emperor.                               # pausa
+imagine         24.07  Imagine hearing that.                                               # pausa
+raised          25.90  The man you raised up...                                            # pausa
+now_calling     27.57  now calling himself by your title.                                  # pausa
+war             30.06  Rome began to prepare for civil war.                                # pausa
+gathered        32.93  Marcus gathered his soldiers.                                       # pausa
+dio             34.98  And the old historian Cassius Dio tells us what he said.            # pausa
+afraid          38.64  He was afraid of only one thing.                                    # pausa
+defeat          41.08  Not defeat.                                                         # pausa
+not_death       42.08  Not death.                                                          # voz
+would           43.22  He was afraid that Cassius would die...                             # pausa
+before_marcus   45.38  before Marcus had the chance to forgive him.                        # voz
+forgive         48.56  To forgive a man who wronged you,                                   # pausa
+he_said         50.20  he said...                                                          # voz
+prize           51.12  that would be a greater prize than any victory.                     # pausa
+chance          54.51  He never got that chance.                                           # pausa
+months          56.28  Three months later,                                                 # pausa
+killed          57.64  Cassius was killed by his own officers.                             # voz
+head            60.33  They brought his head to the emperor...                             # pausa
+like_a          62.12  like a gift.                                                        # voz
+look            63.32  Marcus would not look at it.                                        # pausa
+buried          65.30  He ordered it buried.                                               # pausa
+spared          66.80  And he spared almost everyone who had joined the revolt.            # pausa
+then            70.21  And then...                                                         # pausa
+letters         71.19  the letters.                                                        # pausa
+among           72.40  Among the rebels' papers,                                           # pausa
+there_were      73.88  there were letters.                                                 # voz
+names           75.04  Names.                                                              # voz
+every           76.00  Every man who had written in support of the traitor.                # pausa
+ruler           79.21  Any other ruler would have read every line.                         # pausa
+burned          81.93  Marcus burned them.                                                 # pausa
+without         83.53  Without reading a single one.                                       # pausa
+because         85.59  Because he did not want to learn their names...                     # pausa
+hate            87.56  and be forced to hate them.                                         # voz
+account         89.75  One old account says a governor burned them in his place.           # pausa
+reason          92.96  But it is Marcus's reason that survived.                            # pausa
+think           95.80  Think about that.                                                   # pausa
+wait            97.04  He didn't wait for the hatred to come...                            # pausa
+and_then2       98.88  and then fight it.                                                  # voz
+refused        100.49  He simply refused to feed it.                                       # pausa
+journal        103.03  In his journal,                                                     # pausa
+he_wrote       103.86  he wrote:                                                           # voz
+pain           104.73  as the sense of pain is a characteristic of weakness,               # pausa
+so_also        108.00  so also is anger.                                                   # pausa
+looks          110.05  Anger looks like strength.                                          # pausa
+it_isnt        112.06  It isn't.                                                           # pausa
+wound          112.97  It's a wound.                                                       # pausa
+knew           114.31  And the most powerful man in the world knew...                      # pausa
+unread         117.17  some letters are better left unread.                                # pausa
+pause          120.23  Let's pause here.                                                   # pausa

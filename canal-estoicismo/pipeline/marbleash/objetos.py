@@ -1791,7 +1791,7 @@ def capsa(cx=960, aberta=0.0, n_rolos=7):
             ell(d, x, yt + 30, 7, 7, HOLE)                                                             # selo vazado
             ell(d, x, yt + 30, 4, 4)
         lid = aberta
-        lx, ly = cx + 160 * lid, b - h - 20 - 140 * lid
+        lx, ly = cx - 210 * lid, (b - h - 20) + (h * lid) - 120 * math.sin(math.pi * lid)        # sobe e pousa no chão, à esquerda
         ell(d, lx, ly, w + 8, 20)
         poly(d, [(lx - w - 8, ly), (lx + w + 8, ly), (lx + w + 8, ly - 30), (lx - w - 8, ly - 30)])
         ell(d, lx, ly - 30, w + 8, 18)

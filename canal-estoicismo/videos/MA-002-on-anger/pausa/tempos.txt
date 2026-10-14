@@ -1,0 +1,43 @@
+# Tempos do pausa · MA-002-on-anger — deixas da narração.
+# Áudio: audio/pausa.mp3 (47.23 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+seneca           0.00  Seneca wrote that the greatest remedy for anger...                  # início
+is_delay         3.56  is delay.                                                           # pausa
+delay            5.04  So let's take a small delay.                                        # pausa
+right_now        7.65  Right now.                                                          # pausa
+jaw              8.83  Unclench your jaw.                                                  # pausa
+let_your        10.59  Let your hands fall open.                                           # pausa
+breathe_in      12.75  Breathe in...                                                       # pausa
+slowly          13.86  slowly...                                                           # pausa
+two             15.12  two...                                                              # pausa
+three           16.07  three...                                                            # pausa
+four            17.04  four.                                                               # pausa
+let_go          18.23  And let it go...                                                    # pausa
+two2            19.74  two...                                                              # pausa
+three2          20.68  three...                                                            # pausa
+four2           21.61  four...                                                             # pausa
+five            22.51  five...                                                             # pausa
+six             23.40  six.                                                                # pausa
+one_more        24.71  One more time.                                                      # pausa
+breathe_in2     25.98  Breathe in...                                                       # pausa
+two3            27.03  two...                                                              # pausa
+three3          27.95  three...                                                            # pausa
+four3           28.91  four.                                                               # pausa
+and_out         30.01  And out...                                                          # pausa
+two4            31.12  two...                                                              # pausa
+three4          32.04  three...                                                            # pausa
+four4           32.98  four...                                                             # pausa
+five2           33.86  five...                                                             # pausa
+six2            34.70  six.                                                                # voz
+now             35.94  Now...                                                              # pausa
+one_question    36.77  one question.                                                       # pausa
+just_for        38.00  Just for you.                                                       # pausa
+what            39.42  What are you still carrying...                                      # pausa
+that_happened   40.70  that happened days ago?                                             # voz
+put             43.06  You don't have to put it down yet.                                  # pausa
+notice          44.94  Just notice...                                                      # pausa
+how_heavy       45.52  how heavy it is.                                                    # voz

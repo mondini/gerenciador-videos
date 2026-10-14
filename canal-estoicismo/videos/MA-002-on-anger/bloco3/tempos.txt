@@ -1,0 +1,59 @@
+# Tempos do bloco3 · MA-002-on-anger — deixas da narração.
+# Áudio: audio/bloco3.mp3 (99.87 s). Gerado por `ma tempos`; revise à mão.
+# Uma linha por frase:  NOME  SEGUNDO  FRASE   (# origem do tempo)
+#   SEGUNDO = início da frase no áudio ORIGINAL do ElevenLabs (antes de desacelerar), em segundos.
+#   NOME    = como o script de cena usa a deixa (c.NOME). Vem da linha **Deixas:** do roteiro; as demais têm nome automático.
+#   origem: pausa = fim exato de uma pausa | voz = tempo da palavra no transcritor | estimado = só pelas pausas.
+#
+sometimes         0.00  And sometimes...                                                    # início
+it_isnt           1.08  it isn't one careless comment.                                      # voz
+person            3.97  It's a person.                                                      # pausa
+boss              5.33  The boss who presents your work in the meeting...                   # pausa
+as_if             7.62  as if it were his own.                                              # voz
+name              9.03  And never once says your name.                                      # pausa
+relative         11.37  The relative who always expects one more favor.                     # pausa
+friend           14.90  The friend who only calls...                                        # pausa
+when_they        16.52  when they need something.                                           # voz
+give             18.38  You give more than you should.                                      # pausa
+and_still        20.15  And still...                                                        # pausa
+more             21.14  they want more.                                                     # pausa
+marcus           22.58  Marcus had people like that around him too.                         # pausa
+every_single     25.40  Every single day.                                                   # pausa
+question         27.32  And he left himself a simple question for those moments.            # pausa
+offends          30.58  When someone's behavior offends you...                              # pausa
+ask_yourself     32.76  ask yourself:                                                       # pausa
+could            33.98  could the world exist without people like this?                     # pausa
+couldnt          36.86  It couldn't.                                                        # pausa
+impossible       37.76  So stop demanding the impossible.                                   # pausa
+expecting        40.25  Expecting a world without them...                                   # pausa
+winter           41.86  is like getting angry at winter for being cold.                     # voz
+right            45.22  That doesn't mean they're right.                                    # pausa
+waiting          46.79  It means you stop waiting for them to change...                     # pausa
+peace            49.32  before you allow yourself some peace.                               # voz
+help             52.16  And here is where anger can actually help you.                      # pausa
+signal           55.27  Anger is a signal.                                                  # pausa
+crossed          56.97  It tells you a line was crossed.                                    # pausa
+entry            59.35  In another entry,                                                   # pausa
+marcus_asks      60.56  Marcus asks himself a blunt question:                               # voz
+act              63.00  why not act...                                                      # pausa
+instead_of       63.88  instead of complain?                                                # voz
+soact            65.71  So act.                                                             # pausa
+no               66.78  Say no.                                                             # voz
+conversa         67.82  Ask for that conversation.                                          # pausa
+line             69.70  Draw the line...                                                    # voz
+out_loud         70.42  out loud.                                                           # voz
+proverbs         71.84  And Proverbs has some surprising advice on how to do it:            # pausa
+patience         75.29  By patience a ruler is persuaded.                                   # pausa
+tongue           78.00  A soft tongue breaks the bone.                                      # pausa
+calm             80.49  The calm voice is not the weak one.                                 # pausa
+stubborn         83.05  Sometimes it's the only voice strong enough to move a stubborn man.  # pausa
+difference       87.46  That is the difference.                                             # pausa
+anger            89.19  Anger,                                                              # pausa
+used_well        89.76  used well...                                                        # voz
+action           90.88  becomes an action.                                                  # pausa
+boundary         92.16  A boundary.                                                         # pausa
+a_conversation   93.10  A conversation.                                                     # voz
+nothing          94.52  A grudge becomes nothing.                                           # pausa
+sits             96.58  It just sits there...                                               # pausa
+and_waits        97.84  and waits for you,                                                  # pausa
+night            98.99  every night.                                                        # pausa
