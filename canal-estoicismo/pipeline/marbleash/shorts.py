@@ -171,6 +171,42 @@ def renderizar(sh: Short, final: Path, video: str, saida: Path, avisar=print):
     t1 = fim_narr + DEPOIS
     frases = _frases(b, ini_peca, t0 + ANTES, fim_narr)
     dur = t1 - t0
+    # O áudio nunca corta uma palavra (pedido do criador em 14/10/2026): a voz só entra depois da última palavra
+    # da frase anterior e some antes da primeira da frase seguinte; o respiro de ANTES/DEPOIS fica só na imagem.
+    # Âncora: as pausas detectadas no áudio (exatas); as palavras do transcritor (que às vezes "engolem" a
+    # pausa) só entram quando a deixa não cai no fim de uma pausa. Tudo em segundos do áudio original.
+    pausas = b.audio_info.get('pausas', [])
+    palavras = b.audio_info.get('palavras', [])
+    orig = {nome: seg for nome, seg, _ in tempos.ler(b.arquivo_tempos)}
+    em_final = lambda x: base + b.mapa(x) - t0               # noqa: E731 — segundo original -> segundo do short
+
+    def pausa_antes(seg):
+        return next((p for p in pausas if abs(p[1] - seg) < 0.3), None)
+
+    p = pausa_antes(orig[sh.inicio])
+    if p:
+        som_ini = em_final(p[0] + 0.05)
+    else:
+        antes = [e for _, s, e in palavras if s < orig[sh.inicio] - 0.15]
+        som_ini = em_final(antes[-1] + 0.05) if antes else 0.0
+    som_ini = max(0.0, som_ini)
+    if sh.fim == 'fim':
+        fala_fim = em_final(palavras[-1][2]) if palavras else fim_narr - t0
+        limite = dur
+    else:
+        p = pausa_antes(orig[sh.fim])
+        if p:
+            fala_fim, limite = em_final(p[0]), em_final(p[1] - 0.03)
+        else:
+            dentro = [e for _, s, e in palavras if orig[sh.inicio] - 0.15 <= s < orig[sh.fim] - 0.15]
+            fala_fim = em_final(dentro[-1]) if dentro else fim_narr - t0
+            limite = em_final(orig[sh.fim] - 0.05)
+    som_fim = min(fala_fim + 0.6, limite, dur)                 # fim do fade-out da voz
+    fade_out = max(0.15, min(0.5, som_fim - fala_fim - 0.05))
+    if som_fim - fade_out < fala_fim:
+        avisar(f'  aviso: short {sh.numero}: pausa curta depois da última palavra ({som_fim - fala_fim:.2f} s)')
+    filtro_som = (f'afade=t=in:st={som_ini:.3f}:d={min(0.3, max(0.05, fala_fim - som_ini)):.3f},'
+                  f'afade=t=out:st={som_fim - fade_out:.3f}:d={fade_out:.3f}')
     fundo = _fundo(sh)
     cache = {}
 
@@ -190,7 +226,7 @@ def renderizar(sh: Short, final: Path, video: str, saida: Path, avisar=print):
     saida.parent.mkdir(parents=True, exist_ok=True)
     enc = subprocess.Popen([ffmpeg(), '-y', '-v', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(config.FPS),
                             '-i', '-', '-ss', f'{t0:.3f}', '-t', f'{dur:.3f}', '-i', str(final), '-map', '0:v', '-map', '1:a',
-                            '-af', f'afade=t=in:d=0.3,afade=t=out:st={dur - 0.9:.3f}:d=0.9',
+                            '-af', filtro_som,
                             '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
                             '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', str(saida)],
                            stdin=subprocess.PIPE)
@@ -216,5 +252,5 @@ def renderizar(sh: Short, final: Path, video: str, saida: Path, avisar=print):
     enc.stdin.close()
     enc.wait()
     src.wait()
-    avisar(f'{saida.name}: {dur:.1f} s ({len(frases)} frases)')
+    avisar(f'{saida.name}: {dur:.1f} s ({len(frases)} frases; voz de {som_ini:.2f} s até a última palavra em {fala_fim:.2f} s, fade até {som_fim:.2f} s)')
     return dur

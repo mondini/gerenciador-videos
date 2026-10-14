@@ -58,7 +58,7 @@ HOMEM = Boneco(bonecos.homem, escala=1.35, desfoque=1.1, opacidade=0.9)
 AMIGO = Boneco(bonecos.homem, escala=1.3, desfoque=1.5, opacidade=0.8)
 IMPERADOR = Boneco(bonecos.imperador, escala=1.3, desfoque=1.1, opacidade=0.9)
 
-CRED_942 = Credito('Marcus Aurelius, Meditations 9.42 · trans. George Long')
+CRED_942 = Credito('Marcus Aurelius, Meditations 9.42 · paraphrased')
 CRED_847 = Credito('Marcus Aurelius, Meditations 8.47 · trans. George Long')
 CRED_PROV = Credito('Proverbs 25:15 · World English Bible')
 

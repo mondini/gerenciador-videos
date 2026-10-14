@@ -1,7 +1,8 @@
 # Pacote de Publicação — MA-002 · On Anger
 
 > Gerado em 14/10/2026 a partir do roteiro final, do vídeo montado (`final/MA-002-on-anger-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 9 min 39 s, −16 LUFS) e dos ativos reais do pipeline.
-> **Publicação: AGUARDAR** a revisão única do vídeo montado e a liberação do criador. Data sugerida: terça, 27/10/2026, 14:00 ET (15:00 Brasília), uma semana depois do MA-001.
+> **Publicação:** terça, 27/10/2026, 14:00 ET (15:00 Brasília), uma semana depois do MA-001 (data confirmada pelo criador em 14/10/2026).
+> Atualizado em 14/10/2026: crédito do 9.42 marcado como paráfrase e short da Pausa "with Seneca" (decisões do criador).
 > Isto não é aconselhamento jurídico: em cada item eu digo o que é regra do YouTube, o que é licença do ativo e o que é avaliação minha.
 
 ## 1. TÍTULOS
@@ -91,7 +92,7 @@ stoicism anger, marcus aurelius anger, seneca on anger, how to let go of a grudg
 | Of Anger (De Ira), III.29 | Sêneca (trad. Aubrey Stewart, George Bell & Sons, 1889) | gutenberg.org/ebooks/64576 (conferido em 13/10/2026) | livro (documento histórico) | "we nurse it and inflame it..." | alta | *Seneca, Of Anger III.29 · trans. Aubrey Stewart* |
 | Of Anger (De Ira), II.29 | Sêneca (trad. Aubrey Stewart) | gutenberg.org/ebooks/64576 | livro | "The greatest remedy for anger is delay" (The Pause) | alta | *Seneca, Of Anger II.29 · trans. Aubrey Stewart* |
 | Meditations 11.18 | Marco Aurélio (trad. George Long, 1862) | gutenberg.org/ebooks/15877 (conferido em 13/10/2026) | livro | a 8ª regra (a dor da raiva maior que a do ato) e o fim ("as the sense of pain is a characteristic of weakness...") | alta | *Marcus Aurelius, Meditations 11.18 · trans. George Long* |
-| Meditations 9.42 | Marco Aurélio (trad. George Long) | gutenberg.org/ebooks/15877 | livro | "could the world exist without people like this?" (paráfrase) | alta | *Marcus Aurelius, Meditations 9.42 · trans. George Long* |
+| Meditations 9.42 | Marco Aurélio (trad. George Long) | gutenberg.org/ebooks/15877 | livro | "could the world exist without people like this?" (paráfrase) | alta | *Marcus Aurelius, Meditations 9.42 · paraphrased* |
 | Meditations 8.47 | Marco Aurélio (trad. George Long) | gutenberg.org/ebooks/15877 | livro | "why not act... instead of complain?" (paráfrase) | alta | *Marcus Aurelius, Meditations 8.47 · trans. George Long* |
 | Proverbs 27:3, 25:15, 16:32, 26:20 | Bíblia, World English Bible | ebible.org/web (USFM, conferido em 13/10/2026) | livro (texto religioso) | a pedra e a areia; a língua branda; o lento para a ira; sem lenha o fogo apaga | alta | *Proverbs 27:3 · World English Bible* (e 25:15, 16:32, 26:20) |
 | Roman History 72.26–29 | Cássio Dio; Loeb Classical Library vol. IX, trad. Earnest Cary, 1927 | penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/72*.html (LacusCurtius, conferido em 13/10/2026) | documento histórico | a revolta de Avídio Cássio (175), o "prêmio" de perdoar, a cabeça enterrada, as cartas queimadas sem ler (e a versão de que outro as destruiu, citada no vídeo) | média (fonte antiga; o vídeo avisa a versão divergente: "One old account says...") | *Cassius Dio, Roman History 72.26–29 · Loeb Classical Library* |
@@ -104,7 +105,7 @@ stoicism anger, marcus aurelius anger, seneca on anger, how to let go of a grudg
 | "we nurse it and inflame it, as though to be violently angry proved our anger to be just." | Of Anger III.29 | Aubrey Stewart, 1889 | domínio público | Project Gutenberg #64576 | Literal (recorte do fim da frase). |
 | "consider how much more pain is brought on us by the anger and vexation caused by such acts than by the acts themselves." | Meditations 11.18 (8ª regra) | George Long, 1862 | domínio público | Project Gutenberg #15877 | Literal (recorte; o original segue com "at which we are angry and vexed"). |
 | "A stone is heavy, and sand is a burden; but a fool's provocation is heavier than both." | Proverbs 27:3 | World English Bible | domínio público | ebible.org (USFM) | Literal. |
-| "could the world exist without people like this?" (falado e **na tela, em itálico**) | Meditations 9.42 | George Long | domínio público | Project Gutenberg #15877 | **Paráfrase** de "Is it possible, then, that shameless men should not be in the world?". Na tela parece citação e o crédito diz "trans. George Long". Ver seção 14. |
+| "could the world exist without people like this?" (falado e **na tela, em itálico**) | Meditations 9.42 | George Long | domínio público | Project Gutenberg #15877 | **Paráfrase** de "Is it possible, then, that shameless men should not be in the world?". O crédito na tela diz *Marcus Aurelius, Meditations 9.42 · paraphrased* (ajustado em 14/10/2026). |
 | "why not act... instead of complain?" | Meditations 8.47 | George Long | domínio público | Project Gutenberg #15877 | **Paráfrase** de "why dost thou not rather act than complain?"; apresentada como "a blunt question", não como citação. |
 | "By patience a ruler is persuaded. A soft tongue breaks the bone." | Proverbs 25:15 | World English Bible | domínio público | ebible.org | Literal. |
 | (relato) a revolta, o prêmio de perdoar, a cabeça, as cartas | Cassius Dio 72.26–29 | Earnest Cary, Loeb 1927 | domínio público nos EUA (publicado em 1927, direitos não renovados segundo o LacusCurtius); no Reino Unido, incerto (regra 1 do plano) | LacusCurtius | Relato com palavras próprias. "To forgive a man who wronged you... a greater prize than any victory" é paráfrase de 72.26, dita como "he said", sem aspas na tela. |
@@ -262,12 +263,12 @@ Não há gerador de imagens: cada cena é desenhada por código; a receita está
 
 **Conclusão: PUBLICAR APÓS CORREÇÕES**
 1. Revisão única do vídeo montado pelo criador.
-2. **Crédito do 9.42 (decidir):** no bloco 3, a frase na tela "could the world exist without people like this?" é paráfrase, mas aparece em itálico como citação com "trans. George Long". Sugestão: trocar o crédito para *Marcus Aurelius, Meditations 9.42 (paraphrased)* ou tirar o letreiro e deixar só o crédito. Não alterei sem você decidir.
-3. Liberação da data de publicação (sugestão: 27/10/2026).
+2. ~~Crédito do 9.42~~ (feito em 14/10/2026: *Marcus Aurelius, Meditations 9.42 · paraphrased*).
+3. ~~Data de publicação~~ (confirmada: 27/10/2026, 14:00 ET).
 
 ## 15. SHORTS
 
-Arquivos em `shorts/`. Agenda para a semana sugerida do vídeo (terça, 27/10/2026, 14:00 ET = 15:00 Brasília). Os EUA saem do horário de verão no domingo, **1º/11/2026**: até sábado, Brasília = ET + 1 h; no domingo, ET + 2 h. Em todos: **Vídeo relacionado = MA-002** (se o vídeo agendado não aparecer na lista, ajustar no dia 27, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
+Arquivos em `shorts/`. Agenda da semana do vídeo (terça, 27/10/2026, 14:00 ET = 15:00 Brasília). Os EUA saem do horário de verão no domingo, **1º/11/2026**: até sábado, Brasília = ET + 1 h; no domingo, ET + 2 h. Em todos: **Vídeo relacionado = MA-002** (se o vídeo agendado não aparecer na lista, ajustar no dia 27, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
 
 | Ordem | Dia | ET | Brasília | Arquivo |
 |---|---|---|---|---|
@@ -275,11 +276,11 @@ Arquivos em `shorts/`. Agenda para a semana sugerida do vídeo (terça, 27/10/20
 | 2 | Qua 28/10 | 12:00 | 13:00 | `01-you-don-t-have-to-win.mp4` |
 | 3 | Qui 29/10 | 12:00 | 13:00 | `03-you-already-won-this.mp4` |
 | 4 | Sáb 31/10 | 10:00 | 11:00 | `04-a-grudge-is-a-fire.mp4` |
-| reserva | Dom 1/11 | 10:00 | 12:00 | `05-take-30-seconds.mp4` |
+| 5 (reserva) | Dom 1/11 | 10:00 | 12:00 | `05-take-30-seconds.mp4` |
 
-**Reserva (decidir):** pelo plano, do vídeo 2 em diante 1 short de cada vídeo vai para a reserva e o domingo publica um short da reserva. Como a reserva começa agora, o único short nela é o 05 deste vídeo; publicá-lo no domingo deixa a reserva vazia de novo. Alternativa: segurar o 05 e não publicar nada no domingo 1/11.
+**Reserva:** o 05 é o short da reserva deste vídeo e sai no domingo 1/11 (decisão do criador em 14/10/2026), porque a reserva começa agora e ainda não tem short de vídeo antigo.
 
-**The Pause:** o formato fixo do canal é *"Take 30 seconds with Marcus Aurelius"*, mas a Pausa deste vídeo é de Sêneca (II.29). Mantive o formato no título e na tela e pus o crédito de Sêneca; se preferir, troco o subtítulo do short para "with Seneca" (é só uma linha no `shorts.txt`).
+**The Pause:** como a Pausa deste vídeo é de Sêneca (II.29), o short sai como *"Take 30 seconds with Seneca"* (exceção só para este vídeo, decisão do criador em 14/10/2026; o formato do canal continua "with Marcus Aurelius").
 
 ### 1. `02-the-letters-he-never-read.mp4` (Ter 27/10, 19:00 Brasília)
 
@@ -351,7 +352,7 @@ Full episode: "Your Anger Isn't the Problem. The Grudge Is." (linked above).
 Título:
 
 ```
-Take 30 seconds with Marcus Aurelius
+Take 30 seconds with Seneca
 ```
 
 Descrição:
