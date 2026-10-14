@@ -1,0 +1,23 @@
+# credenciais (chave da API do ElevenLabs)
+.env
+# mídia pesada fica fora do git (vai para o Drive pelo backup)
+*.mp3
+*.wav
+*.mp4
+*.mov
+videos/**/audio/
+videos/**/imagens/
+videos/**/previas/
+videos/**/final/
+biblioteca/**/*.png
+biblioteca/**/*.jpg
+biblioteca/**/*.webp
+# intermediários e ambiente
+videos/**/trabalho/
+.venv/
+node_modules/
+pipeline/.cache/
+pipeline/.modelos/
+__pycache__/
+.pytest_cache/
+.DS_Store
