@@ -15,7 +15,7 @@ Este repositório guarda a produção de **vários canais do YouTube**. Não há
 
 Fora dos canais:
 - `./canais`: painel de todos os canais (ver "Painel dos canais").
-- `docs/`: documentos comuns a todos os canais (pacote de publicação, guia de embalagem).
+- `docs/`: documentos comuns a todos os canais (pacote de publicação, guia de embalagem) e o `plano-de-melhorias.md` (auditoria de 14/10/2026: itens para aplicar um por vez, marcando os feitos).
 - `ferramentas/`: código do painel (`canais.py`) e seus testes.
 - `ideias-de-canais/`: caderno de ideias de canais futuros e protótipos. Não é canal.
 
