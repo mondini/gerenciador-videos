@@ -1,3 +1,5 @@
+> **Histórico:** prompt usado na refatoração do pipeline (11–12/10/2026), já executada. Não é instrução atual: os caminhos `videos/video-NN/` citados aqui hoje são `videos/MA-NNN-slug/`, e o pipeline vigente está descrito em `pipeline/LEIA-ME.md`.
+
 Você vai refatorar o pipeline de produção de vídeos do canal Marble & Ash. Trabalhe com calma e capricho: este código vai ser usado nos próximos 12 vídeos, em sessões separadas, às vezes por modelos menores. Fale comigo em pt-BR.
 
 ## Contexto

@@ -1,7 +1,7 @@
 # Pacote de Publicação — MA-001 · The Man Who Had Everything
 
 > Gerado em 12/10/2026 a partir do roteiro final, do vídeo final remontado (`final/MA-001-the-man-who-had-everything-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 8 min 33 s) e dos ativos reais do pipeline.
-> **Publicação: AGUARDAR** a liberação do criador. O canal ainda não foi criado, então todos os links do canal estão como **VERIFICAR**.
+> **Publicação:** quinta, 15/10/2026, 14:00 ET (15:00 Brasília), agendada no YouTube Studio (liberada em 13/10/2026; canal `@marbleandashwisdom` criado em 13/10/2026; ver seção 13).
 > Atualizado em 12/10/2026: licença comercial da ElevenLabs confirmada (fatura, recibo e página de ajuda guardados) e tradutor da Historia Augusta confirmado (David Magie).
 > Isto não é aconselhamento jurídico: em cada item eu digo o que é regra do YouTube, o que é licença do ativo e o que é avaliação minha.
 

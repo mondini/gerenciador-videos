@@ -250,7 +250,8 @@ def renderizar(sh: Short, final: Path, video: str, saida: Path, avisar=print):
         enc.stdin.write(q.tobytes())
         i += 1
     enc.stdin.close()
-    enc.wait()
-    src.wait()
+    if enc.wait() != 0 or src.wait() != 0:
+        saida.unlink(missing_ok=True)       # short quebrado não pode contar no `ma status`
+        raise SystemExit(f'short {sh.numero}: o ffmpeg falhou; nada foi gravado em {saida.name}.')
     avisar(f'{saida.name}: {dur:.1f} s ({len(frases)} frases; voz de {som_ini:.2f} s até a última palavra em {fala_fim:.2f} s, fade até {som_fim:.2f} s)')
     return dur

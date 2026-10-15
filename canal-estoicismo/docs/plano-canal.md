@@ -1,6 +1,6 @@
 # Marble & Ash — Plano do Canal
 
-*Old wisdom for quiet hours.* Atualizado em 11/10/2026, ao fim da sessão de criação do canal.
+*Old wisdom for quiet hours.* Criado em 11/10/2026, na sessão de criação do canal; cada decisão posterior traz a data. Última revisão: 14/10/2026.
 
 Links (claude.ai):
 - Plano colaborativo (Claude Docs): https://claude.ai/code/artifact/41d9cec2-ff3a-493c-83ac-34526173d40f
@@ -17,7 +17,7 @@ Links (claude.ai):
 - **Tema:** estoicismo com foco em **Marco Aurélio** e as *Meditações*, cruzado de forma sutil com **Provérbios** (sabedorias que se encontram, nunca pregação).
 - **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
 - **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
-- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência: **1 vídeo/semana** (às quintas), 5 shorts por vídeo (detalhes em "Cadência e calendário de publicação"). Meta: 12 vídeos prontos antes de lançar.
+- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência: **1 vídeo/semana** (às quintas), 5 shorts por vídeo (detalhes em "Cadência e calendário de publicação"). Meta original: 12 vídeos prontos antes de lançar; o lançamento foi antecipado (MA-001 agendado para 15/10/2026, com o MA-002 pronto para 22/10/2026).
 - **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs (**plano Starter**; voz e custo em "Voz e créditos do ElevenLabs"). Sem Canva nem Photoshop.
 - **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
 
@@ -65,7 +65,7 @@ Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
 - Última linha falada de todo vídeo, igual sempre: *"[softly] Old wisdom... for quiet hours."* (só o slogan, sem o nome do canal).
 - O slogan começa **2 s depois da última frase do roteiro** (12/10/2026). Automático: `./ma tempos` (ou `./ma audio`, se os tempos já existem) acha a frase "Old wisdom" e alonga a pausa antes dela no áudio desacelerado; nada a regravar no ElevenLabs.
 - **Nenhuma chamada falada** para inscrição ou comentário (o público ouve para dormir); o pedido fica só na descrição e na tela final do YouTube.
-- Visual: o logo Horizonte + slogan em Cormorant Garamond itálico (`marble-300`), peça comum em `videos/comum/` (a criar).
+- Visual: o logo Horizonte + slogan em Cormorant Garamond itálico (`marble-300`), peça comum `videos/comum/encerramento/` (usada desde o MA-001).
 
 ## Voz e créditos do ElevenLabs (desde o vídeo 1, 12/10/2026)
 
@@ -181,7 +181,4 @@ Ver `fluxo-por-video.md`.
 
 ## Status
 
-Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe, o que falta e a etapa de cada vídeo.
-
-- MA-001 *The Man Who Had Everything*: concluído com 2 thumbnails (A e C); pela regra das 3 thumbs, falta a B (Símbolo). **Publicação: aguardar a liberação do criador.**
-- Vídeos 2–12: roteiros a fazer. Pasta de cada um: `videos/MA-NNN-slug/` (slug do nome interno da tabela acima).
+Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe, o que falta e a etapa de cada vídeo; `./canais` (na raiz) junta o status com as datas do `calendario.json`. Pasta de cada vídeo: `videos/MA-NNN-slug/` (slug do nome interno da tabela acima), criada por `./ma novo N`.

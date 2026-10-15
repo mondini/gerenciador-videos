@@ -8,6 +8,7 @@ Um comando por etapa (VIDEO = 1, MA-001 ou a pasta inteira MA-001-slug; BLOCO = 
   stills   VIDEO BLOCO [T ...]    stills de conferência (padrão: STILLS do script de cena)
   render   VIDEO BLOCO            renderiza o bloco com voz + ambiente em previas/blocoN.mp4
   juntar   VIDEO B1 B2 ...        junta blocos com áudio contínuo em final/
+  shorts   VIDEO [NN ...]         shorts verticais (1080x1920) cortados do final, definidos em shorts.txt
   youtube  ARQUIVO.mp4            simula a compressão do YouTube (~4 Mbps) e tira stills
   comparar A B                    diferença de pixels entre duas imagens (ou pastas de PNGs)
   limpar-cache                    apaga o cache de arte (é refeito sozinho)
@@ -212,7 +213,10 @@ def cmd_juntar(a):
             raise SystemExit(f'Falta {v.relative_to(config.CANAL)}. Rode antes: ma render {b.video} {b.numero}')
         videos.append(v)
     juncoes = entrega.juncoes(blocos)
-    base = Bloco(a.video, next(n for n in a.blocos if str(n).isdigit()))
+    numerado = next((n for n in a.blocos if str(n).isdigit()), None)
+    if numerado is None:
+        raise SystemExit('Informe ao menos um bloco numerado (ex.: ma juntar 1 1 abertura 2).')
+    base = Bloco(a.video, numerado)
     pasta = base.final
     pasta.mkdir(parents=True, exist_ok=True)
     nome = a.saida or f'{base.video}-{"-".join(str(b.numero) for b in blocos)}'

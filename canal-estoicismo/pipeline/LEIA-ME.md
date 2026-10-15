@@ -22,8 +22,8 @@ PIP_NO_CACHE_DIR=1 .venv/bin/pip install -r pipeline/requirements.txt
 ```
 
 O pacote `imageio-ffmpeg` traz um ffmpeg dentro do `.venv` (o pipeline o encontra sozinho).
-Opcional, para os tempos automáticos: `.venv/bin/pip install faster-whisper` — o modelo `small.en`
-(~460 MB) é baixado na primeira vez para `pipeline/.modelos/`.
+O `requirements.txt` já instala os opcionais: `faster-whisper` (tempos automáticos; o modelo `small.en`,
+~460 MB, é baixado na primeira vez para `pipeline/.modelos/`) e `pytest` (testes).
 
 Depois disso, use o atalho `./ma` na pasta do canal (ele chama o Python do `.venv`):
 
@@ -62,7 +62,7 @@ Rode na pasta do canal. `VIDEO` = `1`, `MA-001` ou o nome da pasta (`MA-001-the-
 | Backup | `./ma backup VIDEO` | Copia para `DRIVE_ROOT/MA - Marble & Ash/VIDEOS/<pasta do vídeo>/` (01_roteiro, 02_audio, 04_video, 05_projeto, 06_thumbnail, 07_export). Só copia o que mudou; nunca apaga no Drive; texto alterado guarda a versão anterior em `_versoes/`. Roda sozinho depois de `audio` e `juntar` | — |
 | Limpar | `./ma limpar VIDEO --apagar` | Vídeo concluído: refaz o backup e apaga do Mac `trabalho/` (menos `referencia/`), `previas/stills/`, simulações e prévias que já estão no Drive. Sem `--apagar`, só lista | — |
 
-Opções úteis: `render --processos N` (padrão 4), `render --sem-som`, `render --so-som` (refaz só o som, reaproveitando o vídeo sem som já renderizado), `render --ambiente -20` (ganho do
+Opções úteis: `render --processos N` (padrão: até 4, deixando um núcleo livre), `render --sem-som`, `render --so-som` (refaz só o som, reaproveitando o vídeo sem som já renderizado), `render --ambiente -20` (ganho do
 ambiente em dB), `stills --referencia PASTA` (compara com stills salvos), `tempos --refazer`,
 `tempos --sem-transcritor`, `youtube --mbps 4`.
 
@@ -81,10 +81,10 @@ Pausa antes do slogan: `audio.PAUSA_ANTES_SLOGAN` (2 s), aplicada sozinha pelos 
 
 ## 3. Como criar um bloco novo (passo a passo)
 
-Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos nem a aprovação do frame.
+Exemplo: bloco 2 do vídeo 1. Siga na ordem; não pule a conferência dos tempos nem a conferência interna dos stills.
 
 1. **Áudio.** Salve o mp3 do ElevenLabs em `videos/MA-001-the-man-who-had-everything/audio/` com `bloco2` no nome
-   (ex.: `MA-002-bloco2-starter.mp3`). Se houver mais de um, o comando usa o mais recente; para escolher,
+   (ex.: `MA-001-bloco2-starter.mp3`). Se houver mais de um, o comando usa o mais recente; para escolher,
    use `--arquivo`.
 2. **Pausas e ritmo:** `./ma audio 1 2`. Confira a mensagem: número de pausas e duração antes/depois.
 3. **Tempos:** `./ma tempos 1 2`. Ele lê o texto do `## Bloco 2` no `roteiro.md` e grava
@@ -233,7 +233,7 @@ Regras: tudo em `quadro()` depende só de `q.u` e das deixas (nada de `random` s
 | `Falta .../audio.json` | `./ma audio VIDEO BLOCO` |
 | `Falta .../tempos.txt` | `./ma tempos VIDEO BLOCO` |
 | `deixa 'x' não existe em tempos.txt` | renomeie a linha certa de `tempos.txt` para `x` |
-| `Fonte 'Inter-Regular.otf' não encontrada` | copie a fonte para `fontes-tipograficas/` |
+| `Fonte '...' não encontrada` | confira o nome do arquivo (as fontes do canal são `.ttf`; GFS Baskerville é `.otf`) ou copie a fonte nova para `fontes-tipograficas/` |
 | `ffmpeg não encontrado` | instale as dependências (seção 1) ou defina `MA_FFMPEG` |
 | Render lento ou Mac travando | menos processos: `--processos 2` |
 

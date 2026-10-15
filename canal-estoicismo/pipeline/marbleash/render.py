@@ -119,7 +119,8 @@ def renderizar(bloco: Bloco, saida, de=None, ate=None, processos=None, crf=14, p
                     feitos += 1
                 progresso(feitos)
     enc.stdin.close()
-    enc.wait()
+    if enc.wait() != 0:
+        raise SystemExit(f'O ffmpeg falhou ao gravar {saida.name} (o arquivo pode estar incompleto): renderize de novo.')
     dt = time.time() - t0
     seg = n / FPS
     est = {'quadros': n, 'segundos_video': seg, 'segundos_render': dt, 'preparo': t_prep,

@@ -95,17 +95,18 @@ def test_bloco10_nao_confunde_com_bloco1(tmp_path):
 def test_backup_copia_nas_subpastas_e_nunca_apaga(tmp_path):
     pasta = _video(tmp_path)
     _peca_pronta(pasta, 'bloco1')
+    _arq(pasta / 'shorts.txt', b'01 | TITLE |  | 1 | a | fim |')
     drive = tmp_path / 'drive'
     drive.mkdir()
     res = producao.backup(pasta, drive, avisar=lambda *_: None)
     dest = producao.pasta_drive_do_video(pasta, drive)
     assert dest.name == 'MA-001-the-man-who-had-everything'
     for rel in ('01_roteiro/roteiro.md', '02_audio/video01-bloco1-starter.mp3', '04_video/bloco1.mp4',
-                '05_projeto/bloco1/cena.py', '05_projeto/bloco1/tempos.txt'):
+                '05_projeto/bloco1/cena.py', '05_projeto/bloco1/tempos.txt', '05_projeto/shorts.txt'):
         assert (dest / rel).exists(), rel
-    assert res['novos'] == 5
+    assert res['novos'] == 6
     extra = _arq(dest / '02_audio' / 'take-antigo.mp3')         # o que só existe no Drive fica lá
-    assert producao.backup(pasta, drive, avisar=lambda *_: None)['iguais'] == 5
+    assert producao.backup(pasta, drive, avisar=lambda *_: None)['iguais'] == 6
     assert extra.exists()
 
 

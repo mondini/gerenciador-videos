@@ -229,7 +229,7 @@ And the lamp... is still burning.
 | Meditations 7.27 ("Think not so much of what thou hast not as of what thou hast...") | Marco Aurélio | George Long | domínio público | 11/10/2026, MIT Classics |
 | Proverbs 30:8 | Bíblia | World English Bible | domínio público | 11/10/2026, Bible Gateway (WEB) — v. 9 só parafraseado |
 | Proverbs 16:18 e 16:19 | Bíblia | World English Bible | domínio público | 11/10/2026, Bible Gateway (WEB) |
-| Leilão dos tesouros do palácio | *Historia Augusta*, Vida de Marco 17 | edição/tradução: **VERIFICAR** | — | narrado como relato antigo, sem citação literal |
+| Leilão dos tesouros do palácio | *Historia Augusta*, Vida de Marco 17.4 | trad. David Magie, Loeb, 1921 (confirmada pelo criador em 12/10/2026; ver o pacote) | domínio público | narrado como relato antigo, sem citação literal |
 | Fatos gerais (reinado 161–180, peste, guerras no Danúbio, Meditações em grego, título "Ta eis heauton") | conhecimento histórico geral | fonte de referência para a descrição: **VERIFICAR** | — | — |
 
 **Ativos:** fontes Cinzel e Cormorant (Google Fonts, SIL OFL — arquivos OFL.txt na pasta de fontes); Inter (OFL); GFS Baskerville (grego). Som ambiente gerado por código (sem amostras de terceiros). Animações desenhadas por código (sem acervo nem gerador de imagens). Narração: ElevenLabs, plano Starter, voz *Flint — Deep, Raspy, and Warm*, modelo Eleven v4 (Stability 50%, Similarity 75%); gravada em 12/10/2026, 6.638 créditos.

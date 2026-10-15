@@ -76,5 +76,5 @@ def fonte(nome: str) -> str:
         if pasta.is_dir():
             for c in pasta.rglob(nome):
                 return str(c)
-    raise FileNotFoundError(f'Fonte {nome!r} não encontrada. Copie o arquivo para {FONTES}/ '
-                            '(Inter e GFS Baskerville não vêm na pasta; baixe do Google Fonts, licença OFL).')
+    raise FileNotFoundError(f'Fonte {nome!r} não encontrada em {FONTES}/ (confira o nome do arquivo; '
+                            'fonte nova: baixe do Google Fonts, licença OFL, com o OFL-*.txt).')

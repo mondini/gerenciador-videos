@@ -6,7 +6,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - O ambiente já fica em `.venv/` dentro da pasta. Conferir com `./ma -h`. Se faltar, instalar como em `pipeline/LEIA-ME.md` (seção 1).
 - Conferir que o pipeline continua fiel ao padrão aprovado: `.venv/bin/python -m pytest pipeline/testes`.
 - Vídeo novo: `./ma novo N` cria a pasta `videos/MA-NNN-slug/` e o `roteiro.md` inicial a partir da ficha do plano.
-- Processo do vídeo 2 em diante: ver "Processo mais eficiente" em `docs/plano-canal.md` (inclui as melhorias do pipeline a fazer no começo da sessão do vídeo 2).
+- Processo de cada vídeo: ver "Processo mais eficiente" em `docs/plano-canal.md` (as melhorias do pipeline previstas ali já foram feitas em 13/10/2026).
 
 ## 2. Roteiro (se ainda não estiver aprovado)
 - Primeiro o **banco de citações** do tema, já conferidas na fonte. Se o tema pedir outra obra ou tradução, procurar a melhor em domínio público e propor; o criador valida.

@@ -7,7 +7,7 @@ O status é lido dos arquivos da pasta do vídeo e dos títulos do roteiro.md; n
   - Entrega: final/*.mp4, thumbnails/ (3 imagens: A, B e C), shorts/ (5+ mp4) e pacote-de-publicacao.md.
 
 Backup: copia para DRIVE_ROOT/<pasta do canal>/VIDEOS/<pasta do vídeo>/, nas subpastas padronizadas do Drive.
-Nunca apaga nada no Drive. Texto e projeto (roteiro, cena.py, tempos) que mudaram guardam a versão anterior
+Nunca apaga nada no Drive. Texto e projeto (roteiro, cena.py, tempos, shorts.txt) que mudaram guardam a versão anterior
 em _versoes/; mídia que dá para gerar de novo (prévias, final) é só atualizada.
 """
 from __future__ import annotations
@@ -225,6 +225,8 @@ def _mapa_backup(pasta: Path) -> list[tuple[Path, str, bool]]:
         for nome in ('cena.py', 'tempos.txt', 'audio.json'):
             if (sub / nome).exists():
                 itens.append((sub / nome, f'05_projeto/{sub.name}/{nome}', True))
+    if (pasta / 'shorts.txt').exists():                        # definição dos shorts (refaz o `ma shorts`)
+        itens.append((pasta / 'shorts.txt', '05_projeto/shorts.txt', True))
     for p in sorted((pasta / 'thumbnails').glob('*')):
         if p.suffix.lower() in _IMAGEM:
             itens.append((p, f'06_thumbnail/{p.name}', True))

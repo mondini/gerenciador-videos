@@ -3,7 +3,8 @@
 Código da primeira versão, nascido de experimentos numa única conversa (11/10/2026). Foi substituído
 pela biblioteca `pipeline/marbleash/` e pelos scripts de cena em `videos/video-NN/blocoN/`, que
 reproduzem o bloco 1 aprovado **bit a bit** (stills e trechos conferidos pixel a pixel na refatoração).
-Fica aqui só para consulta. Nada em `marbleash/` importa estes arquivos.
+Fica aqui só para consulta. Nada em `marbleash/` importa estes arquivos. (Os caminhos `videos/video-NN/` e
+`videos/video-01/` citados abaixo são os nomes da época; hoje as pastas são `videos/MA-NNN-slug/`.)
 
 | Arquivo | O que era | Para onde foi |
 |---|---|---|
