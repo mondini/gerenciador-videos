@@ -1,0 +1,25 @@
+{
+  "_leia": "Configuração obrigatória do ElevenLabs deste canal (regra no CLAUDE.md da raiz). A chave fica no .env da raiz (ELEVENLABS_API_KEY), nunca aqui. Campo null = pendência: perguntar ao dono antes de gerar.",
+  "modo": "site",
+  "_modo": "site = o dono gera colando o texto no site do ElevenLabs; api = o pipeline gera pela API. Para passar a api, preencher voz.voice_id e modelo.model_id.",
+  "voz": {
+    "nome": "Flint — Deep, Raspy, and Warm",
+    "voice_id": null,
+    "_pendente": "voice_id: a chave da API não tem a permissão voices_read; pegar o ID no site (Voices > Flint > copiar ID) ou liberar voices_read na chave"
+  },
+  "modelo": {
+    "nome": "Eleven v4",
+    "model_id": "eleven_v4",
+    "_conferido": "14/10/2026 pela API (/v1/models: \"Eleven v4\", 1 crédito/caractere) e pelo histórico da conta (gerações do MA-001 e MA-002 com eleven_v4, stability 0.5, similarity 0.75, mp3_44100_128)"
+  },
+  "configuracoes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "idioma": "en",
+  "formato_saida": "mp3_44100_128",
+  "creditos": {
+    "por_caractere": 1.0,
+    "origem": "medido no MA-001 (12/10/2026): 6.638 créditos para ~6.600–6.700 caracteres; conta audio tags e pontuação; regravação cobra de novo (docs/plano-canal.md)"
+  }
+}

@@ -382,6 +382,24 @@ Dois relatos juntos: *Historia Augusta* 28 (amigos, peste, filho mandado embora,
 | 2 | "\"Watch this.\" A small voice, from the other room." → "...you may not get the summer." | 1 |
 | 3 | "Then he told the story of a man he knew." → "...He just ran out of tomorrow." | 3 |
 | 4 | "That is what memento mori really is." → "...on an ordinary Tuesday." | 2 |
-| 5 | The Pause — *Take 30 seconds with Seneca* | Pausa |
+| 5 | The Pause — *Take 30 seconds with Seneca* (a Pausa cita Sêneca; aprovado em 14/10/2026, como no MA-002) | Pausa |
 
 Reserva: bloco 5 ("The same book has a quieter line…" → "…Not to you.").
+
+---
+
+## Plano de arte (aprovado em 14/10/2026)
+
+Critério: o que é identidade da série volta; objetos marcantes e composições de cena dos vídeos anteriores não se repetem.
+
+- **Moldura nova "Via Ápia":** à esquerda, figueira de folhas largas e lobadas; à direita, túmulo romano de beira de estrada (altar funerário com guirlanda e hera); na base, trigo maduro com papoulas (a colheita da 11.34; a papoula do sono); no meio, a estrada com marcos de milha e pequenos túmulos fugindo para o ponto de fuga; no fundo, litoral com porto e navios (os de Senécio), sol baixo; pano novo **"linho"** (dobras finas, borda franjada) em `lencol.PANOS`. Lua sempre crescente ou minguante.
+- **Reaproveitar como está:** imperador; homem comum ("o ouvinte"); lamparina, letreiros, créditos, lua, foco, zoom; cama; acampamento; rolo hebraico (`rolo_icone`, pequeno, junto da citação); sol da Pausa (`pausa_sol`).
+- **Reaproveitar com outra cara:** cavalos (puxando a quadriga do triunfo, não cavalgando); soldados e baú (muro em volta do dinheiro); salão com aplausos (o "triunfo" de hoje do dono de empresa).
+- **Arte nova:**
+  - **Criança** (boneco novo, nos blocos 1, 4 e 6).
+  - Bloco 1: ábaco romano (o "one more email"); folhas caindo e neve (as estações).
+  - Bloco 2: quadriga; tuba romana; cativos; a voz que sussurra atrás do general.
+  - Bloco 3: ampulheta; marcos "L" e "LX"; navios; Senécio (silhueta nova).
+  - Bloco 4: médicos curvados; o beijo na cabeça da criança; foice no trigo; abraço que se desfaz em luz.
+  - Bloco 5: brinquedos romanos (pião, boneca de barro); três silhuetas que se apagam (o rico, o imperador, o ouvinte).
+  - Bloco 6: Marco deitado; o tribuno ajoelhado; luz da manhã no quarto da criança.
