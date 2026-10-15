@@ -77,4 +77,4 @@ Novas séries entram aqui com data e motivo.
 2. Identidade visual do canal (logo, tipografia, banner) no one-line art e na paleta do `estilo-visual.md`.
 3. **Teste de arte com o TESTE-01:** as 25 cenas desenhadas e o vídeo montado sem narração (14/10/2026); o criador avalia pelos critérios do roteiro (parece desenho à mão? é calmo e adulto, não infantil? os símbolos contam a história sem rosto?).
 4. **Vídeo piloto:** tema ligado ao calendário (sugestão: Advento, que começa em 29/11/2026); escolher a voz; medir palavras por minuto e créditos; definir a montagem.
-5. Pipeline mínimo: narração pela API, montagem, legendas, backup.
+5. Pipeline mínimo: montagem feita (14/10/2026, `pipeline/montar.py`); faltam narração pela API, legendas, status para o painel (`canal.json` com `"status"`), backup e limpeza.

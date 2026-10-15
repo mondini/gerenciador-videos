@@ -55,9 +55,8 @@ def linha_do_tempo(m: dict) -> list[dict]:
     return cenas
 
 
-def _renderizar_lote(args):
-    porta, tarefas = args
-    chrome = render.Chrome(porta=porta)
+def _renderizar_lote(tarefas):
+    chrome = render.Chrome()
     feitos = []
     try:
         for html, segundos, saida, legendas, assinatura in tarefas:
@@ -88,7 +87,7 @@ def renderizar_cenas(pasta: Path, cenas: list[dict], paralelo: int) -> list[Path
             lotes[i % len(lotes)].append(p)
         print(f'renderizando {len(pendentes)} cenas ({sum(p[1] for p in pendentes):.0f} s de vídeo) em {len(lotes)} Chromes…', flush=True)
         with ProcessPoolExecutor(len(lotes)) as ex:
-            for feitos in ex.map(_renderizar_lote, [(9333 + i, lote) for i, lote in enumerate(lotes)]):
+            for feitos in ex.map(_renderizar_lote, lotes):
                 for f in feitos:
                     print('  ' + f, flush=True)
     return saidas
@@ -111,6 +110,8 @@ def montar(pasta: Path, paralelo: int = 4) -> Path:
             t += c['visivel']
             if c['cena'] == m['vento']['ate_cena']:
                 fim = t
+        if not fim:
+            raise SystemExit(f'montagem.json: "vento.ate_cena" = {m["vento"]["ate_cena"]!r} não é nenhuma cena da lista')
         v = sons.vento(fim + 2, dbfs=m['vento']['dbfs'])
         musica[:len(v)] += v[:len(musica)]
     sons.gravar_wav(trabalho / 'som.wav', musica)

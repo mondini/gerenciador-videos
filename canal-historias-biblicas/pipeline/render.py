@@ -50,25 +50,45 @@ PREPARA = '''(() => {
 class Chrome:
     """Um Chrome sem tela com uma aba, controlado pelo protocolo DevTools."""
 
-    def __init__(self, largura: int = 1920, altura: int = 1080, porta: int = 9333):
+    def __init__(self, largura: int = 1920, altura: int = 1080):
         self.perfil = tempfile.mkdtemp(prefix='chrome-render-')
+        # Porta 0: o Chrome escolhe uma porta livre e a grava em DevToolsActivePort, no perfil temporário. Assim
+        # vários Chromes rodam em paralelo e o script nunca se conecta a um Chrome antigo que ficou aberto.
         self.proc = subprocess.Popen(
             [CHROME, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--mute-audio', '--no-first-run',
-             f'--remote-debugging-port={porta}', f'--user-data-dir={self.perfil}',
+             '--remote-debugging-port=0', f'--user-data-dir={self.perfil}',
              f'--window-size={largura},{altura}', 'about:blank'],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        for _ in range(100):
-            try:
-                abas = json.load(urllib.request.urlopen(f'http://127.0.0.1:{porta}/json'))
-                aba = next(a for a in abas if a['type'] == 'page')
-                break
-            except Exception:
-                time.sleep(0.1)
-        else:
-            raise RuntimeError('o Chrome não abriu a porta de depuração')
-        self.ws = websocket.create_connection(aba['webSocketDebuggerUrl'], timeout=60, suppress_origin=True)
+        try:
+            porta = self._porta()
+            for _ in range(100):
+                try:
+                    abas = json.load(urllib.request.urlopen(f'http://127.0.0.1:{porta}/json'))
+                    aba = next(a for a in abas if a['type'] == 'page')
+                    break
+                except Exception:
+                    time.sleep(0.1)
+            else:
+                raise RuntimeError('o Chrome não abriu a porta de depuração')
+            self.ws = websocket.create_connection(aba['webSocketDebuggerUrl'], timeout=60, suppress_origin=True)
+        except BaseException:
+            self.proc.kill()
+            self.proc.wait(10)
+            shutil.rmtree(self.perfil, ignore_errors=True)
+            raise
         self.n = 0
         self.enviar('Emulation.setDeviceMetricsOverride', width=largura, height=altura, deviceScaleFactor=1, mobile=False)
+
+    def _porta(self) -> int:
+        arq = Path(self.perfil) / 'DevToolsActivePort'
+        for _ in range(150):
+            if self.proc.poll() is not None:
+                raise RuntimeError(f'o Chrome fechou ao abrir (código {self.proc.returncode})')
+            linhas = arq.read_text().splitlines() if arq.exists() else []
+            if linhas and linhas[0].isdigit():
+                return int(linhas[0])
+            time.sleep(0.1)
+        raise RuntimeError('o Chrome não informou a porta de depuração (DevToolsActivePort)')
 
     def enviar(self, metodo: str, **params):
         self.n += 1

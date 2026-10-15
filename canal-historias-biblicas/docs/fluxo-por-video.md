@@ -2,7 +2,7 @@
 
 Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê, nesta ordem: `CLAUDE.md` (pasta do canal) → `docs/plano-canal.md` → `docs/doutrina-e-fontes.md` → `docs/estilo-visual.md` → `../docs/pacote-de-publicacao.md` (base comum, na raiz) → `docs/pacote-de-publicacao-canal.md` → `../docs/guia-embalagem-youtube.md` → `videos/XX-NNN-slug/roteiro.md` (se existir).
 
-> O pipeline (`pipeline/`) ainda não existe; será criado no piloto. Até lá, os passos que citam comandos são feitos à mão pelo Claude, com as mesmas regras.
+> O pipeline (`pipeline/`) já renderiza as cenas e monta o vídeo (`pipeline.montar`). Narração pela API, legendas, backup e limpeza ainda não têm código: esses passos são feitos à mão pelo Claude, com as mesmas regras.
 
 ## 1. Pauta
 - Olhar o calendário litúrgico das próximas 6 a 10 semanas (`plano-canal.md`) e propor temas que caiam em datas próximas.
@@ -37,7 +37,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 - **Pacote de Publicação** (15 seções) em `videos/XX-NNN-slug/pacote-de-publicacao.md`, partindo das seções fixas do pacote do vídeo anterior. Pedir os links do canal ao criador.
 
 ## 7. Fechar a sessão
-- Backup, commit e push do que mudou no canal.
+- Backup do que mudou no canal. Commit e push só quando o criador pedir (regra geral de 14/10/2026).
 - Anotar decisões novas em `docs/plano-canal.md` (e no `estilo-visual.md` ou `doutrina-e-fontes.md`, se forem dessas áreas).
 - Vídeo concluído: limpeza local (abaixo).
 
@@ -45,7 +45,7 @@ Cada vídeo é feito numa sessão própria. No início da sessão, o Claude lê,
 Quando o criador aprova o texto de um bloco ou o vídeo montado (a revisão única fecha todos os blocos):
 1. Texto: marcar `(aprovado)` no título da seção do roteiro.
 2. Backup no Drive.
-3. Commit só dos arquivos desta pasta: `feat(canal-historias-biblicas): XX-NNN bloco X …`, seguido de push.
+3. Sem commit: commit e push só quando o criador pedir (regra geral de 14/10/2026).
 
 ## Backup no Drive
 
@@ -72,7 +72,7 @@ Regras:
 | Quando | |
 |---|---|
 | Narração nova (créditos pagos) | logo depois de gerar |
-| Gravações de tela novas | ao recebê-las |
+| Vídeos das cenas novos (`gravacoes/`) | depois do render |
 | Bloco fechado | passo 8 |
 | Vídeo final montado | logo depois de montar |
 | Thumbnails ou pacote entregues | ao entregar |
@@ -80,4 +80,4 @@ Regras:
 
 ## Limpeza (vídeo concluído)
 
-Só depois de refazer o backup, e só na pasta local: sai o que tem cópia no Drive ou é refeito pelo pipeline (intermediários, prévias, stills de conferência). Ficam roteiro, áudios, cenas HTML, final, thumbnails e pacote; as gravações de tela saem (estão no Drive e dá para gravar de novo a partir do HTML). A limpeza recusa qualquer caminho fora de `videos/`. Nunca apagar no Drive.
+Só depois de refazer o backup, e só na pasta local: sai o que tem cópia no Drive ou é refeito pelo pipeline (intermediários, prévias, stills de conferência). Ficam roteiro, áudios, cenas HTML, final, thumbnails e pacote; os vídeos das cenas (`gravacoes/`) saem (estão no Drive e o `pipeline.montar` os renderiza de novo a partir do HTML). A limpeza recusa qualquer caminho fora de `videos/`. Nunca apagar no Drive.

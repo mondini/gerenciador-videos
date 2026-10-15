@@ -53,10 +53,11 @@ Esta pasta guarda tudo o que é preciso para produzir os vídeos do canal (nome 
 - `creditos-elevenlabs.csv` — um registro por geração de narração (criar na primeira gravação; formato no `CLAUDE.md` da raiz).
 - `calendario.json` — datas de publicação, lidas pelo painel da raiz (`./canais`); criar quando a primeira data for decidida.
 - `biblioteca/elementos/` — trechos SVG reutilizáveis (sol, nuvem, oliveira, cruz, silhuetas, atributos de santos).
-- `pipeline/` — código Python: narração, sons, legendas, backup.
+- `pipeline/` — código Python. Já existe: `render.py` (cena HTML → vídeo, num Chrome sem tela), `montar.py` (monta o vídeo pelo `montagem.json`) e `sons.py` (música e vento por código). Falta: narração pela API, legendas, status para o painel, backup e limpeza.
 - `videos/XX-NNN-slug/` — uma pasta por vídeo, com código + slug (o mesmo nome no Drive). Dentro: `roteiro.md`, `audio/`, `cenas/` (um HTML por cena), `montagem.json`, `gravacoes/` (vídeo de cada cena), `trabalho/` (intermediários), `final/`, `thumbnails/`, `pacote-de-publicacao.md`.
 
 ## Commits, backup e limpeza (autorizados pelo criador em 14/10/2026, mesma base do outro canal)
-- **Fechar um bloco** = o criador aprovou o texto de um bloco OU o vídeo montado (revisão única, que fecha todos os blocos). Nesse momento, **sem pedir**: (1) marcar `(aprovado)` no título da seção do roteiro, se for texto; (2) backup no Drive; (3) **commit** só dos arquivos desta pasta, `feat(canal-historias-biblicas): XX-NNN bloco X …`, seguido de **push**.
-- **Fim de sessão:** backup, commit e push do que mudou no canal. Fora desses casos, commit só quando o criador pedir.
+- **Fechar um bloco** = o criador aprovou o texto de um bloco OU o vídeo montado (revisão única, que fecha todos os blocos). Nesse momento, **sem pedir**: (1) marcar `(aprovado)` no título da seção do roteiro, se for texto; (2) backup no Drive.
+- **Fim de sessão:** backup do que mudou no canal.
+- **Commit e push só quando o criador pedir** (regra geral de 14/10/2026, no `CLAUDE.md` da raiz): só os arquivos desta pasta, `feat(canal-historias-biblicas): XX-NNN …`.
 - **Backup e limpeza:** regras em `docs/fluxo-por-video.md`. Nunca apagar nada no Drive; limpeza só na pasta local, depois do backup.

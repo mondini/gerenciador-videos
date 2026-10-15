@@ -1,3 +1,5 @@
-numpy
-websocket-client
-imageio-ffmpeg
+# Pipeline do canal — instalar num .venv dentro da pasta do canal: python3 -m venv .venv && .venv/bin/pip install -r pipeline/requirements.txt
+# Versões fixas (as do .venv em que o TESTE-01 foi montado, 14/10/2026), para o render não mudar de uma máquina para outra.
+numpy==2.4.6
+websocket-client==1.9.2        # protocolo DevTools do Chrome sem tela (pipeline/render.py)
+imageio-ffmpeg==0.6.0          # traz um ffmpeg (com libx264) para dentro do .venv
