@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="490 790 960 220">
+  <!-- Dois tufos de juncos com taboas pastel; TESTE-01 c25. Coordenadas da cena 1920×1080 de origem: para reaproveitar, copiar o grupo para dentro da cena e mover com transform. -->
+  <style>
+    :root { --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+    .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+<!-- juncos em primeiro plano -->
+    <g>
+      <path fill="var(--pessego)" d="M 548 846 C 544 830 548 812 556 812 C 564 812 566 830 562 846 Z" transform="translate(5 4)"/>
+      <path fill="var(--salvia)" d="M 590 872 C 586 856 590 840 598 840 C 606 840 608 856 604 872 Z" transform="translate(5 4)"/>
+      <path class="linha" d="M 556 1000 C 556 940 554 880 554 848 M 554 848 C 546 834 548 812 556 810 C 564 812 566 834 558 848 Z M 556 810 c 0 -10 6 -16 12 -12 c 4 4 -2 9 -5 5"/>
+      <path class="linha" d="M 574 1000 C 576 950 584 900 598 874 M 598 874 C 590 860 592 840 600 838 C 608 840 610 860 602 874 Z M 600 838 c 2 -10 10 -14 14 -8 c 2 4 -4 8 -6 4"/>
+      <path class="linha" d="M 540 1000 C 536 950 524 910 506 884 c -6 -8 0 -16 6 -12 c 4 4 -2 9 -5 6"/>
+      <path class="linha" d="M 566 1000 C 570 960 582 930 610 914 c 8 -4 14 4 8 8"/>
+    </g>
+    <g>
+      <path fill="var(--pessego)" d="M 1364 858 C 1360 842 1364 824 1372 824 C 1380 824 1382 842 1378 858 Z" transform="translate(5 4)"/>
+      <path class="linha" d="M 1370 1000 C 1370 950 1370 890 1370 860 M 1370 860 C 1362 846 1364 824 1372 822 C 1380 824 1382 846 1374 860 Z M 1372 822 c 0 -10 -6 -16 -12 -12 c -4 4 2 9 5 5"/>
+      <path class="linha" d="M 1356 1000 C 1352 960 1340 926 1318 900 c -6 -8 2 -14 7 -9"/>
+      <path class="linha" d="M 1384 1000 C 1388 958 1400 926 1424 906 c 6 -6 13 0 8 6"/>
+      <path class="linha" d="M 1394 1000 C 1400 970 1412 952 1432 944"/>
+    </g>
+</svg>

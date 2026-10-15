@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c21 · obras de misericórdia</title>
+<!-- "…to clothe the naked": a capa dobrada e o pão, duas obras de misericórdia. Fundo: amanhecer pêssego. -->
+<style>
+  :root { --ceu: #F6E3D3; --chao: #F1D3BD; --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  .texto { fill: var(--tinta); font-family: "Iowan Old Style", "Palatino", "Georgia", serif; text-anchor: middle; }
+  .grande { font-size: 50px; } .medio { font-size: 40px; } .credito { font-size: 22px; letter-spacing: .16em; }
+  .nuvem { animation: deriva 12s ease-in-out infinite alternate; }
+  .nuvem.b { animation-duration: 16s; animation-delay: -5s; }
+  @keyframes deriva { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+  .respira { transform-box: fill-box; transform-origin: center; animation: respira 6s ease-in-out infinite alternate; }
+  @keyframes respira { from { transform: scale(.96); } to { transform: scale(1.04); } }
+  .chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama 2s ease-in-out infinite alternate; }
+  @keyframes chama { from { transform: scale(.92, .9); } to { transform: scale(1.05, 1.08); } }
+  .gira { transform-box: fill-box; transform-origin: center; animation: gira 48s linear infinite; }
+  @keyframes gira { to { transform: rotate(60deg); } }
+  .balanca { transform-box: fill-box; transform-origin: 50% 100%; animation: balanca 4s ease-in-out infinite alternate; }
+  .balanca.b { animation-duration: 6s; animation-delay: -2s; }
+  .balanca-topo { transform-box: fill-box; transform-origin: 50% 0; animation: balanca 4s ease-in-out infinite alternate; }
+  @keyframes balanca { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+  .voo { animation: atravessa 32s linear infinite; }
+  .asa { transform-box: fill-box; transform-origin: 50% 100%; animation: bate .5s ease-in-out infinite alternate; }
+  @keyframes atravessa { from { transform: translateX(-200px); } to { transform: translateX(2200px); } }
+  @keyframes bate { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+  .pisca { animation: pisca 3s ease-in-out infinite alternate; }
+  @keyframes pisca { from { opacity: .25; } to { opacity: 1; } }
+  .vento { animation: vento 6s ease-in-out infinite; }
+  @keyframes vento { 0% { transform: translateX(40px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateX(-60px); opacity: 0; } }
+  .floco { animation: cai linear infinite; }
+  .floco > g { animation: oscila ease-in-out infinite alternate; }
+  @keyframes cai { from { transform: translateY(0); } to { transform: translateY(1240px); } }
+  @keyframes oscila { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="boil-texto" filterUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1080">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#boil)">
+    <g transform="translate(1340 380) scale(0.8)" style="--traco: 1.88"><g><g class="gira"><path class="linha" d="M 0 -98 L 0 -126 M 49 -85 L 56 -97 M 85 -49 L 109 -63 M 98 0 L 112 0 M 85 49 L 109 63 M 49 85 L 56 97 M 0 98 L 0 126 M -49 85 L -56 97 M -85 49 L -109 63 M -98 0 L -112 0 M -85 -49 L -109 -63 M -49 -85 L -56 -97"/></g><g class="respira"><circle cx="14" cy="12" r="70" fill="var(--pessego)"/><path class="linha" d="M -62 0 A 62 62 0 1 1 0 62 C -30 66 -50 50 -62 28 C -72 10 -94 10 -96 26 C -98 40 -80 44 -76 32 C -72 20 -86 4 -114 10 C -134 14 -146 28 -160 32"/></g></g></g>
+    <g transform="translate(520 300) scale(1)"><g class="nuvem"><path fill="#FBF6F2" transform="translate(0 0)" d="M 0 0 C -10 -28 28 -42 48 -26 C 60 -56 112 -56 124 -24 C 150 -36 180 -18 170 8 C 160 24 20 26 0 0 Z"/><path class="linha" d="M -8 -6 C -16 -32 20 -48 42 -32 C 54 -62 106 -62 118 -30 C 144 -42 174 -24 164 2 M 164 2 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/></g></g>
+    <g transform="translate(1500 220) scale(0.7)" style="--traco: 2.14"><g class="nuvem b"><path fill="#FBF6F2" transform="translate(0 0)" d="M 0 0 C -10 -28 28 -42 48 -26 C 60 -56 112 -56 124 -24 C 150 -36 180 -18 170 8 C 160 24 20 26 0 0 Z"/><path class="linha" d="M -8 -6 C -16 -32 20 -48 42 -32 C 54 -62 106 -62 118 -30 C 144 -42 174 -24 164 2 M 164 2 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/></g></g>
+    <!-- chão -->
+    <path fill="var(--chao)" d="M -200 794 C 200 778 420 808 700 792 S 1200 776 1460 794 S 1820 808 2120 790 L 2120 1300 L -200 1300 Z"/>
+    <path class="linha" d="M -200 780 C 200 764 420 794 700 778 S 1200 762 1460 780 S 1820 794 2120 776"/>
+    <g transform="translate(830 778) scale(1.9)" style="--traco: 0.79"><g><path fill="var(--rosa)" transform="translate(8 6)" d="M -90 0 C -94 -20 -88 -40 -70 -44 C -20 -52 40 -52 80 -44 C 96 -40 100 -20 94 0 C 40 6 -40 6 -90 0 Z"/><path class="linha" d="M -90 0 C -94 -20 -88 -40 -70 -44 C -20 -52 40 -52 80 -44 C 96 -40 100 -20 94 0 C 40 6 -40 6 -90 0 Z M -88 -22 C -40 -30 40 -30 96 -22 M 94 0 c 8 2 14 -6 8 -12 c -4 -3 -9 1 -6 4"/></g></g>
+    <g transform="translate(1150 780) scale(1.9)" style="--traco: 0.79"><g><path fill="var(--pessego)" transform="translate(7 5)" d="M -60 0 C -64 -30 -40 -50 0 -50 C 40 -50 64 -30 60 0 Z"/><path class="linha" d="M -60 0 C -64 -30 -40 -50 0 -50 C 40 -50 64 -30 60 0 Z M -24 -38 c 6 6 14 8 22 6 M 8 -42 c 6 6 14 8 22 6 M 60 0 c 8 2 12 -6 6 -10"/></g></g>
+  </g>
+  <g filter="url(#boil-texto)">
+    <text class="texto credito" x="960" y="600">CATECHISM OF THE CATHOLIC CHURCH, 2447</text>
+
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+</script>
+</body>
+</html>

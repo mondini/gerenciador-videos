@@ -56,18 +56,25 @@ Novas séries entram aqui com data e motivo.
 ## Ferramentas
 
 - **Roteiro e montagem:** Claude.
-- **Voz:** ElevenLabs, **Eleven v4** (lançado em 28/09/2026; é o modelo atual de melhor qualidade da ElevenLabs e aceita IPA entre barras no texto para pronúncia). **Pela API desde o início** (14/10/2026), por script Python, com voz e configurações fixas para a voz não mudar entre blocos e vídeos. Voz: grave, calorosa, pausada; escolher no piloto e registrar aqui (nome, modelo, estabilidade, similaridade). Chave em `.env` desta pasta (fora do git). Estimar o custo ao fechar o roteiro: ~1 crédito por caractere (conferir no piloto).
-- **Imagens:** Gemini (Nano Banana), **plano Plus do app**, geradas à mão pelo criador a partir dos prompts do Claude. Modelo exato (Nano Banana ou Nano Banana Pro) a definir no piloto e registrar em `estilo-visual.md`. Geração pela API: decidir depois. Desligar a marca d'água visível nas configurações do app ("Media watermark"), se a conta tiver a opção; a marca invisível SynthID sempre fica. Midjourney só se o Gemini não alcançar a estética (testar antes de assinar).
-- **Animação:** Remotion (React), montando as cenas a partir de JSON. Licença: grátis para uso individual e empresas de até 3 pessoas, inclusive comercial (conferido em 14/10/2026). Fixar a versão; a licença muda "levemente" na 5.0, então reconferir antes de atualizar.
-- **Python:** recorte dos elementos das imagens (rembg com BiRefNet), catálogo da biblioteca, narração pela API, alinhamento das legendas, **áudios gerados por código** (efeitos, ambiência, transições) quando o criador pedir, backup.
+- **Voz:** ElevenLabs, **Eleven v4** (lançado em 28/09/2026; é o modelo atual de melhor qualidade da ElevenLabs e aceita IPA entre barras no texto para pronúncia). **Pela API desde o início** (14/10/2026), por script Python, com voz e configurações fixas para a voz não mudar entre blocos e vídeos. Voz: grave, calorosa, pausada; escolher no piloto e registrar em `elevenlabs.json` (raiz do canal: nome, `voice_id`, modelo, estabilidade, similaridade, regra de créditos). A chave fica no `.env` da raiz do repositório (fora do git). Antes de gerar, confirmar com o criador o que será gerado e o custo em créditos. Estimar o custo ao fechar o roteiro: ~1 crédito por caractere (conferir no piloto).
+- **Arte e animação:** one-line art desenhado pelo Claude em SVG + CSS + JavaScript, um HTML por cena, sem bibliotecas (`estilo-visual.md`).
+- **Montagem** (14/10/2026): `pipeline/montar.py` lê o `montagem.json` do vídeo, renderiza cada cena quadro a quadro num Chrome sem tela (`pipeline/render.py`, 30 fps exatos, sem gravar a tela) e junta tudo com o ffmpeg do pacote `imageio-ffmpeg`: dissolves de 1 s, entrada e saída pelo preto, som. Sem narração, o tempo de cada cena sai das falas (~140 palavras/min) e as falas podem entrar como legenda provisória. Cena que não mudou não é renderizada de novo. Gravar a tela continua possível para prévias rápidas.
+- **Python:** narração pela API, alinhamento das legendas, **áudios gerados por código** (efeitos, ambiência, transições) quando o criador pedir, backup.
 - **Legendas:** arquivo SRT enviado ao YouTube (acessibilidade, tradução automática, boa leitura na TV). Tempos por alinhamento forçado ao texto do roteiro (stable-ts ou WhisperX) ou pelos tempos que a API do ElevenLabs devolve, nunca por transcrição livre (erra nomes bíblicos e latim).
 - **Música:** instrumental sacra suave sob a voz. Só faixas com licença clara (Biblioteca de Áudio do YouTube ou equivalente) ou geradas por código. Obras em domínio público (Bach, canto gregoriano) **não** liberam as gravações: gravação de terceiros só com licença. Registrar a licença de cada faixa.
 - **Mix:** voz + música normalizadas por ffmpeg (referência do YouTube: ~−14 LUFS). DaVinci Resolve só se precisar.
 
+## Arte e animação (decisões de 14/10/2026)
+
+- **Estilo do canal: one-line art minimalista** (traço preto contínuo, manchas pastel fora de registro, line boil, loops lentos), com o tema contado por símbolos e pessoas só em silhueta sem rosto. Regras completas em `estilo-visual.md`.
+- **Por que:** o traço desenhado à mão e a paleta pastel dão uma identidade própria, calma e adulta, sem cara de IA; não depende de gerador de imagem nem de acervo de museu; e cada cena é feita sob medida, o que ajuda na política de conteúdo inautêntico.
+- **Testes descartados antes desta decisão:** imagens do Nano Banana (cara de IA, "plástico"), desenho por código com bonecos geométricos e pintura sacra de acervo animada em camadas ("pintura viva", com Remotion). Não retomar sem o criador pedir.
+- **Sem Remotion nem GSAP:** o formato é um HTML único por cena; CSS e um timer em JavaScript bastam para os loops e o line boil.
+
 ## Próximos passos
 
 1. Escolher nome, handle e prefixo; criar `canal.json`.
-2. Identidade visual do canal (paleta, tipografia, logo): retrabalhar na próxima sessão.
-3. **Vídeo piloto:** tema ligado ao calendário (sugestão: Advento, que começa em 29/11/2026); roteiro curto para levantar os assets; prompts para o Gemini; teste de arte com critérios definidos antes (parece pintura sacra? os personagens se mantêm em 5 poses? tem cara de livro infantil?).
-4. No piloto: comparar fundo neutro + BiRefNet com fundo chapado (5 imagens cada); escolher a voz; medir palavras por minuto e créditos.
-5. Pipeline mínimo: recorte + catálogo, narração pela API, cena em Remotion, backup.
+2. Identidade visual do canal (logo, tipografia, banner) no one-line art e na paleta do `estilo-visual.md`.
+3. **Teste de arte com o TESTE-01:** as 25 cenas desenhadas e o vídeo montado sem narração (14/10/2026); o criador avalia pelos critérios do roteiro (parece desenho à mão? é calmo e adulto, não infantil? os símbolos contam a história sem rosto?).
+4. **Vídeo piloto:** tema ligado ao calendário (sugestão: Advento, que começa em 29/11/2026); escolher a voz; medir palavras por minuto e créditos; definir a montagem.
+5. Pipeline mínimo: narração pela API, montagem, legendas, backup.

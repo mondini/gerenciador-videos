@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c19 · quem não passou</title>
+<!-- "Just a young man… who did not walk past": a mesma estrada da c02, agora com quem segue com a meia capa. Fundo: amanhecer pêssego. -->
+<style>
+  :root { --ceu: #F6E3D3; --chao: #F1D3BD; --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  .texto { fill: var(--tinta); font-family: "Iowan Old Style", "Palatino", "Georgia", serif; text-anchor: middle; }
+  .grande { font-size: 50px; } .medio { font-size: 40px; } .credito { font-size: 22px; letter-spacing: .16em; }
+  .nuvem { animation: deriva 12s ease-in-out infinite alternate; }
+  .nuvem.b { animation-duration: 16s; animation-delay: -5s; }
+  @keyframes deriva { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+  .respira { transform-box: fill-box; transform-origin: center; animation: respira 6s ease-in-out infinite alternate; }
+  @keyframes respira { from { transform: scale(.96); } to { transform: scale(1.04); } }
+  .chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama 2s ease-in-out infinite alternate; }
+  @keyframes chama { from { transform: scale(.92, .9); } to { transform: scale(1.05, 1.08); } }
+  .gira { transform-box: fill-box; transform-origin: center; animation: gira 48s linear infinite; }
+  @keyframes gira { to { transform: rotate(60deg); } }
+  .balanca { transform-box: fill-box; transform-origin: 50% 100%; animation: balanca 4s ease-in-out infinite alternate; }
+  .balanca.b { animation-duration: 6s; animation-delay: -2s; }
+  .balanca-topo { transform-box: fill-box; transform-origin: 50% 0; animation: balanca 4s ease-in-out infinite alternate; }
+  @keyframes balanca { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+  .voo { animation: atravessa 32s linear infinite; }
+  .asa { transform-box: fill-box; transform-origin: 50% 100%; animation: bate .5s ease-in-out infinite alternate; }
+  @keyframes atravessa { from { transform: translateX(-200px); } to { transform: translateX(2200px); } }
+  @keyframes bate { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+  .pisca { animation: pisca 3s ease-in-out infinite alternate; }
+  @keyframes pisca { from { opacity: .25; } to { opacity: 1; } }
+  .vento { animation: vento 6s ease-in-out infinite; }
+  @keyframes vento { 0% { transform: translateX(40px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateX(-60px); opacity: 0; } }
+  .floco { animation: cai linear infinite; }
+  .floco > g { animation: oscila ease-in-out infinite alternate; }
+  @keyframes cai { from { transform: translateY(0); } to { transform: translateY(1240px); } }
+  @keyframes oscila { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="boil-texto" filterUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1080">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#boil)">
+    <g transform="translate(1310 560) scale(0.9)" style="--traco: 1.67"><g><g class="gira"><path class="linha" d="M 0 -98 L 0 -126 M 49 -85 L 56 -97 M 85 -49 L 109 -63 M 98 0 L 112 0 M 85 49 L 109 63 M 49 85 L 56 97 M 0 98 L 0 126 M -49 85 L -56 97 M -85 49 L -109 63 M -98 0 L -112 0 M -85 -49 L -109 -63 M -49 -85 L -56 -97"/></g><g class="respira"><circle cx="14" cy="12" r="70" fill="var(--pessego)"/><path class="linha" d="M -62 0 A 62 62 0 1 1 0 62 C -30 66 -50 50 -62 28 C -72 10 -94 10 -96 26 C -98 40 -80 44 -76 32 C -72 20 -86 4 -114 10 C -134 14 -146 28 -160 32"/></g></g></g>
+    <g transform="translate(560 300) scale(1)"><g class="nuvem"><path fill="#FBF6F2" transform="translate(0 0)" d="M 0 0 C -10 -28 28 -42 48 -26 C 60 -56 112 -56 124 -24 C 150 -36 180 -18 170 8 C 160 24 20 26 0 0 Z"/><path class="linha" d="M -8 -6 C -16 -32 20 -48 42 -32 C 54 -62 106 -62 118 -30 C 144 -42 174 -24 164 2 M 164 2 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/></g></g>
+    <g class="voo" style="animation-delay: -3s"><g transform="translate(0 240) scale(1.8)" style="--traco: 0.83"><path class="linha asa" style="animation-delay: -0.43s" d="M -14 0 C -10 -7 -4 -8 0 0 C 4 -8 10 -7 14 0"/></g></g>
+    <g class="voo" style="animation-delay: -10s"><g transform="translate(0 210) scale(1.4)" style="--traco: 1.07"><path class="linha asa" style="animation-delay: -1.43s" d="M -14 0 C -10 -7 -4 -8 0 0 C 4 -8 10 -7 14 0"/></g></g>
+    <path fill="#EFE7DA" transform="translate(10 8)" d="M 380 760 C 520 680 700 660 860 668 C 1000 676 1100 650 1240 648 C 1380 646 1480 704 1560 760 L 1560 766 L 380 766 Z"/>
+    <path class="linha" d="M 380 760 C 520 680 700 660 860 668 C 1000 676 1100 650 1240 648 C 1380 646 1480 704 1560 760"/>
+    <path class="linha" d="M 380 760 c -10 4 -20 -2 -16 -10 c 3 -6 11 -4 10 2 M 1560 760 c 10 4 20 -2 16 -10 c -3 -6 -11 -4 -10 2"/>
+    <!-- chão -->
+    <path fill="var(--chao)" d="M -200 774 C 200 758 420 788 700 772 S 1200 756 1460 774 S 1820 788 2120 770 L 2120 1300 L -200 1300 Z"/>
+    <path class="linha" d="M -200 760 C 200 744 420 774 700 758 S 1200 742 1460 760 S 1820 774 2120 756"/>
+    <path fill="var(--creme)" d="M 720 1080 C 760 980 940 940 960 880 C 980 820 1060 790 1136 752 L 1150 752 C 1100 790 1046 830 1060 880 C 1080 940 990 990 990 1080 Z"/>
+    <path class="linha" d="M 720 1080 C 760 980 940 940 960 880 C 980 820 1060 790 1136 752"/>
+    <path class="linha" d="M 990 1080 C 990 990 1080 940 1060 880 C 1046 830 1100 790 1150 752"/>
+    <g transform="translate(560 930) scale(1.1)" style="--traco: 1.36"><g class="balanca"><path fill="var(--salvia-claro)" transform="translate(8 6)" d="M 0 0 C -10 -22 12 -38 30 -28 C 40 -46 72 -42 74 -22 C 92 -20 94 2 80 6 Z"/><path class="linha" d="M -4 -2 C -14 -24 8 -40 26 -30 C 36 -48 68 -44 70 -24 C 88 -22 90 0 76 4 c 4 8 -6 12 -9 6"/></g></g>
+    <g transform="translate(1090 800) scale(0.6)" style="--traco: 2.50"><g><path fill="var(--azul)" transform="translate(5 4)" d="M -10 -128 C -24 -122 -30 -104 -32 -84 C -34 -56 -38 -28 -42 0 C -20 6 20 6 42 0 C 38 -28 34 -56 32 -84 C 30 -104 24 -122 10 -128 C 4 -131 -4 -131 -10 -128 Z"/><path fill="var(--rosa)" transform="translate(5 4)" d="M -12 -128 C -30 -120 -38 -96 -40 -70 C -20 -78 0 -96 12 -126 Z"/><path class="linha" d="M -10 -128 C -24 -122 -30 -104 -32 -84 C -34 -56 -38 -28 -42 0 C -20 6 20 6 42 0 C 38 -28 34 -56 32 -84 C 30 -104 24 -122 10 -128 C 4 -131 -4 -131 -10 -128 Z M 42 0 c 8 2 12 -6 6 -10 c -4 -2 -7 2 -4 4"/><circle class="linha" cx="0" cy="-143" r="13"/><path class="linha" d="M 12 -126 C 0 -96 -20 -78 -40 -70 c -6 6 -2 14 5 10"/><path class="linha" d="M -26 2 c -8 0 -12 8 -4 10 M 18 4 c 6 4 14 2 12 -4"/></g></g>
+
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+</script>
+</body>
+</html>

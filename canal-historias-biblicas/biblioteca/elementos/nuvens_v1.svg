@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="570 190 990 160">
+  <!-- Duas nuvens fofas: mancha quase branca + contorno parcial com floreio; TESTE-01 c25. Coordenadas da cena 1920×1080 de origem: para reaproveitar, copiar o grupo para dentro da cena e mover com transform. -->
+  <style>
+    :root { --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+    .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+<!-- nuvens: manchas quase brancas com contorno parcial -->
+    <path fill="#FBF3EC" d="M 600 318 C 590 290 628 276 648 292 C 660 262 712 262 724 294 C 750 282 780 300 770 326 C 760 342 620 344 600 318 Z"/>
+    <path class="linha" d="M 592 312 C 584 286 620 270 642 286 C 654 256 706 256 718 288 C 744 276 774 294 764 320 M 764 320 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/>
+    <path fill="#FBF3EC" d="M 1428 238 C 1422 220 1446 210 1460 220 C 1470 200 1506 202 1512 222 C 1532 216 1550 232 1540 248 C 1530 258 1440 258 1428 238 Z"/>
+    <path class="linha" d="M 1422 234 C 1416 216 1440 206 1454 216 C 1464 196 1500 198 1506 218 C 1526 212 1544 228 1534 244"/>
+</svg>

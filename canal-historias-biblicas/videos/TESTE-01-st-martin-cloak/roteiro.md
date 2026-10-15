@@ -1,18 +1,21 @@
 # TESTE-01 — The Half Cloak (São Martinho de Tours)
 
-**Roteiro de testes.** Serve para levantar as imagens do teste de arte no Nano Banana (aquarela, iluminura, vitral, regras de rosto). Não é para publicar como está; se o teste agradar, pode virar o vídeo da festa de São Martinho (11/11).
+**Roteiro de testes.** Serve para o teste de arte do one-line art (`docs/estilo-visual.md`): as cenas são desenhadas em HTML e gravadas pelo criador. Não é para publicar como está; se o teste agradar, pode virar o vídeo da festa de São Martinho (11/11).
 
 - Duração estimada: ~2 min 45 s (381 palavras a ~140 palavras/min; ~2.050 caracteres).
 - Série: Santos.
 - Fontes conferidas em 14/10/2026 (ver "Registro de fontes").
+- Narração: a mesma dos blocos aprovados. As cenas foram refeitas em 14/10/2026 para o one-line art: símbolos no lugar de ações, silhuetas sem rosto, no máximo 2 ou 3 figuras, e o gesto da capa mostrado pelo **antes e depois** (nunca o corte).
+- **Arco de cor:** céu azul suave (o frio) → entardecer rosado (o portão e o gesto) → céu azul suave com lua (o sonho) → amanhecer pêssego (o significado e a oração).
+- Atributos de Martinho (fixos, `estilo-visual.md`): capa partida (mancha rosa antigo `#E2B7A8`), espada, cavalo.
+- Neve do vídeo inteiro: pontinhos e pequenos cachos de linha caindo devagar, com manchas creme. Chão com neve: a faixa do chão do fundo + manchas creme deslocadas.
 
 ---
 
-## Abertura — vitral (sem narração, ~4 s) (aprovado)
+## Abertura (sem narração, ~4 s)
 
-**Cena:** vitral de São Martinho dividindo a capa com o mendigo; a luz atravessa o vidro e a câmera entra devagar até a cena seguinte nascer do brilho.
-
-**Assets:** `vitral_martinho-capa_v1.png` (vitral inteiro, sem texto).
+**c01-planicie-neve** · céu azul suave. Planície de inverno com colinas em 3 planos, a mais distante quase sumindo; uma estrada sinuosa atravessa até um arco de portão pequenino no horizonte. Sol baixo de inverno (mancha pêssego pálida).
+**Movimentos:** neve caindo, nuvens derivando.
 
 ---
 
@@ -25,9 +28,14 @@ Sixteen centuries ago, at the gate of a frozen city, a young soldier had almost 
 What he did with that almost-nothing... is still remembered, every eleventh of November.
 ```
 
-**Cena:** estrada coberta de neve ao entardecer; um cavaleiro pequeno e distante, de costas, rumo a muralhas no horizonte. Neve caindo, respiração do cavalo em vapor.
+**c02-beira-da-estrada** ("Have you ever passed… so little yourself") · céu azul suave. Beira da estrada: uma silhueta sentada e encolhida junto a um arbusto; outra silhueta, de pé, já um passo adiante, de costas para ela. Muito respiro entre as duas.
+**Movimentos:** neve caindo; o arbusto balança de leve.
 
-**Assets:** `bg_ceu-inverno-entardecer_v1`, `bg_planicie-neve_v1`, `bg_muralha-amiens-distante_v1`, `martinho_pose-cavalgando-costas_v1`, `cavalo_pose-andando_v1`; partículas: neve.
+**c03-cavaleiro-ao-longe** ("Sixteen centuries ago… nothing left to give") · entardecer rosado. A mesma planície da abertura, mais perto: na estrada, um cavaleiro pequeno em silhueta, de costas, indo para o arco do portão. Muralha baixa de linha no horizonte.
+**Movimentos:** neve; um fio de vapor sobe do cavalo e se desfaz; nuvens.
+
+**c04-lanterna** ("What he did… eleventh of November") · entardecer rosado. Uma lanterna de linha acesa, sozinha sobre o chão ondulado, chama com mancha pêssego (as procissões de lanternas do dia de São Martinho).
+**Movimentos:** a chama "respira"; neve caindo bem devagar.
 
 ---
 
@@ -41,9 +49,20 @@ Martin had already given away everything he owned... except his weapons, and his
 One evening, he rode toward the gate of a city called Amiens.
 ```
 
-**Cena:** cartão de santo em **iluminura** ("Saint Martin of Tours", texto desenhado na montagem) → plano médio de Martinho a cavalo, perfil, capa vermelha sobre a armadura simples, luz dourada fria de fim de tarde.
+**c05-cartao-santo** ("His name was Martin… not yet baptized") · céu azul suave. Cartão do santo: espada e capa inteira dobrada (mancha rosa antigo), cruzadas no centro; embaixo, em texto: *Saint Martin of Tours*.
+**Movimentos:** só o line boil e a capa ondulando de leve.
 
-**Assets:** `card_moldura-iluminura-santo_v1` (moldura vazia, com sol, espada, capa e cavalo nos ornamentos), `martinho_model-sheet_v1` (frente, perfil, costas), `martinho_pose-cavalgando-perfil_v1`, `prop_capa-vermelha-inteira_v1`.
+**c06-cruz-e-elmo** ("As a boy… claimed him first") · céu azul suave. Primeiro plano: um elmo romano simples pousado no chão. Na colina mais distante, uma cruz pequena de linha. Um caminho sinuoso liga os dois, mas some antes de chegar à cruz.
+**Movimentos:** nuvens; pássaros em "m" atravessando ao longe.
+
+**c07-inverno** ("The winter of that year… taking lives") · céu azul suave, mais pálido. Árvores sem folhas, arbustos cobertos de neve, sol escondido atrás de uma nuvem. Linhas de vento com cachos.
+**Movimentos:** neve mais densa (ainda lenta); os galhos balançam; as linhas de vento deslizam.
+
+**c08-o-que-restou** ("Martin had already given away… his soldier's cloak") · céu azul suave. Sobre a linha do chão, só dois objetos, com muito espaço vazio: a espada deitada e a capa inteira dobrada (rosa antigo).
+**Movimentos:** só o line boil; um floco ou outro caindo.
+
+**c09-rumo-a-amiens** ("One evening… Amiens") · entardecer rosado. Cavaleiro em silhueta, de perfil e pequeno, na estrada; a capa inteira (mancha rosa antigo) cai das costas. À frente, o arco do portão de Amiens.
+**Movimentos:** a ponta da capa e a crina balançam; neve; sol baixo "respirando".
 
 ---
 
@@ -59,9 +78,23 @@ Some who were watching laughed. A soldier in half a cloak looked foolish.
 Others said nothing... and felt ashamed. They had done nothing at all.
 ```
 
-**Cena:** portão romano de pedra, neve no chão. O mendigo encolhido junto à parede; dois ou três passantes em silhueta, um de costas. Martinho desce do cavalo, a espada corta a capa (close nas mãos e no tecido), entrega a metade. Fecha com Martinho na meia capa e o mendigo envolto na outra metade.
+**c10-portao** ("At the gate… almost nothing on") · entardecer rosado. O arco do portão (pedras sugeridas só pelo contorno, sem hachura); junto à parede, uma silhueta sentada e encolhida, sem manta.
+**Movimentos:** neve; nuvens atrás do arco.
 
-**Assets:** `bg_portao-romano-amiens_v1` (sem personagens), `bg_primeiro-plano-neve-pedras_v1`, `mendigo_pose-sentado-encolhido_v1`, `mendigo_pose-recebendo-capa_v1`, `mendigo_pose-envolto-capa_v1`, `martinho_pose-sacando-espada_v1`, `martinho_pose-cortando-capa_v1`, `martinho_pose-entregando-capa_v1`, `martinho_pose-meia-capa_v1`, `prop_espada-romana_v1`, `prop_meia-capa-vermelha_v1`, `passante_silhueta-rindo_v1`, `passante_silhueta-costas_v1`, `cavalo_pose-parado_v1`.
+**c11-passantes** ("People walked past… looked away") · a mesma cena do c10, com duas silhuetas de pé passando ao largo: uma de costas, outra com a cabeça virada para o outro lado.
+**Movimentos:** neve; nuvens.
+
+**c12-espada** ("Martin had no coin… drew his sword") · entardecer rosado, sem colinas. A espada sozinha, de pé, no centro; um brilho pêssego percorre a lâmina.
+**Movimentos:** raios finos girando devagar atrás da espada.
+
+**c13-capa-partida** ("and cut his cloak in two") · entardecer rosado, sem colinas. A capa aberta, agora em **duas metades**, levemente afastadas, cada uma com sua mancha rosa antigo deslocada. Não mostrar o corte, só o resultado.
+**Movimentos:** as duas metades ondulam de leve, fora de fase.
+
+**c14-meia-capa** ("He gave one half… what was left") · entardecer rosado. O portão do c10: a silhueta sentada agora envolta numa metade da capa; ao lado, de pé, a silhueta de Martinho com a outra metade, e o cavalo atrás. A mancha rosa antigo é a mesma nas duas metades (é a mesma capa).
+**Movimentos:** neve; as pontas das duas metades balançam.
+
+**c15-de-longe** ("Some who were watching… nothing at all") · entardecer rosado, mais escuro. A cena do c14 vista de longe, pequena no centro; duas silhuetas nas margens, paradas, uma de costas. A luz vai baixando.
+**Movimentos:** neve; o céu escurece devagar ao longo da cena.
 
 ---
 
@@ -76,11 +109,19 @@ And Martin heard Him say: "Martin, who is still but a catechumen, clothed me wit
 Just a young man... who did not walk past.
 ```
 
+**c16-noite** ("That night, Martin dreamed") · céu azul suave com lua de linha e estrelas. Um telhado simples com uma janela em arco; dentro, uma silhueta deitada, coberta pela meia capa. Uma vela pequena na janela.
+**Movimentos:** estrelas cintilando devagar; a chama da vela "respira".
+
+**c17-visao** ("He saw Christ… given away") · amanhecer pêssego, iluminado por um grande sol de linha (mancha pêssego). No centro, uma forma alta e serena **toda tomada pela luz**, sem rosto e sem traços, com a meia capa rosa antigo sobre os ombros: é ela que identifica a cena. Em volta, 3 ou 4 pares de asas de linha (os anjos, sem corpo nem rosto).
+**Movimentos:** raios girando muito devagar; as asas sobem e descem de leve, fora de fase.
+**Regra:** `doutrina-e-fontes.md` (Jesus nunca com rosto; anjos dignos, nada de querubins).
+
+**c18-cartao-fala** ("And Martin heard Him say…") · amanhecer pêssego, sem colinas. A meia capa pequena no alto; embaixo, em texto: *"Martin, who is still but a catechumen, clothed me with this robe."*
 **Crédito na tela:** *Sulpicius Severus, Life of St. Martin, ch. 3 · trans. Alexander Roberts (1894)*.
+**Movimentos:** só o line boil.
 
-**Cena:** Martinho dormindo num alojamento simples, luz de vela. A luz cresce e vira a visão: Cristo **de costas ou com o rosto tomado pela luz** (regra de rosto), vestindo a meia capa vermelha, que deve ser reconhecível; anjos adultos e dignos em volta, em contraluz. Poeira de luz.
-
-**Assets:** `bg_alojamento-noite_v1`, `martinho_pose-dormindo_v1`, `bg_luz-celeste_v1`, `cristo_pose-de-pe-luz-meia-capa_v1`, `anjo_pose-de-pe-contraluz_v1` (2 variações); partículas: poeira de luz.
+**c19-quem-nao-passou** ("A catechumen… did not walk past") · amanhecer pêssego. A estrada sinuosa do c02, agora vazia, e uma única silhueta, com a meia capa, andando para o horizonte. Eco visual da silhueta que passou reto no c02.
+**Movimentos:** sol nascendo e "respirando"; pássaros atravessando.
 
 ---
 
@@ -99,11 +140,25 @@ When I have little, teach me to share it.
 And when I am the one in the cold... clothe me with Your mercy. Amen.
 ```
 
-**Créditos na tela:** *Matthew 25:40 · Douay-Rheims* · *Catechism of the Catholic Church, 2447*.
+**c20-cartao-versiculo** ("Christ had said it… you did it to me") · amanhecer pêssego, sem colinas. Cruz pequena de linha no alto; embaixo, o versículo em texto.
+**Crédito na tela:** *Matthew 25:40 · Douay-Rheims*.
+**Movimentos:** só o line boil.
 
-**Cena:** cartão de versículo em **iluminura** (texto desenhado na montagem) → o portão de Amiens de novo, agora vazio, com marcas de passos na neve e uma luz quente no lugar onde estava o mendigo → fechamento em **vitral**.
+**c21-obras-de-misericordia** ("The Church counts this… clothe the naked") · amanhecer pêssego. Sobre a linha do chão, uma capa dobrada e um pão, lado a lado (duas obras de misericórdia), com muito respiro.
+**Crédito na tela:** *Catechism of the Catholic Church, 2447*.
+**Movimentos:** sol "respirando"; nuvens.
 
-**Assets:** `card_moldura-iluminura-versiculo_v1` (moldura vazia), `bg_portao-romano-amiens_v1` (reaproveitado) + `prop_passos-na-neve_v1`, `vitral_fechamento_v1`.
+**c22-meia-capa-so** ("Not a grand gesture… Half a cloak") · amanhecer pêssego, sem colinas. Só a meia capa, no centro, pequena.
+**Movimentos:** a capa ondula muito de leve.
+
+**c23-caminho-da-vida** ("Martin would later… bishop of Tours") · verde sálvia. Colinas em 3 planos com o caminho sinuoso passando por elas; em cada colina, um símbolo: uma concha com gotas (batismo), o telhado de um pequeno mosteiro, um báculo de bispo na mais distante.
+**Movimentos:** pássaros atravessando; árvores balançando.
+
+**c24-portao-vazio** ("But the story people kept… is this one") · amanhecer pêssego. O portão do c10, vazio; marcas de passos na neve (pequenos cachos de linha) e uma mancha pêssego quente onde o mendigo estava sentado.
+**Movimentos:** a mancha de luz pulsa devagar; neve quase parando.
+
+**c25-oracao** ("Let us pray… Amen") · amanhecer pêssego. Paisagem aberta, colinas em 3 planos, uma cruz pequena na colina mais distante, sol nascendo com laço na cauda, juncos em primeiro plano. Sem texto. Segura até o fim e dissolve para o fundo liso.
+**Movimentos:** sol "respirando" e raios girando devagar; pássaros; juncos balançando.
 
 ---
 
@@ -121,24 +176,22 @@ A única citação literal do relato antigo é a fala de Cristo, no texto exato 
 
 ---
 
-## Lista de imagens do teste de arte
+## Teste de arte
 
-O que vai virar prompt para o Nano Banana. ⭐ = prioridade do teste (cobre os três estilos e as regras de rosto).
+Desenhar primeiro as cenas ⭐, que cobrem os tipos de cena do canal; o resto só se o estilo for aprovado.
 
-| # | Imagem | Estilo | O que testa |
-|---|---|---|---|
-| 1 ⭐ | Cena inteira do portão: Martinho cortando a capa, mendigo, neve | Aquarela | Estilo base, composição, adulto e não infantil |
-| 2 ⭐ | Mesma cena **sem personagens** | Aquarela | Se o Gemini limpa a cena mantendo o estilo |
-| 3 ⭐ | Model sheet de Martinho (frente, perfil, costas) | Aquarela | Consistência de personagem |
-| 4 ⭐ | Martinho em 2 poses (cavalgando, entregando a capa), em fundo neutro, com o model sheet de referência | Aquarela | Pose nova mantendo o mesmo rosto e a mesma roupa; recorte |
-| 5 | Mendigo isolado em fundo neutro | Aquarela | Recorte de figura sentada com tecidos |
-| 6 ⭐ | Visão: Cristo de costas na luz, com a meia capa, e anjos | Aquarela | Regra de rosto de Jesus; anjos adultos; luz |
-| 7 ⭐ | Moldura de iluminura vazia para o cartão do santo | Iluminura | Estilo de iluminura sem texto |
-| 8 ⭐ | Vitral de Martinho dividindo a capa | Vitral | Estilo de vitral |
-| 9 | Mesma pose da imagem 4 em fundo chapado verde | Aquarela | Comparação de recorte (fundo neutro × chapado) |
+**Situação (14/10/2026):** as 25 cenas estão em `cenas/` e o vídeo de teste foi montado **sem narração** (`final/TESTE-01-sem-narracao.mp4`), com as falas como legenda provisória, tempos estimados a ~140 palavras/min e música gerada por código. A voz do ElevenLabs entra quando o criador indicar qual; aí os tempos passam a vir do áudio.
 
-**Critérios para aprovar a arte** (você decide olhando as imagens):
-1. Parece pintura sacra, e não livro infantil?
-2. Martinho continua a mesma pessoa no model sheet e nas poses?
-3. O rosto de Cristo fica de fato escondido pela luz ou pelo ângulo?
-4. Os três estilos parecem do mesmo canal?
+| Cena | Tipo | O que testa |
+|---|---|---|
+| ⭐ c03-cavaleiro-ao-longe | paisagem com figura | colinas em planos, silhueta pequena, neve, entardecer rosado |
+| ⭐ c13-capa-partida | símbolo | contar a ação pelo resultado, manchas fora de registro |
+| ⭐ c17-visao | sagrado | regra de Cristo sem rosto, anjos como asas, luz |
+| ⭐ c20-cartao-versiculo | cartão com texto | tipografia com o traço, leitura em tela de TV |
+| ⭐ c25-oracao | paisagem contemplativa | sol, raios, pássaros, juncos; o clima de oração |
+
+**Critérios para aprovar a arte** (o criador decide olhando as gravações):
+1. Parece desenho feito à mão, calmo e reverente, e não animação infantil nem clip art?
+2. Os símbolos e as silhuetas contam a história sem precisar de rosto?
+3. O line boil e os loops ficam suaves na gravação (sem travar, sem salto no loop)?
+4. As cinco cenas parecem do mesmo canal, mesmo mudando de fundo?

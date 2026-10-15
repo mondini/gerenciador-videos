@@ -1,4 +1,4 @@
-# credenciais (chave da API do ElevenLabs)
+# .env local (a chave do ElevenLabs fica no .env da raiz do repositório)
 .env
 # mídia pesada fica fora do git (vai para o Drive pelo backup)
 *.mp3
@@ -6,18 +6,13 @@
 *.mp4
 *.mov
 videos/**/audio/
-videos/**/imagens/
+videos/**/gravacoes/
 videos/**/previas/
 videos/**/final/
-biblioteca/**/*.png
-biblioteca/**/*.jpg
-biblioteca/**/*.webp
 # intermediários e ambiente
 videos/**/trabalho/
 .venv/
-node_modules/
 pipeline/.cache/
-pipeline/.modelos/
 __pycache__/
 .pytest_cache/
 .DS_Store

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c18 · a fala</title>
+<!-- A fala de Cristo no sonho, no texto exato de Roberts, com o crédito. Fundo: amanhecer pêssego. -->
+<style>
+  :root { --ceu: #F6E3D3; --chao: #F1D3BD; --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  .texto { fill: var(--tinta); font-family: "Iowan Old Style", "Palatino", "Georgia", serif; text-anchor: middle; }
+  .grande { font-size: 50px; } .medio { font-size: 40px; } .credito { font-size: 22px; letter-spacing: .16em; }
+  .nuvem { animation: deriva 12s ease-in-out infinite alternate; }
+  .nuvem.b { animation-duration: 16s; animation-delay: -5s; }
+  @keyframes deriva { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+  .respira { transform-box: fill-box; transform-origin: center; animation: respira 6s ease-in-out infinite alternate; }
+  @keyframes respira { from { transform: scale(.96); } to { transform: scale(1.04); } }
+  .chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama 2s ease-in-out infinite alternate; }
+  @keyframes chama { from { transform: scale(.92, .9); } to { transform: scale(1.05, 1.08); } }
+  .gira { transform-box: fill-box; transform-origin: center; animation: gira 48s linear infinite; }
+  @keyframes gira { to { transform: rotate(60deg); } }
+  .balanca { transform-box: fill-box; transform-origin: 50% 100%; animation: balanca 4s ease-in-out infinite alternate; }
+  .balanca.b { animation-duration: 6s; animation-delay: -2s; }
+  .balanca-topo { transform-box: fill-box; transform-origin: 50% 0; animation: balanca 4s ease-in-out infinite alternate; }
+  @keyframes balanca { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+  .voo { animation: atravessa 32s linear infinite; }
+  .asa { transform-box: fill-box; transform-origin: 50% 100%; animation: bate .5s ease-in-out infinite alternate; }
+  @keyframes atravessa { from { transform: translateX(-200px); } to { transform: translateX(2200px); } }
+  @keyframes bate { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+  .pisca { animation: pisca 3s ease-in-out infinite alternate; }
+  @keyframes pisca { from { opacity: .25; } to { opacity: 1; } }
+  .vento { animation: vento 6s ease-in-out infinite; }
+  @keyframes vento { 0% { transform: translateX(40px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateX(-60px); opacity: 0; } }
+  .floco { animation: cai linear infinite; }
+  .floco > g { animation: oscila ease-in-out infinite alternate; }
+  @keyframes cai { from { transform: translateY(0); } to { transform: translateY(1240px); } }
+  @keyframes oscila { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="boil-texto" filterUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1080">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#boil)">
+    <g transform="translate(960 300) scale(0.32)" style="--traco: 4.69"><g><g transform="translate(-805 -485)"><path fill="var(--rosa)" transform="translate(820 480) scale(.88) translate(-820 -480) translate(20 14)" d="M 958 300 C 944 296 926 284 914 272 C 880 276 846 290 818 312 C 740 372 680 470 652 610 C 680 632 700 618 724 636 C 748 656 770 640 796 654 C 826 670 850 652 878 664 C 906 676 934 662 958 670 C 950 560 964 420 958 300 Z"/><path class="linha" d="M 958 300 C 944 296 926 284 914 272 C 880 276 846 290 818 312 C 740 372 680 470 652 610 C 680 632 700 618 724 636 C 748 656 770 640 796 654 C 826 670 850 652 878 664 C 906 676 934 662 958 670 C 950 560 964 420 958 300 Z"/><path class="linha" d="M 652 610 c -12 -2 -22 -14 -14 -24 c 7 -8 19 -2 16 8 c -2 6 -9 7 -12 3 M 924 292 c 0 -6 8 -6 8 0 c 0 8 -13 8 -13 -2 c 0 -11 18 -11 18 2 c 0 9 -5 14 -12 16"/></g></g></g>
+    <g transform="translate(0 420)"><path class="linha" d="M 880 0 C 910 -8 930 8 960 0 C 990 -8 1010 8 1040 0 M 880 0 c -10 2 -18 -6 -12 -12 c 5 -4 12 0 9 6 M 1040 0 c 10 2 18 -6 12 -12 c -5 -4 -12 0 -9 6"/></g>
+  </g>
+  <g filter="url(#boil-texto)">
+    <text class="texto grande" x="960" y="540">“Martin, who is still but a catechumen,</text>
+    <text class="texto grande" x="960" y="612">clothed me with this robe.”</text>
+    <text class="texto credito" x="960" y="740">SULPICIUS SEVERUS, LIFE OF ST. MARTIN, CH. 3 · TRANS. ALEXANDER ROBERTS (1894)</text>
+
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+</script>
+</body>
+</html>

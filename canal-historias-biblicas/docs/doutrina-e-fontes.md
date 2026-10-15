@@ -42,12 +42,15 @@ A numeração protestante separa as imagens num mandamento próprio e junta os d
 
 ## Representação de pessoas e coisas sagradas
 
-- **Jesus e Maria:** sempre de costas, de longe, em silhueta ou com luz sobre o rosto. **Nunca rosto detalhado.**
+No one-line art do canal ninguém tem rosto (`estilo-visual.md`). Por cima disso:
+
+- **Jesus:** de preferência por símbolos (cruz, cordeiro, luz, pães e peixes, o barco). Quando a história pede a figura, só silhueta de costas ou de longe, ou uma forma tomada pela luz; nunca como personagem comum no meio da cena.
+- **Maria:** de preferência por símbolos (lírio, estrela, rosa, manto). Figura, se precisar, só silhueta de longe ou de costas, com o manto.
 - **Deus Pai:** nunca como figura humana. Representar por luz, raios, nuvem ou a mão que sai das nuvens, como na arte sacra tradicional.
 - **Espírito Santo:** pomba ou línguas de fogo (Pentecostes), como nas Escrituras.
 - **Eucaristia:** hóstia e cálice sempre com reverência (luz, altar), nunca como objeto comum na cena.
-- **Anjos:** figuras adultas e dignas; nada de querubins com cara de bebê (regra do conteúdo não infantil).
-- **Santos:** rosto simples e sereno permitido; atributos iconográficos fixos (ex.: as chaves de São Pedro). Ao criar um santo, registrar os atributos em `estilo-visual.md` para todos os vídeos seguirem.
+- **Anjos:** asas de linha e luz, ou silhueta adulta e digna; nada de querubins com cara de bebê (regra do conteúdo não infantil).
+- **Santos:** silhueta sem rosto, reconhecida pelos atributos iconográficos fixos (ex.: as chaves de São Pedro). Ao criar um santo, registrar os atributos em `estilo-visual.md` para todos os vídeos seguirem.
 
 ## Checklist doutrinário (antes de aprovar cada roteiro)
 

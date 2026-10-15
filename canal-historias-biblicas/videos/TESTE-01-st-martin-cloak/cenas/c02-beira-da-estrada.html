@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c02 · beira da estrada</title>
+<!-- "Have you ever passed…": uma silhueta sentada à beira da estrada e outra que já passou, de costas. Fundo: céu azul suave. -->
+<style>
+  :root { --ceu: #DDE6EA; --chao: #CCD9E0; --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  .texto { fill: var(--tinta); font-family: "Iowan Old Style", "Palatino", "Georgia", serif; text-anchor: middle; }
+  .grande { font-size: 50px; } .medio { font-size: 40px; } .credito { font-size: 22px; letter-spacing: .16em; }
+  .nuvem { animation: deriva 12s ease-in-out infinite alternate; }
+  .nuvem.b { animation-duration: 16s; animation-delay: -5s; }
+  @keyframes deriva { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+  .respira { transform-box: fill-box; transform-origin: center; animation: respira 6s ease-in-out infinite alternate; }
+  @keyframes respira { from { transform: scale(.96); } to { transform: scale(1.04); } }
+  .chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama 2s ease-in-out infinite alternate; }
+  @keyframes chama { from { transform: scale(.92, .9); } to { transform: scale(1.05, 1.08); } }
+  .gira { transform-box: fill-box; transform-origin: center; animation: gira 48s linear infinite; }
+  @keyframes gira { to { transform: rotate(60deg); } }
+  .balanca { transform-box: fill-box; transform-origin: 50% 100%; animation: balanca 4s ease-in-out infinite alternate; }
+  .balanca.b { animation-duration: 6s; animation-delay: -2s; }
+  .balanca-topo { transform-box: fill-box; transform-origin: 50% 0; animation: balanca 4s ease-in-out infinite alternate; }
+  @keyframes balanca { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+  .voo { animation: atravessa 32s linear infinite; }
+  .asa { transform-box: fill-box; transform-origin: 50% 100%; animation: bate .5s ease-in-out infinite alternate; }
+  @keyframes atravessa { from { transform: translateX(-200px); } to { transform: translateX(2200px); } }
+  @keyframes bate { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+  .pisca { animation: pisca 3s ease-in-out infinite alternate; }
+  @keyframes pisca { from { opacity: .25; } to { opacity: 1; } }
+  .vento { animation: vento 6s ease-in-out infinite; }
+  @keyframes vento { 0% { transform: translateX(40px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateX(-60px); opacity: 0; } }
+  .floco { animation: cai linear infinite; }
+  .floco > g { animation: oscila ease-in-out infinite alternate; }
+  @keyframes cai { from { transform: translateY(0); } to { transform: translateY(1240px); } }
+  @keyframes oscila { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="boil-texto" filterUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1080">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#boil)">
+    <g transform="translate(520 300) scale(1)"><g class="nuvem"><path fill="#FBF6F2" transform="translate(0 0)" d="M 0 0 C -10 -28 28 -42 48 -26 C 60 -56 112 -56 124 -24 C 150 -36 180 -18 170 8 C 160 24 20 26 0 0 Z"/><path class="linha" d="M -8 -6 C -16 -32 20 -48 42 -32 C 54 -62 106 -62 118 -30 C 144 -42 174 -24 164 2 M 164 2 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/></g></g>
+    <g transform="translate(1360 250) scale(0.8)" style="--traco: 1.88"><g class="nuvem b"><path fill="#FBF6F2" transform="translate(0 0)" d="M 0 0 C -10 -28 28 -42 48 -26 C 60 -56 112 -56 124 -24 C 150 -36 180 -18 170 8 C 160 24 20 26 0 0 Z"/><path class="linha" d="M -8 -6 C -16 -32 20 -48 42 -32 C 54 -62 106 -62 118 -30 C 144 -42 174 -24 164 2 M 164 2 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/></g></g>
+    <path fill="#E6ECEF" transform="translate(10 8)" d="M 380 760 C 520 680 700 660 860 668 C 1000 676 1100 650 1240 648 C 1380 646 1480 704 1560 760 L 1560 766 L 380 766 Z"/>
+    <path class="linha" d="M 380 760 C 520 680 700 660 860 668 C 1000 676 1100 650 1240 648 C 1380 646 1480 704 1560 760"/>
+    <path class="linha" d="M 380 760 c -10 4 -20 -2 -16 -10 c 3 -6 11 -4 10 2 M 1560 760 c 10 4 20 -2 16 -10 c -3 -6 -11 -4 -10 2"/>
+    <!-- chão -->
+    <path fill="var(--chao)" d="M -200 774 C 200 758 420 788 700 772 S 1200 756 1460 774 S 1820 788 2120 770 L 2120 1300 L -200 1300 Z"/>
+    <path class="linha" d="M -200 760 C 200 744 420 774 700 758 S 1200 742 1460 760 S 1820 774 2120 756"/>
+    <path fill="var(--creme)" d="M 720 1080 C 760 980 940 940 960 880 C 980 820 1060 790 1136 752 L 1150 752 C 1100 790 1046 830 1060 880 C 1080 940 990 990 990 1080 Z"/>
+    <path class="linha" d="M 720 1080 C 760 980 940 940 960 880 C 980 820 1060 790 1136 752"/>
+    <path class="linha" d="M 990 1080 C 990 990 1080 940 1060 880 C 1046 830 1100 790 1150 752"/>
+    <g transform="translate(470 950) scale(1.7)" style="--traco: 0.88"><g class="balanca"><path fill="var(--creme)" transform="translate(8 6)" d="M 0 0 C -10 -22 12 -38 30 -28 C 40 -46 72 -42 74 -22 C 92 -20 94 2 80 6 Z"/><path class="linha" d="M -4 -2 C -14 -24 8 -40 26 -30 C 36 -48 68 -44 70 -24 C 88 -22 90 0 76 4 c 4 8 -6 12 -9 6"/></g></g>
+    <g transform="translate(690 960) scale(1.9)" style="--traco: 0.79"><g><path fill="var(--azul)" transform="translate(5 4)" d="M -34 0 C -38 -30 -30 -58 -8 -66 C 14 -70 32 -54 36 -26 C 38 -12 36 -4 32 0 Z"/><path class="linha" d="M -34 0 C -38 -30 -30 -58 -8 -66 C 14 -70 32 -54 36 -26 C 38 -12 36 -4 32 0 Z M 10 -44 C 28 -50 40 -32 34 -10"/><circle class="linha" cx="4" cy="-76" r="12"/></g></g>
+    <g transform="translate(1010 870) scale(1.25)" style="--traco: 1.20"><g><path fill="var(--salvia)" transform="translate(5 4)" d="M -10 -128 C -24 -122 -30 -104 -32 -84 C -34 -56 -38 -28 -42 0 C -20 6 20 6 42 0 C 38 -28 34 -56 32 -84 C 30 -104 24 -122 10 -128 C 4 -131 -4 -131 -10 -128 Z"/><path class="linha" d="M -10 -128 C -24 -122 -30 -104 -32 -84 C -34 -56 -38 -28 -42 0 C -20 6 20 6 42 0 C 38 -28 34 -56 32 -84 C 30 -104 24 -122 10 -128 C 4 -131 -4 -131 -10 -128 Z M 42 0 c 8 2 12 -6 6 -10 c -4 -2 -7 2 -4 4"/><circle class="linha" cx="0" cy="-143" r="13"/><path class="linha" d="M -26 2 c -8 0 -12 8 -4 10 M 18 4 c 6 4 14 2 12 -4"/></g></g>
+
+    <g id="neve"></g>
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+  // neve: cada floco cai de cima a baixo em loop, com atraso negativo para a cena já começar com neve
+  function aleatorio(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function nevar(alvo, quantos, seed, durMin, durMax) {
+    const r = aleatorio(seed), ns = 'http://www.w3.org/2000/svg';
+    for (let i = 0; i < quantos; i++) {
+      const dur = durMin + r() * (durMax - durMin);
+      const g = document.createElementNS(ns, 'g');
+      g.setAttribute('class', 'floco');
+      g.style.animationDuration = dur + 's';
+      g.style.animationDelay = -(r() * dur) + 's';
+      const x = r() * 1920, tam = 2.2 + r() * 2.6;
+      const dentro = document.createElementNS(ns, 'g');
+      const osc = 3 + r() * 3;
+      dentro.style.animationDuration = osc + 's';
+      dentro.style.animationDelay = -(r() * osc) + 's';
+      dentro.innerHTML = r() < 0.7
+        ? `<circle cx="${x + 2}" cy="-78" r="${tam + 1.5}" fill="#FBF4EE"/><circle class="linha" cx="${x}" cy="-80" r="${tam}"/>`
+        : `<circle cx="${x + 2}" cy="-78" r="${tam + 2}" fill="#FBF4EE"/><path class="linha" d="M ${x - tam} -80 c 0 -${tam} ${tam * 2} -${tam} ${tam * 2} 0 c 0 ${tam * 1.4} -${tam * 1.6} ${tam * 1.4} -${tam * 1.4} 0"/>`;
+      g.appendChild(dentro);
+      alvo.appendChild(g);
+    }
+  }
+  nevar(document.getElementById('neve'), 30, 5, 22, 34);
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "_leia": "Configuração obrigatória do ElevenLabs deste canal (regra no CLAUDE.md da raiz). A chave fica no .env da raiz (ELEVENLABS_API_KEY), nunca aqui. Campo null = pendência: perguntar ao dono antes de gerar.",
+  "modo": "api",
+  "_modo": "site = o dono gera colando o texto no site do ElevenLabs; api = o pipeline gera pela API.",
+  "voz": {
+    "nome": null,
+    "voice_id": null,
+    "_nota": "grave, calorosa, pausada; escolher no piloto (docs/plano-canal.md)"
+  },
+  "modelo": {
+    "nome": "Eleven v4",
+    "model_id": null
+  },
+  "configuracoes": {
+    "stability": null,
+    "similarity_boost": null
+  },
+  "idioma": "en",
+  "formato_saida": "mp3_44100_128",
+  "creditos": {
+    "por_caractere": 1.0,
+    "origem": "estimativa (~1 crédito por caractere); conferir no piloto"
+  }
+}

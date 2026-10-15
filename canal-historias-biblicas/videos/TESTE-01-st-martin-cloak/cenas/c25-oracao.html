@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c25 · oração</title>
+<!-- "Let us pray… Amen": paisagem aberta ao amanhecer, cruz na colina mais distante. Fundo: amanhecer pêssego. -->
+<style>
+  :root { --ceu: #F6E3D3; --chao: #F1D3BD; --tinta: #2F2E2C; --pessego: #EBCDB0; --rosa: #E2B7A8; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --creme: #F0E2CF; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  /* sol respirando e raios girando devagar (12 raios em comprimentos alternados: o giro de 60° fecha o loop) */
+  .sol { transform-box: view-box; transform-origin: 1180px 400px; animation: respira 6s ease-in-out infinite alternate; }
+  .raios { transform-box: view-box; transform-origin: 1180px 400px; animation: gira 48s linear infinite; }
+  @keyframes respira { from { transform: scale(.97); } to { transform: scale(1.04); } }
+  @keyframes gira { to { transform: rotate(60deg); } }
+  /* juncos balançando a partir da base */
+  .junco { transform-box: fill-box; transform-origin: 50% 100%; animation: balanca 4s ease-in-out infinite alternate; }
+  .junco.b { animation-duration: 6s; animation-delay: -2s; }
+  @keyframes balanca { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+  /* pássaros atravessando e batendo as asas */
+  .voo { animation: atravessa 32s linear infinite; }
+  .asa { transform-box: fill-box; transform-origin: 50% 100%; animation: bate .5s ease-in-out infinite alternate; }
+  @keyframes atravessa { from { transform: translateX(-200px); } to { transform: translateX(2200px); } }
+  @keyframes bate { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <path id="passaro" d="M -14 0 C -10 -7 -4 -8 0 0 C 4 -8 10 -7 14 0"/>
+  </defs>
+
+  <g filter="url(#boil)">
+    <!-- nuvens: manchas quase brancas com contorno parcial -->
+    <path fill="#FBF3EC" d="M 600 318 C 590 290 628 276 648 292 C 660 262 712 262 724 294 C 750 282 780 300 770 326 C 760 342 620 344 600 318 Z"/>
+    <path class="linha" d="M 592 312 C 584 286 620 270 642 286 C 654 256 706 256 718 288 C 744 276 774 294 764 320 M 764 320 c 6 8 -2 16 -10 12 c -6 -3 -4 -11 2 -10"/>
+    <path fill="#FBF3EC" d="M 1428 238 C 1422 220 1446 210 1460 220 C 1470 200 1506 202 1512 222 C 1532 216 1550 232 1540 248 C 1530 258 1440 258 1428 238 Z"/>
+    <path class="linha" d="M 1422 234 C 1416 216 1440 206 1454 216 C 1464 196 1500 198 1506 218 C 1526 212 1544 228 1534 244"/>
+
+    <!-- sol: círculo de linha, mancha pêssego deslocada, laço na cauda -->
+    <g class="raios">
+      <path class="linha" d="M 1180 302 L 1180 274 M 1229 315 L 1236 303 M 1265 351 L 1289 337 M 1278 400 L 1292 400 M 1265 449 L 1289 463 M 1229 485 L 1236 497 M 1180 498 L 1180 526 M 1131 485 L 1124 497 M 1095 449 L 1071 463 M 1082 400 L 1068 400 M 1095 351 L 1071 337 M 1131 315 L 1124 303"/>
+    </g>
+    <g class="sol">
+      <circle cx="1194" cy="412" r="70" fill="var(--pessego)"/>
+      <path class="linha" d="M 1118 400 A 62 62 0 1 1 1180 462 C 1150 466 1130 450 1118 428 C 1108 410 1086 410 1084 426 C 1082 440 1100 444 1104 432 C 1108 420 1094 404 1066 410 C 1046 414 1034 428 1020 432"/>
+    </g>
+
+    <!-- pássaros em "m" -->
+    <g class="voo" style="animation-delay: -6s"><g transform="translate(0 250) scale(2)" style="--traco: .75"><use href="#passaro" class="linha asa"/></g></g>
+    <g class="voo" style="animation-delay: -8s"><g transform="translate(60 214) scale(1.6)" style="--traco: .94"><use href="#passaro" class="linha asa" style="animation-delay: -.2s"/></g></g>
+    <g class="voo" style="animation-delay: -21s"><g transform="translate(0 300) scale(1.4)" style="--traco: 1.07"><use href="#passaro" class="linha asa" style="animation-delay: -.35s"/></g></g>
+
+    <!-- colina mais distante (a mais clara), com a cruz pequena -->
+    <path fill="#EFE7DA" transform="translate(10 8)" d="M 560 742 C 650 620 740 566 830 560 C 930 554 960 584 1040 580 C 1140 574 1240 540 1330 548 C 1420 556 1460 660 1500 772 L 1500 800 L 560 800 Z"/>
+    <path class="linha" d="M 560 742 C 650 620 740 566 830 560 C 930 554 960 584 1040 580 C 1140 574 1240 540 1330 548 C 1420 556 1460 660 1500 772"/>
+    <path fill="var(--rosa)" transform="translate(5 5)" d="M 1004 500 L 1012 500 L 1012 518 L 1026 518 L 1026 526 L 1012 526 L 1012 578 L 1004 578 L 1004 526 L 990 526 L 990 518 L 1004 518 Z"/>
+    <path class="linha" d="M 1008 580 L 1008 500 M 990 522 L 1026 522 M 1008 580 c 5 5 13 2 12 -4 c -1 -5 -9 -4 -8 1"/>
+
+    <!-- colina do meio, com uma oliveira pequena; as pontas descem até o chão -->
+    <path fill="var(--salvia-claro)" transform="translate(12 9)" d="M 420 778 C 520 720 640 650 760 646 C 860 644 900 682 980 680 C 1080 676 1160 630 1260 634 C 1360 638 1440 720 1520 778 L 1520 782 L 420 782 Z"/>
+    <path class="linha" d="M 420 778 C 520 720 640 650 760 646 C 860 644 900 682 980 680 C 1080 676 1160 630 1260 634 C 1360 638 1440 720 1520 778"/>
+    <path fill="var(--salvia)" transform="translate(8 6)" d="M 668 612 C 650 590 670 566 694 572 C 704 550 742 554 746 578 C 768 580 774 608 754 618 C 740 628 680 628 668 612 Z"/>
+    <path class="linha" d="M 708 652 C 704 638 714 630 708 616 M 708 630 C 716 624 724 626 728 618 M 664 608 C 648 586 668 562 692 568 C 702 546 740 550 744 574 C 766 576 772 604 752 614 C 738 624 690 624 676 616 c -8 -4 -4 -12 2 -9"/>
+
+    <!-- chão: faixa inteira e linha ondulada passando das bordas, com floreios onde as colinas encostam -->
+    <path fill="var(--chao)" transform="translate(0 12)" d="M -200 790 C 200 774 420 804 700 788 S 1200 772 1460 790 S 1820 804 2120 786 L 2120 1300 L -200 1300 Z"/>
+    <path class="linha" d="M -200 778 C 200 762 420 792 700 776 C 780 772 860 772 942 774 M 1004 774 C 1200 770 1340 766 1460 778 S 1820 792 2120 774"/>
+    <path class="linha" d="M 420 778 c -10 4 -20 -2 -16 -10 c 3 -6 11 -4 10 2 M 1520 778 c 10 4 20 -2 16 -10 c -3 -6 -11 -4 -10 2"/>
+
+    <!-- caminho sinuoso subindo até a crista -->
+    <path fill="var(--creme)" transform="translate(9 6)" d="M 860 1080 C 900 980 1060 940 1010 860 C 970 800 900 780 960 720 C 990 690 1004 660 1004 640 L 1010 640 C 1012 668 1012 700 1000 720 C 960 780 1040 800 1080 860 C 1140 950 1040 990 1010 1080 Z"/>
+    <path class="linha" d="M 860 1080 C 900 980 1060 940 1010 860 C 970 800 900 780 960 720 C 990 690 1004 660 1004 640 M 1010 1080 C 1040 990 1140 950 1080 860 C 1040 800 960 780 1000 720 C 1012 700 1012 668 1010 640"/>
+
+    <!-- juncos em primeiro plano -->
+    <g class="junco">
+      <path fill="var(--pessego)" d="M 548 846 C 544 830 548 812 556 812 C 564 812 566 830 562 846 Z" transform="translate(5 4)"/>
+      <path fill="var(--salvia)" d="M 590 872 C 586 856 590 840 598 840 C 606 840 608 856 604 872 Z" transform="translate(5 4)"/>
+      <path class="linha" d="M 556 1000 C 556 940 554 880 554 848 M 554 848 C 546 834 548 812 556 810 C 564 812 566 834 558 848 Z M 556 810 c 0 -10 6 -16 12 -12 c 4 4 -2 9 -5 5"/>
+      <path class="linha" d="M 574 1000 C 576 950 584 900 598 874 M 598 874 C 590 860 592 840 600 838 C 608 840 610 860 602 874 Z M 600 838 c 2 -10 10 -14 14 -8 c 2 4 -4 8 -6 4"/>
+      <path class="linha" d="M 540 1000 C 536 950 524 910 506 884 c -6 -8 0 -16 6 -12 c 4 4 -2 9 -5 6"/>
+      <path class="linha" d="M 566 1000 C 570 960 582 930 610 914 c 8 -4 14 4 8 8"/>
+    </g>
+    <g class="junco b">
+      <path fill="var(--pessego)" d="M 1364 858 C 1360 842 1364 824 1372 824 C 1380 824 1382 842 1378 858 Z" transform="translate(5 4)"/>
+      <path class="linha" d="M 1370 1000 C 1370 950 1370 890 1370 860 M 1370 860 C 1362 846 1364 824 1372 822 C 1380 824 1382 846 1374 860 Z M 1372 822 c 0 -10 -6 -16 -12 -12 c -4 4 2 9 5 5"/>
+      <path class="linha" d="M 1356 1000 C 1352 960 1340 926 1318 900 c -6 -8 2 -14 7 -9"/>
+      <path class="linha" d="M 1384 1000 C 1388 958 1400 926 1424 906 c 6 -6 13 0 8 6"/>
+      <path class="linha" d="M 1394 1000 C 1400 970 1412 952 1432 944"/>
+    </g>
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+</script>
+</body>
+</html>

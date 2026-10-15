@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESTE-01 · c13 · capa partida</title>
+<!-- "and cut his cloak in two": a capa já partida, sem mostrar o corte. Fundo: entardecer rosado. -->
+<style>
+  :root { --ceu: #F1DCD8; --chao: #E8C7C2; --tinta: #2F2E2C; --rosa: #E2B7A8; --azul: #BFCAD5; --pessego: #EBCDB0; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--ceu); cursor: none; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
+  .mov { transform-box: fill-box; }
+  .metade-e { transform-origin: 90% 0; animation: balanca 4s ease-in-out infinite alternate; }
+  .metade-d { transform-origin: 10% 0; animation: balanca 6s ease-in-out -2s infinite alternate-reverse; }
+  @keyframes balanca { from { transform: rotate(-1.3deg); } to { transform: rotate(1.3deg); } }
+  .floco { animation: cai linear infinite; }
+  .floco > g { transform-box: fill-box; animation: oscila ease-in-out infinite alternate; }
+  @keyframes cai { from { transform: translateY(0); } to { transform: translateY(1240px); } }
+  @keyframes oscila { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="boil" filterUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+      <feTurbulence class="turb" type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- metade esquerda e direita da capa (espelhadas), com a borda do corte quase reta -->
+    <path id="metade-e" d="M 958 300 C 944 296 926 284 914 272 C 880 276 846 290 818 312 C 740 372 680 470 652 610 C 680 632 700 618 724 636 C 748 656 770 640 796 654 C 826 670 850 652 878 664 C 906 676 934 662 958 670 C 950 560 964 420 958 300 Z"/>
+    <path id="metade-d" d="M 962 300 C 976 296 994 284 1006 272 C 1040 276 1074 290 1102 312 C 1180 372 1240 470 1268 610 C 1240 632 1220 618 1196 636 C 1172 656 1150 640 1124 654 C 1094 670 1070 652 1042 664 C 1014 676 986 662 962 670 C 970 560 956 420 962 300 Z"/>
+  </defs>
+
+  <g filter="url(#boil)">
+    <!-- chão: faixa um pouco abaixo da linha (fora de registro) e a linha ondulada passando das bordas -->
+    <path fill="var(--chao)" d="M -200 806 C 200 790 420 820 700 804 S 1200 788 1460 806 S 1820 820 2120 802 L 2120 1300 L -200 1300 Z"/>
+    <path class="linha" d="M -200 792 C 200 776 420 806 700 790 S 1200 774 1460 792 S 1820 806 2120 788"/>
+
+    <!-- espada deitada no chão -->
+    <g>
+      <path fill="var(--azul)" d="M 878 768 L 1096 762 C 1112 764 1118 770 1112 776 L 880 784 Z"/>
+      <path fill="var(--pessego)" d="M 826 770 L 866 768 L 868 780 L 828 782 Z"/>
+      <path class="linha" d="M 866 762 L 1098 756 C 1110 758 1118 762 1122 766 C 1116 770 1110 772 1098 774 L 866 776"/>
+      <path class="linha" d="M 862 744 C 858 756 858 782 864 794 C 868 798 872 796 870 790 C 866 778 866 758 870 748 C 872 742 866 740 862 744 Z"/>
+      <path class="linha" d="M 858 764 L 822 765 M 858 774 L 822 775 M 822 765 C 812 762 806 768 808 774 C 810 782 820 782 822 775"/>
+      <path class="linha" d="M 808 772 c -8 2 -16 -4 -12 -10 c 3 -5 10 -3 10 2"/>
+    </g>
+
+    <!-- metade esquerda -->
+    <g class="mov metade-e">
+      <g transform="translate(-24 -4) rotate(3 958 300)">
+        <use href="#metade-e" fill="var(--rosa)" transform="translate(820 480) scale(.88) translate(-820 -480) translate(20 14)"/>
+        <use href="#metade-e" class="linha"/>
+        <path class="linha" d="M 652 610 c -12 -2 -22 -14 -14 -24 c 7 -8 19 -2 16 8 c -2 6 -9 7 -12 3"/>
+        <path class="linha" d="M 818 312 c -10 -4 -14 -16 -5 -20 c 8 -3 12 8 5 14"/>
+        <path class="linha" d="M 924 292 c 0 -6 8 -6 8 0 c 0 8 -13 8 -13 -2 c 0 -11 18 -11 18 2 c 0 9 -5 14 -12 16"/>
+      </g>
+    </g>
+
+    <!-- metade direita -->
+    <g class="mov metade-d">
+      <g transform="translate(24 10) rotate(-3 962 300)">
+        <use href="#metade-d" fill="var(--rosa)" transform="translate(1100 480) scale(.88) translate(-1100 -480) translate(20 14)"/>
+        <use href="#metade-d" class="linha"/>
+        <path class="linha" d="M 1268 610 c 12 -2 22 -14 14 -24 c -7 -8 -19 -2 -16 8 c 2 6 9 7 12 3"/>
+      </g>
+    </g>
+
+    <g id="neve"></g>
+  </g>
+</svg>
+<script>
+  // line boil: troca o seed do ruído entre 4 valores a cada 125 ms
+  const seeds = [2, 9, 17, 31];
+  let s = 0;
+  setInterval(() => {
+    s = (s + 1) % seeds.length;
+    document.querySelectorAll('.turb').forEach(t => t.setAttribute('seed', seeds[s]));
+  }, 125);
+
+  // neve leve: cada floco cai de cima a baixo em loop, com atraso negativo para a cena já começar com neve
+  function aleatorio(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function nevar(alvo, quantos, seed, durMin, durMax) {
+    const r = aleatorio(seed), ns = 'http://www.w3.org/2000/svg';
+    for (let i = 0; i < quantos; i++) {
+      const dur = durMin + r() * (durMax - durMin);
+      const g = document.createElementNS(ns, 'g');
+      g.setAttribute('class', 'floco');
+      g.style.animationDuration = dur + 's';
+      g.style.animationDelay = -(r() * dur) + 's';
+      const x = r() * 1920, tam = 2.2 + r() * 2.6;
+      const dentro = document.createElementNS(ns, 'g');
+      const osc = 3 + r() * 3;
+      dentro.style.animationDuration = osc + 's';
+      dentro.style.animationDelay = -(r() * osc) + 's';
+      dentro.innerHTML = r() < 0.7
+        ? `<circle cx="${x + 2}" cy="-78" r="${tam + 1.5}" fill="#FBF4EE"/><circle class="linha" cx="${x}" cy="-80" r="${tam}"/>`
+        : `<circle cx="${x + 2}" cy="-78" r="${tam + 2}" fill="#FBF4EE"/><path class="linha" d="M ${x - tam} -80 c 0 -${tam} ${tam * 2} -${tam} ${tam * 2} 0 c 0 ${tam * 1.4} -${tam * 1.6} ${tam * 1.4} -${tam * 1.4} 0"/>`;
+      g.appendChild(dentro);
+      alvo.appendChild(g);
+    }
+  }
+  nevar(document.getElementById('neve'), 26, 13, 22, 34);
+</script>
+</body>
+</html>
