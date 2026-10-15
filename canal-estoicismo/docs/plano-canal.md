@@ -17,7 +17,7 @@ Links (claude.ai):
 - **Tema:** estoicismo com foco em **Marco Aurélio** e as *Meditações*, cruzado de forma sutil com **Provérbios** (sabedorias que se encontram, nunca pregação).
 - **Posicionamento:** estoicismo sob pressão — toque **muito leve** de finanças, trabalho e liderança nos títulos e exemplos. Mudar o contexto, nunca a promessa. Nunca prometer enriquecimento. Âncora de negócios em ~2/3 dos títulos; um exemplo prático de trabalho/dinheiro por vídeo. Provérbios sobre riqueza guardados: 13:11, 21:5, 22:7.
 - **Tom:** poético, calmo, sem ser complexo nem professoral; tom de diário noturno.
-- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência: **1 vídeo/semana** no lançamento, 5 shorts por vídeo (detalhes em "Cadência e calendário de publicação"). Meta: 12 vídeos prontos antes de lançar.
+- **Duração:** **~10 minutos** por vídeo (decisão do vídeo 1). Cadência: **1 vídeo/semana** (às quintas), 5 shorts por vídeo (detalhes em "Cadência e calendário de publicação"). Meta: 12 vídeos prontos antes de lançar.
 - **Ferramentas:** Claude (roteiro, design no Claude Design, montagem do vídeo por código); ElevenLabs (**plano Starter**; voz e custo em "Voz e créditos do ElevenLabs"). Sem Canva nem Photoshop.
 - **Futuro (não iniciar sem pedido):** faixas de áudio em espanhol/português no mesmo vídeo; outros canais (história atmosférica, mistérios do universo).
 
@@ -70,7 +70,7 @@ Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
 ## Voz e créditos do ElevenLabs (desde o vídeo 1, 12/10/2026)
 
 - **Voz:** *Flint — Deep, Raspy, and Warm* (substituiu a voz de senhor ~70 anos usada nas prévias Free).
-- **Modelo:** Eleven v4 · **Stability 50%** · **Similarity 75%** · plano **Starter**. Usar sempre a mesma configuração para a voz não mudar entre blocos e vídeos.
+- **Modelo:** Eleven v4 · **Stability 50%** · **Similarity 75%** · plano **Starter**. Usar sempre a mesma configuração para a voz não mudar entre blocos e vídeos. A configuração vigente fica em `elevenlabs.json` (na raiz do canal), que é a fonte da verdade.
 - **Custo medido no vídeo 1:** 7 áudios (6 blocos + The Pause), uma gravação de cada, **6.638 créditos** (saldo 35.500 → 28.862). O texto colado tinha ~6.600–6.700 caracteres (com as audio tags) e ~1.180 palavras, para ~8 min de narração (8 min 6 s já no ritmo do canal).
 - **Regra para estimar:** **~1 crédito por caractere** do texto colado no ElevenLabs, contando as audio tags e a pontuação. Equivalências aproximadas: ~5,6 créditos por palavra; ~820 créditos por minuto de narração; um vídeo de ~10 min ≈ 6.500–8.000 créditos. Regravações cobram de novo: somar o texto de cada bloco regravado.
 - Ao fechar o roteiro de um vídeo, o Claude informa a estimativa de créditos (total e por bloco) antes da gravação.
@@ -85,8 +85,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 
 ## Cadência e calendário de publicação (decisão de 12/10/2026)
 
-- **Lançamento: 1 vídeo longo por semana.** Motivo: 12 vídeos de reserva duram 12 semanas (com 2/semana durariam 6), dá tempo de aplicar o que as métricas dos primeiros vídeos ensinarem e o ritmo moderado pesa a favor na revisão de monetização (risco de "conteúdo em massa").
-- **Passar para 2 vídeos/semana** só quando: reserva com **6+ vídeos prontos** E produção de 2/semana mantida por **um mês** sem a reserva cair. O criador decide.
+- **1 vídeo longo por semana, sempre** (sem fase de 2/semana, decisão do criador em 14/10/2026). Motivo: 12 vídeos de reserva duram 12 semanas, dá tempo de aplicar o que as métricas dos primeiros vídeos ensinarem e o ritmo moderado pesa a favor na revisão de monetização (risco de "conteúdo em massa").
 - **Créditos:** o criador vai comprar créditos extras do ElevenLabs além do Starter.
 - **Horários em Nova York (ET)**, porque o público principal é dos EUA; 14:00 ET = 19:00 em Londres. Os EUA saem do horário de verão em **1º/11/2026** (e voltam no 2º domingo de março); o Brasil não tem horário de verão:
 
@@ -97,27 +96,28 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 | 14:00 | 15:00 | 16:00 |
 | 18:00 | 19:00 | 20:00 |
 
-- **Semana padrão (fase 1).** Cada vídeo rende 5 shorts: 4 saem na semana e 1 vai para a **reserva de shorts**.
+- **Semana padrão.** Cada vídeo rende 5 shorts: 4 saem na semana e 1 vai para a **reserva de shorts**.
 
 | Dia | Hora (ET) | O que sai |
 |---|---|---|
-| Terça | 14:00 | Vídeo longo |
-| Terça | 18:00 | Short 1 — o corte mais forte |
-| Quarta | 12:00 | Short 2 |
-| Quinta | 12:00 | Short 3 |
-| Sábado | 10:00 | Short 4 |
-| Domingo | 10:00 | Short da reserva, ligado a um vídeo antigo (a partir da 2ª semana; na 1ª, sai o short 5 do próprio vídeo, e a reserva começa no vídeo 2) |
-| Segunda | — | Métricas e preparação |
+| Quinta | 14:00 | Vídeo longo |
+| Quinta | 18:00 | Short 1 — o corte mais forte |
+| Sexta | 12:00 | Short 2 |
+| Sábado | 10:00 | Short 3 |
+| Domingo | 10:00 | Short 4 |
+| Terça | 12:00 | Short da reserva, ligado a um vídeo antigo (a partir da 2ª semana; na 1ª, sai o short 5 do próprio vídeo, e a reserva começa no vídeo 2) |
+| Quarta | — | Métricas e preparação |
+
+> Dia do vídeo longo trocado de terça para quinta em 14/10/2026 (decisão do criador; o MA-001 passou para 15/10/2026). Os shorts acompanham o dia do longo.
 
 - **Em todo short:** "Vídeo relacionado" no YouTube Studio apontando para o vídeo longo de origem (o short da reserva aponta para o vídeo dele).
 - **Reserva de shorts:** cobre as semanas em que o vídeo atrasar, para o canal não parar, e leva tráfego para o acervo.
-- **Fase 2 (2/semana, quando liberada):** longos terça e sexta às 14:00 ET, cada um com short às 18:00 do mesmo dia e mais 2 shorts nos dias seguintes (qua/qui e sáb/dom às 12:00 ou 10:00); 2 shorts de cada vídeo vão para a reserva; segunda às 12:00, short da reserva.
 - **Ajuste:** depois de 3–4 semanas no ar, trocar os horários pelos do relatório "Quando seus espectadores estão no YouTube" do Analytics e registrar aqui.
 - **Agendamento:** a aba **Agenda** da ficha do vídeo no sistema de gestão mostra datas, horas (Nova York e Brasília) e o que programar no Studio a partir da data de upload; o modelo fica em Configurações → Agenda e deve acompanhar esta seção. Se o criador pedir aqui, o Claude monta a agenda daquela semana com datas reais e as duas horas (ET e Brasília, conferindo o horário de verão americano na data), dizendo qual short vai em cada horário e para qual vídeo aponta o "Vídeo relacionado", pronta para programar no YouTube Studio.
 
 ## Regras fixas para todos os vídeos
 
-1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). **Outras obras e traduções (decisão de 12/10/2026):** sempre que o tema pedir (ex.: *Sobre a ira*, de Sêneca, que não está no Gummere), o Claude procura a melhor tradução em domínio público, confere a situação de direitos e propõe; o criador valida antes do uso, e a tradução aprovada entra nesta lista. **Aprovadas (13/10/2026, vídeo 2):** Sêneca, *Of Anger* (*De Ira*), trad. **Aubrey Stewart** (George Bell & Sons, 1889; Project Gutenberg #64576), citável literalmente; Cássio Dio, *Roman History*, **Loeb vol. IX (1927, trad. Earnest Cary)**, contada como relato antigo com as nossas palavras e crédito na tela (domínio público nos EUA; no Reino Unido, incerto). Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
+1. **Somente domínio público:** *Meditações* na tradução de **George Long (1862)** (ou Casaubon, 1634); Sêneca na de Gummere (1917–1925); Provérbios na **World English Bible (WEB)**. Nunca traduções modernas (Hays, Waterfield etc.). **Outras obras e traduções (decisão de 12/10/2026):** sempre que o tema pedir (ex.: *Sobre a ira*, de Sêneca, que não está no Gummere), o Claude procura a melhor tradução em domínio público, confere a situação de direitos e propõe; o criador valida antes do uso, e a tradução aprovada entra nesta lista. **Aprovadas (13/10/2026, vídeo 2):** Sêneca, *Of Anger* (*De Ira*), trad. **Aubrey Stewart** (George Bell & Sons, 1889; Project Gutenberg #64576), citável literalmente; Cássio Dio, *Roman History*, **Loeb vol. IX (1927, trad. Earnest Cary)**, contada como relato antigo com as nossas palavras e crédito na tela (domínio público nos EUA; no Reino Unido, incerto). **Aprovadas (14/10/2026, vídeo 3):** Sêneca, *Of the Shortness of Life* (*De Brevitate Vitae*), trad. **Aubrey Stewart** (mesmo volume do *Of Anger*, Project Gutenberg #64576); *Historia Augusta*, trad. **David Magie** (Loeb, 1921), contada com nossas palavras; Tertuliano, *Apology* 33, trad. **S. Thelwall** (*Ante-Nicene Fathers* vol. III), só como registro histórico do sussurro no triunfo. Conferir cada citação na fonte antes de aprovar o bloco e anotar onde/quando foi conferida.
 2. **Crédito na tela, sempre:** toda citação ou informação de fora mostra a fonte no canto inferior esquerdo (Inter, discreto). Ex.: *Marcus Aurelius, Meditations 6.30 · trans. George Long*; *Proverbs 16:18 · World English Bible*.
 3. **Citações:** lidas no inglês antigo da tradução e, logo depois, repetidas em palavras simples ("In other words...", "In simple words..."). **Desde 13/10/2026 (vídeo 2, bloco 3), usar menos:** no máximo uma citação literal por bloco (a mais forte e curta), explicada só se for difícil; as demais são contadas direto em palavras simples, com o crédito na tela. O padrão "texto antigo + In simple words" repetido cansa. Blocos já aprovados antes disso ficam como estão.
 4. **Narração pronta para colar no ElevenLabs:** só o texto falado + audio tags (`[softly]`, `[thoughtful]`, `[warmly]`, `[whispers]`, `[sighs]`) e reticências para pausas. Deixas visuais e créditos ficam fora do bloco de texto. Um arquivo de áudio por bloco.
@@ -132,7 +132,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 |---|---|---|---|---|
 | 1 | The Man Who Had Everything | The Richest Man in Rome Wrote This to Himself Every Night | Poder e humildade | 30:8-9 e 16:18-19 |
 | 2 | On Anger | Your Anger Isn't the Problem. The Grudge Is. (trocado em 13/10/2026; antes: How to Stay Calm When Work and Money Push You to the Edge) | Ira e rancor | 16:32 |
-| 3 | The Last Hour | Memento Mori for Busy Minds: Stop Spending Your Life on Tomorrow | Memento mori | 27:1 |
+| 3 | The Last Hour | Life Isn't Short. You're Just Busy. (trocado em 14/10/2026; antes: Memento Mori for Busy Minds: Stop Spending Your Life on Tomorrow) | Memento mori | 27:1 |
 | 4 | What You Cannot Control | Stoicism for Financial Stress: Let Go of What You Can't Control | Dicotomia do controle | 19:21 |
 | 5 | The Noise of Others | Stop Living for Their Approval: Stoic Wisdom for Leaders | Opinião alheia | 29:25 |
 | 6 | Holding Your Tongue | The Power of Saying Less: Ancient Proverbs Every Leader Should Hear | Domínio da fala | 17:28 |
