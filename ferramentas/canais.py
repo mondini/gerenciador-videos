@@ -17,6 +17,7 @@ import csv
 import json
 import os
 import re
+import shlex
 import subprocess
 import urllib.error
 import urllib.request
@@ -56,12 +57,19 @@ def ler_canais(raiz: Path = RAIZ) -> list[Canal]:
 
 def carregar_videos(canal: Canal) -> None:
     if canal.comando_status:
+        r = None
         try:
-            r = subprocess.run(canal.comando_status, shell=True, cwd=canal.pasta, capture_output=True, text=True, timeout=180)
-            canal.videos = json.loads(r.stdout)['videos']
+            # sem shell: o comando do canal.json roda como programa + argumentos, sem interpretação do shell
+            r = subprocess.run(shlex.split(canal.comando_status), cwd=canal.pasta, capture_output=True, text=True, timeout=180)
+            videos = json.loads(r.stdout)['videos']
+            if not isinstance(videos, list):
+                raise TypeError('"videos" não é uma lista')
+            canal.videos = videos
             return
-        except (subprocess.TimeoutExpired, json.JSONDecodeError, KeyError) as e:
-            canal.aviso = f'o comando de status falhou ({canal.comando_status}): {type(e).__name__}; status estimado pelas pastas'
+        except (subprocess.TimeoutExpired, json.JSONDecodeError, KeyError, TypeError, ValueError, OSError) as e:
+            erro = (r.stderr.strip().splitlines() or [''])[-1] if r is not None and r.stderr else ''
+            canal.aviso = (f'o comando de status falhou ({canal.comando_status}): {type(e).__name__}'
+                           + (f' — {erro}' if erro else '') + '; status estimado pelas pastas')
     elif not canal.tem_canal_json:
         canal.aviso = 'sem canal.json; status estimado pelas pastas'
     else:
@@ -131,7 +139,15 @@ def ler_creditos(canal: Canal) -> list[dict]:
     if not arq.exists():
         return []
     with arq.open(encoding='utf-8', newline='') as f:
-        return [{**r, 'creditos': int(r['creditos'])} for r in csv.DictReader(f)]
+        return [{**r, 'creditos': _inteiro(r.get('creditos'))} for r in csv.DictReader(f)]
+
+
+def _inteiro(v) -> int:
+    """Créditos de uma linha do CSV; célula vazia ou inválida conta 0 (não derruba o painel)."""
+    try:
+        return int(v)
+    except (TypeError, ValueError):
+        return 0
 
 
 def env_raiz(chave: str, raiz: Path = RAIZ) -> str:
@@ -140,9 +156,9 @@ def env_raiz(chave: str, raiz: Path = RAIZ) -> str:
     arq = raiz / '.env'
     if arq.exists():
         for linha in arq.read_text(encoding='utf-8').splitlines():
-            m = re.match(rf'\s*{re.escape(chave)}\s*=\s*"?([^"\n]*)"?\s*$', linha)
+            m = re.match(rf'\s*{re.escape(chave)}\s*=\s*(.*)$', linha)
             if m:
-                return m.group(1).strip()
+                return m.group(1).strip().strip('"').strip("'").strip()
     return ''
 
 
@@ -241,9 +257,10 @@ def _bloco_creditos(canais: list[Canal], agora: datetime) -> list[str]:
 
 def cmd_calendario(a, raiz: Path = RAIZ, agora: datetime | None = None) -> str:
     agora = agora or datetime.now(BRASILIA)
+    desde = agora - timedelta(days=1)                       # inclui as de ontem, para conferir o que acabou de sair
     itens = sorted((i for c in ler_canais(raiz) for i in ler_calendario(c)
-                    if agora - timedelta(days=1) <= i['quando'] <= agora + timedelta(days=a.dias)), key=lambda i: i['quando'])
-    return '\n'.join([f'Publicações de {agora:%d/%m} a {agora + timedelta(days=a.dias):%d/%m/%Y}'] +
+                    if desde <= i['quando'] <= agora + timedelta(days=a.dias)), key=lambda i: i['quando'])
+    return '\n'.join([f'Publicações de {desde:%d/%m} a {agora + timedelta(days=a.dias):%d/%m/%Y}'] +
                      ([_linha_agenda(i) for i in itens] or ['  nenhuma']))
 
 

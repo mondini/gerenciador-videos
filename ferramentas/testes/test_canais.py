@@ -63,3 +63,27 @@ def test_env_da_raiz(tmp_path, monkeypatch):
     assert canais.env_raiz('ELEVENLABS_API_KEY', tmp_path) == 'abc'
     (tmp_path / '.env').write_text('ELEVENLABS_API_KEY=\n')
     assert canais.env_raiz('ELEVENLABS_API_KEY', tmp_path) == ''
+
+
+def test_credito_em_branco_nao_derruba_o_painel(tmp_path):
+    c = tmp_path / 'canal-c'
+    c.mkdir()
+    (c / 'creditos-elevenlabs.csv').write_text('data,video,o_que,caracteres,creditos,origem,nota\n'
+                                               '2026-10-14,CC-001,blocos,7000,,estimado,medir depois\n'
+                                               '2026-10-14,CC-001,teste,100,100,medido,\n')
+    regs = canais.ler_creditos(canais.Canal(pasta=c, nome='C', prefixo='CC'))
+    assert [r['creditos'] for r in regs] == [0, 100]
+
+
+def test_comando_de_status_quebrado_cai_na_estimativa(tmp_path):
+    c = tmp_path / 'canal-d'
+    (c / 'videos' / 'DD-001-x').mkdir(parents=True)
+    canal = canais.Canal(pasta=c, nome='D', prefixo='DD', comando_status='./nao-existe --json')
+    canais.carregar_videos(canal)
+    assert 'falhou' in canal.aviso and [v['codigo'] for v in canal.videos] == ['DD-001']
+
+
+def test_env_com_aspas_simples(tmp_path, monkeypatch):
+    monkeypatch.delenv('DRIVE_ROOT', raising=False)
+    (tmp_path / '.env').write_text("# DRIVE_ROOT=/comentado\nDRIVE_ROOT='/Meu Drive/Canais'\n")
+    assert canais.env_raiz('DRIVE_ROOT', tmp_path) == '/Meu Drive/Canais'
