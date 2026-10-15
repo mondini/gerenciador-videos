@@ -156,3 +156,41 @@ Escolhido entre três variações (14/10/2026). Título falado aos ~12 s, "memen
 
 ## Abertura padrão (3 s)
 Peça comum `videos/comum/abertura`. Sem narração.
+
+## Bloco 2 — O lembrete (aprovado)
+
+```
+[thoughtful] In ancient Rome, there was no greater honor than a triumph.
+A general came home from a great victory... and the whole city poured into the streets to see him.
+He rode in a chariot, dressed almost like a god. Crowds. Trumpets. Captives marching behind.
+[softly] And yet, an old writer tells us... a voice behind him kept whispering in his ear.
+Look behind you. Remember... you are only a man.
+
+[thoughtful] Today, the triumph looks different.
+The record quarter. The contract you chased for a whole year. The team standing up to applaud... your name on the screen.
+[softly] And no one is whispering behind you.
+No one says... remember.
+
+[thoughtful] Marcus Aurelius had no one to whisper either. He was the emperor. Who would dare?
+So at night, alone, he wrote the reminder himself.
+Do not act as if thou wert going to live ten thousand years. Death hangs over thee.
+[warmly] In simple words... you don't have forever.
+And then, in the same breath, he told himself what to do about it:
+while you live... while you still can... be good.
+
+[thoughtful] That is what memento mori really is.
+Not a skull on the desk. Not a fear.
+A filter.
+Put your death next to your calendar... and watch what falls away.
+The urgent things start to look small.
+And that small voice from the other room... starts to look urgent.
+[softly] The general needed the whisper for one day of glory.
+Most of us need it... on an ordinary Tuesday.
+```
+
+**Deixas:** rome = "In ancient Rome" · general = "A general came home" · chariot = "He rode in a chariot" · crowds = "Crowds" · captives = "Captives marching" · voice = "And yet, an old writer" · behind = "Look behind you" · man = "Remember... you are only" · today = "Today, the triumph" · quarter = "The record quarter" · contract = "The contract you chased" · team = "The team standing up" · noone = "And no one is whispering" · says = "No one says" · marcus = "Marcus Aurelius had no one" · dare = "Who would dare" · night = "So at night" · thousand = "Do not act as if" · hangs = "Death hangs over" · simple = "In simple words" · breath = "And then, in the same" · good = "while you live" · filter_intro = "That is what memento" · skull = "Not a skull" · filter = "A filter" · calendar = "Put your death" · urgent = "The urgent things" · voice2 = "And that small voice" · glory = "The general needed" · tuesday = "Most of us need it"
+
+Exemplo de trabalho: o dono de empresa/líder (pedido do criador, 14/10/2026): o trimestre recorde, o contrato, o time aplaudindo. Tertuliano fala de "uma voz" atrás do general (não de um escravo): manter "a voice behind him". Literal só o 4.17; o fim do 4.17 ("be good") em palavras simples.
+**Short:** "That is what memento mori really is." até "...on an ordinary Tuesday."
+**Ideias de cena:** o triunfo em sombras (quadriga, trombetas, louros, cativos) e a silhueta que sussurra atrás do general; o ouvinte num salão romano com gente aplaudindo, contrato lacrado e baús de moedas; Marco escrevendo à noite à lamparina; tabuinha de compromissos com linhas que caem e somem, e a silhueta da criança acendendo no lugar.
+**Créditos:** *Tertullian, Apology 33 · trans. S. Thelwall* · *Marcus Aurelius, Meditations 4.17 · trans. George Long*
