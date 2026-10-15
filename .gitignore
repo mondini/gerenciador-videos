@@ -1,15 +1,12 @@
-node_modules/
-dist/
-.next/
+# credenciais
 .env
 .env.*
 !.env.example
-*.sqlite
-*.db
-*.db-wal
-*.db-shm
-*.db.gz
-data/
 credentials*.json
 token*.json
+
+# dependências e caches (os canais podem ter outros no próprio .gitignore)
+node_modules/
+__pycache__/
+.pytest_cache/
 .DS_Store

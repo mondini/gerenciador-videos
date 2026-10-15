@@ -1,0 +1,3 @@
+#!/bin/sh
+# Painel de todos os canais (só leitura). Ajuda: ./canais -h
+exec python3 "$(dirname "$0")/ferramentas/canais.py" "$@"

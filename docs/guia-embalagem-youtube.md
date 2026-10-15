@@ -1,6 +1,6 @@
 # Guia Definitivo de Embalagem, Algoritmo e SEO no YouTube (2026)
 
-Este documento foi estruturado a partir do estudo consolidado de dados de mais de 18.000 canais do YouTube e análises de arquitetura algorítmica. Ele serve como o **manual de referência do canal** para a criação de títulos, thumbnails, descrições, metadados e retenção audiovisual de alto impacto, garantindo crescimento sustentável e eliminando o risco de *AI slop* ou conteúdo inautêntico.
+Este documento foi estruturado a partir do estudo consolidado de dados de mais de 18.000 canais do YouTube e análises de arquitetura algorítmica. Ele serve como o **manual de referência de todos os canais** para a criação de títulos, thumbnails, descrições, metadados e retenção audiovisual de alto impacto, garantindo crescimento sustentável e eliminando o risco de *AI slop* ou conteúdo inautêntico.
 
 ---
 
