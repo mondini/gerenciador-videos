@@ -236,3 +236,49 @@ Literal só a carta 101 ("Let us postpone nothing…"); *Shortness* I e III em p
 **Short:** "Then he told the story of a man he knew." até "...He just ran out of tomorrow."
 **Ideias de cena:** muro com soldados em volta do baú de moedas × areia de ampulheta escorrendo para mãos estendidas; marcos "L" e "LX" numa estrada que some no horizonte; Senécio: casa que cresce (moedas, navios, campos), a visita, a cabeceira do doente, o jantar à lamparina; a lamparina se apaga e o sol nasce sobre a mesa vazia; tabuinha de contas com a coluna da vida.
 **Créditos:** *Seneca, Of the Shortness of Life I, III · trans. Aubrey Stewart* · *Seneca, Moral Letters 101 · trans. Richard M. Gummere*
+
+## Bloco 4 — As crianças (aprovado)
+
+```
+[thoughtful] Now... let me tell you something about Marcus that most people never hear.
+He was the most powerful man in the world. The best doctors of the empire answered to him.
+And it did not matter.
+[softly] As he was preparing to leave for war... his little son fell ill.
+His name was Verus. He was seven years old.
+The doctors cut into a swelling just below his ear... and the boy did not survive.
+Seven years.
+[thoughtful] The old historian tells us Marcus mourned him for only five days.
+And even then... the empire kept knocking at his door. And he answered.
+Then he went to war.
+
+[softly] We don't know what he felt at night, in the tent, far from home.
+But in his journal, there is one line he copied from the philosopher Epictetus.
+It may be the hardest line in all of Stoicism.
+When a man kisses his child... he should whisper to himself, "Tomorrow perchance thou wilt die."
+[thoughtful] Someone objected. Those are words of bad omen.
+And Epictetus said no. It is no more a bad omen... than saying the wheat will be harvested.
+[softly] In simple words... the child in your arms is not yours forever.
+Nothing is.
+
+[thoughtful] It sounds unbearable. But listen again.
+It doesn't say love them less.
+It says... look at them. Now. While they're here.
+[softly] Your son. Your daughter. Your niece, your nephew. The grandchild who calls you on Sundays.
+One day, one of you will hug the other... for the last time.
+And neither of you will know it.
+
+[thoughtful] That is the whole of memento mori.
+Not fear.
+Attention.
+[warmly] So the next time a small voice says, "Watch this"...
+put everything down. And watch.
+
+[softly] Let's pause here.
+```
+
+**Deixas:** now = "Now... let me tell you" · powerful = "He was the most powerful" · doctors = "The best doctors" · matter = "And it did not matter" · war = "As he was preparing" · verus = "His name was Verus" · seven = "He was seven" · cut = "The doctors cut" · seven2 = "Seven years" · mourned = "The old historian" · knocking = "And even then" · went = "Then he went to war" · tent = "We don't know what" · journal = "But in his journal" · hardest = "It may be the hardest" · kisses = "When a man kisses" · omen = "Someone objected" · wheat = "And Epictetus said no" · simple = "In simple words" · nothing = "Nothing is" · unbearable = "It sounds unbearable" · less = "It doesn't say" · look = "It says... look" · son = "Your son" · niece = "Your niece" · grandchild = "The grandchild" · hug = "One day, one of you" · neither = "And neither of you" · whole = "That is the whole" · fear = "Not fear" · attention = "Attention" · next = "So the next time" · put = "put everything down" · pause = "Let's pause here"
+
+Tom dark e pesado (pedido do criador). *Historia Augusta* 21.3-4 contada com nossas palavras (filho de 7 anos, cirurgia do tumor abaixo da orelha, luto de 5 dias, logo antes da guerra). Epicteto não foi professor de Marco: "the philosopher Epictetus". Única citação literal: 11.34 ("Tomorrow" sem hífen, para o ElevenLabs). A 9.40 ficou fora (puxava para o desapego). Fecha retomando o "Watch this" do gancho.
+**Short (o mais forte):** "When a man kisses his child..." até "...And neither of you will know it."
+**Ideias de cena:** Marco e o menino em sombra; a caminha à lamparina, médicos curvados, a lamparina que se apaga; a porta com mensageiros batendo; a tenda de campanha à noite com lua minguante; o pai que se inclina e beija a cabeça da criança; trigo sendo colhido; duas silhuetas num abraço que se desfaz em luz; o ouvinte larga a tabuinha e se ajoelha ao lado da criança.
+**Créditos:** *Historia Augusta, Life of Marcus 21 · trans. David Magie* · *Marcus Aurelius, Meditations 11.34 · trans. George Long*
