@@ -194,3 +194,45 @@ Exemplo de trabalho: o dono de empresa/líder (pedido do criador, 14/10/2026): o
 **Short:** "That is what memento mori really is." até "...on an ordinary Tuesday."
 **Ideias de cena:** o triunfo em sombras (quadriga, trombetas, louros, cativos) e a silhueta que sussurra atrás do general; o ouvinte num salão romano com gente aplaudindo, contrato lacrado e baús de moedas; Marco escrevendo à noite à lamparina; tabuinha de compromissos com linhas que caem e somem, e a silhueta da criança acendendo no lugar.
 **Créditos:** *Tertullian, Apology 33 · trans. S. Thelwall* · *Marcus Aurelius, Meditations 4.17 · trans. George Long*
+
+## Bloco 3 — A vida que a gente adia (aprovado)
+
+```
+[thoughtful] Long before Marcus, another Roman watched the richest men of his city... and noticed something strange.
+His name was Seneca.
+These men guarded their money like soldiers guard a wall. No one could take a single coin.
+[softly] But their time... they handed it out to anyone who asked.
+A meeting. A favor. A dinner they never wanted to attend.
+We are not short of days, Seneca said. We just waste them.
+
+[thoughtful] And everywhere he went, he heard the same promise.
+After fifty, I'll slow down. At sixty, I'll finally rest.
+His answer was almost cruel.
+Who promised you fifty?
+[softly] How late it is, he wrote, to begin living... just when it's time to leave.
+
+[thoughtful] Then he told the story of a man he knew.
+Cornelius Senecio. He started with nothing... and built a fortune.
+He knew how to make money, and how to keep it. He lived simply. He took care of his health.
+One morning, he came to visit Seneca, as he always did.
+He spent the rest of the day at the bedside of a sick friend.
+In the evening, he had a good dinner.
+And that night... his throat began to close.
+[softly] He barely lived to see the sunrise.
+[thoughtful] Seneca wrote that he died in the middle of his success... with money still pouring in. Investments on land and at sea.
+[softly] Not one of his plans had failed.
+He just ran out of tomorrow.
+
+[thoughtful] Seneca drew one lesson from it:
+Let us postpone nothing. Let us balance life's account every day.
+[warmly] Any business owner understands that.
+You don't wait until the end of the year to find out the company was losing money.
+So why wait until the end of your life... to find out what you were spending it on?
+```
+
+**Deixas:** long = "Long before Marcus" · seneca = "His name was Seneca" · guarded = "These men guarded" · coin = "No one could take" · time = "But their time" · meeting = "A meeting" · waste = "We are not short" · promise = "And everywhere he went" · fifty = "After fifty" · sixty = "At sixty" · cruel = "His answer was" · promised = "Who promised you" · late = "How late it is" · story = "Then he told the story" · senecio = "Cornelius Senecio" · fortune = "He started with nothing" · knew = "He knew how to make" · simply = "He lived simply" · morning = "One morning" · bedside = "He spent the rest" · dinner = "In the evening" · throat = "And that night" · sunrise = "He barely lived" · success = "Seneca wrote that he died" · investments = "Investments on land" · plans = "Not one of his plans" · tomorrow = "He just ran out" · lesson = "Seneca drew one" · postpone = "Let us postpone" · balance = "Let us balance" · owner = "Any business owner" · year = "You don't wait" · life = "So why wait"
+
+Literal só a carta 101 ("Let us postpone nothing…"); *Shortness* I e III em palavras simples. Senécio contado na ordem da carta 101; "a man he knew" (Sêneca não o chama de amigo). "ran out of tomorrow" prepara o 27:1 do bloco 5.
+**Short:** "Then he told the story of a man he knew." até "...He just ran out of tomorrow."
+**Ideias de cena:** muro com soldados em volta do baú de moedas × areia de ampulheta escorrendo para mãos estendidas; marcos "L" e "LX" numa estrada que some no horizonte; Senécio: casa que cresce (moedas, navios, campos), a visita, a cabeceira do doente, o jantar à lamparina; a lamparina se apaga e o sol nasce sobre a mesa vazia; tabuinha de contas com a coluna da vida.
+**Créditos:** *Seneca, Of the Shortness of Life I, III · trans. Aubrey Stewart* · *Seneca, Moral Letters 101 · trans. Richard M. Gummere*
