@@ -16,7 +16,7 @@ FONTES = CANAL / 'fontes-tipograficas'
 VIDEOS = CANAL / 'videos'
 CACHE = Path(os.environ.get('MA_CACHE', PIPELINE / '.cache'))
 MODELOS = Path(os.environ.get('MA_MODELOS', PIPELINE / '.modelos'))
-REPO = CANAL.parent                                                   # repositório (o .env do sistema fica aqui)
+REPO = CANAL.parent                                                   # repositório (o .env da raiz fica aqui)
 
 # Dados do canal (nome, prefixo do código dos vídeos, pasta no Drive): canal.json.
 _CANAL_JSON = CANAL / 'canal.json'
@@ -25,7 +25,7 @@ PREFIXO = CANAL_INFO.get('prefixo', 'MA')
 
 
 def env_repo(chave: str, padrao: str | None = None) -> str | None:
-    """Valor do ambiente ou, se faltar, do .env do repositório (o mesmo que o sistema usa: DRIVE_ROOT, PORT)."""
+    """Valor do ambiente ou, se faltar, do .env da raiz do repositório (DRIVE_ROOT, ELEVENLABS_API_KEY)."""
     if os.environ.get(chave):
         return os.environ[chave]
     arq = REPO / '.env'

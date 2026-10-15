@@ -19,7 +19,7 @@
 
 - Do vídeo 2 em diante o gancho segue a seção 5 do guia de embalagem: confirmar a promessa do título nos primeiros 15 s, falar a palavra-chave nos primeiros 30 s, abrir um *loop* para o meio ou o fim.
 - Arte: decidir depois do roteiro o que reaproveitar do MA-001 e o que fazer novo, para a animação não ficar parecida demais com a do vídeo 1.
-- Revisão de 14/10/2026 (criador): crédito do 9.42 na tela como *Meditations 9.42 · paraphrased* (o letreiro é paráfrase); short da Pausa "Take 30 seconds **with Seneca**" só neste vídeo; o short 05 sai no domingo 1/11 como short da reserva; publicação em 27/10/2026, 14:00 ET.
+- Revisão de 14/10/2026 (criador): crédito do 9.42 na tela como *Meditations 9.42 · paraphrased* (o letreiro é paráfrase); short da Pausa "Take 30 seconds **with Seneca**" só neste vídeo; o short 05 sai como short da reserva; publicação em 22/10/2026, 14:00 ET (era 27/10; dia do canal trocado de terça para quinta em 14/10/2026), com o short 05 na terça 27/10.
 
 ---
 

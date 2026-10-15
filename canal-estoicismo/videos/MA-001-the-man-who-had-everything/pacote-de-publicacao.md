@@ -253,21 +253,21 @@ Não há gerador de imagens: cada cena é desenhada por código. A "receita" de 
 
 **Conclusão: PUBLICAR APÓS CORREÇÕES**
 1. ~~Criar o canal e trocar `[CHANNEL LINK]` na descrição~~ (feito em 13/10/2026: `@marbleandashwisdom`).
-2. ~~Publicação em espera~~ (liberada em 13/10/2026: upload agendado para terça, 20/10/2026, 14:00 ET = 15:00 Brasília).
+2. ~~Publicação em espera~~ (liberada em 13/10/2026: upload agendado para terça, 20/10/2026; em 14/10/2026 o criador antecipou para **quinta, 15/10/2026, 14:00 ET = 15:00 Brasília**).
 
 ## 15. SHORTS
 
-Arquivos em `shorts/`. Agenda da semana de lançamento do vídeo (terça, 20/10/2026, 14:00 ET = 15:00 Brasília; EUA ainda em horário de verão). Em todos: **Vídeo relacionado = MA-001** (se o vídeo agendado não aparecer na lista, ajustar no dia 20, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
+Arquivos em `shorts/`. Agenda da semana de lançamento do vídeo (quinta, 15/10/2026, 14:00 ET = 15:00 Brasília; EUA ainda em horário de verão). Em todos: **Vídeo relacionado = MA-001** (se o vídeo agendado não aparecer na lista, ajustar no dia 15, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
 
 | Ordem | Dia | ET | Brasília | Arquivo |
 |---|---|---|---|---|
-| 1 | Ter 20/10 | 18:00 | 19:00 | `01-still-not-enough.mp4` |
-| 2 | Qua 21/10 | 12:00 | 13:00 | `03-don-t-become-the-crown.mp4` |
-| 3 | Qui 22/10 | 12:00 | 13:00 | `04-the-phone-that-got-old.mp4` |
-| 4 | Sáb 24/10 | 10:00 | 11:00 | `05-pride-before-the-fall.mp4` |
-| 5 | Dom 25/10 | 10:00 | 11:00 | `02-take-30-seconds.mp4` |
+| 1 | Qui 15/10 | 18:00 | 19:00 | `01-still-not-enough.mp4` |
+| 2 | Sex 16/10 | 12:00 | 13:00 | `03-don-t-become-the-crown.mp4` |
+| 3 | Sáb 17/10 | 10:00 | 11:00 | `04-the-phone-that-got-old.mp4` |
+| 4 | Dom 18/10 | 10:00 | 11:00 | `05-pride-before-the-fall.mp4` |
+| 5 | Ter 20/10 | 12:00 | 13:00 | `02-take-30-seconds.mp4` |
 
-### 1. `01-still-not-enough.mp4` (Ter 20/10, 19:00 Brasília)
+### 1. `01-still-not-enough.mp4` (Qui 15/10, 19:00 Brasília)
 
 Título:
 
@@ -283,7 +283,7 @@ Full episode: "The Richest Man in Rome Wrote This to Himself Every Night" (linke
 #Stoicism #MarcusAurelius #Shorts
 ```
 
-### 2. `03-don-t-become-the-crown.mp4` (Qua 21/10, 13:00 Brasília)
+### 2. `03-don-t-become-the-crown.mp4` (Sex 16/10, 13:00 Brasília)
 
 Título:
 
@@ -300,7 +300,7 @@ Full episode: "The Richest Man in Rome Wrote This to Himself Every Night" (linke
 #Stoicism #MarcusAurelius #Shorts
 ```
 
-### 3. `04-the-phone-that-got-old.mp4` (Qui 22/10, 13:00 Brasília)
+### 3. `04-the-phone-that-got-old.mp4` (Sáb 17/10, 11:00 Brasília)
 
 Título:
 
@@ -316,7 +316,7 @@ Full episode: "The Richest Man in Rome Wrote This to Himself Every Night" (linke
 #Stoicism #Enough #Shorts
 ```
 
-### 4. `05-pride-before-the-fall.mp4` (Sáb 24/10, 11:00 Brasília)
+### 4. `05-pride-before-the-fall.mp4` (Dom 18/10, 11:00 Brasília)
 
 Título:
 
@@ -333,7 +333,7 @@ Full episode: "The Richest Man in Rome Wrote This to Himself Every Night" (linke
 #Proverbs #AncientWisdom #Shorts
 ```
 
-### 5. `02-take-30-seconds.mp4` (Dom 25/10, 11:00 Brasília)
+### 5. `02-take-30-seconds.mp4` (Ter 20/10, 13:00 Brasília)
 
 Título:
 

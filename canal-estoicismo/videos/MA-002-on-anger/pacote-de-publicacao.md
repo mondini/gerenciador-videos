@@ -1,7 +1,7 @@
 # Pacote de Publicação — MA-002 · On Anger
 
 > Gerado em 14/10/2026 a partir do roteiro final, do vídeo montado (`final/MA-002-on-anger-1-abertura-2-3-4-pausa-5-6-encerramento.mp4`, 9 min 39 s, −16 LUFS) e dos ativos reais do pipeline.
-> **Publicação:** terça, 27/10/2026, 14:00 ET (15:00 Brasília), uma semana depois do MA-001 (data confirmada pelo criador em 14/10/2026).
+> **Publicação:** quinta, 22/10/2026, 14:00 ET (15:00 Brasília), uma semana depois do MA-001 (em 14/10/2026 o criador mudou o dia do canal de terça para quinta; antes era terça, 27/10).
 > Atualizado em 14/10/2026: crédito do 9.42 marcado como paráfrase e short da Pausa "with Seneca" (decisões do criador).
 > Isto não é aconselhamento jurídico: em cada item eu digo o que é regra do YouTube, o que é licença do ativo e o que é avaliação minha.
 
@@ -264,25 +264,25 @@ Não há gerador de imagens: cada cena é desenhada por código; a receita está
 **Conclusão: PUBLICAR APÓS CORREÇÕES**
 1. Revisão única do vídeo montado pelo criador.
 2. ~~Crédito do 9.42~~ (feito em 14/10/2026: *Marcus Aurelius, Meditations 9.42 · paraphrased*).
-3. ~~Data de publicação~~ (confirmada: 27/10/2026, 14:00 ET).
+3. ~~Data de publicação~~ (confirmada: 22/10/2026, 14:00 ET, depois da troca de terça para quinta).
 
 ## 15. SHORTS
 
-Arquivos em `shorts/`. Agenda da semana do vídeo (terça, 27/10/2026, 14:00 ET = 15:00 Brasília). Os EUA saem do horário de verão no domingo, **1º/11/2026**: até sábado, Brasília = ET + 1 h; no domingo, ET + 2 h. Em todos: **Vídeo relacionado = MA-002** (se o vídeo agendado não aparecer na lista, ajustar no dia 27, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
+Arquivos em `shorts/`. Agenda da semana do vídeo (quinta, 22/10/2026, 14:00 ET = 15:00 Brasília). A semana inteira fica antes de **1º/11/2026**, quando os EUA saem do horário de verão, então Brasília = ET + 1 h em todos. Em todos: **Vídeo relacionado = MA-002** (se o vídeo agendado não aparecer na lista, ajustar no dia 22, depois que ele ficar público), público "não é para crianças", conteúdo sintético "Não" (mesma avaliação da seção 9). As descrições citam o episódio pelo título porque links na descrição de Shorts não são clicáveis.
 
 | Ordem | Dia | ET | Brasília | Arquivo |
 |---|---|---|---|---|
-| 1 | Ter 27/10 | 18:00 | 19:00 | `02-the-letters-he-never-read.mp4` (o corte mais forte, segundo o roteiro) |
-| 2 | Qua 28/10 | 12:00 | 13:00 | `01-you-don-t-have-to-win.mp4` |
-| 3 | Qui 29/10 | 12:00 | 13:00 | `03-you-already-won-this.mp4` |
-| 4 | Sáb 31/10 | 10:00 | 11:00 | `04-a-grudge-is-a-fire.mp4` |
-| 5 (reserva) | Dom 1/11 | 10:00 | 12:00 | `05-take-30-seconds.mp4` |
+| 1 | Qui 22/10 | 18:00 | 19:00 | `02-the-letters-he-never-read.mp4` (o corte mais forte, segundo o roteiro) |
+| 2 | Sex 23/10 | 12:00 | 13:00 | `01-you-don-t-have-to-win.mp4` |
+| 3 | Sáb 24/10 | 10:00 | 11:00 | `03-you-already-won-this.mp4` |
+| 4 | Dom 25/10 | 10:00 | 11:00 | `04-a-grudge-is-a-fire.mp4` |
+| 5 (reserva) | Ter 27/10 | 12:00 | 13:00 | `05-take-30-seconds.mp4` |
 
-**Reserva:** o 05 é o short da reserva deste vídeo e sai no domingo 1/11 (decisão do criador em 14/10/2026), porque a reserva começa agora e ainda não tem short de vídeo antigo.
+**Reserva:** o 05 é o short da reserva deste vídeo e sai no horário da reserva, terça 27/10 (decisão do criador em 14/10/2026; era domingo 1/11 antes da troca para quinta), porque a reserva começa agora e ainda não tem short de vídeo antigo.
 
 **The Pause:** como a Pausa deste vídeo é de Sêneca (II.29), o short sai como *"Take 30 seconds with Seneca"* (exceção só para este vídeo, decisão do criador em 14/10/2026; o formato do canal continua "with Marcus Aurelius").
 
-### 1. `02-the-letters-he-never-read.mp4` (Ter 27/10, 19:00 Brasília)
+### 1. `02-the-letters-he-never-read.mp4` (Qui 22/10, 19:00 Brasília)
 
 Título:
 
@@ -299,7 +299,7 @@ Full episode: "Your Anger Isn't the Problem. The Grudge Is." (linked above).
 #Stoicism #MarcusAurelius #Shorts
 ```
 
-### 2. `01-you-don-t-have-to-win.mp4` (Qua 28/10, 13:00 Brasília)
+### 2. `01-you-don-t-have-to-win.mp4` (Sex 23/10, 13:00 Brasília)
 
 Título:
 
@@ -315,7 +315,7 @@ Full episode: "Your Anger Isn't the Problem. The Grudge Is." (linked above).
 #Stoicism #LettingGo #Shorts
 ```
 
-### 3. `03-you-already-won-this.mp4` (Qui 29/10, 13:00 Brasília)
+### 3. `03-you-already-won-this.mp4` (Sáb 24/10, 11:00 Brasília)
 
 Título:
 
@@ -331,7 +331,7 @@ Full episode: "Your Anger Isn't the Problem. The Grudge Is." (linked above).
 #Stoicism #Anger #Shorts
 ```
 
-### 4. `04-a-grudge-is-a-fire.mp4` (Sáb 31/10, 11:00 Brasília)
+### 4. `04-a-grudge-is-a-fire.mp4` (Dom 25/10, 11:00 Brasília)
 
 Título:
 
@@ -347,7 +347,7 @@ Full episode: "Your Anger Isn't the Problem. The Grudge Is." (linked above).
 #Stoicism #AncientWisdom #Shorts
 ```
 
-### 5. `05-take-30-seconds.mp4` (reserva; Dom 1/11, 12:00 Brasília)
+### 5. `05-take-30-seconds.mp4` (reserva; Ter 27/10, 13:00 Brasília)
 
 Título:
 

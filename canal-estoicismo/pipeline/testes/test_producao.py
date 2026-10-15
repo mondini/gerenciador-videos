@@ -147,12 +147,12 @@ def test_limpeza_so_tira_o_que_tem_backup_ou_e_refeito(tmp_path, monkeypatch):
 def test_le_drive_root_do_env_do_repositorio(tmp_path, monkeypatch):
     monkeypatch.setattr(config, 'REPO', tmp_path)
     monkeypatch.delenv('DRIVE_ROOT', raising=False)
-    (tmp_path / '.env').write_text('# comentário\nDRIVE_ROOT="/x/Meu Drive/Canais"\nPORT=4321\n')
+    (tmp_path / '.env').write_text('# comentário\nDRIVE_ROOT="/x/Meu Drive/Canais"\nOUTRA=1\n')
     assert config.env_repo('DRIVE_ROOT') == '/x/Meu Drive/Canais'
-    assert config.env_repo('PORT') == '4321'
-    monkeypatch.setenv('PORT', '9999')
-    assert config.env_repo('PORT') == '9999'
-    assert os.environ['PORT'] == '9999'
+    assert config.env_repo('OUTRA') == '1'
+    monkeypatch.setenv('OUTRA', '2')
+    assert config.env_repo('OUTRA') == '2'
+    assert os.environ['OUTRA'] == '2'
 
 
 def test_novo_video_a_partir_do_plano(tmp_path, monkeypatch):
@@ -169,3 +169,19 @@ def test_novo_video_a_partir_do_plano(tmp_path, monkeypatch):
     assert '# Vídeo 3 — The Last Hour' in txt and 'Conceito estoico (uma ideia)' in txt and 'memento mori para viver melhor' in txt
     with pytest.raises(SystemExit):
         producao.novo_video(3, plano)
+
+
+def test_painel_junta_plano_e_pastas(tmp_path, monkeypatch):
+    plano = tmp_path / 'plano.md'
+    plano.write_text('| # | Nome interno | Título | Tema | Provérbio |\n|---|---|---|---|---|\n'
+                     '| 1 | The Man Who Had Everything | The Richest Man in Rome | Riqueza | 16:18 |\n'
+                     '| 2 | On Anger | How to Stay Calm | Raiva | 15:1 |\n', encoding='utf-8')
+    monkeypatch.setattr(config, 'VIDEOS', tmp_path / 'videos')
+    _video(tmp_path)
+    _video(tmp_path, 'MA-007-extra')
+    v = {x['codigo']: x for x in producao.painel(plano)}
+    assert list(v) == ['MA-001', 'MA-002', 'MA-007']
+    assert v['MA-001']['etapa'] == 'Roteiro' and v['MA-001']['titulo'] == 'The Richest Man in Rome'
+    assert v['MA-001']['creditos_pendentes'] > 0 and not v['MA-001']['concluido']
+    assert v['MA-002'] == {'codigo': 'MA-002', 'titulo': 'How to Stay Calm', 'etapa': 'Ideia', 'concluido': False,
+                           'pendencias': [], 'creditos_pendentes': 0}

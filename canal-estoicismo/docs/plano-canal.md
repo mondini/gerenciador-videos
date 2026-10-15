@@ -77,7 +77,7 @@ Momento fixo em todo vídeo em que o espectador pratica o que ouviu.
 
 ## Guia de embalagem — decisões do criador (12/10/2026)
 
-Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
+Referência: `docs/guia-embalagem-youtube.md`, na raiz do repositório (vale para todos os canais). Onde o guia conflitava com o canal:
 - **Texto da thumbnail:** passa a ser no máximo **3 palavras** (antes, 4 na variante C).
 - **Cores das thumbnails:** **mantém** a paleta do canal (carvão, mármore, âmbar), apesar de o guia desaconselhar tons marrons/neutros. Conferir a legibilidade em tamanho de celular (320×180).
 - **Rostos:** canal dark; as silhuetas fazem o papel do "fator humano".
@@ -113,7 +113,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 - **Em todo short:** "Vídeo relacionado" no YouTube Studio apontando para o vídeo longo de origem (o short da reserva aponta para o vídeo dele).
 - **Reserva de shorts:** cobre as semanas em que o vídeo atrasar, para o canal não parar, e leva tráfego para o acervo.
 - **Ajuste:** depois de 3–4 semanas no ar, trocar os horários pelos do relatório "Quando seus espectadores estão no YouTube" do Analytics e registrar aqui.
-- **Agendamento:** a aba **Agenda** da ficha do vídeo no sistema de gestão mostra datas, horas (Nova York e Brasília) e o que programar no Studio a partir da data de upload; o modelo fica em Configurações → Agenda e deve acompanhar esta seção. Se o criador pedir aqui, o Claude monta a agenda daquela semana com datas reais e as duas horas (ET e Brasília, conferindo o horário de verão americano na data), dizendo qual short vai em cada horário e para qual vídeo aponta o "Vídeo relacionado", pronta para programar no YouTube Studio.
+- **Agendamento:** as datas de cada vídeo e short ficam em `calendario.json` (raiz do canal), que o painel da raiz (`./canais`) mostra junto com os outros canais. Se o criador pedir, o Claude monta a agenda daquela semana com datas reais e as duas horas (ET e Brasília, conferindo o horário de verão americano na data), dizendo qual short vai em cada horário e para qual vídeo aponta o "Vídeo relacionado", pronta para programar no YouTube Studio.
 
 ## Regras fixas para todos os vídeos
 
@@ -124,7 +124,7 @@ Referência: `guia-embalagem-youtube.md`. Onde o guia conflitava com o canal:
 5. **Ritmo:** o ElevenLabs não tem controle de velocidade; na montagem as pausas são levemente alongadas (+10% + 0,05 s) e a voz fica no andamento original, para ~150 palavras/min (decisão de 12/10/2026; antes era −8% de andamento, que deixava ~120 palavras/min, lento demais).
 6. **Efeitos de voz:** EM ESPERA — gerar sempre seco.
 7. **Construção do roteiro aos poucos:** um bloco por vez, com perguntas ao criador, nada genérico. O criador aprova cada bloco.
-8. **Pacote de Publicação** ao concluir cada vídeo (`pacote-de-publicacao-regras.md`). Nunca inventar fonte, versículo, link ou licença — perguntar ou marcar "VERIFICAR". Pedir os links do canal na hora.
+8. **Pacote de Publicação** ao concluir cada vídeo (base comum em `docs/pacote-de-publicacao.md` na raiz + complemento do canal em `pacote-de-publicacao-canal.md`). Nunca inventar fonte, versículo, link ou licença — perguntar ou marcar "VERIFICAR". Pedir os links do canal na hora.
 
 ## Os 12 vídeos
 
@@ -147,7 +147,7 @@ Versículos e citações desta tabela são **pontos de partida**: conferir na WE
 
 ### Formatos (decisão de 12/10/2026)
 
-O formato é a **promessa do título** e serve para comparar o desempenho no experimento de 90 dias (campo Formato do sistema de gestão).
+O formato é a **promessa do título** e serve para comparar o desempenho no experimento de 90 dias.
 
 | Formato | O que promete | Vídeos |
 |---|---|---|
@@ -181,7 +181,7 @@ Ver `fluxo-por-video.md`.
 
 ## Status
 
-Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe e o que falta em cada vídeo, e `./ma sincronizar N` leva isso ao kanban do sistema de gestão.
+Não se escreve à mão: `./ma status N` (na pasta do canal) mostra o que existe, o que falta e a etapa de cada vídeo.
 
 - MA-001 *The Man Who Had Everything*: concluído com 2 thumbnails (A e C); pela regra das 3 thumbs, falta a B (Símbolo). **Publicação: aguardar a liberação do criador.**
 - Vídeos 2–12: roteiros a fazer. Pasta de cada um: `videos/MA-NNN-slug/` (slug do nome interno da tabela acima).

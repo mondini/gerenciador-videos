@@ -58,10 +58,8 @@ Rode na pasta do canal. `VIDEO` = `1`, `MA-001` ou o nome da pasta (`MA-001-the-
 | YouTube | `./ma youtube videos/MA-001-the-man-who-had-everything/previas/bloco1.mp4` | Recomprime a ~4 Mbps e salva stills lado a lado (inteiros e zoom num degradê) | `...-youtube4mbps.mp4`, `previas/stills/<nome>-youtube/` |
 | Comparar | `./ma comparar A.png B.png` | Diferença de pixels (também aceita duas pastas) | — |
 | Testes | `.venv/bin/python -m pytest pipeline/testes` | Confere tempos, atalhos de desempenho e os stills de referência | — |
-| Status | `./ma status VIDEO` | O que existe e o que falta por peça (texto aprovado, voz, tempos, cena, prévia), final, thumbs, shorts, pacote; etapa do kanban e créditos do ElevenLabs para o que falta | — |
+| Status | `./ma status VIDEO` | O que existe e o que falta por peça (texto aprovado, voz, tempos, cena, prévia), final, thumbs, shorts, pacote; etapa do kanban e créditos do ElevenLabs para o que falta. `./ma status --json` (sem VIDEO) lista todos os vídeos, inclusive as ideias do plano, para o painel da raiz (`./canais`) | — |
 | Backup | `./ma backup VIDEO` | Copia para `DRIVE_ROOT/MA - Marble & Ash/VIDEOS/<pasta do vídeo>/` (01_roteiro, 02_audio, 04_video, 05_projeto, 06_thumbnail, 07_export). Só copia o que mudou; nunca apaga no Drive; texto alterado guarda a versão anterior em `_versoes/`. Roda sozinho depois de `audio` e `juntar` | — |
-| Sincronizar | `./ma sincronizar VIDEO` | Manda etapa, títulos, roteiro, duração e pendências para o sistema de gestão (`npm run dev` na raiz; canal cadastrado com prefixo `MA`) | — |
-| Fechar | `./ma fechar VIDEO` | `backup` + `sincronizar` (ao fechar um bloco e no fim da sessão) | — |
 | Limpar | `./ma limpar VIDEO --apagar` | Vídeo concluído: refaz o backup e apaga do Mac `trabalho/` (menos `referencia/`), `previas/stills/`, simulações e prévias que já estão no Drive. Sem `--apagar`, só lista | — |
 
 Opções úteis: `render --processos N` (padrão 4), `render --sem-som`, `render --so-som` (refaz só o som, reaproveitando o vídeo sem som já renderizado), `render --ambiente -20` (ganho do

@@ -4,8 +4,8 @@
   "_modo": "site = o dono gera colando o texto no site do ElevenLabs; api = o pipeline gera pela API. Para passar a api, preencher voz.voice_id e modelo.model_id.",
   "voz": {
     "nome": "Flint — Deep, Raspy, and Warm",
-    "voice_id": null,
-    "_pendente": "voice_id: a chave da API não tem a permissão voices_read; pegar o ID no site (Voices > Flint > copiar ID) ou liberar voices_read na chave"
+    "voice_id": "qAZH0aMXY8tw1QufPN0D",
+    "_conferido": "14/10/2026 pela API (/v1/voices): \"Flint - Deep, Raspy, and Warm\", professional, inglês americano, compatível com eleven_v4"
   },
   "modelo": {
     "nome": "Eleven v4",

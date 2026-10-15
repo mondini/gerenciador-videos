@@ -1,5 +1,6 @@
 {
   "nome": "Marble & Ash",
   "prefixo": "MA",
-  "pasta_drive": "MA - Marble & Ash"
+  "pasta_drive": "MA - Marble & Ash",
+  "status": "./ma status --json"
 }

@@ -12,12 +12,11 @@ Um comando por etapa (VIDEO = 1, MA-001 ou a pasta inteira MA-001-slug; BLOCO = 
   comparar A B                    diferença de pixels entre duas imagens (ou pastas de PNGs)
   limpar-cache                    apaga o cache de arte (é refeito sozinho)
 
-Produção (status, backup e sistema de gestão):
+Produção (status, backup e limpeza):
   novo        N                   cria videos/MA-NNN-slug/ e o roteiro.md a partir da ficha do plano
   status      VIDEO               o que já existe, o que falta e a etapa do kanban
+  status      --json [VIDEO]      o mesmo em JSON; sem VIDEO, todos os vídeos (painel da raiz: ./canais)
   backup      VIDEO               copia para o Google Drive (nunca apaga nada lá)
-  sincronizar VIDEO               manda status, roteiro e pendências para o sistema de gestão
-  fechar      VIDEO               backup + sincronizar (ao fechar um bloco ou uma etapa)
   limpar      VIDEO [--apagar]    vídeo concluído: tira do Mac o que tem backup ou é refeito
 """
 from __future__ import annotations
@@ -331,6 +330,14 @@ def _backup_automatico(pasta):
 
 
 def cmd_status(a):
+    if a.json:
+        import json
+        from marbleash import producao
+        videos = [producao.item_painel(_status(_pasta_video(a.video)))] if a.video else producao.painel()
+        print(json.dumps({'videos': videos}, ensure_ascii=False))
+        return
+    if not a.video:
+        raise SystemExit('Informe o VIDEO (ex.: ma status 2) ou use --json para todos.')
     st = _status(_pasta_video(a.video))
     print(f'{st.codigo} · {st.nome_interno}' + (f'  ("{st.titulo}")' if st.titulo else ''))
     print(f'etapa no kanban: {st.etapa}')
@@ -362,21 +369,6 @@ def cmd_backup(a):
     r = producao.backup(pasta)
     print(f'{r["novos"]} novo(s), {r["atualizados"]} atualizado(s) ({r["versoes"]} versão(ões) anterior(es) em _versoes/), '
           f'{r["iguais"]} já iguais; {r["bytes"] / 1e6:.1f} MB copiados\n-> {r["destino"]}')
-
-
-def cmd_sincronizar(a):
-    from marbleash import producao
-    st = _status(_pasta_video(a.video))
-    r = producao.sincronizar(st)
-    v = r['video']
-    print(f'sistema: {v["codigo"]} na etapa {v["etapa"]}; {len(v["pendencias"])} pendência(s)')
-    for aviso in r['avisos']:
-        print(f'  {aviso}')
-
-
-def cmd_fechar(a):
-    cmd_backup(a)
-    cmd_sincronizar(a)
 
 
 def cmd_limpar(a):
@@ -475,10 +467,12 @@ def main(argv=None):
     sp.add_argument('numero', type=int, help='número do vídeo na tabela "Os 12 vídeos" (ex.: 3)')
     sp.set_defaults(f=cmd_novo)
 
-    for nome, f, ajuda in (('status', cmd_status, 'o que já existe e o que falta'),
-                           ('backup', cmd_backup, 'copia o vídeo para o Google Drive'),
-                           ('sincronizar', cmd_sincronizar, 'manda status e roteiro para o sistema de gestão'),
-                           ('fechar', cmd_fechar, 'backup + sincronizar')):
+    sp = sub.add_parser('status', help='o que já existe e o que falta')
+    sp.add_argument('video', nargs='?', help='ex.: 1, MA-001 ou MA-001-slug (opcional com --json)')
+    sp.add_argument('--json', action='store_true', help='saída em JSON; sem VIDEO, todos os vídeos (painel da raiz)')
+    sp.set_defaults(f=cmd_status)
+
+    for nome, f, ajuda in (('backup', cmd_backup, 'copia o vídeo para o Google Drive'),):
         sp = sub.add_parser(nome, help=ajuda)
         sp.add_argument('video', help='ex.: 1, MA-001 ou MA-001-slug')
         sp.set_defaults(f=f)

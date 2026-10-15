@@ -6,7 +6,7 @@ O status é lido dos arquivos da pasta do vídeo e dos títulos do roteiro.md; n
   - Animação: blocoN/tempos.txt, blocoN/cena.py e a prévia previas/blocoN.mp4.
   - Entrega: final/*.mp4, thumbnails/ (3 imagens: A, B e C), shorts/ (5+ mp4) e pacote-de-publicacao.md.
 
-Backup: copia para DRIVE_ROOT/<pasta do canal>/VIDEOS/<pasta do vídeo>/, nas subpastas do sistema de gestão.
+Backup: copia para DRIVE_ROOT/<pasta do canal>/VIDEOS/<pasta do vídeo>/, nas subpastas padronizadas do Drive.
 Nunca apaga nada no Drive. Texto e projeto (roteiro, cena.py, tempos) que mudaram guardam a versão anterior
 em _versoes/; mídia que dá para gerar de novo (prévias, final) é só atualizada.
 """
@@ -20,8 +20,7 @@ from pathlib import Path
 
 from . import config, tempos
 
-ETAPAS = ['Roteiro', 'Narração', 'Imagens', 'Edição', 'Thumbnail']   # as do sistema de gestão que o pipeline sabe medir
-CREDITOS_POR_CARACTERE = 1                                            # ElevenLabs: ~1 crédito por caractere
+ETAPAS = ['Roteiro', 'Narração', 'Imagens', 'Edição', 'Thumbnail']   # etapas do kanban que o pipeline sabe medir
 SHORTS_MIN = 5
 THUMBS_MIN = 3           # A (Palavra), B (Símbolo) e C (Gancho), para o teste A/B do YouTube (decisão de 12/10/2026)
 _IMAGEM = {'.png', '.jpg', '.jpeg', '.webp'}
@@ -70,7 +69,7 @@ class Status:
 
     @property
     def etapa(self) -> str:
-        """Etapa do kanban do sistema em que o vídeo está, pelo que já existe."""
+        """Etapa do kanban em que o vídeo está, pelo que já existe."""
         if not self.pecas or any(not p.texto_aprovado for p in self.pecas):
             return 'Roteiro'
         if any(not p.mp3 for p in self.pecas):
@@ -88,10 +87,10 @@ class Status:
     @property
     def creditos_pendentes(self) -> int:
         """Créditos do ElevenLabs para narrar as peças que ainda não têm mp3."""
-        return sum(p.caracteres for p in self.pecas if not p.mp3) * CREDITOS_POR_CARACTERE
+        return round(sum(p.caracteres for p in self.pecas if not p.mp3) * creditos_por_caractere())
 
     def pendencias(self) -> list[str]:
-        """O que falta, em frases curtas (é isto que vai para o sistema de gestão)."""
+        """O que falta, em frases curtas."""
         out = []
         if not self.pecas:
             out.append('roteiro: nenhuma seção "## Bloco N" no roteiro.md')
@@ -107,6 +106,15 @@ class Status:
         if not self.pacote:
             out.append('pacote-de-publicacao.md')
         return out
+
+
+def creditos_por_caractere() -> float:
+    """Regra de créditos do elevenlabs.json do canal (configuração obrigatória, ver CLAUDE.md da raiz)."""
+    import json
+    arq = config.CANAL / 'elevenlabs.json'
+    if not arq.exists():
+        raise SystemExit(f'Falta {arq.name} na pasta do canal (configuração obrigatória do ElevenLabs).')
+    return json.loads(arq.read_text(encoding='utf-8'))['creditos']['por_caractere']
 
 
 def _campo(md: str, rotulo: str) -> str:
@@ -195,7 +203,7 @@ def pasta_drive_do_video(pasta_video: Path, drive_root: Path | None = None) -> P
 def _drive_root() -> Path:
     v = config.env_repo('DRIVE_ROOT')
     if not v:
-        raise SystemExit('DRIVE_ROOT não definido (no .env da raiz do repositório, o mesmo do sistema de gestão).')
+        raise SystemExit('DRIVE_ROOT não definido (no .env da raiz do repositório).')
     raiz = Path(v).expanduser()
     if not raiz.is_dir():
         raise SystemExit(f'DRIVE_ROOT não existe: {raiz}\nO Google Drive for Desktop está aberto e logado?')
@@ -311,39 +319,6 @@ def limpar(itens: list[Path]) -> int:
     return total
 
 
-# ---------------------------------------------------------------- sincronização com o sistema de gestão
-
-def dados_sincronizar(st: Status) -> dict:
-    """Corpo do POST /api/sincronizar do sistema de gestão (ver src/server/servicos/sincronizar.ts)."""
-    return {
-        'prefixo': config.PREFIXO,
-        'codigo': st.codigo,
-        'pasta': st.pasta.name,
-        'nomeInterno': st.nome_interno or st.slug or st.codigo,
-        'tituloFinal': st.titulo or None,
-        'etapa': st.etapa,
-        'roteiro': (st.pasta / 'roteiro.md').read_text(encoding='utf-8') if (st.pasta / 'roteiro.md').exists() else '',
-        'duracaoFinalSeg': round(st.duracao_final) if st.duracao_final else None,
-        'pendencias': st.pendencias(),
-    }
-
-
-def sincronizar(st: Status, url: str | None = None) -> dict:
-    import json
-    import urllib.error
-    import urllib.request
-    base = url or f'http://localhost:{config.env_repo("PORT", "4321")}'
-    req = urllib.request.Request(f'{base}/api/sincronizar', data=json.dumps(dados_sincronizar(st)).encode(),
-                                 headers={'content-type': 'application/json'}, method='POST')
-    try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            return json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        raise SystemExit(f'O sistema recusou: {json.loads(e.read()).get("erro", e)}')
-    except urllib.error.URLError:
-        raise SystemExit(f'O sistema de gestão não está rodando em {base}. Na raiz do repositório: npm run dev')
-
-
 # ---------------- vídeo novo (ma novo N) ----------------
 def _celulas(linha):
     return [c.strip() for c in linha.strip().strip('|').split('|')]
@@ -369,6 +344,43 @@ def ficha_do_plano(numero, plano=None):
     m = re.search(rf'^- \*\*Vídeo {numero} — [^*]+:\*\* (.+)$', txt, re.M)
     ficha['ficha'] = m.group(1).strip() if m else ''
     return ficha
+
+
+def videos_do_plano(plano=None) -> list[dict]:
+    """As linhas da tabela "Os 12 vídeos" do plano: número, nome interno e título de publicação."""
+    plano = Path(plano or config.CANAL / 'docs' / 'plano-canal.md')
+    out, tabela = [], None
+    for linha in plano.read_text(encoding='utf-8').splitlines():
+        if not linha.startswith('|'):
+            tabela = None
+            continue
+        c = _celulas(linha)
+        tabela = tabela or c[0]
+        if tabela == '#' and len(c) == 5 and c[0].isdigit():
+            out.append({'numero': int(c[0]), 'nome': c[1], 'titulo': c[2]})
+    return out
+
+
+def painel(plano=None) -> list[dict]:
+    """Todos os vídeos no formato do painel da raiz (`./canais`). Os do plano que ainda não têm pasta ficam em Ideia."""
+    tam = len(config.PREFIXO) + 4                                  # "MA-001"
+    pastas = {p.name[:tam]: p for p in sorted(config.VIDEOS.glob(f'{config.PREFIXO}-[0-9][0-9][0-9]*')) if p.is_dir()}
+    out = []
+    for v in videos_do_plano(plano):
+        codigo = f'{config.PREFIXO}-{v["numero"]:03d}'
+        pasta = pastas.pop(codigo, None)
+        if pasta:
+            out.append(item_painel(ler_status(pasta), v['titulo']))
+        else:
+            out.append({'codigo': codigo, 'titulo': v['titulo'], 'etapa': 'Ideia', 'concluido': False,
+                        'pendencias': [], 'creditos_pendentes': 0})
+    return out + [item_painel(ler_status(p)) for p in pastas.values()]    # vídeos fora da tabela do plano
+
+
+def item_painel(st: Status, titulo_plano: str = '') -> dict:
+    titulo = re.sub(r'\s*\([^)]*\d{1,2}/\d{1,2}[^)]*\)\s*$', '', st.titulo or titulo_plano or st.nome_interno)  # tira "(trocado em 14/10…)"
+    return {'codigo': st.codigo, 'titulo': titulo, 'etapa': st.etapa,
+            'concluido': st.concluido, 'pendencias': st.pendencias(), 'creditos_pendentes': st.creditos_pendentes}
 
 
 def slug(nome):
