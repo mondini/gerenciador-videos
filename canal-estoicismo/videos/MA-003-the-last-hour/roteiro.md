@@ -282,3 +282,26 @@ Tom dark e pesado (pedido do criador). *Historia Augusta* 21.3-4 contada com nos
 **Short (o mais forte):** "When a man kisses his child..." até "...And neither of you will know it."
 **Ideias de cena:** Marco e o menino em sombra; a caminha à lamparina, médicos curvados, a lamparina que se apaga; a porta com mensageiros batendo; a tenda de campanha à noite com lua minguante; o pai que se inclina e beija a cabeça da criança; trigo sendo colhido; duas silhuetas num abraço que se desfaz em luz; o ouvinte larga a tabuinha e se ajoelha ao lado da criança.
 **Créditos:** *Historia Augusta, Life of Marcus 21 · trans. David Magie* · *Marcus Aurelius, Meditations 11.34 · trans. George Long*
+
+## The Pause (aprovado)
+
+```
+[softly] Seneca once wrote... count each separate day as a separate life.
+So let's live this one... for a few breaths.
+Let your shoulders drop. Let your hands rest.
+Breathe in... slowly... two... three... four.
+And let it go... two... three... four... five... six.
+One more time.
+Breathe in... two... three... four.
+And out... two... three... four... five... six.
+[warmly] Now... one question. Just for you.
+Who in your life... is waiting for you today?
+[softly] You don't have to answer out loud.
+Just let their face... come to you.
+```
+
+**Deixas:** seneca = "Seneca once wrote" · live = "So let's live" · shoulders = "Let your shoulders" · breathe_in = "Breathe in" · two = "two" · three = "three" · four = "four" · let_go = "And let it go" · one_more = "One more time" · breathe_in2 = "Breathe in" · and_out = "And out" · now = "Now" · who = "Who in your life" · answer = "You don't have to answer" · face = "Just let their face"
+
+~30 s, mesmo formato dos vídeos 1 e 2. A pergunta liga o bloco 4 ao 5.
+**Ideias de cena:** o sol do logo baixo no horizonte (o pôr do sol do gancho), subindo na inspiração e descendo na expiração; pergunta na tela em Cormorant Garamond itálico. Prepara o "I am already setting" do fechamento.
+**Créditos:** *Seneca, Moral Letters 101 · trans. Richard M. Gummere*
