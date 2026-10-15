@@ -305,3 +305,34 @@ Just let their face... come to you.
 ~30 s, mesmo formato dos vídeos 1 e 2. A pergunta liga o bloco 4 ao 5.
 **Ideias de cena:** o sol do logo baixo no horizonte (o pôr do sol do gancho), subindo na inspiração e descendo na expiração; pergunta na tela em Cormorant Garamond itálico. Prepara o "I am already setting" do fechamento.
 **Créditos:** *Seneca, Moral Letters 101 · trans. Richard M. Gummere*
+
+## Bloco 5 — Provérbio-ponte (aprovado)
+
+```
+[thoughtful] Centuries before Seneca, the book of Proverbs put this whole lesson into a single line.
+Don't boast about tomorrow; for you don't know what a day may bring.
+[softly] It doesn't say don't plan. Planning is wise.
+It says don't boast. Don't act as if tomorrow already belongs to you.
+Senecio's investments were a boast about tomorrow.
+And so is "next summer."
+
+[thoughtful] The same book has a quieter line... and it cuts even deeper.
+Don't tell your neighbor, "Come back tomorrow, I'll give it to you then"... when you have it with you now.
+[warmly] It was written about what we owe the people around us.
+And what the people we love are asking for... is rarely money.
+It's an afternoon. A trip. An hour on the floor with your kids.
+You're not waiting until you can afford it.
+You can already afford it.
+[softly] You're only waiting... for tomorrow.
+And tomorrow was never promised to anyone.
+Not to a rich man in Rome.
+Not to an emperor.
+Not to you.
+```
+
+**Deixas:** centuries = "Centuries before Seneca" · boast = "Don't boast about tomorrow" · plan = "It doesn't say" · belongs = "It says don't boast" · senecio = "Senecio's investments" · summer = "And so is" · quieter = "The same book" · neighbor = "Don't tell your neighbor" · owe = "It was written" · money = "And what the people" · afternoon = "It's an afternoon" · afford = "You're not waiting" · already = "You can already" · waiting = "You're only waiting" · promised = "And tomorrow was never" · rich = "Not to a rich man" · emperor = "Not to an emperor" · you = "Not to you"
+
+Literal só o 27:1; o 3:28 simplificado (no original, o bem devido ao vizinho). Sem atribuir a Salomão e sem o "two men who never met" do MA-001. "Not to an emperor" prepara o bloco 6.
+**Short (reserva):** "The same book has a quieter line..." até "...Not to you."
+**Ideias de cena:** rolo hebraico pequeno num canto junto da citação; navios e campos de Senécio virando fumaça; a porta onde o vizinho bate e ouve "amanhã"; uma tarde no chão com a criança (pião, bonecos de barro romanos); três silhuetas em sequência (o rico, o imperador, o ouvinte), cada uma apagando a vez da outra.
+**Créditos:** *Proverbs 27:1 · World English Bible* · *Proverbs 3:28 · World English Bible*
