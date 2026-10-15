@@ -1,0 +1,10 @@
+{
+  "cenas": [
+    { "tipo": "pergunta", "inicio": 0, "fim": 3.5, "pre": "Dizem que", "palavra": "forró" },
+    { "tipo": "mito", "inicio": 3.5, "fim": 8, "pre": "vem de", "palavra": "for all", "nota": "os bailes “para todos” dos americanos em Natal, nos anos 1940" },
+    { "tipo": "carimbo", "inicio": 8, "fim": 10.5, "palavra": "for all", "carimbo": "MITO" },
+    { "tipo": "encurta", "inicio": 10.5, "fim": 15.5, "longa": "forrobodó", "curta": "forró", "nota": "festa, arrasta-pé, bagunça" },
+    { "tipo": "prova", "inicio": 15.5, "fim": 20, "de": 1943, "ano": 1912, "texto": "Chiquinha Gonzaga estreia a opereta “Forrobodó”", "nota": "30 anos antes dos americanos" },
+    { "tipo": "fim", "inicio": 20, "fim": 23, "pre": "Etimologia:", "texto": "verdade ou mito?" }
+  ]
+}
