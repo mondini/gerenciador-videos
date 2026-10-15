@@ -336,3 +336,52 @@ Literal só o 27:1; o 3:28 simplificado (no original, o bem devido ao vizinho). 
 **Short (reserva):** "The same book has a quieter line..." até "...Not to you."
 **Ideias de cena:** rolo hebraico pequeno num canto junto da citação; navios e campos de Senécio virando fumaça; a porta onde o vizinho bate e ouve "amanhã"; uma tarde no chão com a criança (pião, bonecos de barro romanos); três silhuetas em sequência (o rico, o imperador, o ouvinte), cada uma apagando a vez da outra.
 **Créditos:** *Proverbs 27:1 · World English Bible* · *Proverbs 3:28 · World English Bible*
+
+## Bloco 6 — Fechamento (aprovado)
+
+```
+[softly] In the year 180, on the frontier, with his army around him... Marcus Aurelius was dying.
+His friends stood by his bed, weeping.
+And he asked them... why are you crying for me? Think of the plague. Think of the death that waits for all of us.
+[thoughtful] Near the end, he let only his son come in.
+And then he sent him away... afraid his son would catch the sickness.
+[softly] Then an officer came to ask for the watchword of the day.
+And the emperor answered:
+Go to the rising sun. I am already setting.
+[thoughtful] That night, he covered his head... as if he were going to sleep.
+And he did not wake up.
+
+[softly] He didn't beg for more time.
+He had spent his whole life... remembering he wouldn't have it.
+[thoughtful] The rising sun was the ones who would come after him.
+And yours... may be asleep in the next room right now.
+
+[warmly] So tonight, before you sleep, try something Seneca suggested.
+Close your eyes... and say quietly: I have lived.
+Not because everything is done. Because today was real.
+[softly] And if tomorrow comes... take it as a gift.
+Hug them a little longer. Take the trip.
+While it's still today.
+
+[softly] Old wisdom... for quiet hours.
+```
+
+**Deixas:** year = "In the year 180" · friends = "His friends stood" · crying = "And he asked them" · plague = "Think of the plague" · son = "Near the end" · away = "And then he sent" · officer = "Then an officer" · answered = "And the emperor answered" · rising = "Go to the rising sun" · setting = "I am already setting" · covered = "That night" · wake = "And he did not wake" · beg = "He didn't beg" · spent = "He had spent" · after = "The rising sun was" · next = "And yours" · tonight = "So tonight" · lived = "Close your eyes" · real = "Not because everything" · gift = "And if tomorrow comes" · hug = "Hug them" · today = "While it's still today" · slogan = "Old wisdom"
+
+Dois relatos juntos: *Historia Augusta* 28 (amigos, peste, filho mandado embora, cabeça coberta) e Cássio Dio 72.34 (a senha, única citação literal); fora a acusação de Dio contra os médicos. Na fonte, o "rising sun" é o sucessor (Cômodo); aqui, "os que vêm depois". Carta 12 em palavras simples. Fecha o *loop* do gancho. Último bloco: declarar `FADE` na cena. Encerramento padrão do canal.
+**Ideias de cena:** tenda no acampamento, amigos curvados em volta do leito; o filho que entra e sai; o tribuno que se ajoelha; o sol do logo se pondo no horizonte enquanto a luz âmbar nasce do lado oposto; Marco cobre a cabeça, a lamparina baixa; corte para o quarto de uma criança dormindo com a luz da manhã entrando; escurece; encerramento padrão.
+**Créditos:** *Historia Augusta, Life of Marcus 28 · trans. David Magie* · *Cassius Dio, Roman History 72.34 · Loeb Classical Library* · *Seneca, Moral Letters 12 · trans. Richard M. Gummere*
+
+---
+
+## Shorts (5)
+
+| # | Trecho | Bloco |
+|---|---|---|
+| 1 | "When a man kisses his child..." → "...And neither of you will know it." (o mais forte) | 4 |
+| 2 | "\"Watch this.\" A small voice, from the other room." → "...you may not get the summer." | 1 |
+| 3 | "Then he told the story of a man he knew." → "...He just ran out of tomorrow." | 3 |
+| 4 | "That is what memento mori really is." → "...on an ordinary Tuesday." | 2 |
+| 5 | The Pause — *Take 30 seconds with Seneca* | Pausa |
+
+Reserva: bloco 5 ("The same book has a quieter line…" → "…Not to you.").
