@@ -65,11 +65,20 @@ O objeto se desenhando sozinho.
 No mapa, com fluxos de partículas para vento, nuvens e água.
 - Pororoca, friagem na Amazônia, rios voadores, ciclones no Sul, granizo no cerrado.
 
+### Casos (minidocumentários)
+Histórias brasileiras de empresas que quebraram, golpes financeiros e projetos que fracassaram, contadas com começo, auge e queda. Mesmo público do "Dinheiro do dia a dia". True crime, games e casos de outros países ficam fora (outro público).
+- Fordlândia, a cidade da Ford que a Amazônia engoliu.
+- Encol e os prédios que nunca ficaram prontos.
+- Varig; Mappin.
+- Golpes e pirâmides: Boi Gordo, Avestruz Master, Telexfree (recurso visual "promessa x realidade", com o prometido em fantasma translúcido).
+- Recursos: a maquete conta a história (prédios crescendo e apagando), linha do tempo, gráficos de queda e citações reais em cartão, sempre com fonte.
+
 ### Bandeiras e brasões (Shorts)
 Por que a bandeira do seu estado ou da sua cidade é assim. Muito regional e compartilhável.
 
 ## Cuidados
 
+- **Casos:** só fatos documentados (decisão judicial, CVM, Banco Central, imprensa com fonte); quem não foi condenado é "acusado". Sem escândalo político. Nada de recriar capa de jornal ou documento real; arquivo só com licença.
 - Sem política partidária. Obras paradas e impostos são explicados com dados, sem culpar governos específicos.
 - Dinheiro: explicar, **nunca recomendar investimento**.
 - Inventos e polêmicas históricas: sempre os dois lados, com fonte.
@@ -93,3 +102,5 @@ Por que a bandeira do seu estado ou da sua cidade é assim. Muito regional e com
 ## Pautas e anotações
 
 <!-- Novas pautas e resultados, com data. -->
+
+- **15/10/2026:** estilo visual aprovado pelo dono a partir de duas artes conceito: [O caminho de um Pix](../prototipos/pix/) e [Fordlândia](../prototipos/fordlandia/). Mesma identidade (papel creme, maquete com corte de terra, Archivo + IBM Plex Mono, coluna de infográfico à esquerda, legenda palavra por palavra); cada linha editorial pode ter a sua cor de destaque. Linha "Casos" incluída.

@@ -8,7 +8,7 @@ Caderno de ideias para canais novos, todos com **animação 2D/motion design** e
 
 > Esta pasta não é um projeto. Quando uma ideia virar canal de verdade, ela ganha a própria pasta (`canal-<nome>/`, com `CLAUDE.md`, como os outros canais) e sai daqui.
 
-Criado em 14/10/2026. Última revisão: 14/10/2026.
+Criado em 14/10/2026. Última revisão: 15/10/2026.
 
 ---
 
@@ -17,11 +17,12 @@ Criado em 14/10/2026. Última revisão: 14/10/2026.
 | Ordem | Canal | Idioma | Visual (principal + secundário) | Linhas editoriais | Ficha |
 |---|---|---|---|---|---|
 | 1 | **Língua e costumes** | PT | Tipografia cinética + mapa | Etimologia ("verdade ou mito?"), mapa das palavras, expressões populares, superstições e simpatias | [lingua-e-costumes.md](canais/lingua-e-costumes.md) |
-| 2 | **Brasil por dentro** | PT | Isométrico + infográfico/mapa | Infraestrutura, dinheiro do dia a dia, burocracia, Brasil em mapas, casas, comida de rua, inventos, clima, bandeiras e brasões | [brasil-por-dentro.md](canais/brasil-por-dentro.md) |
+| 2 | **Brasil por dentro** | PT | Isométrico + infográfico/mapa | Infraestrutura, dinheiro do dia a dia, burocracia, Brasil em mapas, casas, comida de rua, inventos, clima, casos (minidocumentários), bandeiras e brasões | [brasil-por-dentro.md](canais/brasil-por-dentro.md) |
 | 3 | **Lendas regionais** | PT | Flat com paleta escura + mapa | Terror folclórico, uma lenda por vídeo | [lendas-regionais.md](canais/lendas-regionais.md) |
 | 4 | **Sistemas e padrões** | EN + áudio PT | Partículas/generativo + diagramas em line art | Emergência, biomimética, matemática visual, ritmos brasileiros | [sistemas-e-padroes.md](canais/sistemas-e-padroes.md) |
 | 5 | **Ciência do cotidiano** | PT | Flat + line art | Ciência do dia a dia brasileiro, física dos brinquedos de rua, o céu do mês | [ciencia-do-cotidiano.md](canais/ciencia-do-cotidiano.md) |
 | 6 | **Futebol com bolinhas** | PT | Flat (prancheta) + infográfico | Táticas, lances históricos, regras | [futebol-com-bolinhas.md](canais/futebol-com-bolinhas.md) |
+| — | **Histórias católicas** (arquivada) | EN | A definir (one-line art e silhuetas reprovados) | Santos, parábolas, Mandamentos, salmos; pauta pelo calendário litúrgico | [historias-catolicas.md](canais/historias-catolicas.md) |
 
 Por que essa ordem:
 - **1.** Concorrência quase zero, produção quase toda por código, Shorts virais e comentários garantidos.
@@ -29,6 +30,7 @@ Por que essa ordem:
 - **3.** Gênero com público fiel no Brasil, e a narração atmosférica se parece com o que já fazemos.
 - **4.** Diferencial técnico (simulação de verdade) e RPM de inglês.
 - **5** e **6** ficam por último porque a concorrência é maior; precisam de validação com Shorts antes.
+- **Histórias católicas** fica fora da fila: já foi canal e voltou para o caderno sem estilo de arte aprovado. Só retomar com um caminho de arte novo.
 
 ### De onde veio cada ideia
 
@@ -139,3 +141,6 @@ Cada protótipo testa ao mesmo tempo a ideia e a técnica. Os dois primeiros val
 <!-- Espaço livre: ideias novas, links de referência e resultados dos protótipos, com data. -->
 
 - **14/10/2026, protótipo 1 (Remotion):** Short de 23s renderizado em ~20s, todo a partir de um JSON. Ainda sem narração. Detalhes em [prototipos/forro/](prototipos/forro/).
+- **15/10/2026, protótipo 3 (arte conceito):** um quadro de "O caminho de um Pix" com maquete isométrica em three.js + infográfico e mapa do IBGE em d3, tudo no Remotion. Detalhes em [prototipos/pix/](prototipos/pix/).
+- **15/10/2026, Histórias católicas:** o canal `canal-historias-biblicas/` foi arquivado e voltou para o caderno como ideia; nenhum dos estilos de arte testados agradou. Ficha, testes e lições em [canais/historias-catolicas.md](canais/historias-catolicas.md).
+- **15/10/2026, arte conceito "Fordlândia" (Brasil por dentro, linha "Casos"):** mesmo estilo de maquete num caso histórico, com linha do tempo e mapa das Américas. Detalhes em [prototipos/fordlandia/](prototipos/fordlandia/).

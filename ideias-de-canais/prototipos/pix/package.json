@@ -1,0 +1,25 @@
+{
+  "name": "prototipo-pix",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "arte": "remotion still src/index.ts Pix out/arte-conceito.png --frame=86 --gl=angle"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.4.0",
+    "@remotion/cli": "4.0.528",
+    "@remotion/google-fonts": "4.0.528",
+    "@remotion/three": "4.0.528",
+    "d3-geo": "3.1.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.528",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.0",
+    "@types/react": "19.1.8",
+    "@types/three": "0.180.0",
+    "typescript": "5.8.3"
+  }
+}
