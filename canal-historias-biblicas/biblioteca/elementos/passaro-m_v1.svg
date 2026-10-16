@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 -12 40 18">
-  <!-- Pássaro em "m"; nas cenas, ampliar e compensar o traço (variável CSS traco = 1.5 / escala); TESTE-01 c25. Coordenadas da cena 1920×1080 de origem: para reaproveitar, copiar o grupo para dentro da cena e mover com transform. -->
-  <style>
-    :root { --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
-    .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
-  </style>
-  <path class="linha" d="M -14 0 C -10 -7 -4 -8 0 0 C 4 -8 10 -7 14 0"/>
-</svg>

@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="630 530 170 140">
-  <!-- Oliveira pequena e arredondada; TESTE-01 c25. Coordenadas da cena 1920×1080 de origem: para reaproveitar, copiar o grupo para dentro da cena e mover com transform. -->
-  <style>
-    :root { --tinta: #2F2E2C; --salvia: #B7CBC4; --salvia-claro: #C9D0BD; --pessego: #EBCDB0; --rosa: #E2B7A8; --azul: #BFCAD5; --creme: #F0E2CF; }
-    .linha { fill: none; stroke: var(--tinta); stroke-width: var(--traco, 1.5); stroke-linecap: round; stroke-linejoin: round; }
-  </style>
-    <path fill="var(--salvia)" transform="translate(8 6)" d="M 668 612 C 650 590 670 566 694 572 C 704 550 742 554 746 578 C 768 580 774 608 754 618 C 740 628 680 628 668 612 Z"/>
-    <path class="linha" d="M 708 652 C 704 638 714 630 708 616 M 708 630 C 716 624 724 626 728 618 M 664 608 C 648 586 668 562 692 568 C 702 546 740 550 744 574 C 766 576 772 604 752 614 C 738 624 690 624 676 616 c -8 -4 -4 -12 2 -9"/>
-</svg>
