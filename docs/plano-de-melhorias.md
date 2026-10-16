@@ -13,7 +13,7 @@ Auditoria completa de 14/10/2026: código (painel da raiz, pipelines dos dois ca
 ## 1. Retrato em 14/10/2026
 
 - **Marble & Ash:** MA-001 agendado (qui 15/10), MA-002 pronto (qui 22/10), MA-003 com roteiro aprovado e sem narração (~8.187 créditos), MA-004 a MA-012 só no plano. **Folga real: uma semana.** O MA-003 precisa estar pronto até qui 29/10/2026 para a cadência não quebrar.
-- **Histórias católicas:** piloto. TESTE-01 montado sem narração; sem `canal.json`, `calendario.json` e `creditos-elevenlabs.csv` (o painel estima a etapa pelas pastas); voz ainda não escolhida.
+- **Histórias católicas:** *canal arquivado em 15/10/2026* (voltou para `ideias-de-canais/`); os itens marcados "católico" abaixo ficam sem efeito. Antes: piloto. TESTE-01 montado sem narração; sem `canal.json`, `calendario.json` e `creditos-elevenlabs.csv` (o painel estima a etapa pelas pastas); voz ainda não escolhida.
 - **Créditos do ElevenLabs:** saldo de 20.979 de 35.581 (renova em 12/11/2026). Cada vídeo do MA custa ~7.000–8.000 créditos com regravações; 1 vídeo por semana consome ~100% da cota mensal atual, sem sobra para testes. Com o segundo canal narrando, a conta não fecha sem plano maior ou créditos extras (pesquisar preço na hora).
 - **Testes:** painel 7 ✅, Marble & Ash 29 ✅ (inclui a comparação pixel a pixel com o render aprovado), histórias católicas sem testes.
 - **Segurança:** nenhuma chave no git nem no histórico; `npm audit` sem vulnerabilidades; `.gitignore` cobre `.env`, `credentials*.json` e `token*.json`.

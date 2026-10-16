@@ -11,7 +11,6 @@ Este repositório guarda a produção de **vários canais do YouTube**. Não há
 | Canal | Pasta | Fase | Idioma público | Prefixo | Commits |
 |---|---|---|---|---|---|
 | Marble & Ash (estoicismo) | `canal-estoicismo/` | Em produção | Inglês | `MA` | `feat(canal-estoicismo): …` |
-| Histórias católicas (nome a definir) | `canal-historias-biblicas/` | Piloto | Inglês | a definir | `feat(canal-historias-biblicas): …` |
 
 Fora dos canais:
 - `./canais`: painel de todos os canais (ver "Painel dos canais").
